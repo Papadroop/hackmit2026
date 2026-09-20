@@ -24,6 +24,25 @@ describe("parseRoute", () => {
     })
   })
 
+  it("maps /calibration to the metrics page", () => {
+    expect(parseRoute("/calibration")).toEqual({ name: "metrics" })
+    expect(parseRoute(paths.metrics())).toEqual({ name: "metrics" })
+    expect(parseRoute("/calibration/")).toEqual({ name: "metrics" })
+  })
+
+  it("maps /c/<company> to a company, by slug", () => {
+    expect(parseRoute("/c/shell-plc")).toEqual({
+      name: "company",
+      slug: "shell-plc",
+    })
+    // The slug has to match company_slug in backend/auditor/company.py, or the link would
+    // not find its own company.
+    expect(parseRoute(paths.company("Ørsted A/S"))).toEqual({
+      name: "company",
+      slug: "orsted-a-s",
+    })
+  })
+
   it("reports everything else as not found", () => {
     expect(parseRoute("/a")).toEqual({ name: "not-found", path: "/a" })
     expect(parseRoute("/a/one/two")).toEqual({

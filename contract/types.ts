@@ -268,10 +268,15 @@ export type Tag =
   | "fibbing"
   | "false_labels"
   | "greenrinsing";
+/**
+ * Which way the headline moved between the company's oldest and newest document. Scores are problem scores, so `worsening` means the headline went up. `undetermined` is for fewer than two dated documents: a company with one page has not held still, it has not been watched.
+ */
+export type TrendDirection = "improving" | "worsening" | "steady" | "undetermined";
 
 export interface Contract {
   event?: Event;
   analysis?: Analysis;
+  company?: CompanyView;
 }
 /**
  * Descriptive keys are allowed (the transport adds `source`). contract_version is required so a consumer can refuse a log it does not understand.
@@ -525,19 +530,8 @@ export interface P_Summary {
 }
 export interface Summary {
   headline: ProfileEntry;
-  dimensions: {
-    clarity: ProfileEntry1;
-    support: ProfileEntry1;
-    materiality: ProfileEntry1;
-    consistency: ProfileEntry1;
-    completeness: ProfileEntry1;
-  };
-  verdict_distribution: {
-    supported: number;
-    unsubstantiated: number;
-    misleading_by_framing: number;
-    contradicted: number;
-  };
+  dimensions: DimensionProfile;
+  verdict_distribution: VerdictDistribution;
   top_issues: {
     rank: number;
     /**
@@ -565,9 +559,28 @@ export interface ProfileEntry {
   score: Score01;
   confidence: Score01;
 }
+/**
+ * The five D6 dimensions, each with its own score and confidence. Completeness is document-level, so at claim level it has no score of its own.
+ */
+export interface DimensionProfile {
+  clarity: ProfileEntry1;
+  support: ProfileEntry1;
+  materiality: ProfileEntry1;
+  consistency: ProfileEntry1;
+  completeness: ProfileEntry1;
+}
 export interface ProfileEntry1 {
   score: Score01;
   confidence: Score01;
+}
+/**
+ * How many claims fell into each verdict category. Must equal the verdicts counted.
+ */
+export interface VerdictDistribution {
+  supported: number;
+  unsubstantiated: number;
+  misleading_by_framing: number;
+  contradicted: number;
 }
 export interface P_AnalysisCompleted {
   duration_ms?: number;
@@ -612,4 +625,162 @@ export interface Analysis {
   omissions: Omission[];
   summary?: Summary;
   ext?: Ext;
+}
+/**
+ * One company's analyses side by side, with the trend over time (D2's third zoom level, D6 "Aggregation"). Served by GET /api/company/{name} and built by backend/auditor/company.py; not part of an event stream, because it spans analyses. Every number is arithmetic over the documents listed beneath it and records its contributors in ext.drivers; only the narrative is written.
+ */
+export interface CompanyView {
+  company: Company;
+  industry?: Industry;
+  headline: ProfileEntry2;
+  dimensions: DimensionProfile;
+  verdict_distribution: VerdictDistribution1;
+  /**
+   * Every document of this company that has a complete analysis, oldest first: the trend's order.
+   */
+  documents: CompanyDocument[];
+  trend: CompanyTrend;
+  /**
+   * The company's worst findings across its documents, ranked by the same weighted severity the aggregation uses. A target is (document_id, target): claim and omission ids are unique within one analysis only.
+   */
+  top_issues: {
+    rank: number;
+    document_id: Id;
+    /**
+     * Stable identifier. Fixture ids are short (C1, L11, E8b, X3, O2); live ids may be generated. Unique across all entity types within one analysis.
+     */
+    target: string;
+    /**
+     * The title that document's own summary gave the finding.
+     */
+    title: string;
+  }[];
+  /**
+   * Credit where due across the documents: well-substantiated claims.
+   */
+  credit: {
+    document_id: Id;
+    target: Id;
+    title: string;
+  }[];
+  document_count: number;
+  /**
+   * Claims across every document listed.
+   */
+  claim_count: number;
+  omission_count: number;
+  /**
+   * The one thing asked of a model, after the numbers are fixed. Absent when nobody has written one: GET /api/company/{name} serves arithmetic only, so no page waits on a model.
+   */
+  narrative?: string;
+  ext?: Ext;
+}
+/**
+ * score is the company's greenwashing likelihood across the documents analysed. It says what the worst of the record is; the trend says which way it is moving.
+ */
+export interface ProfileEntry2 {
+  score: Score01;
+  confidence: Score01;
+}
+/**
+ * How many claims fell into each verdict category. Must equal the verdicts counted.
+ */
+export interface VerdictDistribution1 {
+  supported: number;
+  unsubstantiated: number;
+  misleading_by_framing: number;
+  contradicted: number;
+}
+/**
+ * One analysed document as the company view lists it: its own header numbers, what it is worth in the company's (recency x confidence) and how much of the company's headline it is (share). Documents are listed oldest first.
+ */
+export interface CompanyDocument {
+  /**
+   * Stable identifier. Fixture ids are short (C1, L11, E8b, X3, O2); live ids may be generated. Unique across all entity types within one analysis.
+   */
+  document_id: string;
+  analysis_id?: Id;
+  title: string;
+  url?: string;
+  /**
+   * When the document is from. Absent when neither an archive capture nor a retrieval date says; `date_basis` then reads `unknown` and the document is left off the trend.
+   */
+  date?: string;
+  /**
+   * Where `date` came from. `archive` wins over `retrieved`, because the ingester stamps `retrieved` with the day it ran even when it read a 2024 capture.
+   */
+  date_basis: "archive" | "retrieved" | "unknown";
+  text_type?: TextType;
+  headline: ProfileEntry3;
+  dimensions: DimensionProfile;
+  verdict_distribution: VerdictDistribution;
+  claim_count: number;
+  omission_count: number;
+  /**
+   * How current this document is against the company's newest: 1.0 for that one, halving every half-life before it. The company-level analogue of a claim's prominence.
+   */
+  recency: number;
+  /**
+   * recency x the headline's confidence: this document's say in every company number.
+   */
+  weight: number;
+  /**
+   * This document's share of the company headline. The shares add up to 1.
+   */
+  share: number;
+  ext?: Ext;
+}
+/**
+ * The document summary's headline, unchanged.
+ */
+export interface ProfileEntry3 {
+  score: Score01;
+  confidence: Score01;
+}
+/**
+ * The movement of the headline across one company's documents in time order, with a separate confidence saying how much of it to believe and a note that says so in words. Two documents are a line, not a trend: `confidence` is low and `note` says why, and a page must show one with the other.
+ */
+export interface CompanyTrend {
+  direction: TrendDirection;
+  /**
+   * Documents the direction rests on: those that carry a date.
+   */
+  points: number;
+  /**
+   * last.score - first.score. Null when there are fewer than two points.
+   */
+  change: number | null;
+  /**
+   * The change at an annual rate. Null when there are fewer than two points or they share a date.
+   */
+  per_year: number | null;
+  /**
+   * Days between the first and last point.
+   */
+  span_days: number | null;
+  /**
+   * How much of the direction to believe: 0 when undetermined, and never above the confidence of the two headlines that moved.
+   */
+  confidence: number;
+  /**
+   * The oldest point. Both ends are the same document when only one carries a date, and both are null when none does.
+   */
+  first: TrendPoint | null;
+  /**
+   * The newest point.
+   */
+  last: TrendPoint | null;
+  /**
+   * One sentence a page can print under the arrow, saying what the direction rests on — including, when it rests on two documents, that two documents are not a trend.
+   */
+  note: string;
+  ext?: Ext;
+}
+/**
+ * One end of the trend: the document whose headline it is, when that document is from, and what it read.
+ */
+export interface TrendPoint {
+  document_id: Id;
+  date: Date;
+  score: Score01;
 }

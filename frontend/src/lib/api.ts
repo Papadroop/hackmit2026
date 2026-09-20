@@ -1,5 +1,8 @@
 /** Client for the backend API (backend/auditor/main.py). */
 
+import type { CalibrationReport } from "@/lib/calibration"
+import type { CompanyView } from "@/lib/company"
+
 export type ReplayRequest = {
   kind: "replay"
   fixture?: string
@@ -108,4 +111,9 @@ export const api = {
   eventsUrl: (id: string, after = 0) =>
     `/api/analyses/${id}/events${after > 0 ? `?after=${after}` : ""}`,
   logUrl: (id: string) => `/api/analyses/${id}/log`,
+  /** The calibration run (backend/data/calibration.json); 404 until one has been made. */
+  getCalibration: () => request<CalibrationReport>("/api/calibration"),
+  /** One company across its analysed documents; `name` is its name, slug or a prefix. */
+  getCompany: (name: string) =>
+    request<CompanyView>(`/api/company/${encodeURIComponent(name)}`),
 }

@@ -19,8 +19,8 @@ from fastapi.responses import FileResponse, StreamingResponse
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, Field, model_validator
 
-from . import pipeline
-from .documents import DocumentsResponse, document_title, list_documents, log_name
+from . import company, pipeline
+from .documents import DocumentsResponse, document_title, list_documents, load_demo_documents, log_name
 from .envelope import LogError, is_safe_name, log_summary, read_log
 from .replay import run_replay
 from .store import Analysis, AnalysisStore, Status
@@ -222,6 +222,40 @@ def create_app(settings: Settings | None = None) -> FastAPI:
         return list_documents(
             settings.demo_documents_dir, settings.fixtures_dir, live_analysis=pipeline.LIVE_AVAILABLE
         )
+
+    @app.get("/api/company/{name:path}")
+    async def company_view(request: Request, name: str) -> dict[str, Any]:
+        """The company page's data (roadmap step 18, design-doc D2's third zoom level): every
+        analysed document of one company side by side, with the trend over time. Built from the
+        recordings in `fixtures/`, the saved runs, and the analyses this process is holding, one
+        per document; `name` is the company's name, its slug or an unambiguous prefix
+        (`Shell%20plc`, `shell-plc`, `shell`). Arithmetic only, so a company page never waits on
+        a model — `python -m auditor.company "<name>" --explain` prints the same derivation. 404,
+        saying what there is instead, until one of the company's documents has been analysed."""
+        sources: list[tuple[Path, str]] = [(settings.fixtures_dir, "fixture")]
+        if settings.runs_dir is not None:
+            sources.append((settings.runs_dir, "run"))
+        records, skipped = company.load_records(sources)
+        for analysis in store(request).all():
+            record = company.fold_record(analysis.events, {"kind": "live", "name": analysis.id})
+            if record is not None and record.company:
+                record.read_at = analysis.created_at.timestamp()
+                records.append(record)
+        grouped = company.group_by_company(records)
+        analysed = ", ".join(grouped) or "nothing yet"
+        known = [d.company for d in load_demo_documents(settings.demo_documents_dir) if d.company]
+        wanted = company.find_company([*grouped, *known], name)
+        if wanted is None:
+            raise HTTPException(404, f"No company matching {name!r}. Analysed so far: {analysed}.")
+        if wanted not in grouped:
+            raise HTTPException(
+                404,
+                f"No analysis of {wanted}'s documents yet — analyse one of its pages first. Analysed so far: {analysed}.",
+            )
+        view = company.build_company(grouped[wanted], company=wanted).view
+        if skipped:
+            view["ext"]["skipped"] = skipped
+        return view
 
     @app.post("/api/analyses", status_code=201)
     async def create_analysis(request: Request, body: AnalysisRequest) -> AnalysisSummary:

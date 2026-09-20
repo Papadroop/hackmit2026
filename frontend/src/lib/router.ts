@@ -1,5 +1,7 @@
 import { useMemo, useSyncExternalStore } from "react"
 
+import { companySlug } from "@/lib/company"
+
 /**
  * The URL is the source of truth for which screen is open. An analysis lives at
  * /a/<analysis id>, so a reload keeps it (the server still holds its log and the client
@@ -8,16 +10,23 @@ import { useMemo, useSyncExternalStore } from "react"
 export type Route =
   | { name: "menu" }
   | { name: "analysis"; id: string }
+  | { name: "metrics" }
+  | { name: "company"; slug: string }
   | { name: "not-found"; path: string }
 
 export const paths = {
   menu: () => "/",
   analysis: (id: string) => `/a/${encodeURIComponent(id)}`,
+  metrics: () => "/calibration",
+  company: (name: string) => `/c/${companySlug(name)}`,
 }
 
 export function parseRoute(pathname: string): Route {
   const path = pathname.replace(/\/+$/, "") || "/"
   if (path === "/") return { name: "menu" }
+  if (path === "/calibration") return { name: "metrics" }
+  const company = /^\/c\/([^/]+)$/.exec(path)
+  if (company) return { name: "company", slug: decodeURIComponent(company[1]) }
   const analysis = /^\/a\/([^/]+)$/.exec(path)
   if (analysis) return { name: "analysis", id: decodeURIComponent(analysis[1]) }
   return { name: "not-found", path }

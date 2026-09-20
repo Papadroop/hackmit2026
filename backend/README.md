@@ -87,6 +87,7 @@ sees a half-finished answer.
 | `GET /api/health` | Liveness, plus the fixtures and runs directories in use. |
 | `GET /api/fixtures` | Fixtures in `fixtures/`, each with event count, duration and a count per type, or the validation error if the file is invalid. |
 | `GET /api/documents` | What the menu shows: the demo texts in `demo-documents/` joined with their recordings in `fixtures/` by source URL, plus `live_analysis` (whether text and URL input work yet) and any invalid recordings. The demo text's `role` is never exposed. |
+| `GET /api/company/{name}` | The company page (step 18): every analysed document of one company, oldest first, with the company's headline and profile, the issues and credit across them, and the trend over time. `name` is the company's name, its slug or an unambiguous prefix (`Shell%20plc`, `shell-plc`, `shell`). Built from `fixtures/`, the saved runs and this process's analyses, one per document; arithmetic only, so no page waits on a model. 404, naming the companies there are, until one of its documents has been analysed. |
 | `POST /api/analyses` | Start an analysis. Body is one of `{"kind": "replay", "fixture": "<name>", "speed": 1}`, `{"kind": "replay", "run": "<saved run>"}`, `{"kind": "text", "text": "...", "title": "..."}`, `{"kind": "url", "url": "..."}`, `{"kind": "pdf", "filename": "...", "data_base64": "..."}`. Live kinds take an optional `speed` for any stages replayed from a recording. Returns 201 with `analysis_id` and `events_url`. The pasted text and the PDF bytes are never written to the log's `source`. |
 | `GET /api/analyses` | Analyses in this process, newest first. |
 | `GET /api/analyses/{id}` | Status (`running`, `completed`, `failed`), event count, last seq. |
@@ -172,6 +173,20 @@ Every analysis is also appended, event by event, to `backend/data/runs/<timestam
   narrative. Measure it without calling a model:
   `.venv/bin/python -m auditor.summary ../fixtures/shell-climate.analysis.json --explain`
   prints the arithmetic and compares the header with the reference's hand-written one.
+- `company.py`: roadmap step 18's second half, D2's third zoom level — one company's documents
+  side by side, with the trend. The same discipline a level up: the company's numbers are the
+  weighted Lehmer mean of the *documents'* headlines, so one misleading page among five bland
+  ones reads 0.85 where a plain mean reads 0.23, and each number names the documents that drove
+  it. A document's weight is `recency x confidence` — recency being the company-level analogue
+  of a claim's prominence, halving every `AUDITOR_COMPANY_HALFLIFE_DAYS` — so the page on the
+  site today counts most without the pages it replaced being erased. The headline therefore says
+  what the worst of the record is and the **trend** says which way it is moving; the trend
+  carries its own confidence and a `note` that says plainly when there is too little to call
+  ("two documents 933 days apart: a step, not a trend"). Documents are dated by the capture
+  behind an `archive_url` when there is one, because the ingester stamps `retrieved` with today
+  even when it reads a 2024 snapshot. Claude is asked for the narrative only, and only by the
+  CLI: `.venv/bin/python -m auditor.company "Shell plc" --explain` prints the whole derivation
+  and calls no model.
 - `verdict.py`: roadmap step 17. A prosecutor and a defence argue each claim in two calls that
   cannot see each other, from one dossier: the claim, its four dimension scores with their
   bases, its language marks and every evidence item linked to it. A judge then reads both and

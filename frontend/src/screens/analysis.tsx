@@ -143,9 +143,20 @@ function AnalysisView() {
             {title ?? "Analysis"}
           </p>
           <p className="truncate text-xs text-muted-foreground">
-            {[document?.company, describePace(source)]
-              .filter(Boolean)
-              .join(", ")}
+            {/* The demo narrative's last move: open a document, click a claim, zoom out to
+                the company (design-doc D2, D7). */}
+            {document?.company && (
+              <>
+                <Link
+                  href={paths.company(document.company)}
+                  className="rounded-sm underline decoration-border decoration-dotted underline-offset-2 outline-none hover:decoration-marker focus-visible:ring-3 focus-visible:ring-ring/50"
+                >
+                  {document.company}
+                </Link>
+                {describePace(source) ? ", " : ""}
+              </>
+            )}
+            {describePace(source)}
           </p>
         </div>
         <ToggleGroup

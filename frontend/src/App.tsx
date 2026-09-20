@@ -3,7 +3,9 @@ import { Link } from "@/components/link"
 import { Button } from "@/components/ui/button"
 import { paths, useRoute } from "@/lib/router"
 import { AnalysisScreen } from "@/screens/analysis"
+import { CompanyScreen } from "@/screens/company"
 import { MenuScreen } from "@/screens/menu"
+import { MetricsScreen } from "@/screens/metrics"
 
 export function App() {
   const route = useRoute()
@@ -12,6 +14,10 @@ export function App() {
       return <MenuScreen />
     case "analysis":
       return <AnalysisScreen id={route.id} />
+    case "metrics":
+      return <MetricsScreen />
+    case "company":
+      return <CompanyScreen key={route.slug} slug={route.slug} />
     case "not-found":
       return <NotFound path={route.path} />
   }

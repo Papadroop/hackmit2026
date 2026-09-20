@@ -9,7 +9,8 @@ node -e '
 const fs = require("fs");
 const s = JSON.parse(fs.readFileSync("contract/schema.json", "utf8"));
 const w = { "$schema": s["$schema"], title: "Contract", type: "object",
-  properties: { event: { "$ref": "#/definitions/Event" }, analysis: { "$ref": "#/definitions/Analysis" } },
+  properties: { event: { "$ref": "#/definitions/Event" }, analysis: { "$ref": "#/definitions/Analysis" },
+    company: { "$ref": "#/definitions/CompanyView" } },
   additionalProperties: false, definitions: s.definitions };
 fs.writeFileSync(process.argv[1], JSON.stringify(w));
 ' "$WRAPPER"

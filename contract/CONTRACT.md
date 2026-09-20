@@ -2,7 +2,7 @@
 
 *Phase 0, step 2 of `roadmap.md`. Version 1.0.0. The machine-readable form is `contract/schema.json` (JSON Schema draft-07); this file explains it. D-numbers refer to `design-doc.md`.*
 
-Last updated: 2026-09-19
+Last updated: 2026-09-20 (step 18's company view, §4 and §6; still version 1.0.0 — the new objects are served, not carried in a log, so no event payload and no recording changes)
 
 ## 1. What it is, and the files
 
@@ -12,7 +12,7 @@ An analysis is an ordered stream of events (D8). The **transport** owns the enve
 |---|---|
 | `contract/schema.json` | Source of truth. Root validates one event; `definitions` hold the entities, enums, payloads and the folded `Analysis` object. Draft-07 so it works unchanged with `jsonschema` (Python), `ajv` (already in `frontend/node_modules`), VS Code and type generators. |
 | `contract/types.ts` | TypeScript types generated from the schema. Regenerate, never edit. |
-| `contract/tools/contract.py` | `resolve` spans, `build` an event log from an analysis file, `validate` a log or an analysis, `fold` a log back into an analysis. |
+| `contract/tools/contract.py` | `resolve` spans, `build` an event log from an analysis file, `validate` a log or an analysis, `validate-company` a company view (§4), `fold` a log back into an analysis. |
 | `contract/tools/gen_types.sh` | Regenerates `types.ts`. |
 | `contract/requirements.txt` | `jsonschema` for the tool. |
 | `fixtures/shell-climate.analysis.json` | The golden reference (`golden-reference.md`) as data: the folded `Analysis` object. |
@@ -107,6 +107,12 @@ A **Span** is `{text, start, end, context?, occurrence?}`. `text` is authoritati
 
 **Analysis**: the folded object, `{analysis_id, contract_version, mode, document, claims, signals, evidence, scores, arguments, verdicts, omissions, summary}`. The frontend's reducer is a fold over the events; `contract.py fold` is the reference implementation and the round-trip check proves the fixture's log folds back to its analysis file exactly.
 
+**CompanyView** (D2's third zoom level, D6 "Aggregation"): one company's analyses side by side, `{company, industry?, headline, dimensions, verdict_distribution, documents, trend, top_issues, credit, document_count, claim_count, omission_count, narrative?}`. The first four are shaped exactly as a `Summary`'s, so a page can reuse the header it already draws. It is not part of an event stream — it spans analyses, and no log carries one — so it is served instead: `GET /api/company/{name}`, built by `backend/auditor/company.py` and checked by `contract.py validate-company`.
+
+- A company-level target is a **pair**, `{document_id, target}`. Ids are unique within one analysis only (§5), so `C1` is a different claim in every document. Each `top_issues` and `credit` entry keeps the title its own document's summary gave it.
+- **CompanyDocument**: `document_id`, `title`, `date_basis` ∈ {archive, retrieved, unknown}, optional `analysis_id`, `url`, `date` and `text_type`, the document's own `headline`, `dimensions`, `verdict_distribution`, `claim_count` and `omission_count`, and what it is worth here — `recency` (1.0 for the company's newest document, halving every half-life before it), `weight` (recency × the headline's confidence) and `share` (its share of the company headline; the shares add up to 1). `date` is the capture date when `date_basis` is `archive` and absent when `unknown`; documents are listed oldest first.
+- **CompanyTrend**: `direction` ∈ {improving, worsening, steady, undetermined}, `points` (documents that carry a date), `change`, `per_year`, `span_days`, `confidence`, `first` and `last` (a `TrendPoint`: `{document_id, date, score}`), and a `note`. Scores are problem scores, so `worsening` means the headline went up. Two documents are a line, not a trend: the confidence says so in a number and the `note` says so in a sentence, and a page shows the two together, exactly as it shows likelihood with confidence everywhere else.
+
 Every entity has an optional `ext` object for anything not in the contract, so `additionalProperties: false` can stay on everywhere else and typos fail loudly.
 
 ## 5. Ids
@@ -142,6 +148,16 @@ These are the rules the golden reference was scored under. They are deliberately
 
   Against the golden reference's hand-written header the profile's mean absolute error is about 0.08, and the ranking picks 3 of its 5 top issues and 3 of its 4 credits. The reference was a judgment and this is arithmetic; they are closest on Completeness and Consistency and differ most on the headline (0.70 against 0.80), which is the price of the dilution resistance above.
 
+- **Company view** numbers are the same arithmetic one level up, implemented in `backend/auditor/company.py` (`aggregate_company`) and checked by `contract.py validate-company`:
+
+  The headline and the profile are a **weighted Lehmer mean over the documents' headlines**, not over their claims: a company is a set of pages, each already read as a whole, and pooling every claim would let a long page outvote a short one by count. A document's say is `recency x confidence x score^(power-1)`, where **recency is the company-level analogue of a claim's prominence** — 1.0 for the newest document, halving every `AUDITOR_COMPANY_HALFLIFE_DAYS` (730) before it, so the page on the site today counts most without the pages it replaced being erased. One misleading page among five bland ones reads 0.85 where a plain mean of the same six reads 0.23. Two alternatives were rejected: the **worst document** (0.90) lets one page speak for the company forever, so the view could never show improvement, which is the one thing it is for; **the latest document only** lets a bland page published a week after a misleading one reset the record (0.10 against 0.89). The consequence is deliberate: a company that has cleaned up still reads high (2024 at 0.90 replaced by 2026 at 0.20 gives 0.83), because the headline says what the worst of the record is and **the trend says which way it is moving**. One number cannot do both.
+
+  Documents are put in time order by the capture date behind an `archive_url` when one is at least `AUDITOR_COMPANY_ARCHIVE_GAP_DAYS` older than the fetch, and by `source.retrieved` otherwise — the ingester stamps `retrieved` with the day it ran even when what it read was a 2024 snapshot, and a capture taken around the fetch (as the golden reference's is) is a permalink for the live page rather than where the text came from. An undated document is counted as if it were one half-life old and left off the trend, which `ext.notes` says in words.
+
+  The rules the validator checks: the counts and the distribution equal the documents' own; the documents are listed oldest first; **every number lies within the range of the documents' numbers** — a mean never leaves the range of what it averaged, whatever the weights are — and the documents' `share`s add up to 1, which is what makes the headline explainable from the rows beneath it; a headline below the plain mean of its documents is warned about, because the combination is meant to lean to the worst. For the trend: `points` equals the documents that carry a date, the direction agrees with the sign of the change, the span matches the two dates, `undetermined` carries no change and confidence 0, and **the confidence never exceeds that of the two headlines that moved** — the same bound a verdict's confidence obeys, for the same reason.
+
+  The ranking pools the documents' claims and omissions, each weighted by its own prominence and confidence and by its page's recency, and each keeps the title its document's summary gave it, so no model is needed to name a company-level finding. The narrative is the one thing asked of a model, after the numbers are fixed; `GET /api/company/{name}` serves the arithmetic without it, so no page waits on a call. `python -m auditor.company "<name>" --explain` prints the whole derivation.
+
 ## 7. Fixture authoring
 
 1. Save the document text under `demo-documents/` in canonical form (§3).
@@ -172,4 +188,5 @@ The golden reference's precedent items (ASA on Shell, the Paris court on TotalEn
 - Evidence links carry the relation, not the item: one filing can support one claim and contradict the framing of another.
 - The four evaluators are overlapping stages: the fixture streams them that way because scores legitimately cite evidence another evaluator found, and the validator's reference-before-use rule caught exactly that when they were sequential.
 - The confidence formula (§6) starts from the deciding dimension rather than averaging the four, because the verdict's likelihood *is* that dimension's score: averaging would let three confident readings of things that are not the problem drown the one that is. It subtracts rather than multiplies so each term is readable in the one-sentence `ext.confidence_basis` the panel can show.
-- Deferred: re-scoring semantics for live runs, and the company view's cross-document objects (the rest of step 18) — a company page is several analyses side by side with a trend, which needs objects this contract does not yet have.
+- The company view's objects (§4) sit outside the event stream rather than inside it: a company page spans analyses, and no single log can carry one, so it is a served object with its own validator command instead of a new event type. Its targets are pairs of `(document_id, target)` because §5's ids are unique within one analysis only — the alternative, making ids globally unique, would have changed every fixture and every id in the golden reference to solve a problem only this view has.
+- Deferred: re-scoring semantics for live runs.

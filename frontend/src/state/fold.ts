@@ -23,7 +23,7 @@ import type {
   Verdict,
 } from "@contract"
 
-import { VERDICT_ORDER, isVerdictCategory } from "@/lib/encoding"
+import { isVerdictCategory } from "@/lib/encoding"
 import { PROFILE_ORDER } from "@/lib/evidence"
 import { DOCUMENT_INGESTED, type Envelope } from "@/lib/events"
 
@@ -386,9 +386,12 @@ export function asSummary(value: unknown, final: unknown): SummaryState | null {
   const given = isRecord(value.verdict_distribution)
     ? value.verdict_distribution
     : {}
-  const verdict_distribution = Object.fromEntries(
-    VERDICT_ORDER.map((category) => [category, asCount(given[category]) ?? 0])
-  ) as Summary["verdict_distribution"]
+  const verdict_distribution: Summary["verdict_distribution"] = {
+    supported: asCount(given.supported) ?? 0,
+    unsubstantiated: asCount(given.unsubstantiated) ?? 0,
+    misleading_by_framing: asCount(given.misleading_by_framing) ?? 0,
+    contradicted: asCount(given.contradicted) ?? 0,
+  }
   const top_issues = (Array.isArray(value.top_issues) ? value.top_issues : [])
     .filter(isTarget)
     .map((issue, i) => ({

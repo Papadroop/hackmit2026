@@ -926,60 +926,10 @@
           "description": "score is the document's greenwashing likelihood."
         },
         "dimensions": {
-          "type": "object",
-          "properties": {
-            "clarity": {
-              "$ref": "#/definitions/ProfileEntry"
-            },
-            "support": {
-              "$ref": "#/definitions/ProfileEntry"
-            },
-            "materiality": {
-              "$ref": "#/definitions/ProfileEntry"
-            },
-            "consistency": {
-              "$ref": "#/definitions/ProfileEntry"
-            },
-            "completeness": {
-              "$ref": "#/definitions/ProfileEntry"
-            }
-          },
-          "required": [
-            "clarity",
-            "support",
-            "materiality",
-            "consistency",
-            "completeness"
-          ],
-          "additionalProperties": false
+          "$ref": "#/definitions/DimensionProfile"
         },
         "verdict_distribution": {
-          "type": "object",
-          "properties": {
-            "supported": {
-              "type": "integer",
-              "minimum": 0
-            },
-            "unsubstantiated": {
-              "type": "integer",
-              "minimum": 0
-            },
-            "misleading_by_framing": {
-              "type": "integer",
-              "minimum": 0
-            },
-            "contradicted": {
-              "type": "integer",
-              "minimum": 0
-            }
-          },
-          "required": [
-            "supported",
-            "unsubstantiated",
-            "misleading_by_framing",
-            "contradicted"
-          ],
-          "additionalProperties": false
+          "$ref": "#/definitions/VerdictDistribution"
         },
         "top_issues": {
           "type": "array",
@@ -1049,6 +999,388 @@
         "verdict_distribution",
         "top_issues",
         "credit",
+        "claim_count",
+        "omission_count"
+      ],
+      "additionalProperties": false
+    },
+    "DimensionProfile": {
+      "type": "object",
+      "properties": {
+        "clarity": {
+          "$ref": "#/definitions/ProfileEntry"
+        },
+        "support": {
+          "$ref": "#/definitions/ProfileEntry"
+        },
+        "materiality": {
+          "$ref": "#/definitions/ProfileEntry"
+        },
+        "consistency": {
+          "$ref": "#/definitions/ProfileEntry"
+        },
+        "completeness": {
+          "$ref": "#/definitions/ProfileEntry"
+        }
+      },
+      "required": [
+        "clarity",
+        "support",
+        "materiality",
+        "consistency",
+        "completeness"
+      ],
+      "additionalProperties": false,
+      "description": "The five D6 dimensions, each with its own score and confidence. Completeness is document-level, so at claim level it has no score of its own."
+    },
+    "VerdictDistribution": {
+      "type": "object",
+      "properties": {
+        "supported": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "unsubstantiated": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "misleading_by_framing": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "contradicted": {
+          "type": "integer",
+          "minimum": 0
+        }
+      },
+      "required": [
+        "supported",
+        "unsubstantiated",
+        "misleading_by_framing",
+        "contradicted"
+      ],
+      "additionalProperties": false,
+      "description": "How many claims fell into each verdict category. Must equal the verdicts counted."
+    },
+    "TrendDirection": {
+      "type": "string",
+      "enum": [
+        "improving",
+        "worsening",
+        "steady",
+        "undetermined"
+      ],
+      "description": "Which way the headline moved between the company's oldest and newest document. Scores are problem scores, so `worsening` means the headline went up. `undetermined` is for fewer than two dated documents: a company with one page has not held still, it has not been watched."
+    },
+    "TrendPoint": {
+      "type": "object",
+      "description": "One end of the trend: the document whose headline it is, when that document is from, and what it read.",
+      "properties": {
+        "document_id": {
+          "$ref": "#/definitions/Id"
+        },
+        "date": {
+          "$ref": "#/definitions/Date"
+        },
+        "score": {
+          "$ref": "#/definitions/Score01"
+        }
+      },
+      "required": [
+        "document_id",
+        "date",
+        "score"
+      ],
+      "additionalProperties": false
+    },
+    "CompanyTrend": {
+      "type": "object",
+      "description": "The movement of the headline across one company's documents in time order, with a separate confidence saying how much of it to believe and a note that says so in words. Two documents are a line, not a trend: `confidence` is low and `note` says why, and a page must show one with the other.",
+      "properties": {
+        "direction": {
+          "$ref": "#/definitions/TrendDirection"
+        },
+        "points": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Documents the direction rests on: those that carry a date."
+        },
+        "change": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": -1,
+          "maximum": 1,
+          "description": "last.score - first.score. Null when there are fewer than two points."
+        },
+        "per_year": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "description": "The change at an annual rate. Null when there are fewer than two points or they share a date."
+        },
+        "span_days": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0,
+          "description": "Days between the first and last point."
+        },
+        "confidence": {
+          "$ref": "#/definitions/Score01",
+          "description": "How much of the direction to believe: 0 when undetermined, and never above the confidence of the two headlines that moved."
+        },
+        "first": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/TrendPoint"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "description": "The oldest point. Both ends are the same document when only one carries a date, and both are null when none does."
+        },
+        "last": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/TrendPoint"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "description": "The newest point."
+        },
+        "note": {
+          "type": "string",
+          "minLength": 1,
+          "description": "One sentence a page can print under the arrow, saying what the direction rests on — including, when it rests on two documents, that two documents are not a trend."
+        },
+        "ext": {
+          "$ref": "#/definitions/Ext"
+        }
+      },
+      "required": [
+        "direction",
+        "points",
+        "change",
+        "per_year",
+        "span_days",
+        "confidence",
+        "first",
+        "last",
+        "note"
+      ],
+      "additionalProperties": false
+    },
+    "CompanyDocument": {
+      "type": "object",
+      "description": "One analysed document as the company view lists it: its own header numbers, what it is worth in the company's (recency x confidence) and how much of the company's headline it is (share). Documents are listed oldest first.",
+      "properties": {
+        "document_id": {
+          "$ref": "#/definitions/Id",
+          "description": "Document.id of the analysed document; half of a company-level target, since claim ids repeat across analyses."
+        },
+        "analysis_id": {
+          "$ref": "#/definitions/Id"
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1
+        },
+        "url": {
+          "type": "string",
+          "format": "uri"
+        },
+        "date": {
+          "$ref": "#/definitions/Date",
+          "description": "When the document is from. Absent when neither an archive capture nor a retrieval date says; `date_basis` then reads `unknown` and the document is left off the trend."
+        },
+        "date_basis": {
+          "type": "string",
+          "enum": [
+            "archive",
+            "retrieved",
+            "unknown"
+          ],
+          "description": "Where `date` came from. `archive` wins over `retrieved`, because the ingester stamps `retrieved` with the day it ran even when it read a 2024 capture."
+        },
+        "text_type": {
+          "$ref": "#/definitions/TextType"
+        },
+        "headline": {
+          "$ref": "#/definitions/ProfileEntry",
+          "description": "The document summary's headline, unchanged."
+        },
+        "dimensions": {
+          "$ref": "#/definitions/DimensionProfile"
+        },
+        "verdict_distribution": {
+          "$ref": "#/definitions/VerdictDistribution"
+        },
+        "claim_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "omission_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "recency": {
+          "$ref": "#/definitions/Score01",
+          "description": "How current this document is against the company's newest: 1.0 for that one, halving every half-life before it. The company-level analogue of a claim's prominence."
+        },
+        "weight": {
+          "type": "number",
+          "minimum": 0,
+          "description": "recency x the headline's confidence: this document's say in every company number."
+        },
+        "share": {
+          "$ref": "#/definitions/Score01",
+          "description": "This document's share of the company headline. The shares add up to 1."
+        },
+        "ext": {
+          "$ref": "#/definitions/Ext"
+        }
+      },
+      "required": [
+        "document_id",
+        "title",
+        "date_basis",
+        "headline",
+        "dimensions",
+        "verdict_distribution",
+        "claim_count",
+        "omission_count",
+        "recency",
+        "weight",
+        "share"
+      ],
+      "additionalProperties": false
+    },
+    "CompanyView": {
+      "type": "object",
+      "description": "One company's analyses side by side, with the trend over time (D2's third zoom level, D6 \"Aggregation\"). Served by GET /api/company/{name} and built by backend/auditor/company.py; not part of an event stream, because it spans analyses. Every number is arithmetic over the documents listed beneath it and records its contributors in ext.drivers; only the narrative is written.",
+      "properties": {
+        "company": {
+          "$ref": "#/definitions/Company"
+        },
+        "industry": {
+          "$ref": "#/definitions/Industry"
+        },
+        "headline": {
+          "$ref": "#/definitions/ProfileEntry",
+          "description": "score is the company's greenwashing likelihood across the documents analysed. It says what the worst of the record is; the trend says which way it is moving."
+        },
+        "dimensions": {
+          "$ref": "#/definitions/DimensionProfile"
+        },
+        "verdict_distribution": {
+          "$ref": "#/definitions/VerdictDistribution",
+          "description": "The documents' distributions added together."
+        },
+        "documents": {
+          "type": "array",
+          "description": "Every document of this company that has a complete analysis, oldest first: the trend's order.",
+          "items": {
+            "$ref": "#/definitions/CompanyDocument"
+          }
+        },
+        "trend": {
+          "$ref": "#/definitions/CompanyTrend"
+        },
+        "top_issues": {
+          "type": "array",
+          "description": "The company's worst findings across its documents, ranked by the same weighted severity the aggregation uses. A target is (document_id, target): claim and omission ids are unique within one analysis only.",
+          "items": {
+            "type": "object",
+            "properties": {
+              "rank": {
+                "type": "integer",
+                "minimum": 1
+              },
+              "document_id": {
+                "$ref": "#/definitions/Id"
+              },
+              "target": {
+                "$ref": "#/definitions/Id",
+                "description": "Claim or omission id inside that document's analysis."
+              },
+              "title": {
+                "type": "string",
+                "minLength": 1,
+                "description": "The title that document's own summary gave the finding."
+              }
+            },
+            "required": [
+              "rank",
+              "document_id",
+              "target",
+              "title"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "credit": {
+          "type": "array",
+          "description": "Credit where due across the documents: well-substantiated claims.",
+          "items": {
+            "type": "object",
+            "properties": {
+              "document_id": {
+                "$ref": "#/definitions/Id"
+              },
+              "target": {
+                "$ref": "#/definitions/Id"
+              },
+              "title": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "required": [
+              "document_id",
+              "target",
+              "title"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "document_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "claim_count": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Claims across every document listed."
+        },
+        "omission_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "narrative": {
+          "type": "string",
+          "description": "The one thing asked of a model, after the numbers are fixed. Absent when nobody has written one: GET /api/company/{name} serves arithmetic only, so no page waits on a model."
+        },
+        "ext": {
+          "$ref": "#/definitions/Ext"
+        }
+      },
+      "required": [
+        "company",
+        "headline",
+        "dimensions",
+        "verdict_distribution",
+        "documents",
+        "trend",
+        "top_issues",
+        "credit",
+        "document_count",
         "claim_count",
         "omission_count"
       ],

@@ -61,6 +61,12 @@ at a detail such as the menu's waterline.
 | `src/state/analysis.ts` | The reducer: state is a fold over the events received. Selectors for views live here. |
 | `src/state/analysis-provider.tsx` | Fetches one analysis and tails its stream; mounted with `key={id}`. Exposes `useAnalysis()`. |
 | `src/components/debug-drawer.tsx` | The raw event log in the bottom panel of the analysis screen. Stays in the app throughout. |
+| `src/screens/metrics.tsx` | `/calibration`: how far the audit's likelihood matches what regulators decided. Reads `GET /api/calibration`, the artifact `python -m auditor.calibration run` wrote. |
+| `src/components/calibration-plot.tsx` | Every precedent on one axis at the score the audit gave it, above the line where it was upheld and below where the advertiser was cleared, with the threshold as a line the reader moves; and the calibration curve beside it. |
+| `src/lib/calibration.ts` | The report's shape and the metrics redone in the browser, so moving the threshold is free. A test checks it reproduces the backend's published numbers exactly. |
+| `src/screens/company.tsx` | `/c/<company>`: one company across its documents, with the trend. Reads `GET /api/company/{name}`. Read-only: a document's `url` is where it was read from, not what is there now, so nothing is analysed from here. |
+| `src/components/trend-line.tsx` | The company's documents in time at their own headline scores. Problem scores, so a rising line is the company getting worse; nothing is drawn below two dated documents. |
+| `src/lib/company.ts` | The company view's words and its slug, which mirrors `company_slug` in `backend/auditor/company.py` so a link finds its own company. Shapes come from `@contract`. |
 | `src/App.tsx` | The route switch. |
 | `src/index.css` | Design tokens and the document pane's type and highlight styles, then the menu screen's own palette and rules (every class prefixed `rinse-`). Light is the designed palette; dark is provisional. |
 | `@contract` | Path alias for `../contract/types.ts`, the generated contract types. Type-only imports, so it never reaches a bundle. |

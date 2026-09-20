@@ -8,6 +8,7 @@ Usage:
                                                         envelope + payload schema + ordering invariants;
                                                         with --analysis, fold and compare (round trip)
   contract.py validate-analysis <analysis.json>         schema + spans + references + derivation rules
+  contract.py validate-company  <company.json>          schema + the company view's derivation rules
   contract.py fold     <events.jsonl> <out.json>        events -> Analysis object
 
 Exit code 1 on any error; warnings do not fail. Requires jsonschema>=4 (contract/requirements.txt).
@@ -19,6 +20,7 @@ import json
 import re
 import sys
 import unicodedata
+from datetime import date as date_type
 from collections import Counter, defaultdict
 from pathlib import Path
 
@@ -402,6 +404,139 @@ def cmd_validate_analysis(path: str) -> int:
     return rep.finish("validate-analysis")
 
 
+# ----------------------------------------------------------------------------- company view (step 18, second half)
+
+# Every number in the view is recorded to two decimals, so equality is checked to that.
+ROUNDING = 0.011
+
+# A `steady` trend means the headline did not move. The size below which it counts as not having
+# moved is a knob of the aggregation (AUDITOR_COMPANY_EPSILON, 0.05 by default), so the contract
+# checks the sign rather than the threshold, with room for a generous setting.
+STEADY_MAX = 0.1
+
+
+def in_range(value: float, values: list[float]) -> bool:
+    """A weighted mean never leaves the range of what it averaged. That is what makes the company
+    headline explainable from the documents beneath it, whatever the weights are."""
+    return not values or (min(values) - ROUNDING <= value <= max(values) + ROUNDING)
+
+
+def check_company(c: dict, rep: Report) -> None:
+    """The company view (CONTRACT.md §6, "Company view"): the numbers must be explainable from
+    the documents listed beneath them, and the trend must not claim more than its points support.
+
+    The view carries no claims — each document's own analysis does — so references into a
+    document are checked as far as the document id and left to `validate-analysis` beyond that.
+    """
+    v = validator_for("CompanyView")
+    for e in schema_errors(v, c):
+        rep.error(f"schema: {e}")
+    if rep.errors:
+        return  # structure is broken; the rest would be noise
+
+    docs = c["documents"]
+    ids = [d["document_id"] for d in docs]
+    for did, n in Counter(ids).items():
+        if n > 1:
+            rep.error(f"document {did!r} listed {n} times; a company view holds one analysis per document")
+    if len(docs) != c["document_count"]:
+        rep.error(f"document_count {c['document_count']} != {len(docs)} documents listed")
+    for key, field in (("claim_count", "claim_count"), ("omission_count", "omission_count")):
+        total = sum(d[field] for d in docs)
+        if c[key] != total:
+            rep.error(f"{key} {c[key]} != {total} summed over the documents")
+    for category in ("supported", "unsubstantiated", "misleading_by_framing", "contradicted"):
+        total = sum(d["verdict_distribution"][category] for d in docs)
+        if c["verdict_distribution"][category] != total:
+            rep.error(f"verdict_distribution.{category} = {c['verdict_distribution'][category]} but the documents give {total}")
+
+    # time order: undated documents first, then by date. The trend reads this order.
+    dates = [d.get("date", "") for d in docs]
+    if dates != sorted(dates):
+        rep.error(f"documents must be listed oldest first (the trend's order), got {dates}")
+
+    # every number inside the range of the documents it was computed from, and the shares adding up
+    headlines = [d["headline"]["score"] for d in docs]
+    if not in_range(c["headline"]["score"], headlines):
+        rep.error(f"headline {c['headline']['score']} is outside the range of its documents {sorted(headlines)}")
+    for name, entry in c["dimensions"].items():
+        values = [d["dimensions"][name]["score"] for d in docs]
+        if not in_range(entry["score"], values):
+            rep.error(f"dimensions.{name} {entry['score']} is outside the range of its documents {sorted(values)}")
+    shares = sum(d["share"] for d in docs)
+    expected = 1.0 if any(s > 0 for s in headlines) else 0.0
+    if docs and abs(shares - expected) > 0.02:
+        rep.error(f"the documents' shares of the headline add up to {shares:.3f}, not {expected:.0f}")
+    if headlines and c["headline"]["score"] < sum(headlines) / len(headlines) - ROUNDING:
+        rep.warn(
+            f"headline {c['headline']['score']} is below the plain mean of its documents "
+            f"({sum(headlines) / len(headlines):.2f}); the combination is meant to lean to the worst of the record (D6)"
+        )
+
+    check_trend(c, docs, rep)
+
+    ranks = [t["rank"] for t in c["top_issues"]]
+    if ranks != list(range(1, len(ranks) + 1)):
+        rep.error(f"top_issues ranks must be 1..n, got {ranks}")
+    for entry in c["top_issues"] + c["credit"]:
+        if entry["document_id"] not in ids:
+            rep.error(f"issue {entry['document_id']}/{entry['target']} names a document the view does not list")
+
+
+def check_trend(c: dict, docs: list[dict], rep: Report) -> None:
+    t = c["trend"]
+    dated = [d for d in docs if d.get("date")]
+    if t["points"] != len(dated):
+        rep.error(f"trend.points {t['points']} != {len(dated)} documents with a date")
+
+    if t["direction"] == "undetermined":
+        if len(dated) >= 2:
+            rep.error("trend.direction is undetermined although two dated documents can be compared")
+        if t["change"] is not None or t["confidence"] != 0:
+            rep.error("an undetermined trend has no change and confidence 0")
+        return
+    if len(dated) < 2:
+        rep.error(f"trend.direction {t['direction']!r} on {len(dated)} dated document(s); two points are the least a direction can rest on")
+        return
+
+    first, last = t["first"], t["last"]
+    if first is None or last is None:
+        rep.error("a trend with a direction names the two documents it is between")
+        return
+    for end, doc, where in ((first, dated[0], "first"), (last, dated[-1], "last")):
+        if end["document_id"] != doc["document_id"] or end["date"] != doc["date"]:
+            rep.error(f"trend.{where} is {end['document_id']} of {end['date']} but the {where} document listed is {doc['document_id']} of {doc['date']}")
+        if abs(end["score"] - doc["headline"]["score"]) > ROUNDING:
+            rep.error(f"trend.{where}.score {end['score']} != that document's headline {doc['headline']['score']}")
+
+    change = last["score"] - first["score"]
+    if abs(t["change"] - change) > ROUNDING:
+        rep.error(f"trend.change {t['change']} != last - first ({change:.2f})")
+    span = (date_type.fromisoformat(last["date"]) - date_type.fromisoformat(first["date"])).days
+    if t["span_days"] != span:
+        rep.error(f"trend.span_days {t['span_days']} != {span} days between {first['date']} and {last['date']}")
+    if t["direction"] == "worsening" and t["change"] <= 0:
+        rep.error(f"trend.direction worsening but the headline moved {t['change']:+.2f}")
+    if t["direction"] == "improving" and t["change"] >= 0:
+        rep.error(f"trend.direction improving but the headline moved {t['change']:+.2f}")
+    if t["direction"] == "steady" and abs(t["change"]) > STEADY_MAX:
+        rep.error(f"trend.direction steady but the headline moved {t['change']:+.2f}")
+    if t["per_year"] is not None and span == 0:
+        rep.error("trend.per_year on documents captured the same day: there is no time to divide by")
+
+    # Confidence is bounded by the two readings that moved: a movement cannot be surer than the
+    # numbers it is a movement between (the same rule the verdict's confidence follows, §6).
+    cap = min(dated[0]["headline"]["confidence"], dated[-1]["headline"]["confidence"])
+    if t["confidence"] > cap + ROUNDING:
+        rep.error(f"trend.confidence {t['confidence']} is above the confidence of the headlines that moved ({cap})")
+
+
+def cmd_validate_company(path: str) -> int:
+    rep = Report()
+    check_company(load_json(path), rep)
+    return rep.finish("validate-company")
+
+
 # ----------------------------------------------------------------------------- build (analysis -> events)
 
 class Timeline:
@@ -775,6 +910,8 @@ def main(argv: list[str]) -> int:
             return cmd_validate(rest[0], ap)
         if cmd == "validate-analysis":
             return cmd_validate_analysis(rest[0])
+        if cmd == "validate-company":
+            return cmd_validate_company(rest[0])
         if cmd == "fold":
             return cmd_fold(rest[0], rest[1])
     except IndexError:
