@@ -11,4 +11,13 @@ export default defineConfig({
       "@": path.resolve(import.meta.dirname, "./src"),
     },
   },
+  server: {
+    // 5173 is taken by another project on the dev machine.
+    port: 5174,
+    // The API lives in backend/ (uvicorn on 8400). Proxying keeps it same-origin in dev,
+    // so there is no CORS and EventSource works unchanged.
+    proxy: {
+      "/api": { target: "http://127.0.0.1:8400" },
+    },
+  },
 })

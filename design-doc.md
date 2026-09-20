@@ -152,7 +152,7 @@ Extends the document view in D2. Judges can only reward analysis they can see, s
 
 See `roadmap.md`: frontend first on a hand-made fixture, then one pipeline stage at a time, each step ending in a visual check.
 
-- **D8. An analysis is an event stream.** Fixture, live run and replay share one format, so the interface is built before the pipeline and replay comes free.
+- **D8. An analysis is an event stream.** Fixture, live run and replay share one format, so the interface is built before the pipeline and replay comes free. Envelope: `fixtures/README.md`; payloads, ordering and derivation rules: `contract/CONTRACT.md`; first fixture: `fixtures/shell-climate.jsonl`.
 
 ## Deferred (implementation)
 

@@ -1,13 +1,27 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
-@import "@fontsource-variable/geist";
+@import "@fontsource-variable/public-sans";
+@import "@fontsource-variable/literata";
 
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
     --font-heading: var(--font-sans);
-    --font-sans: 'Geist Variable', sans-serif;
+    --font-sans: 'Public Sans Variable', ui-sans-serif, system-ui, sans-serif;
+    --font-serif: 'Literata Variable', Georgia, serif;
+
+    /* design-plan.md palette as Tailwind colours: bg-paper, text-ink, text-verdict-contradicted, ... */
+    --color-desk: var(--desk);
+    --color-paper: var(--paper);
+    --color-ink: var(--ink);
+    --color-graphite: var(--graphite);
+    --color-marker: var(--marker);
+    --color-verdict-contradicted: var(--verdict-contradicted);
+    --color-verdict-misleading: var(--verdict-misleading);
+    --color-verdict-unsubstantiated: var(--verdict-unsubstantiated);
+    --color-verdict-supported: var(--verdict-supported);
+
     --color-sidebar-ring: var(--sidebar-ring);
     --color-sidebar-border: var(--sidebar-border);
     --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
@@ -49,72 +63,99 @@
 }
 
 :root {
-    --background: oklch(1 0 0);
-    --foreground: oklch(0.145 0 0);
-    --card: oklch(1 0 0);
-    --card-foreground: oklch(0.145 0 0);
-    --popover: oklch(1 0 0);
-    --popover-foreground: oklch(0.145 0 0);
-    --primary: oklch(0.205 0 0);
-    --primary-foreground: oklch(0.985 0 0);
-    --secondary: oklch(0.97 0 0);
-    --secondary-foreground: oklch(0.205 0 0);
-    --muted: oklch(0.97 0 0);
-    --muted-foreground: oklch(0.556 0 0);
-    --accent: oklch(0.97 0 0);
-    --accent-foreground: oklch(0.205 0 0);
-    --destructive: oklch(0.577 0.245 27.325);
-    --border: oklch(0.922 0 0);
-    --input: oklch(0.922 0 0);
-    --ring: oklch(0.708 0 0);
-    --chart-1: oklch(0.87 0 0);
-    --chart-2: oklch(0.556 0 0);
-    --chart-3: oklch(0.439 0 0);
-    --chart-4: oklch(0.371 0 0);
-    --chart-5: oklch(0.269 0 0);
-    --radius: 0.625rem;
-    --sidebar: oklch(0.985 0 0);
-    --sidebar-foreground: oklch(0.145 0 0);
-    --sidebar-primary: oklch(0.205 0 0);
-    --sidebar-primary-foreground: oklch(0.985 0 0);
-    --sidebar-accent: oklch(0.97 0 0);
-    --sidebar-accent-foreground: oklch(0.205 0 0);
-    --sidebar-border: oklch(0.922 0 0);
-    --sidebar-ring: oklch(0.708 0 0);
+    /* Base palette (design-plan.md). Desk is the app chrome; Paper is for the document pane only. */
+    --desk: #e9ecee;
+    --paper: #ffffff;
+    --ink: #1c2733;
+    --graphite: #5b6572;
+    --marker: #2a4d9b;
+
+    /* Verdict scale. Hue is the category; highlight alpha is confidence; underline style is
+       the second channel (solid, wavy, dashed, dotted). Team review pending. */
+    --verdict-contradicted: #b3261e;
+    --verdict-misleading: #b8700a;
+    --verdict-unsubstantiated: #6e6a85;
+    --verdict-supported: #1e7566;
+
+    /* shadcn variables mapped onto the palette. */
+    --background: var(--desk);
+    --foreground: var(--ink);
+    --card: #f4f5f6;
+    --card-foreground: var(--ink);
+    --popover: #f4f5f6;
+    --popover-foreground: var(--ink);
+    --primary: var(--marker);
+    --primary-foreground: #ffffff;
+    --secondary: #dde1e4;
+    --secondary-foreground: var(--ink);
+    --muted: #dde1e4;
+    --muted-foreground: var(--graphite);
+    --accent: #dde1e4;
+    --accent-foreground: var(--ink);
+    --destructive: var(--verdict-contradicted);
+    --border: #cbd1d6;
+    --input: #cbd1d6;
+    --ring: var(--marker);
+    --chart-1: var(--verdict-supported);
+    --chart-2: var(--verdict-unsubstantiated);
+    --chart-3: var(--verdict-misleading);
+    --chart-4: var(--verdict-contradicted);
+    --chart-5: var(--graphite);
+    --radius: 0.5rem;
+    --sidebar: #f4f5f6;
+    --sidebar-foreground: var(--ink);
+    --sidebar-primary: var(--marker);
+    --sidebar-primary-foreground: #ffffff;
+    --sidebar-accent: #dde1e4;
+    --sidebar-accent-foreground: var(--ink);
+    --sidebar-border: #cbd1d6;
+    --sidebar-ring: var(--marker);
 }
 
 .dark {
-    --background: oklch(0.145 0 0);
-    --foreground: oklch(0.985 0 0);
-    --card: oklch(0.205 0 0);
-    --card-foreground: oklch(0.985 0 0);
-    --popover: oklch(0.205 0 0);
-    --popover-foreground: oklch(0.985 0 0);
-    --primary: oklch(0.922 0 0);
-    --primary-foreground: oklch(0.205 0 0);
-    --secondary: oklch(0.269 0 0);
-    --secondary-foreground: oklch(0.985 0 0);
-    --muted: oklch(0.269 0 0);
-    --muted-foreground: oklch(0.708 0 0);
-    --accent: oklch(0.269 0 0);
-    --accent-foreground: oklch(0.985 0 0);
-    --destructive: oklch(0.704 0.191 22.216);
-    --border: oklch(1 0 0 / 10%);
-    --input: oklch(1 0 0 / 15%);
-    --ring: oklch(0.556 0 0);
-    --chart-1: oklch(0.87 0 0);
-    --chart-2: oklch(0.556 0 0);
-    --chart-3: oklch(0.439 0 0);
-    --chart-4: oklch(0.371 0 0);
-    --chart-5: oklch(0.269 0 0);
-    --sidebar: oklch(0.205 0 0);
-    --sidebar-foreground: oklch(0.985 0 0);
-    --sidebar-primary: oklch(0.488 0.243 264.376);
-    --sidebar-primary-foreground: oklch(0.985 0 0);
-    --sidebar-accent: oklch(0.269 0 0);
-    --sidebar-accent-foreground: oklch(0.985 0 0);
-    --sidebar-border: oklch(1 0 0 / 10%);
-    --sidebar-ring: oklch(0.556 0 0);
+    /* Provisional. Derived mechanically from the light palette so the theme toggle never shows
+       a broken screen; the team designs dark mode after light is agreed (design-plan.md). */
+    --desk: #14181c;
+    --paper: #1e242b;
+    --ink: #e6e9ec;
+    --graphite: #9aa3ad;
+    --marker: #8aa6ee;
+    --verdict-contradicted: #e0655c;
+    --verdict-misleading: #e0a03a;
+    --verdict-unsubstantiated: #a29dbb;
+    --verdict-supported: #4fb3a2;
+
+    --background: var(--desk);
+    --foreground: var(--ink);
+    --card: #1b2026;
+    --card-foreground: var(--ink);
+    --popover: #1b2026;
+    --popover-foreground: var(--ink);
+    --primary: var(--marker);
+    --primary-foreground: #0f1419;
+    --secondary: #262d35;
+    --secondary-foreground: var(--ink);
+    --muted: #262d35;
+    --muted-foreground: var(--graphite);
+    --accent: #262d35;
+    --accent-foreground: var(--ink);
+    --destructive: var(--verdict-contradicted);
+    --border: #2f3841;
+    --input: #2f3841;
+    --ring: var(--marker);
+    --chart-1: var(--verdict-supported);
+    --chart-2: var(--verdict-unsubstantiated);
+    --chart-3: var(--verdict-misleading);
+    --chart-4: var(--verdict-contradicted);
+    --chart-5: var(--graphite);
+    --sidebar: #1b2026;
+    --sidebar-foreground: var(--ink);
+    --sidebar-primary: var(--marker);
+    --sidebar-primary-foreground: #0f1419;
+    --sidebar-accent: #262d35;
+    --sidebar-accent-foreground: var(--ink);
+    --sidebar-border: #2f3841;
+    --sidebar-ring: var(--marker);
 }
 
 @layer base {
@@ -127,4 +168,237 @@
   html {
     @apply font-sans;
     }
+}
+
+/* The document pane (design-plan.md: the document is the exhibit, set in Literata on Paper).
+   Structure classes are set by components/document-pane.tsx from the layout in
+   lib/document-layout.ts; every selector here is a single class or attribute so nothing
+   cancels out. */
+@layer components {
+  .document {
+    font-family: var(--font-serif);
+    font-size: 17px;
+    line-height: 1.6;
+    color: var(--ink);
+    font-optical-sizing: auto;
+    text-wrap: pretty;
+  }
+  .document > :first-child,
+  .document-container > :first-child {
+    margin-top: 0;
+  }
+  .document-title {
+    font-size: 28px;
+    line-height: 1.2;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+  }
+  .document-heading {
+    margin-top: 2em;
+    line-height: 1.25;
+    font-weight: 500;
+  }
+  .document-heading[data-level="2"] {
+    font-size: 22px;
+  }
+  .document-heading[data-level="3"] {
+    margin-top: 1.6em;
+    font-size: 1em;
+    font-weight: 600;
+  }
+  .document-heading[data-level="4"] {
+    margin-top: 1.4em;
+    font-size: 1em;
+    font-weight: 600;
+    font-style: italic;
+  }
+  .document-paragraph {
+    margin-top: 1em;
+  }
+  .document-paragraph[data-prominence="headline"] {
+    font-size: 19px;
+    line-height: 1.5;
+  }
+  .document-list {
+    margin-top: 0.8em;
+    padding-left: 1.4em;
+    list-style: disc;
+  }
+  .document-list > li {
+    margin-top: 0.4em;
+  }
+  .document-list > li::marker {
+    color: var(--graphite);
+  }
+  .document-container {
+    margin-top: 1.6em;
+  }
+  /* Small print: what the source page de-emphasises stays de-emphasised, so a buried
+     admission looks buried. */
+  .document-container[data-kind="cautionary_note"],
+  .document-container[data-kind="footnote"] {
+    font-size: 15px;
+    line-height: 1.55;
+    color: var(--graphite);
+  }
+  .document-container[data-kind="promo"],
+  .document-container[data-kind="quote"] {
+    padding-left: 1em;
+    border-left: 2px solid var(--border);
+    color: var(--graphite);
+  }
+  .document-container[data-kind="quote"] {
+    font-style: italic;
+  }
+
+  /* A claim span. Hue and alpha are custom properties so a verdict (roadmap step 5) only has
+     to set them: pending claims are Graphite at 15%, no underline. */
+  .claim-mark {
+    --mark-hue: var(--graphite);
+    --mark-alpha: 0.15;
+    background-color: color-mix(in oklab, var(--mark-hue) calc(var(--mark-alpha) * 100%), transparent);
+    color: inherit;
+    padding-block: 0.12em;
+    border-radius: 2px;
+    box-decoration-break: clone;
+    -webkit-box-decoration-break: clone;
+    cursor: pointer;
+    /* The one motion moment: a highlight settles from Graphite to its verdict hue. */
+    transition:
+      background-color 700ms ease,
+      text-decoration-color 700ms ease,
+      box-shadow 120ms ease;
+    @starting-style {
+      background-color: transparent;
+    }
+  }
+  /* The verdict scale (design-plan.md). Hue and underline style per category; the same
+     attribute styles the margin ids and the panel's verdict words. */
+  [data-verdict="contradicted"] {
+    --mark-hue: var(--verdict-contradicted);
+    --mark-line-style: solid;
+  }
+  [data-verdict="misleading_by_framing"] {
+    --mark-hue: var(--verdict-misleading);
+    --mark-line-style: wavy;
+  }
+  [data-verdict="unsubstantiated"] {
+    --mark-hue: var(--verdict-unsubstantiated);
+    --mark-line-style: dashed;
+  }
+  [data-verdict="supported"] {
+    --mark-hue: var(--verdict-supported);
+    --mark-line-style: dotted;
+  }
+  .claim-mark[data-verdict] {
+    text-decoration-line: underline;
+    text-decoration-style: var(--mark-line-style);
+    text-decoration-color: color-mix(
+      in oklab,
+      var(--mark-hue) calc(var(--mark-line-alpha, 1) * 100%),
+      transparent
+    );
+    text-decoration-thickness: 1.5px;
+    text-underline-offset: 0.16em;
+    text-decoration-skip-ink: none;
+  }
+  /* Hover is a faint ring in the mark's own hue, so it reads at any confidence; selection is
+     the Marker ring. Only marks in the document react, not the panel's verdict words. */
+  mark.claim-mark:hover {
+    box-shadow: 0 0 0 1px color-mix(in oklab, var(--mark-hue) 45%, transparent);
+  }
+  .claim-mark[data-selected] {
+    box-shadow: 0 0 0 1.5px var(--marker);
+  }
+  .claim-mark:focus-visible {
+    outline: 2px solid var(--marker);
+    outline-offset: 2px;
+  }
+
+  /* The Language layer (design-plan.md): word-level marks as Graphite text-decoration only,
+     never fill, tight under the words so a verdict underline can sit below it. Polarity is
+     the style: a flag is a dotted line, a benign note the same but faint, a credit a thin
+     solid line in the Supported hue. */
+  .language-mark {
+    text-decoration-line: underline;
+    text-decoration-style: dotted;
+    text-decoration-color: color-mix(in oklab, var(--graphite) 90%, transparent);
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.04em;
+    text-decoration-skip-ink: none;
+  }
+  .language-mark[data-polarity="benign"] {
+    text-decoration-color: color-mix(in oklab, var(--graphite) 40%, transparent);
+  }
+  .language-mark[data-polarity="credit"] {
+    text-decoration-style: solid;
+    text-decoration-color: var(--verdict-supported);
+  }
+
+  /* The honest version (design-doc D6): a redline. What the evidence does not allow is
+     struck through in Graphite; what the tool would write instead is in italic, the voice
+     of a rewrite, with no colour of its own. */
+  .honest-del {
+    color: var(--graphite);
+    text-decoration-line: line-through;
+    text-decoration-color: var(--graphite);
+    text-decoration-thickness: 1px;
+  }
+  .honest-ins {
+    font-style: italic;
+    text-decoration: none;
+  }
+  /* Inside a claim highlight the honest words sit on Paper: the fill stays on what was
+     struck, only the category underline continues. */
+  .claim-mark .honest-ins {
+    background-color: var(--paper);
+    padding-block: 0.12em;
+  }
+  .document-insert {
+    cursor: pointer;
+  }
+  .document-insert:hover .honest-ins {
+    background-color: var(--muted);
+  }
+
+  /* Margin labels: the claim's id beside its first line, positioned by the pane. */
+  .document-gutter-label {
+    position: absolute;
+    left: 0.5rem;
+    height: 18px;
+    padding: 0 3px;
+    border-radius: 2px;
+    font-family: var(--font-sans);
+    font-size: 13px;
+    line-height: 18px;
+    font-variant-numeric: tabular-nums;
+    color: var(--graphite);
+    cursor: pointer;
+    user-select: none;
+    transition: color 120ms ease;
+  }
+  @media (min-width: 40rem) {
+    .document-gutter-label {
+      left: 1.25rem;
+    }
+  }
+  .document-gutter-label:hover {
+    color: var(--ink);
+    background-color: var(--muted);
+  }
+  .document-gutter-label[data-verdict] {
+    color: var(--mark-hue);
+  }
+  .document-gutter-label[data-selected] {
+    color: var(--mark-hue, var(--marker));
+    font-weight: 500;
+    background-color: var(--muted);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .claim-mark,
+    .document-gutter-label {
+      transition: none;
+    }
+  }
 }

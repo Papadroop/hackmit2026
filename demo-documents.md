@@ -97,7 +97,7 @@ Why this one: it is a label in the brief's sense (the announcement of a "carbon 
 
 Expected result: headline likelihood about 0.55 with confidence about 0.7; a majority of Supported claims; the "carbon neutral" family Misleading by framing (or Contradicted in the German jurisdiction); Unsubstantiated for "clean energy", "high-quality carbon credits" and "industry-leading"; omissions on the share of the product footprint covered by credits (about a quarter), absolute units sold, and device lifetime and repairability (SASB Hardware: product lifecycle management).
 
-Risks: the release is long (4093 words including footnotes), above the 2,500-word guideline; the document view has to scroll, which real documents demand anyway. The April 2025 release "Apple surpasses 60 percent reduction" (about 2,900 words) is the shorter substitute if the interface struggles; it still contains the carbon-neutral Watch and Mac mini claims.
+Risks: the release is long (4093 words as first counted; 2,318 once step 10's ingester dropped the page's hidden duplicate of the article text), around the 2,500-word guideline; the document view has to scroll, which real documents demand anyway. The April 2025 release "Apple surpasses 60 percent reduction" (about 2,900 words) is the shorter substitute if the interface struggles; it still contains the carbon-neutral Watch and Mac mini claims.
 
 ### C. Ørsted — "Towards net zero" (likely clean)
 
@@ -172,5 +172,6 @@ Everything below was fetched today unless marked. "Fetch tool" is the web-fetch 
 ## 8. Fixture files
 
 - `demo-documents/shell-climate-2026-09-19.md` — verbatim text, with a front-matter header recording URL, retrieval method, archive status and word counts. Spans in `golden-reference.md` are substrings of this file.
-- `demo-documents/orsted-decarbonisation-2026-09-19.md` — same format; captured through the fetch tool, to be re-extracted from HTML in step 10.
-- `demo-documents/apple-carbon-neutral-2023-09-12.md` — same format; static page, clean extraction.
+- `demo-documents/orsted-decarbonisation-2026-09-19.md` — same format; re-extracted from the rendered HTML by the step 10 ingester on 2026-09-19 and diffed against the fetch-tool copy: the same text with the page's curly quotes restored, plus the link cards' section heading and link sentences. 720 words.
+- `demo-documents/apple-carbon-neutral-2023-09-12.md` — same format; re-extracted from the static HTML by the step 10 ingester on 2026-09-19. 2,318 words: the earlier 4,093 count included the page's hidden copy-text duplicate of the article, which the ingester drops.
+- `fixtures/shell-climate.analysis.json` and `fixtures/shell-climate.jsonl` — the Shell hand analysis as contract data and as the replayable event log (step 2); see `contract/CONTRACT.md`.

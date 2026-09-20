@@ -1,0 +1,29 @@
+[project]
+name = "auditor"
+version = "0.0.1"
+description = "Greenwashing Auditor API: event stream, replay, and the analysis pipeline"
+requires-python = ">=3.12"
+dependencies = [
+  "fastapi>=0.115",
+  "uvicorn[standard]>=0.30",
+  "httpx>=0.27",            # ingest: fetching pages and PDFs
+  "beautifulsoup4>=4.12",   # ingest: HTML
+  "lxml>=5",                # ingest: HTML parser for BeautifulSoup
+  "pymupdf>=1.24",          # ingest: PDF text with layout
+  "anthropic>=1.7",         # llm: Claude calls for the pipeline stages
+  "python-dotenv>=1.0",     # llm: backend/.env
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8", "httpx2>=2", "jsonschema>=4.18"]  # jsonschema: contract/tools/contract.py
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+include = ["auditor*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]

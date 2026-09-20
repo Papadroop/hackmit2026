@@ -14,6 +14,7 @@ Last updated: 2026-09-19
 | Retrieved | 2026-09-19, from the page's AEM content model (`climate.model.json`) |
 | Archive | Wayback snapshots monthly 2025-03-28 → 2026-09-04 at this URL; 2024-03-01 → 2025-03-02 at the previous URL `/sustainability/our-climate-target.html` |
 | Role | Likely greenwashing (primary demo document) |
+| Machine form | `fixtures/shell-climate.analysis.json` (this analysis as data, spans resolved to offsets) and `fixtures/shell-climate.jsonl` (the event log the app replays); rules in `contract/CONTRACT.md` |
 
 ## 0. Conventions used in this file
 
@@ -21,11 +22,11 @@ Last updated: 2026-09-19
 
 **Dimensions** (D6): Clarity (Linguistic evaluator), Support (Substantiation + External verification), Materiality (proportionality), Consistency (Self-consistency evaluator). Completeness is document-level only (§6).
 
-**Verdict category**, derived from the dimensions, in this order:
-1. **Contradicted** — an evidence item contradicts the literal content of the claim, or the company's own statements do (Support or Consistency ≥ 0.7 with `c` ≥ 0.6).
-2. **Unsubstantiated** — the claim is too vague to verify (Clarity ≥ 0.7), or no evidence could be found either way (Support ≈ 0.5, low `c`).
-3. **Misleading by framing** — the literal content is supported, but Clarity or Materiality (or a weakening of the target over time) is the weakest link at ≥ 0.5.
-4. **Supported** — everything else, with `c` ≥ 0.6.
+**Verdict category**, derived by the rules in `contract/CONTRACT.md` §6, which the fixture validator enforces:
+1. **Contradicted** — an evidence item with relation `contradicts` is linked to the claim, and Support ≥ 0.7 or Consistency ≥ 0.7 with confidence ≥ 0.6.
+2. **Unsubstantiated** — Clarity ≥ 0.7 (too vague to verify), or Support between 0.4 and 0.6 with confidence below 0.6 (nothing found either way).
+3. **Misleading by framing** — likelihood above 0.5: the literal content stands and clarity, materiality or a weakened target carries the verdict. Evidence that contradicts only the impression is linked as `contradicts_framing` and leads here, not to Contradicted.
+4. **Supported** — likelihood at or below 0.5. A materiality-only weakness at 0.5 stays Supported, with the caveat shown.
 
 **Pattern tags** from the "seven sins" (hidden trade-off, no proof, vagueness, irrelevance, lesser of two evils, fibbing, false labels). One extra tag from Planet Tracker's taxonomy is used where the seven sins have no word for it: **greenrinsing** = changing a target before it is met.
 
@@ -239,7 +240,7 @@ Scores are (problem score / confidence). "—" means the dimension does not appl
 | C16 methane 0.04% / 0.002% | 0.2/0.8 | 0.25/0.6 | 0.3/0.7 | 0.1/0.8 | 0.3 | 0.6 | Supported | — | E14, E6, E17 |
 | C17 NCI −9.0%, within 2025 range | 0.4/0.9 | 0.15/0.9 | 0.5/0.8 | 0.6/0.9 | 0.6 | 0.85 | Misleading by framing | greenrinsing | E5, E13, E19 |
 | C18 routine flaring eliminated | 0.35/0.8 | 0.25/0.6 | 0.3/0.7 | 0.2/0.8 | 0.35 | 0.65 | Supported | — | E14, E15 |
-| C19 oil-product Scope 3 −18% vs 2021 | 0.3/0.8 | 0.15/0.9 | 0.55/0.8 | 0.3/0.8 | 0.55 | 0.8 | Supported (driver caveat) | — | E4b |
+| C19 oil-product Scope 3 −18% vs 2021 | 0.3/0.8 | 0.15/0.9 | 0.5/0.8 | 0.3/0.8 | 0.5 | 0.8 | Supported (driver caveat) | — | E4b, X5 |
 | C20 portfolio changes, divesting assets | 0.5/0.8 | 0.3/0.7 | 0.65/0.85 | 0.4/0.7 | 0.65 | 0.8 | Misleading by framing | hidden trade-off | E18, E3, E4b |
 | C21 high-quality carbon credits | 0.7/0.8 | 0.5/0.3 | 0.4/0.6 | 0.2/0.5 | 0.7 | 0.7 | Unsubstantiated | vagueness | E12 |
 | C22 growing power sales, incl. renewable | 0.55/0.8 | 0.45/0.5 | 0.4/0.6 | 0.5/0.7 | 0.55 | 0.6 | Unsubstantiated | no proof | E7 |
@@ -342,9 +343,11 @@ Candidate not included: lobbying and policy positions (the page conditions the N
 8. **Dimension scores carry a `basis` string** (one sentence) so the claim panel can show why, not just how much.
 9. **Recomputations are evidence items too** (type `computation`, with the formula and inputs), so "numbers recomputed" is visible in the panel.
 
-## 9. Open points for the team review
+## 9. Open points, and how step 2 settled them
 
-- Whether C23 is "Misleading by framing" or "Contradicted" (§5.1 note). This decides how the verdict rules in §0 are written.
-- Whether C2, C9, C14 should show as Supported at likelihood 0.5, or whether a materiality-only weakness should cap likelihood lower (say 0.4) so "Supported" claims never sit at the midpoint of the scale.
-- Whether "greenrinsing" stays as an eighth tag or is folded into the Consistency dimension only.
-- E8b is the most useful precedent for the **Fix** field: the ASA accepted a 2025 Shell ad that stated the 68% / 23% investment split on screen. The fix for C1 and O2 should quote it.
+- **C23 is Misleading by framing, not Contradicted.** The contract distinguishes evidence that contradicts a claim's literal content (`contradicts`) from evidence that contradicts only the impression it gives (`contradicts_framing`); only the former can make a claim Contradicted. Shell's annual report contradicts the *framing* of the LNG sentence, so C23 keeps its category and its 0.8 likelihood.
+- **A materiality-only weakness at 0.5 stays Supported**, with the 0.5 visible as the caveat. Misleading by framing needs a likelihood above 0.5. C19's Materiality was set to 0.5 (from 0.55) to be consistent with C14: both are accurate figures whose scope is stated and whose driver is partly divestment.
+- **greenrinsing stays as an eighth tag**, in the schema's enum.
+- **E8b is the most useful precedent for the Fix field**: the ASA accepted a 2025 Shell ad that stated the 68% / 23% investment split on screen. The fix for C1 and O2 quotes it.
+- **Verdict confidence stays a judgment** until step 17 defines the formula; the validator only checks that it sits within the range of the claim's dimension confidences.
+- The cross-check script run in step 2 compared every claim span, claim type, signal span, dimension score, verdict and evidence id in this file against `fixtures/shell-climate.analysis.json`; the only difference was the C19 change above, now applied here.

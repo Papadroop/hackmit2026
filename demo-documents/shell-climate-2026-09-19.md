@@ -3,16 +3,19 @@ title: Climate | Shell Global
 company: Shell plc
 url: https://www.shell.com/sustainability/climate.html
 retrieved: 2026-09-19
-method: text fields extracted from the page's AEM content model (https://www.shell.com/sustainability/climate.model.json); headings and list bullets reconstructed; navigation, link cards and the "You may also be interested in" list omitted
+method: text fields of the page's AEM content model (https://www.shell.com/sustainability/climate.model.json); non-breaking spaces normalised to ASCII spaces (contract rule); headings and list bullets reconstructed; navigation, link cards and the "You may also be interested in" list omitted. Reproduced byte for byte by the step 10 ingester (backend/auditor/ingest) from the live model on 2026-09-19.
 wayback: monthly snapshots from 2025-03-28 to 2026-09-04 (see demo-documents.md); older versions at https://www.shell.com/sustainability/our-climate-target.html (2024-03-01 to 2025-03-02)
 words_total: 2164
 words_before_cautionary_note: 840
+text_type: policy
+industry: Oil & Gas – Integrated
+sasb_codes: EM-EP, EM-RM
 role: likely greenwashing (primary demo document; golden reference in ../golden-reference.md)
 ---
 
 # Climate
 
-Our target is to become a net-zero emissions energy business by 2050. As we implement our strategy to deliver more value with less emissions, we are reducing emissions from our operations, and helping our customers transition to cleaner energy solutions. Find out more about how we are working to achieve this target and our progress so far.
+Our target is to become a net-zero emissions energy business by 2050. As we implement our strategy to deliver more value with less emissions, we are reducing emissions from our operations, and helping our customers transition to cleaner energy solutions. Find out more about how we are working to achieve this target and our progress so far.
 
 ## Climate
 
@@ -24,11 +27,11 @@ We have set intensity targets and absolute targets and an ambition over the shor
 
 Our net-zero target includes emissions from our operations, as well as from the end-use of all the energy products we sell. The metrics we use to track progress against our energy transition targets and ambition include:
 
-- Halving Scope 1 and 2 emissions under our operational control by 2030, on a net basis, compared with 2016. Scope 1 emissions come directly from our operations, and Scope 2 from the energy we buy to run our operations.
+- Halving Scope 1 and 2 emissions under our operational control by 2030, on a net basis, compared with 2016. Scope 1 emissions come directly from our operations, and Scope 2 from the energy we buy to run our operations.
 
-- Maintaining methane emissions intensity for operated oil and gas assets below 0.2% and achieve near-zero methane emissions intensity by 2030.
+- Maintaining methane emissions intensity for operated oil and gas assets below 0.2% and achieve near-zero methane emissions intensity by 2030.
 
-- Reducing the net carbon intensity (NCI) of the products we sell by 15-20% by 2030. NCI measures emissions associated with each unit of energy we sell[A]. It reflects changes in sales of oil and gas products, and changes in sales of low--carbon products - such as biofuels and renewable electricity. Reducing the NCI of the products we sell requires action by both Shell and our customers, with the support of governments and policymakers to create the right conditions for change.
+- Reducing the net carbon intensity (NCI) of the products we sell by 15-20% by 2030. NCI measures emissions associated with each unit of energy we sell[A]. It reflects changes in sales of oil and gas products, and changes in sales of low--carbon products - such as biofuels and renewable electricity. Reducing the NCI of the products we sell requires action by both Shell and our customers, with the support of governments and policymakers to create the right conditions for change.
 
 - Reducing customer emissions from the use of our oil products by 15-20% by 2030, Scope 3 Category 11 (2021 baseline).
 
@@ -72,7 +75,7 @@ To decarbonise our operations, we are:
 
 - making portfolio changes such as acquisitions and investments in low carbon intensity projects, decommissioning facilities, divesting assets while sustaining our liquids production.
 
-If required, we may choose to use high-quality carbon credits to offset any remaining emissions from our operations, in line with the carbon mitigation hierarchy of avoid, reduce, and compensate or to meet local regulatory requirements.
+If required, we may choose to use high-quality carbon credits to offset any remaining emissions from our operations, in line with the carbon mitigation hierarchy of avoid, reduce, and compensate or to meet local regulatory requirements.
 
 To support our customers to decarbonise, we are:
 
@@ -84,11 +87,11 @@ To support our customers to decarbonise, we are:
 
 - developing abatement projects, including deploying more CCS; and
 
-- using carbon credits to offset remaining carbon emissions.
+- using carbon credits to offset remaining carbon emissions.
 
 ### Footnotes
 
-[A] Shell’s net carbon intensity is the average intensity, weighted by sales volume, of the energy products sold by Shell. It is tracked, measured and reported using our Net Carbon Footprint (NCF) methodology (PDF, 2 MB).
+[A] Shell’s net carbon intensity is the average intensity, weighted by sales volume, of the energy products sold by Shell. It is tracked, measured and reported using our Net Carbon Footprint (NCF) methodology (PDF, 2 MB).
 
 ### Cautionary note
 

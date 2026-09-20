@@ -1,75 +1,41 @@
-// Smoke test for the frontend stack. Replace with the real app (roadmap step 3).
-import { useState } from "react"
-import { motion } from "motion/react"
-import { Leaf, Moon, ScanSearch, Sun } from "lucide-react"
-import { toast } from "sonner"
-
-import { useTheme } from "@/components/theme-provider"
-import { Badge } from "@/components/ui/badge"
+import { ThemeToggle, Wordmark } from "@/components/chrome"
+import { Link } from "@/components/link"
 import { Button } from "@/components/ui/button"
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card"
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipTrigger,
-} from "@/components/ui/tooltip"
+import { paths, useRoute } from "@/lib/router"
+import { AnalysisScreen } from "@/screens/analysis"
+import { MenuScreen } from "@/screens/menu"
 
 export function App() {
-  const [runs, setRuns] = useState(0)
-  const { theme, setTheme } = useTheme()
+  const route = useRoute()
+  switch (route.name) {
+    case "menu":
+      return <MenuScreen />
+    case "analysis":
+      return <AnalysisScreen id={route.id} />
+    case "not-found":
+      return <NotFound path={route.path} />
+  }
+}
 
+function NotFound({ path }: { path: string }) {
   return (
-    <main className="flex min-h-svh items-center justify-center p-6">
-      <motion.div
-        initial={{ opacity: 0, y: 8 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.3, ease: "easeOut" }}
-      >
-        <Card className="w-full max-w-md">
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2">
-              <Leaf className="size-5" aria-hidden />
-              Greenwashing Auditor
-            </CardTitle>
-            <CardDescription>
-              Stack check: Tailwind, shadcn/ui, Motion and Lucide are wired up.
-              Press <kbd>d</kbd> to toggle dark mode.
-            </CardDescription>
-          </CardHeader>
-          <CardContent className="flex flex-wrap items-center gap-3">
-            <Tooltip>
-              <TooltipTrigger asChild>
-                <Button
-                  onClick={() => {
-                    setRuns((n) => n + 1)
-                    toast.success("Analysis started")
-                  }}
-                >
-                  <ScanSearch />
-                  Analyse
-                </Button>
-              </TooltipTrigger>
-              <TooltipContent>Runs the fixture replay</TooltipContent>
-            </Tooltip>
-            <Button
-              variant="outline"
-              size="icon"
-              aria-label="Toggle theme"
-              onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-            >
-              {theme === "dark" ? <Sun /> : <Moon />}
-            </Button>
-            <Badge variant="secondary">Runs: {runs}</Badge>
-          </CardContent>
-        </Card>
-      </motion.div>
-    </main>
+    <div className="flex min-h-svh flex-col">
+      <header className="flex items-center gap-3 px-6 py-3">
+        <Wordmark />
+        <div className="ml-auto">
+          <ThemeToggle />
+        </div>
+      </header>
+      <main className="mx-auto w-full max-w-prose px-6 py-10">
+        <h1 className="text-2xl font-medium">Nothing at this address</h1>
+        <p className="mt-2 text-muted-foreground">
+          There is no page at {path}.
+        </p>
+        <Button className="mt-6" asChild>
+          <Link href={paths.menu()}>Choose a document</Link>
+        </Button>
+      </main>
+    </div>
   )
 }
 

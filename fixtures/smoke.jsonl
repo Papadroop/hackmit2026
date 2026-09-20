@@ -1,0 +1,15 @@
+{"t_ms": 0, "type": "analysis.started", "payload": {"contract_version": "1.0.0", "mode": "fixture", "document_ref": {"title": "Transport smoke test"}, "note": "Lifecycle events only. Domain events (claims, evidence, verdicts) come from the step 2 fixture."}}
+{"t_ms": 200, "type": "stage.started", "payload": {"stage": "ingest", "label": "Reading the document"}}
+{"t_ms": 900, "type": "stage.completed", "payload": {"stage": "ingest"}}
+{"t_ms": 1000, "type": "stage.started", "payload": {"stage": "extract", "label": "Finding claims"}}
+{"t_ms": 1400, "type": "debug.note", "payload": {"text": "Payloads are opaque to the transport. This one is arbitrary."}}
+{"t_ms": 2200, "type": "stage.completed", "payload": {"stage": "extract"}}
+{"t_ms": 2300, "type": "stage.started", "payload": {"stage": "language", "label": "Reading how claims are worded"}}
+{"t_ms": 3100, "type": "stage.completed", "payload": {"stage": "language"}}
+{"t_ms": 3200, "type": "stage.started", "payload": {"stage": "verify", "label": "Gathering evidence"}}
+{"t_ms": 4800, "type": "stage.completed", "payload": {"stage": "verify"}}
+{"t_ms": 4900, "type": "stage.started", "payload": {"stage": "verdict", "label": "Deciding"}}
+{"t_ms": 5600, "type": "stage.completed", "payload": {"stage": "verdict"}}
+{"t_ms": 5700, "type": "stage.started", "payload": {"stage": "summary", "label": "Summarising"}}
+{"t_ms": 6000, "type": "stage.completed", "payload": {"stage": "summary"}}
+{"t_ms": 6100, "type": "analysis.completed", "payload": {}}

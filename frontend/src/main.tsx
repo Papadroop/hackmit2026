@@ -9,7 +9,7 @@ import { TooltipProvider } from "@/components/ui/tooltip"
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <ThemeProvider>
+    <ThemeProvider defaultTheme="light">
       <TooltipProvider>
         <App />
         <Toaster />

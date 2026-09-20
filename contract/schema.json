@@ -1,0 +1,1597 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://greenwashing-auditor.local/contract/schema.json",
+  "title": "Greenwashing Auditor data contract",
+  "description": "Root schema validates one Event (one line of an event log). The envelope (seq, t_ms, type, payload) is owned by the transport and documented in fixtures/README.md; this schema restates it and defines every payload. The Analysis object, the entities and the enums live in definitions. Contract version 1.0.0; see CONTRACT.md.",
+  "$ref": "#/definitions/Event",
+  "definitions": {
+    "Id": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,63}$",
+      "description": "Stable identifier. Fixture ids are short (C1, L11, E8b, X3, O2); live ids may be generated. Unique across all entity types within one analysis."
+    },
+    "Score01": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1
+    },
+    "Date": {
+      "type": "string",
+      "format": "date",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+    },
+    "Ext": {
+      "type": "object",
+      "description": "Free extension bag. Anything not in the contract goes here so additionalProperties can stay false everywhere else."
+    },
+    "Span": {
+      "type": "object",
+      "description": "A verbatim substring of Document.text. `text` is authoritative; `start`/`end` are Unicode code-point offsets into Document.text and must satisfy text == Document.text[start:end]. `context` and `occurrence` are authoring hints used to re-anchor the span if offsets go stale.",
+      "properties": {
+        "text": {
+          "type": "string",
+          "minLength": 1
+        },
+        "start": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "end": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "context": {
+          "type": "string",
+          "minLength": 1,
+          "description": "A unique substring of Document.text that contains `text`; disambiguates repeated phrases."
+        },
+        "occurrence": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "1-based index of which occurrence of `text` in Document.text is meant, when `context` is not given."
+        }
+      },
+      "required": [
+        "text",
+        "start",
+        "end"
+      ],
+      "additionalProperties": false
+    },
+    "RegionKind": {
+      "type": "string",
+      "enum": [
+        "title",
+        "heading",
+        "paragraph",
+        "list_item",
+        "footnote",
+        "cautionary_note",
+        "promo",
+        "quote",
+        "caption",
+        "other"
+      ]
+    },
+    "Region": {
+      "type": "object",
+      "description": "A labelled range of Document.text. Regions of the same kind must not overlap; different kinds may nest (a paragraph may contain list_items). Used for prominence weighting and for scrolling to paragraph labels.",
+      "properties": {
+        "kind": {
+          "$ref": "#/definitions/RegionKind"
+        },
+        "start": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "end": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "label": {
+          "type": "string",
+          "description": "Human label such as P4 or 'Cautionary note'."
+        },
+        "level": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 6,
+          "description": "Heading level, for kind=heading."
+        },
+        "prominence": {
+          "$ref": "#/definitions/Score01",
+          "description": "1.0 = headline/hero, 0.6 = body, 0.3 = footnote or cautionary note."
+        }
+      },
+      "required": [
+        "kind",
+        "start",
+        "end"
+      ],
+      "additionalProperties": false
+    },
+    "Company": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "aliases": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "ticker": {
+          "type": "string"
+        },
+        "country": {
+          "type": "string",
+          "description": "ISO 3166-1 alpha-2"
+        },
+        "sec_cik": {
+          "type": "string"
+        },
+        "ext": {
+          "$ref": "#/definitions/Ext"
+        }
+      },
+      "required": [
+        "name"
+      ],
+      "additionalProperties": false
+    },
+    "Industry": {
+      "type": "object",
+      "properties": {
+        "label": {
+          "type": "string",
+          "minLength": 1
+        },
+        "sasb_codes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "SASB industry codes used as the materiality reference, e.g. EM-EP."
+        },
+        "ext": {
+          "$ref": "#/definitions/Ext"
+        }
+      },
+      "required": [
+        "label"
+      ],
+      "additionalProperties": false
+    },
+    "TextType": {
+      "type": "string",
+      "enum": [
+        "label",
+        "policy",
+        "claim",
+        "press_release",
+        "web_page",
+        "report",
+        "other"
+      ],
+      "description": "The brief's kinds (label, policy, claim) plus common concrete forms."
+    },
+    "Document": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "$ref": "#/definitions/Id"
+        },
+        "title": {
+          "type": "string"
+        },
+        "company": {
+          "$ref": "#/definitions/Company"
+        },
+        "industry": {
+          "$ref": "#/definitions/Industry"
+        },
+        "text_type": {
+          "$ref": "#/definitions/TextType"
+        },
+        "source": {
+          "type": "object",
+          "properties": {
+            "url": {
+              "type": "string",
+              "format": "uri"
+            },
+            "retrieved": {
+              "$ref": "#/definitions/Date"
+            },
+            "method": {
+              "type": "string",
+              "description": "How the text was obtained (e.g. AEM model JSON, static HTML, PDF)."
+            },
+            "archive_url": {
+              "type": "string",
+              "format": "uri"
+            },
+            "fixture_path": {
+              "type": "string",
+              "description": "Repo path of the saved text, if any."
+            }
+          },
+          "required": [
+            "retrieved"
+          ],
+          "additionalProperties": false
+        },
+        "language": {
+          "type": "string",
+          "default": "en"
+        },
+        "text": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Canonical plain text. Rules: NFC-normalised; every Unicode space character (including U+00A0) becomes an ASCII space; no tabs or carriage returns; no runs of spaces; \\n line breaks; blocks separated by exactly one blank line; no leading or trailing whitespace; no markdown markers. All spans index into this string by Unicode code point."
+        },
+        "word_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "regions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Region"
+          }
+        },
+        "ext": {
+          "$ref": "#/definitions/Ext"
+        }
+      },
+      "required": [
+        "id",
+        "title",
+        "company",
+        "industry",
+        "text_type",
+        "source",
+        "text",
+        "regions"
+      ],
+      "additionalProperties": false
+    },
+    "ClaimType": {
+      "type": "string",
+      "enum": [
+        "factual",
+        "commitment",
+        "comparative",
+        "vague_attribute",
+        "certification"
+      ],
+      "description": "D4 Q1. Routes evaluation: factual claims are verified; commitments tested for credibility; comparatives need their baseline; certifications checked for existence and coverage; vague attributes are unverifiable by construction."
+    },
+    "Scope": {
+      "type": "string",
+      "enum": [
+        "product",
+        "packaging",
+        "operations",
+        "supply_chain",
+        "company",
+        "other"
+      ]
+    },
+    "Claim": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "$ref": "#/definitions/Id"
+        },
+        "spans": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/Span"
+          },
+          "description": "First span is the primary highlight; further spans are repeats of the same claim elsewhere in the text."
+        },
+        "type": {
+          "$ref": "#/definitions/ClaimType"
+        },
+        "scope": {
+          "$ref": "#/definitions/Scope"
+        },
+        "scope_note": {
+          "type": "string",
+          "description": "Precise scope in words, e.g. 'operated upstream assets only'."
+        },
+        "attribute": {
+          "type": "string",
+          "minLength": 1,
+          "description": "What is asserted: net zero, -36%, cleaner, ..."
+        },
+        "quantity": {
+          "type": "string"
+        },
+        "baseline": {
+          "type": "string"
+        },
+        "timeframe": {
+          "type": "string"
+        },
+        "paragraph": {
+          "type": "string",
+          "description": "Label of the paragraph region the primary span sits in (P1...)."
+        },
+        "prominence": {
+          "$ref": "#/definitions/Score01"
+        },
+        "note": {
+          "type": "string"
+        },
+        "ext": {
+          "$ref": "#/definitions/Ext"
+        }
+      },
+      "required": [
+        "id",
+        "spans",
+        "type",
+        "scope",
+        "attribute"
+      ],
+      "additionalProperties": false
+    },
+    "SignalKind": {
+      "type": "string",
+      "enum": [
+        "hedge",
+        "vague_term",
+        "undefined_term",
+        "comparative_without_baseline",
+        "weak_verb",
+        "qualifier_present",
+        "qualifier_absent",
+        "scope_mismatch",
+        "responsibility_diffusion",
+        "framing",
+        "ratio_language",
+        "intensifier",
+        "approximation",
+        "buried_admission",
+        "prominence",
+        "share_of_attention",
+        "emotive",
+        "register"
+      ],
+      "description": "D4 Q2. Claim-level kinds are the first fourteen; prominence, share_of_attention, emotive and register may also be document-level."
+    },
+    "Polarity": {
+      "type": "string",
+      "enum": [
+        "flag",
+        "benign",
+        "credit"
+      ],
+      "description": "flag = a greenwashing signal; benign = noted but harmless (so the Language layer visibly does not flag everything); credit = a qualifier or precision that counts in the text's favour."
+    },
+    "LanguageSignal": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "$ref": "#/definitions/Id"
+        },
+        "level": {
+          "type": "string",
+          "enum": [
+            "claim",
+            "document"
+          ]
+        },
+        "kind": {
+          "$ref": "#/definitions/SignalKind"
+        },
+        "polarity": {
+          "$ref": "#/definitions/Polarity"
+        },
+        "spans": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Span"
+          },
+          "description": "Word-level marks. Required non-empty for level=claim; may be empty for level=document."
+        },
+        "note": {
+          "type": "string",
+          "minLength": 1
+        },
+        "claim_ids": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Id"
+          }
+        },
+        "strength": {
+          "$ref": "#/definitions/Score01"
+        },
+        "ext": {
+          "$ref": "#/definitions/Ext"
+        }
+      },
+      "required": [
+        "id",
+        "level",
+        "kind",
+        "polarity",
+        "spans",
+        "note",
+        "claim_ids"
+      ],
+      "additionalProperties": false,
+      "if": {
+        "properties": {
+          "level": {
+            "const": "claim"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "spans": {
+            "minItems": 1
+          }
+        }
+      }
+    },
+    "Tier": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 5,
+      "description": "D5 reliability tier. 1 regulator ruling, court judgment, law; 2 audited/assured filing, government or intergovernmental data; 3 independent third-party dataset or standard; 4 news; 5 the company's own material."
+    },
+    "EvidenceKind": {
+      "type": "string",
+      "enum": [
+        "ruling",
+        "law",
+        "filing",
+        "report",
+        "dataset",
+        "standard",
+        "company_page",
+        "press_release",
+        "news",
+        "archive",
+        "computation",
+        "other"
+      ]
+    },
+    "Relation": {
+      "type": "string",
+      "enum": [
+        "supports",
+        "contradicts",
+        "contradicts_framing",
+        "context",
+        "precedent",
+        "criteria"
+      ],
+      "description": "From the target's point of view. supports/contradicts concern the literal content; contradicts_framing means the literal content stands but the impression does not; context is background or materiality; precedent is a ruling on similar wording; criteria is a rule the claim is measured against. For an omission target, supports means the evidence establishes the omitted fact."
+    },
+    "Verification": {
+      "type": "string",
+      "enum": [
+        "fetched_exact",
+        "fetched_by_eye",
+        "second_party_fetch",
+        "computed",
+        "unverified"
+      ],
+      "description": "fetched_exact: quote matched programmatically against the fetched source; fetched_by_eye: read from the fetched source by a person; second_party_fetch: fetched and quoted by a separate verification run; computed: the item is a computation, its quote is the result statement and its verification rests on derived_from; unverified: never displayed as a quote."
+    },
+    "EvidenceItem": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "$ref": "#/definitions/Id"
+        },
+        "kind": {
+          "$ref": "#/definitions/EvidenceKind"
+        },
+        "tier": {
+          "$ref": "#/definitions/Tier"
+        },
+        "source": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string",
+              "minLength": 1
+            },
+            "publisher": {
+              "type": "string"
+            },
+            "date": {
+              "type": "string",
+              "description": "Publication or decision date, ISO date or free text if only a year/month is known."
+            },
+            "locator": {
+              "type": "string",
+              "description": "Page, paragraph, section or case reference."
+            }
+          },
+          "required": [
+            "name"
+          ],
+          "additionalProperties": false
+        },
+        "url": {
+          "type": "string",
+          "format": "uri"
+        },
+        "quote": {
+          "type": "string",
+          "description": "Verbatim text from the source. Displayed only when verified."
+        },
+        "verified": {
+          "type": "boolean"
+        },
+        "verification": {
+          "$ref": "#/definitions/Verification"
+        },
+        "retrieved": {
+          "$ref": "#/definitions/Date"
+        },
+        "stage": {
+          "$ref": "#/definitions/Stage",
+          "description": "Which evaluator produced or found it."
+        },
+        "links": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "properties": {
+              "target": {
+                "$ref": "#/definitions/Id",
+                "description": "A claim id or an omission id."
+              },
+              "relation": {
+                "$ref": "#/definitions/Relation"
+              }
+            },
+            "required": [
+              "target",
+              "relation"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "computation": {
+          "type": "object",
+          "description": "For kind=computation: a number recomputed from other evidence.",
+          "properties": {
+            "formula": {
+              "type": "string",
+              "minLength": 1
+            },
+            "inputs": {
+              "type": "object"
+            },
+            "result": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "required": [
+            "formula",
+            "inputs",
+            "result"
+          ],
+          "additionalProperties": false
+        },
+        "derived_from": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Id"
+          },
+          "description": "Evidence ids this item was computed from."
+        },
+        "note": {
+          "type": "string"
+        },
+        "ext": {
+          "$ref": "#/definitions/Ext"
+        }
+      },
+      "required": [
+        "id",
+        "kind",
+        "tier",
+        "source",
+        "verified",
+        "verification",
+        "retrieved",
+        "links"
+      ],
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "const": "computation"
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "computation",
+              "derived_from"
+            ],
+            "properties": {
+              "verification": {
+                "const": "computed"
+              }
+            }
+          },
+          "else": {
+            "properties": {
+              "verification": {
+                "not": {
+                  "const": "computed"
+                }
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "verified": {
+                "const": true
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "verification": {
+                "enum": [
+                  "fetched_exact",
+                  "fetched_by_eye",
+                  "second_party_fetch",
+                  "computed"
+                ]
+              }
+            },
+            "required": [
+              "quote"
+            ]
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "verified": {
+                "const": false
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "verification": {
+                "const": "unverified"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "Dimension": {
+      "type": "string",
+      "enum": [
+        "clarity",
+        "support",
+        "materiality",
+        "consistency"
+      ],
+      "description": "D6 claim-level dimensions. Completeness is document-level and lives in Summary."
+    },
+    "DimensionScore": {
+      "type": "object",
+      "description": "score is a problem score: 0 = no greenwashing signal on this dimension, 1 = maximal. confidence is how sure the evaluator is of that score.",
+      "properties": {
+        "claim_id": {
+          "$ref": "#/definitions/Id"
+        },
+        "dimension": {
+          "$ref": "#/definitions/Dimension"
+        },
+        "score": {
+          "$ref": "#/definitions/Score01"
+        },
+        "confidence": {
+          "$ref": "#/definitions/Score01"
+        },
+        "basis": {
+          "type": "string",
+          "minLength": 1,
+          "description": "One sentence saying why."
+        },
+        "evidence_ids": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Id"
+          }
+        },
+        "stage": {
+          "$ref": "#/definitions/Stage"
+        },
+        "ext": {
+          "$ref": "#/definitions/Ext"
+        }
+      },
+      "required": [
+        "claim_id",
+        "dimension",
+        "score",
+        "confidence",
+        "basis"
+      ],
+      "additionalProperties": false
+    },
+    "VerdictCategory": {
+      "type": "string",
+      "enum": [
+        "supported",
+        "unsubstantiated",
+        "misleading_by_framing",
+        "contradicted"
+      ]
+    },
+    "Tag": {
+      "type": "string",
+      "enum": [
+        "hidden_trade_off",
+        "no_proof",
+        "vagueness",
+        "irrelevance",
+        "lesser_of_two_evils",
+        "fibbing",
+        "false_labels",
+        "greenrinsing"
+      ],
+      "description": "The seven sins of greenwashing plus greenrinsing (a target changed before it is met, from Planet Tracker's taxonomy)."
+    },
+    "Argument": {
+      "type": "object",
+      "properties": {
+        "claim_id": {
+          "$ref": "#/definitions/Id"
+        },
+        "role": {
+          "type": "string",
+          "enum": [
+            "prosecutor",
+            "defence",
+            "judge"
+          ]
+        },
+        "text": {
+          "type": "string",
+          "minLength": 1
+        },
+        "evidence_ids": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Id"
+          }
+        },
+        "ext": {
+          "$ref": "#/definitions/Ext"
+        }
+      },
+      "required": [
+        "claim_id",
+        "role",
+        "text"
+      ],
+      "additionalProperties": false
+    },
+    "Verdict": {
+      "type": "object",
+      "description": "likelihood = max of the claim's four dimension scores (weakest link). category is derived from the scores and the evidence relations by the rule in CONTRACT.md §6.",
+      "properties": {
+        "claim_id": {
+          "$ref": "#/definitions/Id"
+        },
+        "likelihood": {
+          "$ref": "#/definitions/Score01"
+        },
+        "confidence": {
+          "$ref": "#/definitions/Score01"
+        },
+        "category": {
+          "$ref": "#/definitions/VerdictCategory"
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Tag"
+          },
+          "uniqueItems": true
+        },
+        "rationale": {
+          "type": "string",
+          "minLength": 1,
+          "description": "The judge's reasoning, one to three sentences."
+        },
+        "fix": {
+          "type": "string",
+          "description": "What evidence or rewording would make the claim legitimate."
+        },
+        "rewrite": {
+          "type": "string",
+          "description": "The claim as the evidence would allow it to be stated."
+        },
+        "evidence_ids": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Id"
+          }
+        },
+        "ext": {
+          "$ref": "#/definitions/Ext"
+        }
+      },
+      "required": [
+        "claim_id",
+        "likelihood",
+        "confidence",
+        "category",
+        "tags",
+        "rationale"
+      ],
+      "additionalProperties": false
+    },
+    "Omission": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "$ref": "#/definitions/Id"
+        },
+        "topic": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Short title for the margin card: 'Not mentioned: ...'."
+        },
+        "why_material": {
+          "type": "string",
+          "minLength": 1
+        },
+        "materiality_reference": {
+          "type": "string",
+          "description": "The external reference that makes it material, e.g. 'SASB EM-EP: Reserves Valuation & Capital Expenditures'."
+        },
+        "complete_text": {
+          "type": "string",
+          "description": "What the document would say if it were complete."
+        },
+        "score": {
+          "$ref": "#/definitions/Score01"
+        },
+        "confidence": {
+          "$ref": "#/definitions/Score01"
+        },
+        "evidence_ids": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Id"
+          }
+        },
+        "ext": {
+          "$ref": "#/definitions/Ext"
+        }
+      },
+      "required": [
+        "id",
+        "topic",
+        "why_material",
+        "score",
+        "confidence"
+      ],
+      "additionalProperties": false
+    },
+    "ProfileEntry": {
+      "type": "object",
+      "properties": {
+        "score": {
+          "$ref": "#/definitions/Score01"
+        },
+        "confidence": {
+          "$ref": "#/definitions/Score01"
+        }
+      },
+      "required": [
+        "score",
+        "confidence"
+      ],
+      "additionalProperties": false
+    },
+    "Summary": {
+      "type": "object",
+      "properties": {
+        "headline": {
+          "$ref": "#/definitions/ProfileEntry",
+          "description": "score is the document's greenwashing likelihood."
+        },
+        "dimensions": {
+          "type": "object",
+          "properties": {
+            "clarity": {
+              "$ref": "#/definitions/ProfileEntry"
+            },
+            "support": {
+              "$ref": "#/definitions/ProfileEntry"
+            },
+            "materiality": {
+              "$ref": "#/definitions/ProfileEntry"
+            },
+            "consistency": {
+              "$ref": "#/definitions/ProfileEntry"
+            },
+            "completeness": {
+              "$ref": "#/definitions/ProfileEntry"
+            }
+          },
+          "required": [
+            "clarity",
+            "support",
+            "materiality",
+            "consistency",
+            "completeness"
+          ],
+          "additionalProperties": false
+        },
+        "verdict_distribution": {
+          "type": "object",
+          "properties": {
+            "supported": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "unsubstantiated": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "misleading_by_framing": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "contradicted": {
+              "type": "integer",
+              "minimum": 0
+            }
+          },
+          "required": [
+            "supported",
+            "unsubstantiated",
+            "misleading_by_framing",
+            "contradicted"
+          ],
+          "additionalProperties": false
+        },
+        "top_issues": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "rank": {
+                "type": "integer",
+                "minimum": 1
+              },
+              "target": {
+                "$ref": "#/definitions/Id",
+                "description": "Claim or omission id; the header links to it."
+              },
+              "title": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "required": [
+              "rank",
+              "target",
+              "title"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "credit": {
+          "type": "array",
+          "description": "Credit where due: well-substantiated claims.",
+          "items": {
+            "type": "object",
+            "properties": {
+              "target": {
+                "$ref": "#/definitions/Id"
+              },
+              "title": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "required": [
+              "target",
+              "title"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "claim_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "omission_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "narrative": {
+          "type": "string"
+        },
+        "ext": {
+          "$ref": "#/definitions/Ext"
+        }
+      },
+      "required": [
+        "headline",
+        "dimensions",
+        "verdict_distribution",
+        "top_issues",
+        "credit",
+        "claim_count",
+        "omission_count"
+      ],
+      "additionalProperties": false
+    },
+    "Stage": {
+      "type": "string",
+      "enum": [
+        "ingest",
+        "extract",
+        "language",
+        "substantiate",
+        "verify",
+        "consistency",
+        "omissions",
+        "verdict",
+        "summary"
+      ],
+      "description": "Pipeline stages, in canonical order, named as in fixtures/README.md. language = Linguistic evaluator (D5), substantiate = Substantiation evaluator, verify = External verification, consistency = Self-consistency. The four evaluators and omissions may run concurrently after extract; verdict waits for all of them; summary waits for verdict."
+    },
+    "Mode": {
+      "type": "string",
+      "enum": [
+        "fixture",
+        "live",
+        "replay"
+      ]
+    },
+    "Analysis": {
+      "type": "object",
+      "description": "The folded result of one analysis: what the frontend holds in memory after consuming the event log, and what the fixture is authored as.",
+      "properties": {
+        "analysis_id": {
+          "$ref": "#/definitions/Id",
+          "description": "From analysis.started.payload.analysis_id in a fixture; the server's id for a live run."
+        },
+        "contract_version": {
+          "type": "string",
+          "pattern": "^\\d+\\.\\d+\\.\\d+$"
+        },
+        "mode": {
+          "$ref": "#/definitions/Mode"
+        },
+        "document": {
+          "$ref": "#/definitions/Document"
+        },
+        "claims": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Claim"
+          }
+        },
+        "signals": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LanguageSignal"
+          }
+        },
+        "evidence": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EvidenceItem"
+          }
+        },
+        "scores": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DimensionScore"
+          }
+        },
+        "arguments": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Argument"
+          }
+        },
+        "verdicts": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Verdict"
+          }
+        },
+        "omissions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Omission"
+          }
+        },
+        "summary": {
+          "$ref": "#/definitions/Summary"
+        },
+        "ext": {
+          "$ref": "#/definitions/Ext"
+        }
+      },
+      "required": [
+        "analysis_id",
+        "contract_version",
+        "mode",
+        "document",
+        "claims",
+        "signals",
+        "evidence",
+        "scores",
+        "arguments",
+        "verdicts",
+        "omissions"
+      ],
+      "additionalProperties": false
+    },
+    "EventType": {
+      "type": "string",
+      "enum": [
+        "analysis.started",
+        "stage.started",
+        "stage.completed",
+        "document.ingested",
+        "claim.extracted",
+        "language.signal",
+        "evidence.added",
+        "dimension.scored",
+        "omission.found",
+        "argument.made",
+        "verdict.issued",
+        "summary.updated",
+        "analysis.completed",
+        "analysis.failed",
+        "debug.note"
+      ]
+    },
+    "Event": {
+      "type": "object",
+      "description": "One line of the event log: the transport envelope (fixtures/README.md) with a contract payload. seq may be omitted in files (assigned from line order); t_ms is milliseconds since analysis.started, non-decreasing.",
+      "properties": {
+        "seq": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "t_ms": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "type": {
+          "$ref": "#/definitions/EventType"
+        },
+        "payload": {
+          "type": "object"
+        }
+      },
+      "required": [
+        "t_ms",
+        "type",
+        "payload"
+      ],
+      "additionalProperties": false,
+      "oneOf": [
+        {
+          "properties": {
+            "type": {
+              "const": "analysis.started"
+            },
+            "payload": {
+              "$ref": "#/definitions/P_AnalysisStarted"
+            }
+          }
+        },
+        {
+          "properties": {
+            "type": {
+              "const": "stage.started"
+            },
+            "payload": {
+              "$ref": "#/definitions/P_Stage"
+            }
+          }
+        },
+        {
+          "properties": {
+            "type": {
+              "const": "stage.completed"
+            },
+            "payload": {
+              "$ref": "#/definitions/P_Stage"
+            }
+          }
+        },
+        {
+          "properties": {
+            "type": {
+              "const": "document.ingested"
+            },
+            "payload": {
+              "$ref": "#/definitions/P_Document"
+            }
+          }
+        },
+        {
+          "properties": {
+            "type": {
+              "const": "claim.extracted"
+            },
+            "payload": {
+              "$ref": "#/definitions/P_Claim"
+            }
+          }
+        },
+        {
+          "properties": {
+            "type": {
+              "const": "language.signal"
+            },
+            "payload": {
+              "$ref": "#/definitions/P_Signal"
+            }
+          }
+        },
+        {
+          "properties": {
+            "type": {
+              "const": "evidence.added"
+            },
+            "payload": {
+              "$ref": "#/definitions/P_Evidence"
+            }
+          }
+        },
+        {
+          "properties": {
+            "type": {
+              "const": "dimension.scored"
+            },
+            "payload": {
+              "$ref": "#/definitions/P_Score"
+            }
+          }
+        },
+        {
+          "properties": {
+            "type": {
+              "const": "omission.found"
+            },
+            "payload": {
+              "$ref": "#/definitions/P_Omission"
+            }
+          }
+        },
+        {
+          "properties": {
+            "type": {
+              "const": "argument.made"
+            },
+            "payload": {
+              "$ref": "#/definitions/P_Argument"
+            }
+          }
+        },
+        {
+          "properties": {
+            "type": {
+              "const": "verdict.issued"
+            },
+            "payload": {
+              "$ref": "#/definitions/P_Verdict"
+            }
+          }
+        },
+        {
+          "properties": {
+            "type": {
+              "const": "summary.updated"
+            },
+            "payload": {
+              "$ref": "#/definitions/P_Summary"
+            }
+          }
+        },
+        {
+          "properties": {
+            "type": {
+              "const": "analysis.completed"
+            },
+            "payload": {
+              "$ref": "#/definitions/P_AnalysisCompleted"
+            }
+          }
+        },
+        {
+          "properties": {
+            "type": {
+              "const": "analysis.failed"
+            },
+            "payload": {
+              "$ref": "#/definitions/P_AnalysisFailed"
+            }
+          }
+        },
+        {
+          "properties": {
+            "type": {
+              "const": "debug.note"
+            },
+            "payload": {
+              "$ref": "#/definitions/P_DebugNote"
+            }
+          }
+        }
+      ]
+    },
+    "P_AnalysisStarted": {
+      "type": "object",
+      "description": "Descriptive keys are allowed (the transport adds `source`). contract_version is required so a consumer can refuse a log it does not understand.",
+      "properties": {
+        "contract_version": {
+          "type": "string",
+          "pattern": "^\\d+\\.\\d+\\.\\d+$"
+        },
+        "analysis_id": {
+          "$ref": "#/definitions/Id"
+        },
+        "mode": {
+          "$ref": "#/definitions/Mode"
+        },
+        "document_ref": {
+          "type": "object",
+          "properties": {
+            "url": {
+              "type": "string",
+              "format": "uri"
+            },
+            "title": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": false
+        },
+        "source": {
+          "type": "object"
+        }
+      },
+      "required": [
+        "contract_version"
+      ],
+      "additionalProperties": true
+    },
+    "P_Stage": {
+      "type": "object",
+      "properties": {
+        "stage": {
+          "$ref": "#/definitions/Stage"
+        },
+        "label": {
+          "type": "string",
+          "description": "Human text for the progress display, e.g. 'Finding claims'."
+        },
+        "note": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "stage"
+      ],
+      "additionalProperties": false
+    },
+    "P_Document": {
+      "type": "object",
+      "properties": {
+        "document": {
+          "$ref": "#/definitions/Document"
+        }
+      },
+      "required": [
+        "document"
+      ],
+      "additionalProperties": false
+    },
+    "P_Claim": {
+      "type": "object",
+      "properties": {
+        "claim": {
+          "$ref": "#/definitions/Claim"
+        }
+      },
+      "required": [
+        "claim"
+      ],
+      "additionalProperties": false
+    },
+    "P_Signal": {
+      "type": "object",
+      "properties": {
+        "signal": {
+          "$ref": "#/definitions/LanguageSignal"
+        }
+      },
+      "required": [
+        "signal"
+      ],
+      "additionalProperties": false
+    },
+    "P_Evidence": {
+      "type": "object",
+      "properties": {
+        "evidence": {
+          "$ref": "#/definitions/EvidenceItem"
+        }
+      },
+      "required": [
+        "evidence"
+      ],
+      "additionalProperties": false
+    },
+    "P_Score": {
+      "type": "object",
+      "properties": {
+        "score": {
+          "$ref": "#/definitions/DimensionScore"
+        }
+      },
+      "required": [
+        "score"
+      ],
+      "additionalProperties": false
+    },
+    "P_Omission": {
+      "type": "object",
+      "properties": {
+        "omission": {
+          "$ref": "#/definitions/Omission"
+        }
+      },
+      "required": [
+        "omission"
+      ],
+      "additionalProperties": false
+    },
+    "P_Argument": {
+      "type": "object",
+      "properties": {
+        "argument": {
+          "$ref": "#/definitions/Argument"
+        }
+      },
+      "required": [
+        "argument"
+      ],
+      "additionalProperties": false
+    },
+    "P_Verdict": {
+      "type": "object",
+      "properties": {
+        "verdict": {
+          "$ref": "#/definitions/Verdict"
+        }
+      },
+      "required": [
+        "verdict"
+      ],
+      "additionalProperties": false
+    },
+    "P_Summary": {
+      "type": "object",
+      "properties": {
+        "summary": {
+          "$ref": "#/definitions/Summary"
+        },
+        "final": {
+          "type": "boolean",
+          "description": "True for the last summary of the analysis; earlier ones are provisional and may be replaced."
+        }
+      },
+      "required": [
+        "summary",
+        "final"
+      ],
+      "additionalProperties": false
+    },
+    "P_AnalysisCompleted": {
+      "type": "object",
+      "properties": {
+        "duration_ms": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "counts": {
+          "type": "object",
+          "properties": {
+            "claims": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "signals": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "evidence": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "omissions": {
+              "type": "integer",
+              "minimum": 0
+            }
+          },
+          "required": [
+            "claims",
+            "signals",
+            "evidence",
+            "omissions"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    },
+    "P_AnalysisFailed": {
+      "type": "object",
+      "properties": {
+        "error": {
+          "type": "string",
+          "minLength": 1,
+          "description": "'cancelled' when the user stopped it."
+        },
+        "stage": {
+          "$ref": "#/definitions/Stage"
+        }
+      },
+      "required": [
+        "error"
+      ],
+      "additionalProperties": false
+    },
+    "P_DebugNote": {
+      "type": "object",
+      "description": "Free-form note for the debug drawer.",
+      "properties": {
+        "text": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "text"
+      ],
+      "additionalProperties": true
+    }
+  }
+}

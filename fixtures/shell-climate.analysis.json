@@ -1,0 +1,3828 @@
+{
+  "analysis_id": "shell-climate-2026-09-19",
+  "contract_version": "1.0.0",
+  "mode": "fixture",
+  "document": {
+    "id": "shell-climate-2026-09-19",
+    "title": "Climate | Shell Global",
+    "company": {
+      "name": "Shell plc",
+      "aliases": [
+        "Shell",
+        "Royal Dutch Shell"
+      ],
+      "ticker": "SHEL",
+      "country": "GB",
+      "sec_cik": "1306965"
+    },
+    "industry": {
+      "label": "Oil & Gas – Integrated",
+      "sasb_codes": [
+        "EM-EP",
+        "EM-RM"
+      ]
+    },
+    "text_type": "policy",
+    "source": {
+      "url": "https://www.shell.com/sustainability/climate.html",
+      "retrieved": "2026-09-19",
+      "method": "Text fields of the page's AEM content model (climate.model.json); headings and list bullets reconstructed; navigation and link cards omitted.",
+      "archive_url": "https://web.archive.org/web/20260904004048/https://www.shell.com/sustainability/climate.html",
+      "fixture_path": "demo-documents/shell-climate-2026-09-19.md"
+    },
+    "language": "en",
+    "text": "Climate\n\nOur target is to become a net-zero emissions energy business by 2050. As we implement our strategy to deliver more value with less emissions, we are reducing emissions from our operations, and helping our customers transition to cleaner energy solutions. Find out more about how we are working to achieve this target and our progress so far.\n\nClimate\n\nWe have a target to become a net-zero emissions energy business by 2050. As we work to deliver more value, we must also navigate the multi-decade energy transition. We are progressing with improving the energy efficiency of our operations and using more renewable electricity to power our activities. We are also helping to build the energy system of the future, with low-carbon energy products and solutions. Find out more about how we are working to achieve this target and our progress so far.\n\nOur targets and ambition\n\nWe have set intensity targets and absolute targets and an ambition over the short, medium and long term to track our performance over time. We have a target to become a net-zero emissions energy business by 2050. We believe this target supports the more ambitious goal of the Paris Agreement, to limit the rise in the global average temperature this century to 1.5°C above pre-industrial levels.\n\nOur net-zero target includes emissions from our operations, as well as from the end-use of all the energy products we sell. The metrics we use to track progress against our energy transition targets and ambition include:\n\nHalving Scope 1 and 2 emissions under our operational control by 2030, on a net basis, compared with 2016. Scope 1 emissions come directly from our operations, and Scope 2 from the energy we buy to run our operations.\n\nMaintaining methane emissions intensity for operated oil and gas assets below 0.2% and achieve near-zero methane emissions intensity by 2030.\n\nReducing the net carbon intensity (NCI) of the products we sell by 15-20% by 2030. NCI measures emissions associated with each unit of energy we sell[A]. It reflects changes in sales of oil and gas products, and changes in sales of low--carbon products - such as biofuels and renewable electricity. Reducing the NCI of the products we sell requires action by both Shell and our customers, with the support of governments and policymakers to create the right conditions for change.\n\nReducing customer emissions from the use of our oil products by 15-20% by 2030, Scope 3 Category 11 (2021 baseline).\n\nWe have set short-, medium- and long-term targets to reduce the net carbon intensity of the energy products we sell, compared with 2016:\n\n2-3% by 2021 - achieved\n3-4% by 2022 - achieved\n6-8% by 2023 - achieved\n9-12% by 2024 - achieved\n9-13% by 2025 - achieved\n15-20% by 2030\n100% by 2050\n\nOur progress\n\n2025 performance:\n\nScope 1 and 2 emissions were down by 36% by the end of 2025 compared with the 2016 baseline year. We have achieved around 70% of our target to halve our Scope 1 and 2 operational emissions by 2030, compared with 2016.\n\nMethane emissions intensity maintained well below our 0.2% target, at 0.04% for Shell-operated oil and gas assets with marketed gas and 0.002% for Shell-operated oil and gas assets without marketed gas.\n\nNet carbon intensity (NCI) decreased by 9.0% compared with the 2016 reference year and was within the 2025 target range.\n\nWe eliminated routine flaring from our upstream operations with effect from January 2025.\n\nCustomer emissions from the use of our oil products (Scope 3, Category 11) reduced by 18% by the end of 2025 compared with 2021.\n\nShell Energy Transition Strategy 2024\n\nSee how we are providing energy today while helping to build the energy system of the future\n\nOur approach\n\nTo decarbonise our operations, we are:\n\nusing more renewable electricity to power our operations;\n\ndeveloping CCS for some of our facilities;\n\nimproving the energy efficiency of our operations; and\n\nmaking portfolio changes such as acquisitions and investments in low carbon intensity projects, decommissioning facilities, divesting assets while sustaining our liquids production.\n\nIf required, we may choose to use high-quality carbon credits to offset any remaining emissions from our operations, in line with the carbon mitigation hierarchy of avoid, reduce, and compensate or to meet local regulatory requirements.\n\nTo support our customers to decarbonise, we are:\n\ngrowing our power sales, including those of renewable power;\n\nincreasing the proportion of gas and LNG in our hydrocarbon sales while reducing the proportion of sales of oil products;\n\nincreasing sales of low-carbon fuels, such as biofuels, and developing hydrogen;\n\ndeveloping abatement projects, including deploying more CCS; and\n\nusing carbon credits to offset remaining carbon emissions.\n\nFootnotes\n\n[A] Shell’s net carbon intensity is the average intensity, weighted by sales volume, of the energy products sold by Shell. It is tracked, measured and reported using our Net Carbon Footprint (NCF) methodology (PDF, 2 MB).\n\nCautionary note\n\nThe companies in which Shell plc directly and indirectly owns investments are separate legal entities. In this content “Shell”, “Shell Group” and “Group” are sometimes used for convenience to reference Shell plc and its subsidiaries in general. Likewise, the words “we”, “us” and “our” are also used to refer to Shell plc and its subsidiaries in general or to those who work for them. These terms are also used where no useful purpose is served by identifying the particular entity or entities. ‘‘Subsidiaries’’, “Shell subsidiaries” and “Shell companies” as used in this content refer to entities over which Shell plc either directly or indirectly has control. The terms “joint venture”, “joint operations”, “joint arrangements”, and “associates” may also be used to refer to a commercial arrangement in which Shell has a direct or indirect ownership interest with one or more parties. The term “Shell interest” is used for convenience to indicate the direct and/or indirect ownership interest held by Shell in an entity or unincorporated joint arrangement, after exclusion of all third-party interest.\n\nForward-Looking statements\n\nThis content contains forward-looking statements (within the meaning of the U.S. Private Securities Litigation Reform Act of 1995) concerning the financial condition, results of operations and businesses of Shell. All statements other than statements of historical fact are, or may be deemed to be, forward-looking statements. Forward-looking statements are statements of future expectations that are based on management’s current expectations and assumptions, including (without limitation) those concerning Shell’s strategy and operating plans, macroeconomic conditions, future energy demand, supply and product mix, commodity prices, demand for Shell’s products, production results and reserve estimates, development, execution and management of projects, energy transition and climate change, management of safety and environmental risks, costs, cash capital expenditures, technology advancements, legislative, judicial, fiscal and regulatory developments, regional conflicts and trading conditions, and involve known and unknown risks and uncertainties that could cause actual results, performance or events to differ materially from those expressed or implied in these statements. Forward-looking statements include, among other things, statements concerning the potential exposure of Shell to market risks and statements expressing management’s expectations, beliefs, estimates, forecasts, projections and assumptions. These forward-looking statements are identified by their use of terms and phrases such as “aim”; “ambition”; ‘‘anticipate’’; “aspire”, “aspiration”, ‘‘believe’’; “commit”; “commitment”; ‘‘could’’; “desire”; ‘‘estimate’’; ‘‘expect’’; ‘‘goals’’; ‘‘intend’’; ‘‘may’’; “milestones”; ‘‘objectives’’; ‘‘outlook’’; ‘‘plan’’; ‘‘probably’’; ‘‘project’’; ‘‘risks’’; “schedule”; ‘‘seek’’; ‘‘should’’; ‘‘target’’; “vision”; ‘‘will’’; “would” and similar terms and phrases. There are a number of factors that could affect the future operations of Shell and could cause those results to differ materially from those expressed in the forward-looking statements included in this content, including (without limitation): (a) price fluctuations in crude oil and natural gas; (b) changes in demand for Shell’s products; (c) currency fluctuations; (d) drilling and production results; (e) reserves estimates; (f) loss of market share and industry competition; (g) environmental and physical risks, including climate change; (h) risks associated with the identification of suitable potential acquisition properties and targets, and successful negotiation and completion of such transactions; (i) the risk of doing business in developing countries and countries subject to international sanctions; (j) legislative, judicial, fiscal and regulatory developments including tariffs and regulatory measures addressing climate change; (k) economic and financial market conditions in various countries and regions; (l) political risks, including the risks of expropriation and renegotiation of the terms of contracts with governmental entities, delays or advancements in the approval of projects and delays in the reimbursement for shared costs; (m) risks associated with the impact of pandemics, regional conflicts, such as the Russia-Ukraine war and the conflict in the Middle East, and a significant cyber security, data privacy or IT incident; (n) the pace of the energy transition; and (o) changes in trading conditions. No assurance is provided that future dividend payments will match or exceed previous dividend payments. All forward-looking statements contained in this content are expressly qualified in their entirety by the cautionary statements contained or referred to in this section. Readers should not place undue reliance on forward-looking statements. Additional risk factors that may affect future results are contained in Shell plc’s Form 20-F for the year ended December 31, 2025 (available at www.shell.com/investors/news-and-filings/sec-filings.html and www.sec.gov). These risk factors also expressly qualify all forward-looking statements contained in this content and should be considered by the reader. Each forward-looking statement speaks only as of the date of this content. Neither Shell plc nor any of its subsidiaries undertake any obligation to publicly update or revise any forward-looking statement as a result of new information, future events or other information. In light of these risks, results could differ materially from those stated, implied or inferred from the forward-looking statements contained in this content.\n\nShell’s net carbon intensity and net-zero emissions target\n\nIn this content we may refer to Shell’s “net carbon intensity” (NCI), which includes Shell’s carbon emissions from the production of our energy products, our suppliers’ carbon emissions in supplying energy for that production and our customers’ carbon emissions associated with their use of the energy products we sell. Shell’s NCI also includes the emissions associated with the production and use of energy products produced by others which Shell purchases for resale. Shell only controls its own emissions. The use of the terms Shell’s “net carbon intensity” or NCI is for convenience only and not intended to suggest these emissions are those of Shell plc or its subsidiaries.\n\nShell’s operating plan and outlook are forecasted for a three-year period and ten-year period, respectively, and are updated every year. They reflect the current economic environment and what we can reasonably expect to see over the next three and ten years. Accordingly, the outlook reflects our combined Scope 1 and 2 target, NCI target and our oil products ambition over the next ten years. However, Shell’s operating plan and outlook cannot reflect our 2050 net-zero emissions target, as this target is outside our planning period. Such future operating plans and outlooks could include changes to our portfolio, efficiency improvements and the use of carbon capture and storage and carbon credits. In the future, as society moves towards net-zero emissions, we expect Shell’s operating plans and outlooks to reflect this movement. However, if society is not net zero in 2050, as of today, there would be significant risk that Shell may not meet this target.\n\nThe information provided above regarding Shell’s NCI and net zero emissions target are not intended, nor should they be construed as introducing, suggesting or making any claim, target or representation thereof other than what is included in the content.\n\nForward-Looking non-GAAP measures\n\nThis content may contain certain forward-looking non-GAAP measures such as free cash flow and underlying operating expenses. We are unable to provide a reconciliation of these forward-looking non-GAAP measures to the most comparable GAAP financial measures because certain information needed to reconcile those non-GAAP measures to the most comparable GAAP financial measures is dependent on future events some of which are outside the control of Shell, such as oil and gas prices, interest rates and exchange rates. Moreover, estimating such GAAP measures with the required precision necessary to provide a meaningful reconciliation is extremely difficult and could not be accomplished without unreasonable effort. Non-GAAP measures in respect of future periods which cannot be reconciled to the most comparable GAAP financial measure are calculated in a manner which is consistent with the accounting policies applied in Shell plc’s consolidated financial statements. These forward-looking non-GAAP measures are provided to assist readers in understanding management’s use and expectations of such measures and may not be appropriate for other purposes.\n\nThe contents of websites referred to in this content do not form part of this content.\n\nWe may have used certain terms, such as resources, in this content that the United States Securities and Exchange Commission (SEC) strictly prohibits us from including in our filings with the SEC. Investors are urged to consider closely the disclosure in our Form 20-F, File No 1-32575, available on the SEC website www.sec.gov.",
+    "word_count": 2139,
+    "regions": [
+      {
+        "kind": "title",
+        "start": 0,
+        "end": 7,
+        "label": "H1 Climate"
+      },
+      {
+        "kind": "paragraph",
+        "start": 9,
+        "end": 350,
+        "label": "P1",
+        "prominence": 1.0
+      },
+      {
+        "kind": "heading",
+        "start": 352,
+        "end": 359,
+        "label": "H2 Climate",
+        "level": 2
+      },
+      {
+        "kind": "paragraph",
+        "start": 361,
+        "end": 857,
+        "label": "P2",
+        "prominence": 0.9
+      },
+      {
+        "kind": "heading",
+        "start": 859,
+        "end": 883,
+        "label": "H2 Our targets and ambition",
+        "level": 2
+      },
+      {
+        "kind": "paragraph",
+        "start": 885,
+        "end": 1280,
+        "label": "P3",
+        "prominence": 0.7
+      },
+      {
+        "kind": "paragraph",
+        "start": 1282,
+        "end": 2464,
+        "label": "P4",
+        "prominence": 0.7
+      },
+      {
+        "kind": "list_item",
+        "start": 1504,
+        "end": 1721
+      },
+      {
+        "kind": "list_item",
+        "start": 1723,
+        "end": 1864
+      },
+      {
+        "kind": "list_item",
+        "start": 1866,
+        "end": 2346
+      },
+      {
+        "kind": "list_item",
+        "start": 2348,
+        "end": 2464
+      },
+      {
+        "kind": "paragraph",
+        "start": 2466,
+        "end": 2602,
+        "label": "P5",
+        "prominence": 0.6
+      },
+      {
+        "kind": "paragraph",
+        "start": 2604,
+        "end": 2753,
+        "label": "P6",
+        "prominence": 0.8
+      },
+      {
+        "kind": "list_item",
+        "start": 2604,
+        "end": 2627
+      },
+      {
+        "kind": "list_item",
+        "start": 2628,
+        "end": 2651
+      },
+      {
+        "kind": "list_item",
+        "start": 2652,
+        "end": 2675
+      },
+      {
+        "kind": "list_item",
+        "start": 2676,
+        "end": 2700
+      },
+      {
+        "kind": "list_item",
+        "start": 2701,
+        "end": 2725
+      },
+      {
+        "kind": "list_item",
+        "start": 2726,
+        "end": 2740
+      },
+      {
+        "kind": "list_item",
+        "start": 2741,
+        "end": 2753
+      },
+      {
+        "kind": "heading",
+        "start": 2755,
+        "end": 2767,
+        "label": "H2 Our progress",
+        "level": 2
+      },
+      {
+        "kind": "heading",
+        "start": 2769,
+        "end": 2786,
+        "label": "H3 2025 performance:",
+        "level": 3
+      },
+      {
+        "kind": "paragraph",
+        "start": 2788,
+        "end": 3552,
+        "label": "P7",
+        "prominence": 0.7
+      },
+      {
+        "kind": "list_item",
+        "start": 2788,
+        "end": 3005
+      },
+      {
+        "kind": "list_item",
+        "start": 3007,
+        "end": 3209
+      },
+      {
+        "kind": "list_item",
+        "start": 3211,
+        "end": 3331
+      },
+      {
+        "kind": "list_item",
+        "start": 3333,
+        "end": 3422
+      },
+      {
+        "kind": "list_item",
+        "start": 3424,
+        "end": 3552
+      },
+      {
+        "kind": "promo",
+        "start": 3554,
+        "end": 3685,
+        "label": "Promo card",
+        "prominence": 0.5
+      },
+      {
+        "kind": "heading",
+        "start": 3554,
+        "end": 3591,
+        "label": "H3 Shell Energy Transition Strategy 2024",
+        "level": 3
+      },
+      {
+        "kind": "paragraph",
+        "start": 3593,
+        "end": 3685,
+        "label": "P8",
+        "prominence": 0.5
+      },
+      {
+        "kind": "heading",
+        "start": 3687,
+        "end": 3699,
+        "label": "H2 Our approach",
+        "level": 2
+      },
+      {
+        "kind": "paragraph",
+        "start": 3701,
+        "end": 4319,
+        "label": "P9",
+        "prominence": 0.6
+      },
+      {
+        "kind": "list_item",
+        "start": 3741,
+        "end": 3798
+      },
+      {
+        "kind": "list_item",
+        "start": 3800,
+        "end": 3842
+      },
+      {
+        "kind": "list_item",
+        "start": 3844,
+        "end": 3898
+      },
+      {
+        "kind": "list_item",
+        "start": 3900,
+        "end": 4081
+      },
+      {
+        "kind": "paragraph",
+        "start": 4321,
+        "end": 4762,
+        "label": "P10",
+        "prominence": 0.6
+      },
+      {
+        "kind": "list_item",
+        "start": 4371,
+        "end": 4431
+      },
+      {
+        "kind": "list_item",
+        "start": 4433,
+        "end": 4554
+      },
+      {
+        "kind": "list_item",
+        "start": 4556,
+        "end": 4636
+      },
+      {
+        "kind": "list_item",
+        "start": 4638,
+        "end": 4702
+      },
+      {
+        "kind": "list_item",
+        "start": 4704,
+        "end": 4762
+      },
+      {
+        "kind": "heading",
+        "start": 4764,
+        "end": 4773,
+        "label": "H3 Footnotes",
+        "level": 3
+      },
+      {
+        "kind": "paragraph",
+        "start": 4775,
+        "end": 4996,
+        "label": "P11",
+        "prominence": 0.3
+      },
+      {
+        "kind": "footnote",
+        "start": 4775,
+        "end": 4996,
+        "label": "Footnote A",
+        "prominence": 0.3
+      },
+      {
+        "kind": "cautionary_note",
+        "start": 4998,
+        "end": 14279,
+        "label": "Cautionary note",
+        "prominence": 0.3
+      },
+      {
+        "kind": "heading",
+        "start": 4998,
+        "end": 5013,
+        "label": "H3 Cautionary note",
+        "level": 3
+      },
+      {
+        "kind": "paragraph",
+        "start": 5015,
+        "end": 14279,
+        "label": "P12",
+        "prominence": 0.3
+      }
+    ]
+  },
+  "claims": [
+    {
+      "id": "C1",
+      "spans": [
+        {
+          "text": "Our target is to become a net-zero emissions energy business by 2050",
+          "start": 9,
+          "end": 77
+        },
+        {
+          "text": "We have a target to become a net-zero emissions energy business by 2050",
+          "start": 361,
+          "end": 432,
+          "occurrence": 1
+        },
+        {
+          "text": "We have a target to become a net-zero emissions energy business by 2050",
+          "start": 1025,
+          "end": 1096,
+          "occurrence": 2
+        }
+      ],
+      "type": "commitment",
+      "scope": "company",
+      "attribute": "net-zero emissions energy business",
+      "paragraph": "P1",
+      "prominence": 1.0,
+      "scope_note": "Whole company including the end-use of sold products (per C8)",
+      "timeframe": "2050"
+    },
+    {
+      "id": "C2",
+      "spans": [
+        {
+          "text": "we are reducing emissions from our operations",
+          "start": 151,
+          "end": 196
+        }
+      ],
+      "type": "factual",
+      "scope": "operations",
+      "attribute": "operational emissions falling",
+      "paragraph": "P1",
+      "prominence": 1.0
+    },
+    {
+      "id": "C3",
+      "spans": [
+        {
+          "text": "helping our customers transition to cleaner energy solutions",
+          "start": 202,
+          "end": 262
+        }
+      ],
+      "type": "vague_attribute",
+      "scope": "product",
+      "attribute": "cleaner energy solutions",
+      "paragraph": "P1",
+      "prominence": 1.0,
+      "scope_note": "Customers / products sold"
+    },
+    {
+      "id": "C4",
+      "spans": [
+        {
+          "text": "deliver more value with less emissions",
+          "start": 111,
+          "end": 149
+        }
+      ],
+      "type": "vague_attribute",
+      "scope": "company",
+      "attribute": "less emissions (no baseline)",
+      "paragraph": "P1",
+      "prominence": 1.0
+    },
+    {
+      "id": "C5",
+      "spans": [
+        {
+          "text": "We are progressing with improving the energy efficiency of our operations and using more renewable electricity to power our activities",
+          "start": 526,
+          "end": 660
+        }
+      ],
+      "type": "factual",
+      "scope": "operations",
+      "attribute": "energy efficiency and renewable electricity use",
+      "paragraph": "P2",
+      "prominence": 0.9
+    },
+    {
+      "id": "C6",
+      "spans": [
+        {
+          "text": "helping to build the energy system of the future, with low-carbon energy products and solutions",
+          "start": 674,
+          "end": 769
+        }
+      ],
+      "type": "vague_attribute",
+      "scope": "product",
+      "attribute": "low-carbon energy products and solutions",
+      "paragraph": "P2",
+      "prominence": 0.9
+    },
+    {
+      "id": "C7",
+      "spans": [
+        {
+          "text": "We believe this target supports the more ambitious goal of the Paris Agreement, to limit the rise in the global average temperature this century to 1.5°C",
+          "start": 1098,
+          "end": 1251
+        }
+      ],
+      "type": "comparative",
+      "scope": "company",
+      "attribute": "Paris Agreement 1.5°C alignment",
+      "paragraph": "P3",
+      "prominence": 0.7,
+      "baseline": "Paris Agreement 1.5°C goal (external benchmark)"
+    },
+    {
+      "id": "C8",
+      "spans": [
+        {
+          "text": "Our net-zero target includes emissions from our operations, as well as from the end-use of all the energy products we sell",
+          "start": 1282,
+          "end": 1404
+        }
+      ],
+      "type": "factual",
+      "scope": "company",
+      "attribute": "target scope covers Scope 1, 2 and 3",
+      "paragraph": "P4",
+      "prominence": 0.7
+    },
+    {
+      "id": "C9",
+      "spans": [
+        {
+          "text": "Halving Scope 1 and 2 emissions under our operational control by 2030, on a net basis, compared with 2016",
+          "start": 1504,
+          "end": 1609
+        }
+      ],
+      "type": "commitment",
+      "scope": "operations",
+      "attribute": "Scope 1+2 -50% (net)",
+      "paragraph": "P4",
+      "prominence": 0.7,
+      "scope_note": "Operational control boundary; net basis permits carbon credits",
+      "quantity": "50%",
+      "baseline": "2016",
+      "timeframe": "2030"
+    },
+    {
+      "id": "C10",
+      "spans": [
+        {
+          "text": "Maintaining methane emissions intensity for operated oil and gas assets below 0.2% and achieve near-zero methane emissions intensity by 2030",
+          "start": 1723,
+          "end": 1863
+        }
+      ],
+      "type": "commitment",
+      "scope": "operations",
+      "attribute": "methane intensity <0.2%, near zero by 2030",
+      "paragraph": "P4",
+      "prominence": 0.7,
+      "scope_note": "Operated oil and gas assets",
+      "quantity": "<0.2%; near zero",
+      "timeframe": "2030"
+    },
+    {
+      "id": "C11",
+      "spans": [
+        {
+          "text": "Reducing the net carbon intensity (NCI) of the products we sell by 15-20% by 2030",
+          "start": 1866,
+          "end": 1947
+        },
+        {
+          "text": "15-20% by 2030",
+          "start": 2726,
+          "end": 2740,
+          "context": "9-13% by 2025 - achieved\n15-20% by 2030"
+        }
+      ],
+      "type": "commitment",
+      "scope": "product",
+      "attribute": "net carbon intensity -15-20%",
+      "paragraph": "P4",
+      "prominence": 0.7,
+      "scope_note": "Energy products sold, well-to-wheel, net of carbon credits",
+      "quantity": "15-20%",
+      "baseline": "2016",
+      "timeframe": "2030"
+    },
+    {
+      "id": "C12",
+      "spans": [
+        {
+          "text": "Reducing customer emissions from the use of our oil products by 15-20% by 2030, Scope 3 Category 11 (2021 baseline)",
+          "start": 2348,
+          "end": 2463
+        }
+      ],
+      "type": "commitment",
+      "scope": "product",
+      "attribute": "Scope 3 Category 11 (oil products) -15-20%",
+      "paragraph": "P4",
+      "prominence": 0.7,
+      "scope_note": "Oil products only; gas and LNG excluded",
+      "quantity": "15-20%",
+      "baseline": "2021",
+      "timeframe": "2030",
+      "note": "Called an 'ambition' in the FAQ and the 2024 strategy; listed among target metrics here"
+    },
+    {
+      "id": "C13",
+      "spans": [
+        {
+          "text": "2-3% by 2021 - achieved",
+          "start": 2604,
+          "end": 2627
+        },
+        {
+          "text": "3-4% by 2022 - achieved",
+          "start": 2628,
+          "end": 2651
+        },
+        {
+          "text": "6-8% by 2023 - achieved",
+          "start": 2652,
+          "end": 2675
+        },
+        {
+          "text": "9-12% by 2024 - achieved",
+          "start": 2676,
+          "end": 2700
+        },
+        {
+          "text": "9-13% by 2025 - achieved",
+          "start": 2701,
+          "end": 2725
+        }
+      ],
+      "type": "factual",
+      "scope": "product",
+      "attribute": "five NCI targets achieved",
+      "paragraph": "P6",
+      "prominence": 0.8,
+      "quantity": "2-3%, 3-4%, 6-8%, 9-12%, 9-13%",
+      "baseline": "2016",
+      "timeframe": "2021-2025"
+    },
+    {
+      "id": "C14",
+      "spans": [
+        {
+          "text": "Scope 1 and 2 emissions were down by 36% by the end of 2025 compared with the 2016 baseline year",
+          "start": 2788,
+          "end": 2884
+        }
+      ],
+      "type": "factual",
+      "scope": "operations",
+      "attribute": "Scope 1+2 -36%",
+      "paragraph": "P7",
+      "prominence": 0.7,
+      "quantity": "36%",
+      "baseline": "2016",
+      "timeframe": "end 2025"
+    },
+    {
+      "id": "C15",
+      "spans": [
+        {
+          "text": "We have achieved around 70% of our target to halve our Scope 1 and 2 operational emissions by 2030",
+          "start": 2886,
+          "end": 2984
+        }
+      ],
+      "type": "factual",
+      "scope": "operations",
+      "attribute": "~70% of 2030 target achieved",
+      "paragraph": "P7",
+      "prominence": 0.7,
+      "quantity": "around 70%",
+      "note": "Derived: 36/50"
+    },
+    {
+      "id": "C16",
+      "spans": [
+        {
+          "text": "Methane emissions intensity maintained well below our 0.2% target, at 0.04% for Shell-operated oil and gas assets with marketed gas and 0.002% for Shell-operated oil and gas assets without marketed gas",
+          "start": 3007,
+          "end": 3208
+        }
+      ],
+      "type": "factual",
+      "scope": "operations",
+      "attribute": "methane intensity 0.04% / 0.002%",
+      "paragraph": "P7",
+      "prominence": 0.7,
+      "scope_note": "Shell-operated assets",
+      "quantity": "0.04%; 0.002%",
+      "timeframe": "2025"
+    },
+    {
+      "id": "C17",
+      "spans": [
+        {
+          "text": "Net carbon intensity (NCI) decreased by 9.0% compared with the 2016 reference year and was within the 2025 target range",
+          "start": 3211,
+          "end": 3330
+        }
+      ],
+      "type": "factual",
+      "scope": "product",
+      "attribute": "NCI -9.0%, within 2025 target range",
+      "paragraph": "P7",
+      "prominence": 0.7,
+      "quantity": "9.0%",
+      "baseline": "2016",
+      "timeframe": "2025"
+    },
+    {
+      "id": "C18",
+      "spans": [
+        {
+          "text": "We eliminated routine flaring from our upstream operations with effect from January 2025",
+          "start": 3333,
+          "end": 3421
+        }
+      ],
+      "type": "factual",
+      "scope": "operations",
+      "attribute": "routine flaring eliminated",
+      "paragraph": "P7",
+      "prominence": 0.7,
+      "scope_note": "Upstream-operated assets (Shell's flaring page); non-operated ventures excluded",
+      "timeframe": "January 2025"
+    },
+    {
+      "id": "C19",
+      "spans": [
+        {
+          "text": "Customer emissions from the use of our oil products (Scope 3, Category 11) reduced by 18% by the end of 2025 compared with 2021",
+          "start": 3424,
+          "end": 3551
+        }
+      ],
+      "type": "factual",
+      "scope": "product",
+      "attribute": "Scope 3 Category 11 -18%",
+      "paragraph": "P7",
+      "prominence": 0.7,
+      "scope_note": "Oil products only",
+      "quantity": "18%",
+      "baseline": "2021",
+      "timeframe": "end 2025"
+    },
+    {
+      "id": "C20",
+      "spans": [
+        {
+          "text": "making portfolio changes such as acquisitions and investments in low carbon intensity projects, decommissioning facilities, divesting assets while sustaining our liquids production",
+          "start": 3900,
+          "end": 4080
+        }
+      ],
+      "type": "factual",
+      "scope": "operations",
+      "attribute": "portfolio changes as a decarbonisation lever",
+      "paragraph": "P9",
+      "prominence": 0.6
+    },
+    {
+      "id": "C21",
+      "spans": [
+        {
+          "text": "we may choose to use high-quality carbon credits to offset any remaining emissions from our operations",
+          "start": 4096,
+          "end": 4198
+        }
+      ],
+      "type": "commitment",
+      "scope": "operations",
+      "attribute": "offsetting with high-quality carbon credits",
+      "paragraph": "P9",
+      "prominence": 0.6
+    },
+    {
+      "id": "C22",
+      "spans": [
+        {
+          "text": "growing our power sales, including those of renewable power",
+          "start": 4371,
+          "end": 4430
+        }
+      ],
+      "type": "factual",
+      "scope": "product",
+      "attribute": "growing power sales",
+      "paragraph": "P10",
+      "prominence": 0.6
+    },
+    {
+      "id": "C23",
+      "spans": [
+        {
+          "text": "increasing the proportion of gas and LNG in our hydrocarbon sales while reducing the proportion of sales of oil products",
+          "start": 4433,
+          "end": 4553
+        }
+      ],
+      "type": "factual",
+      "scope": "product",
+      "attribute": "sales mix shifting to gas and LNG, presented as customer decarbonisation",
+      "paragraph": "P10",
+      "prominence": 0.6,
+      "note": "Sits under the heading 'To support our customers to decarbonise'"
+    },
+    {
+      "id": "C24",
+      "spans": [
+        {
+          "text": "increasing sales of low-carbon fuels, such as biofuels, and developing hydrogen",
+          "start": 4556,
+          "end": 4635
+        }
+      ],
+      "type": "factual",
+      "scope": "product",
+      "attribute": "growing low-carbon fuels and hydrogen",
+      "paragraph": "P10",
+      "prominence": 0.6
+    },
+    {
+      "id": "C25",
+      "spans": [
+        {
+          "text": "using carbon credits to offset remaining carbon emissions",
+          "start": 4704,
+          "end": 4761
+        }
+      ],
+      "type": "factual",
+      "scope": "product",
+      "attribute": "carbon credits offset remaining emissions",
+      "paragraph": "P10",
+      "prominence": 0.6
+    }
+  ],
+  "signals": [
+    {
+      "id": "L1",
+      "level": "claim",
+      "kind": "undefined_term",
+      "polarity": "flag",
+      "spans": [
+        {
+          "text": "net-zero emissions energy business",
+          "start": 35,
+          "end": 69,
+          "occurrence": 1
+        },
+        {
+          "text": "net-zero emissions energy business",
+          "start": 390,
+          "end": 424,
+          "occurrence": 2
+        },
+        {
+          "text": "net-zero emissions energy business",
+          "start": 1054,
+          "end": 1088,
+          "occurrence": 3
+        }
+      ],
+      "note": "Term of art defined only on the FAQ page; 'business' makes it an identity statement rather than an emissions outcome.",
+      "claim_ids": [
+        "C1"
+      ],
+      "strength": 0.5
+    },
+    {
+      "id": "L2",
+      "level": "claim",
+      "kind": "comparative_without_baseline",
+      "polarity": "flag",
+      "spans": [
+        {
+          "text": "cleaner",
+          "start": 238,
+          "end": 245
+        }
+      ],
+      "note": "Cleaner than what? The CMA Green Claims Code warns against general terms used without explanation.",
+      "claim_ids": [
+        "C3"
+      ],
+      "strength": 0.8
+    },
+    {
+      "id": "L3",
+      "level": "claim",
+      "kind": "comparative_without_baseline",
+      "polarity": "flag",
+      "spans": [
+        {
+          "text": "more value with less emissions",
+          "start": 119,
+          "end": 149
+        }
+      ],
+      "note": "Slogan pairing a financial and an environmental promise; 'less' has no baseline.",
+      "claim_ids": [
+        "C4"
+      ],
+      "strength": 0.7
+    },
+    {
+      "id": "L4",
+      "level": "claim",
+      "kind": "hedge",
+      "polarity": "flag",
+      "spans": [
+        {
+          "text": "helping",
+          "start": 202,
+          "end": 209,
+          "occurrence": 1
+        },
+        {
+          "text": "helping",
+          "start": 674,
+          "end": 681,
+          "occurrence": 2
+        },
+        {
+          "text": "helping",
+          "start": 3637,
+          "end": 3644,
+          "occurrence": 3
+        }
+      ],
+      "note": "Agency hedge: Shell's own contribution is unspecified.",
+      "claim_ids": [
+        "C3",
+        "C6"
+      ],
+      "strength": 0.5
+    },
+    {
+      "id": "L5",
+      "level": "claim",
+      "kind": "vague_term",
+      "polarity": "flag",
+      "spans": [
+        {
+          "text": "energy system of the future",
+          "start": 695,
+          "end": 722,
+          "occurrence": 1
+        },
+        {
+          "text": "energy system of the future",
+          "start": 3658,
+          "end": 3685,
+          "occurrence": 2
+        }
+      ],
+      "note": "Future-evoking and unfalsifiable.",
+      "claim_ids": [
+        "C6"
+      ],
+      "strength": 0.6
+    },
+    {
+      "id": "L6",
+      "level": "claim",
+      "kind": "vague_term",
+      "polarity": "flag",
+      "spans": [
+        {
+          "text": "low-carbon energy products and solutions",
+          "start": 729,
+          "end": 769
+        }
+      ],
+      "note": "'Low-carbon' is undefined; on this page LNG is listed under customer decarbonisation.",
+      "claim_ids": [
+        "C6"
+      ],
+      "strength": 0.7
+    },
+    {
+      "id": "L7",
+      "level": "claim",
+      "kind": "hedge",
+      "polarity": "flag",
+      "spans": [
+        {
+          "text": "We believe",
+          "start": 1098,
+          "end": 1108
+        }
+      ],
+      "note": "Converts an alignment claim into an opinion.",
+      "claim_ids": [
+        "C7"
+      ],
+      "strength": 0.5
+    },
+    {
+      "id": "L8",
+      "level": "claim",
+      "kind": "weak_verb",
+      "polarity": "flag",
+      "spans": [
+        {
+          "text": "supports the more ambitious goal",
+          "start": 1121,
+          "end": 1153
+        }
+      ],
+      "note": "'Supports' rather than 'is aligned with'; no third-party validation named.",
+      "claim_ids": [
+        "C7"
+      ],
+      "strength": 0.5
+    },
+    {
+      "id": "L9",
+      "level": "claim",
+      "kind": "qualifier_present",
+      "polarity": "credit",
+      "spans": [
+        {
+          "text": "on a net basis",
+          "start": 1575,
+          "end": 1589
+        }
+      ],
+      "note": "Qualifier stated, which counts in Shell's favour, but it is technical: it permits carbon credits and a lay reader will not parse it.",
+      "claim_ids": [
+        "C9"
+      ],
+      "strength": 0.4
+    },
+    {
+      "id": "L10",
+      "level": "claim",
+      "kind": "responsibility_diffusion",
+      "polarity": "flag",
+      "spans": [
+        {
+          "text": "requires action by both Shell and our customers, with the support of governments and policymakers",
+          "start": 2206,
+          "end": 2303
+        }
+      ],
+      "note": "Conditions the target on customers and governments.",
+      "claim_ids": [
+        "C11"
+      ],
+      "strength": 0.6
+    },
+    {
+      "id": "L11",
+      "level": "claim",
+      "kind": "prominence",
+      "polarity": "flag",
+      "spans": [
+        {
+          "text": "achieved",
+          "start": 2619,
+          "end": 2627,
+          "occurrence": 1
+        },
+        {
+          "text": "achieved",
+          "start": 2643,
+          "end": 2651,
+          "occurrence": 2
+        },
+        {
+          "text": "achieved",
+          "start": 2667,
+          "end": 2675,
+          "occurrence": 3
+        },
+        {
+          "text": "achieved",
+          "start": 2692,
+          "end": 2700,
+          "occurrence": 4
+        },
+        {
+          "text": "achieved",
+          "start": 2717,
+          "end": 2725,
+          "occurrence": 5
+        }
+      ],
+      "note": "Five ticks for short-horizon targets of 2-13%; the 2030 entry gives no hint that it was lowered from 20% in 2024 or that a 2035 target of 45% was removed.",
+      "claim_ids": [
+        "C11",
+        "C13"
+      ],
+      "strength": 0.8
+    },
+    {
+      "id": "L12",
+      "level": "claim",
+      "kind": "intensifier",
+      "polarity": "benign",
+      "spans": [
+        {
+          "text": "well below",
+          "start": 3046,
+          "end": 3056
+        }
+      ],
+      "note": "Accurate: 0.04% against a 0.2% target. Shown so the Language layer visibly does not flag every intensifier.",
+      "claim_ids": [
+        "C16"
+      ],
+      "strength": 0.1
+    },
+    {
+      "id": "L13",
+      "level": "claim",
+      "kind": "approximation",
+      "polarity": "benign",
+      "spans": [
+        {
+          "text": "around 70%",
+          "start": 2903,
+          "end": 2913
+        }
+      ],
+      "note": "Arithmetic checks: 36/50 = 72%.",
+      "claim_ids": [
+        "C15"
+      ],
+      "strength": 0.1
+    },
+    {
+      "id": "L14",
+      "level": "claim",
+      "kind": "framing",
+      "polarity": "flag",
+      "spans": [
+        {
+          "text": "To support our customers to decarbonise",
+          "start": 4321,
+          "end": 4360
+        }
+      ],
+      "note": "A heading about decarbonisation introduces a bullet about selling more gas.",
+      "claim_ids": [
+        "C23"
+      ],
+      "strength": 0.8
+    },
+    {
+      "id": "L15",
+      "level": "claim",
+      "kind": "ratio_language",
+      "polarity": "flag",
+      "spans": [
+        {
+          "text": "proportion",
+          "start": 4448,
+          "end": 4458,
+          "occurrence": 1
+        },
+        {
+          "text": "proportion",
+          "start": 4518,
+          "end": 4528,
+          "occurrence": 2
+        }
+      ],
+      "note": "Proportions hide absolute volumes; LNG sales are planned to grow 4-5% a year to 2030.",
+      "claim_ids": [
+        "C23"
+      ],
+      "strength": 0.8
+    },
+    {
+      "id": "L16",
+      "level": "claim",
+      "kind": "vague_term",
+      "polarity": "flag",
+      "spans": [
+        {
+          "text": "high-quality",
+          "start": 4117,
+          "end": 4129
+        }
+      ],
+      "note": "No standard or registry named.",
+      "claim_ids": [
+        "C21"
+      ],
+      "strength": 0.6
+    },
+    {
+      "id": "L17",
+      "level": "claim",
+      "kind": "hedge",
+      "polarity": "flag",
+      "spans": [
+        {
+          "text": "If required, we may choose",
+          "start": 4083,
+          "end": 4109
+        }
+      ],
+      "note": "Double hedge.",
+      "claim_ids": [
+        "C21"
+      ],
+      "strength": 0.4
+    },
+    {
+      "id": "L18",
+      "level": "claim",
+      "kind": "qualifier_present",
+      "polarity": "flag",
+      "spans": [
+        {
+          "text": "including those of renewable power",
+          "start": 4396,
+          "end": 4430
+        }
+      ],
+      "note": "The qualifier reveals that power sales growth is not all renewable, under a decarbonisation heading.",
+      "claim_ids": [
+        "C22"
+      ],
+      "strength": 0.5
+    },
+    {
+      "id": "L19",
+      "level": "document",
+      "kind": "prominence",
+      "polarity": "flag",
+      "spans": [],
+      "note": "840 words of claims above; the sentence that undercuts the headline ('cannot reflect our 2050 net-zero emissions target') sits in a 1,320-word legal note at the bottom.",
+      "claim_ids": [
+        "C1"
+      ],
+      "strength": 0.9
+    },
+    {
+      "id": "L20",
+      "level": "document",
+      "kind": "share_of_attention",
+      "polarity": "flag",
+      "spans": [],
+      "note": "No words on the absolute size of the footprint, on LNG growth plans or on capital allocation; most of the text is about targets and intensity metrics.",
+      "claim_ids": [],
+      "strength": 0.8
+    },
+    {
+      "id": "L21",
+      "level": "claim",
+      "kind": "buried_admission",
+      "polarity": "flag",
+      "spans": [
+        {
+          "text": "while sustaining our liquids production",
+          "start": 4041,
+          "end": 4080
+        }
+      ],
+      "note": "Oil output will not fall; placed inside a list of decarbonisation actions.",
+      "claim_ids": [
+        "C20"
+      ],
+      "strength": 0.7
+    },
+    {
+      "id": "L22",
+      "level": "claim",
+      "kind": "hedge",
+      "polarity": "flag",
+      "spans": [
+        {
+          "text": "targets and ambition",
+          "start": 1473,
+          "end": 1493,
+          "context": "energy transition targets and ambition"
+        }
+      ],
+      "note": "The FAQ and the 2024 strategy call the oil-products reduction an 'ambition'; this page lists it among target metrics without the label.",
+      "claim_ids": [
+        "C12"
+      ],
+      "strength": 0.5
+    },
+    {
+      "id": "L23",
+      "level": "claim",
+      "kind": "scope_mismatch",
+      "polarity": "flag",
+      "spans": [
+        {
+          "text": "upstream operations",
+          "start": 3372,
+          "end": 3391
+        }
+      ],
+      "note": "Shell's flaring page says 'Upstream-operated assets': non-operated ventures are excluded.",
+      "claim_ids": [
+        "C18"
+      ],
+      "strength": 0.3
+    },
+    {
+      "id": "L24",
+      "level": "document",
+      "kind": "register",
+      "polarity": "benign",
+      "spans": [],
+      "note": "Plain, numerate, corporate; little emotive or nature-evoking language. The greenwashing here is structural (scope, ratio, omission), not lyrical.",
+      "claim_ids": [],
+      "strength": 0.1
+    }
+  ],
+  "evidence": [
+    {
+      "id": "E1",
+      "kind": "filing",
+      "tier": 2,
+      "source": {
+        "name": "Shell Annual Report and Accounts 2025 (Form 6-K / 20-F, FY2025)",
+        "publisher": "Shell plc / SEC EDGAR",
+        "date": "2026-03",
+        "locator": "p. 367 of the PDF edition"
+      },
+      "url": "https://www.sec.gov/Archives/edgar/data/1306965/000162828026017027/shellannualreportandacco.htm",
+      "quote": "Shell's Operating Plan, outlook and business plans cover a 10-year forecast period and are updated every year. The business plan reflects our Scope 1, Scope 2 and NCI targets over the next 10 years. However, Shell's business plans cannot reflect our 2050 net-zero emissions target, as this target is currently outside our planning period.",
+      "verified": true,
+      "verification": "fetched_exact",
+      "retrieved": "2026-09-19",
+      "stage": "consistency",
+      "links": [
+        {
+          "target": "C1",
+          "relation": "contradicts"
+        },
+        {
+          "target": "C7",
+          "relation": "contradicts_framing"
+        }
+      ],
+      "note": "The same sentence appears in the page's own cautionary note (P12): 'Shell’s operating plan and outlook cannot reflect our 2050 net-zero emissions target, as this target is outside our planning period.'"
+    },
+    {
+      "id": "E1b",
+      "kind": "filing",
+      "tier": 2,
+      "source": {
+        "name": "Shell Annual Report and Accounts 2025, cautionary statement",
+        "publisher": "Shell plc / SEC EDGAR",
+        "date": "2026-03",
+        "locator": "p. 459 of the PDF edition; also P12 of the page"
+      },
+      "url": "https://www.sec.gov/Archives/edgar/data/1306965/000162828026017027/shellannualreportandacco.htm",
+      "quote": "However, if society is not net zero in 2050, as of today, there would be significant risk that Shell may not meet this target.",
+      "verified": true,
+      "verification": "fetched_exact",
+      "retrieved": "2026-09-19",
+      "stage": "consistency",
+      "links": [
+        {
+          "target": "C1",
+          "relation": "context"
+        }
+      ],
+      "note": "The 2050 target is conditional on society reaching net zero."
+    },
+    {
+      "id": "E2",
+      "kind": "filing",
+      "tier": 2,
+      "source": {
+        "name": "Shell Annual Report and Accounts 2025, cash capital expenditure by segment",
+        "publisher": "Shell plc / SEC EDGAR",
+        "date": "2026-03",
+        "locator": "p. 24 of the PDF edition, table 'Cash capital expenditure', $ million, 2025"
+      },
+      "url": "https://www.sec.gov/Archives/edgar/data/1306965/000162828026017027/shellannualreportandacco.htm",
+      "quote": "Integrated Gas 4,689; Upstream 9,316; Marketing 1,862; Chemicals and Products 3,063; Renewables and Energy Solutions 1,866; Corporate 119; Total cash capital expenditure 20,915",
+      "verified": true,
+      "verification": "fetched_exact",
+      "retrieved": "2026-09-19",
+      "stage": "verify",
+      "links": [
+        {
+          "target": "C1",
+          "relation": "contradicts_framing"
+        },
+        {
+          "target": "C6",
+          "relation": "contradicts_framing"
+        },
+        {
+          "target": "O2",
+          "relation": "supports"
+        }
+      ],
+      "note": "Table values transcribed row by row; the quote is the table, not prose."
+    },
+    {
+      "id": "E3",
+      "kind": "filing",
+      "tier": 2,
+      "source": {
+        "name": "Shell Annual Report and Accounts 2025, strategy; Capital Markets Day release 25 March 2025",
+        "publisher": "Shell plc",
+        "date": "2026-03",
+        "locator": "p. 87 of the PDF edition; liquids: 'sustaining our 1.4 million barrels per day of liquids production to 2030' (Capital Markets Day release, 25 Mar 2025, https://www.globenewswire.com/news-release/2025/03/25/3048433/0/en/Shell-accelerates-strategy-to-deliver-more-value-with-less-emissions.html)"
+      },
+      "url": "https://www.sec.gov/Archives/edgar/data/1306965/000162828026017027/shellannualreportandacco.htm",
+      "quote": "We plan to grow LNG sales by 4-5% (CAGR) a year through to 2030.",
+      "verified": true,
+      "verification": "fetched_exact",
+      "retrieved": "2026-09-19",
+      "stage": "verify",
+      "links": [
+        {
+          "target": "C1",
+          "relation": "contradicts_framing"
+        },
+        {
+          "target": "C20",
+          "relation": "contradicts_framing"
+        },
+        {
+          "target": "C23",
+          "relation": "contradicts_framing"
+        },
+        {
+          "target": "O3",
+          "relation": "supports"
+        }
+      ]
+    },
+    {
+      "id": "E4",
+      "kind": "filing",
+      "tier": 2,
+      "source": {
+        "name": "Shell Annual Report and Accounts 2025, drivers of absolute Scope 3 emissions change",
+        "publisher": "Shell plc / SEC EDGAR",
+        "date": "2026-03",
+        "locator": "p. 93 of the PDF edition"
+      },
+      "url": "https://www.sec.gov/Archives/edgar/data/1306965/000162828026017027/shellannualreportandacco.htm",
+      "quote": "Scope 3 emissions associated with our energy product sales were 1,065 million tonnes CO2e, compared with 1,084 million tonnes CO2e in 2024. Higher emissions from the use of the liquefied natural gas (LNG) we sell were more than offset by lower emissions from the use of our oil products sold and lower emissions associated with our purchases of non-renewable power from third parties.",
+      "verified": true,
+      "verification": "fetched_exact",
+      "retrieved": "2026-09-19",
+      "stage": "verify",
+      "links": [
+        {
+          "target": "C23",
+          "relation": "contradicts_framing"
+        },
+        {
+          "target": "C4",
+          "relation": "context"
+        },
+        {
+          "target": "O1",
+          "relation": "supports"
+        }
+      ]
+    },
+    {
+      "id": "E4b",
+      "kind": "filing",
+      "tier": 2,
+      "source": {
+        "name": "Shell Annual Report and Accounts 2025, Scope 3 Category 11",
+        "publisher": "Shell plc / SEC EDGAR",
+        "date": "2026-03",
+        "locator": "p. 93; p. 15 gives 467 (2024: 491; 2021: 569) million tonnes CO2e"
+      },
+      "url": "https://www.sec.gov/Archives/edgar/data/1306965/000162828026017027/shellannualreportandacco.htm",
+      "quote": "In 2025, Scope 3, Category 11 emissions from the use of our oil products were 467 million tonnes CO2e, a reduction of 4.9% compared with 2024. This reduction was driven by lower sales in our Products business following completion of the sale of the Shell Energy and Chemicals Park Singapore in April 2025 and by lower Mobility sales.",
+      "verified": true,
+      "verification": "fetched_exact",
+      "retrieved": "2026-09-19",
+      "stage": "verify",
+      "links": [
+        {
+          "target": "C19",
+          "relation": "supports"
+        },
+        {
+          "target": "C12",
+          "relation": "context"
+        },
+        {
+          "target": "C20",
+          "relation": "context"
+        }
+      ],
+      "note": "p. 93 continues: 'At the end of 2025, we achieved a reduction of 17.9% compared with 2021'."
+    },
+    {
+      "id": "E5",
+      "kind": "filing",
+      "tier": 2,
+      "source": {
+        "name": "Shell Annual Report and Accounts 2025, headline KPIs",
+        "publisher": "Shell plc / SEC EDGAR",
+        "date": "2026-03",
+        "locator": "p. 7 of the PDF edition"
+      },
+      "url": "https://www.sec.gov/Archives/edgar/data/1306965/000162828026017027/shellannualreportandacco.htm",
+      "quote": "53 million tonnes Scope 1 and 2 emissions CO2e (2024: 58); 71 gCO2e/MJ Net carbon intensity (NCI) (2024: 71)",
+      "verified": true,
+      "verification": "fetched_exact",
+      "retrieved": "2026-09-19",
+      "stage": "verify",
+      "links": [
+        {
+          "target": "C2",
+          "relation": "supports"
+        },
+        {
+          "target": "C14",
+          "relation": "supports"
+        },
+        {
+          "target": "C17",
+          "relation": "supports"
+        },
+        {
+          "target": "C17",
+          "relation": "contradicts_framing"
+        },
+        {
+          "target": "C13",
+          "relation": "contradicts_framing"
+        }
+      ],
+      "note": "NCI was 71 gCO2e/MJ in both 2024 and 2025: no year-on-year progress behind the 2025 'achieved'."
+    },
+    {
+      "id": "E6",
+      "kind": "filing",
+      "tier": 2,
+      "source": {
+        "name": "Shell Annual Report and Accounts 2025, assurance of GHG emissions measures",
+        "publisher": "Shell plc / SEC EDGAR",
+        "date": "2026-03",
+        "locator": "p. 101 of the PDF edition"
+      },
+      "url": "https://www.sec.gov/Archives/edgar/data/1306965/000162828026017027/shellannualreportandacco.htm",
+      "quote": "Ernst & Young LLP ('EY') was engaged by Shell plc ('Shell', 'the Company') to perform a limited assurance engagement in accordance with International Standard on Assurance Engagements other than Audits or Reviews of Historical Financial Information ('ISAE 3000 (Revised)') and International Standard for Assurance Engagements on Greenhouse Gas Statements (ISAE 3410) to report on the accompanying greenhouse gas (GHG) statement",
+      "verified": true,
+      "verification": "fetched_exact",
+      "retrieved": "2026-09-19",
+      "stage": "verify",
+      "links": [
+        {
+          "target": "C14",
+          "relation": "context"
+        },
+        {
+          "target": "C16",
+          "relation": "context"
+        },
+        {
+          "target": "C17",
+          "relation": "context"
+        },
+        {
+          "target": "C19",
+          "relation": "context"
+        }
+      ],
+      "note": "Limited, not reasonable, assurance."
+    },
+    {
+      "id": "E7",
+      "kind": "report",
+      "tier": 5,
+      "source": {
+        "name": "Shell Energy Transition Strategy 2024",
+        "publisher": "Shell plc",
+        "date": "2024-03-14",
+        "locator": "p. 26; p. 7: 'We believe our total absolute emissions peaked in 2018 at 1.73 gigatonnes of carbon dioxide equivalent (GtCO2e).'"
+      },
+      "url": "https://www.shell.com/sustainability/reporting-centre/_jcr_content/root/main/section_1888019429/promo_copy_1767682700/links/item0.stream/1726832326846/2c3f9065f2886e789ac196789f137dbca49473e8/shell-energy-transition-strategy-2024.pdf",
+      "quote": "Given this focus on value, we expect growth in total power sales to 2030 will be lower than previously planned. This has led to an update to our net carbon intensity target. We are now targeting a 15-20% reduction by 2030 in the net carbon intensity of the energy products we sell, compared with 2016, against our previous target of a 20% reduction. Acknowledging uncertainty in the pace of change in the energy transition, we have also chosen to retire our 2035 target of a 45% reduction in net carbon intensity.",
+      "verified": true,
+      "verification": "fetched_exact",
+      "retrieved": "2026-09-19",
+      "stage": "consistency",
+      "links": [
+        {
+          "target": "C11",
+          "relation": "contradicts_framing"
+        },
+        {
+          "target": "C13",
+          "relation": "contradicts_framing"
+        },
+        {
+          "target": "C22",
+          "relation": "contradicts_framing"
+        },
+        {
+          "target": "O4",
+          "relation": "supports"
+        },
+        {
+          "target": "O1",
+          "relation": "supports"
+        }
+      ],
+      "note": "Company material, but an admission against interest: it documents the weakening of the targets shown on the page."
+    },
+    {
+      "id": "E8",
+      "kind": "ruling",
+      "tier": 1,
+      "source": {
+        "name": "ASA ruling G22-1170842, Shell UK Ltd",
+        "publisher": "UK Advertising Standards Authority",
+        "date": "2023-06-07",
+        "locator": "Upheld (omission issue); not upheld (renewable-electricity customer figures)"
+      },
+      "url": "https://www.asa.org.uk/rulings/shell-uk-ltd-g22-1170842-shell-uk-ltd.html",
+      "quote": "large-scale oil and gas investment and extraction comprised the vast majority of the company's business model in 2022 [...] the ads omitted material information and were likely to mislead",
+      "verified": true,
+      "verification": "fetched_by_eye",
+      "retrieved": "2026-09-19",
+      "stage": "substantiate",
+      "links": [
+        {
+          "target": "C1",
+          "relation": "precedent"
+        },
+        {
+          "target": "C3",
+          "relation": "precedent"
+        },
+        {
+          "target": "C6",
+          "relation": "precedent"
+        },
+        {
+          "target": "O2",
+          "relation": "context"
+        }
+      ],
+      "note": "Action: 'ensure that their future ads featuring environmental claims did not mislead by exaggerating or omitting material information about the proportion of their business activities comprised of lower carbon activities.'"
+    },
+    {
+      "id": "E8b",
+      "kind": "ruling",
+      "tier": 1,
+      "source": {
+        "name": "ASA ruling G24-1248246, Shell UK Ltd",
+        "publisher": "UK Advertising Standards Authority",
+        "date": "2025-04-09",
+        "locator": "Not upheld"
+      },
+      "url": "https://www.asa.org.uk/rulings/shell-uk-ltd-g24-1248246-shell-uk-ltd.html",
+      "quote": "In 2023, 68% of Shell's global investments included oil & gas, 23% included low-carbon energy solutions and 9% non-energy products.",
+      "verified": true,
+      "verification": "fetched_by_eye",
+      "retrieved": "2026-09-19",
+      "stage": "substantiate",
+      "links": [
+        {
+          "target": "C1",
+          "relation": "precedent"
+        },
+        {
+          "target": "O2",
+          "relation": "precedent"
+        }
+      ],
+      "note": "Precedent for the fix: the ASA found the ad 'had therefore not given a misleading overall impression' because the investment split was stated on screen."
+    },
+    {
+      "id": "E8c",
+      "kind": "ruling",
+      "tier": 1,
+      "source": {
+        "name": "Dutch Reclame Code Commissie 2021/00190; College van Beroep 2022/00100; RCC 2023/00091 (Shell offset claims)",
+        "publisher": "Stichting Reclame Code",
+        "date": "2021-08-26; 2022-10-20; 2023-10-09",
+        "locator": "All three upheld against Shell's 'CO2-neutral' / 'CO2-compensated' consumer claims"
+      },
+      "url": "https://www.reclamecode.nl/uitspraak/?uitspraakId=365319",
+      "quote": "Shell heeft zelf gekozen voor een claim met een absoluut karakter en dit impliceert dat zij nader bewijs dient te (kunnen) leveren",
+      "verified": true,
+      "verification": "second_party_fetch",
+      "retrieved": "2026-09-19",
+      "stage": "substantiate",
+      "links": [
+        {
+          "target": "C21",
+          "relation": "precedent"
+        },
+        {
+          "target": "C25",
+          "relation": "precedent"
+        }
+      ],
+      "note": "Translation: Shell chose a claim of an absolute character and must therefore be able to prove it. Other rulings: https://www.reclamecode.nl/uitspraken/resultaten/vervoer-2021-00190/304997/ and https://www.reclamecode.nl/uitspraken/uitspraak/vervoer-2023-00091/427115/"
+    },
+    {
+      "id": "E9",
+      "kind": "ruling",
+      "tier": 1,
+      "source": {
+        "name": "Tribunal judiciaire de Paris, judgment of 23 October 2025, RG 22/02955, Greenpeace France et al. v TotalEnergies (court communiqué)",
+        "publisher": "Tribunal judiciaire de Paris",
+        "date": "2025-10-23",
+        "locator": "Misleading commercial practices for statements on 'carbon neutrality by 2050' and 'major player in the energy transition'; TotalEnergies said on 24 Oct 2025 it would not appeal"
+      },
+      "url": "https://www.tribunal-de-paris.justice.fr/sites/default/files/2025-10/Communiqu%C3%A9%20Greenpeace%20Amis%20de%20la%20Terre%20et%20Notre%20Affaire%20%C3%A0%20Tous%20c.%20Totalenergies%2023102025.pdf",
+      "quote": "en ayant recours à cette terminologie, sans préciser aux consommateurs que le groupe avait son propre scénario pour atteindre la neutralité carbone, et qu'il continuait à augmenter sa production et ses investissements dans le pétrole et le gaz, à rebours des préconisations des experts scientifiques fondées sur l'Accord de Paris, le groupe avait fait état d'allégations environnementales de nature à induire en erreur le consommateur.",
+      "verified": true,
+      "verification": "fetched_exact",
+      "retrieved": "2026-09-19",
+      "stage": "substantiate",
+      "links": [
+        {
+          "target": "C1",
+          "relation": "precedent"
+        },
+        {
+          "target": "C7",
+          "relation": "precedent"
+        }
+      ],
+      "note": "Same claim family as C1, different company: the court's reasoning (no disclosure that oil and gas production and investment keep growing) maps onto O2 and O3."
+    },
+    {
+      "id": "E10",
+      "kind": "dataset",
+      "tier": 3,
+      "source": {
+        "name": "Transition Pathway Initiative, company assessment: Shell",
+        "publisher": "Transition Pathway Initiative (LSE Grantham Research Institute)",
+        "date": "assessment date not shown on page"
+      },
+      "url": "https://www.transitionpathwayinitiative.org/companies/shell",
+      "quote": "Management Quality: Level 5, Transition Planning and Implementation. Carbon Performance: 2028 Not Aligned; 2035 National Pledges; 2050 1.5 Degrees.",
+      "verified": true,
+      "verification": "fetched_by_eye",
+      "retrieved": "2026-09-19",
+      "stage": "verify",
+      "links": [
+        {
+          "target": "C1",
+          "relation": "contradicts_framing"
+        },
+        {
+          "target": "C7",
+          "relation": "supports"
+        },
+        {
+          "target": "C7",
+          "relation": "contradicts_framing"
+        }
+      ],
+      "note": "The 2050 target is rated 1.5°C-aligned; near-term performance is not."
+    },
+    {
+      "id": "E11",
+      "kind": "standard",
+      "tier": 1,
+      "source": {
+        "name": "CMA Green Claims Code",
+        "publisher": "UK Competition and Markets Authority",
+        "date": "2021-09-20"
+      },
+      "url": "https://www.gov.uk/government/publications/green-claims-code-making-environmental-claims/environmental-claims-on-goods-and-services",
+      "quote": "claims must be truthful and accurate; claims must be clear and unambiguous; claims must not omit or hide important information; compare goods or services in a fair and meaningful way; consider the full life cycle of the product or service; are substantiated",
+      "verified": true,
+      "verification": "fetched_by_eye",
+      "retrieved": "2026-09-19",
+      "stage": "substantiate",
+      "links": [
+        {
+          "target": "C3",
+          "relation": "criteria"
+        },
+        {
+          "target": "C4",
+          "relation": "criteria"
+        },
+        {
+          "target": "C6",
+          "relation": "criteria"
+        },
+        {
+          "target": "O1",
+          "relation": "criteria"
+        },
+        {
+          "target": "O2",
+          "relation": "criteria"
+        },
+        {
+          "target": "O3",
+          "relation": "criteria"
+        },
+        {
+          "target": "O4",
+          "relation": "criteria"
+        }
+      ],
+      "note": "Also warns that 'green', 'sustainable' or 'eco-friendly', 'especially if used without explanation', imply an overall benefit the business must be able to prove."
+    },
+    {
+      "id": "E12",
+      "kind": "law",
+      "tier": 1,
+      "source": {
+        "name": "Directive (EU) 2024/825, Empowering Consumers for the Green Transition",
+        "publisher": "European Union",
+        "date": "applies from 2026-09-27"
+      },
+      "url": "https://eur-lex.europa.eu/eli/dir/2024/825/oj/eng",
+      "verified": false,
+      "verification": "unverified",
+      "retrieved": "2026-09-19",
+      "stage": "substantiate",
+      "links": [
+        {
+          "target": "C3",
+          "relation": "criteria"
+        },
+        {
+          "target": "C6",
+          "relation": "criteria"
+        },
+        {
+          "target": "C21",
+          "relation": "criteria"
+        },
+        {
+          "target": "C25",
+          "relation": "criteria"
+        }
+      ],
+      "note": "Applies from 27 September 2026: bans generic environmental claims without recognised excellent performance and product claims of neutral, reduced or positive climate impact based on offsetting. Date confirmed from EUR-Lex-derived sources; article text not fetched, so no quote is displayed. B2C product claims are in scope; corporate targets are not directly."
+    },
+    {
+      "id": "E13",
+      "kind": "company_page",
+      "tier": 5,
+      "source": {
+        "name": "Shell, 'Our climate target – FAQs'",
+        "publisher": "Shell plc",
+        "locator": "Also: 'a target of 9-12% reduction by 2024 which we met, achieving a 9% reduction compared with 2016 and a target of 9-13% reduction by 2025 which we also met, reporting a continued 9% reduction compared with 2016.' and 'In March 2024, we also set an ambition to reduce customer emissions from the use of our oil products by 15-20% by 2030 compared with 2021 (Scope 3, Category 11).'"
+      },
+      "url": "https://www.shell.com/sustainability/climate/our-climate-target-faqs.html",
+      "quote": "The Scope 3 emissions we report account for over 90% of the total emissions we report.",
+      "verified": true,
+      "verification": "fetched_exact",
+      "retrieved": "2026-09-19",
+      "stage": "consistency",
+      "links": [
+        {
+          "target": "C8",
+          "relation": "context"
+        },
+        {
+          "target": "C1",
+          "relation": "context"
+        },
+        {
+          "target": "C12",
+          "relation": "context"
+        },
+        {
+          "target": "C13",
+          "relation": "contradicts_framing"
+        },
+        {
+          "target": "C17",
+          "relation": "contradicts_framing"
+        },
+        {
+          "target": "O1",
+          "relation": "supports"
+        }
+      ],
+      "note": "Company page: it can corroborate scope statements and contradict framing, but cannot substantiate a claim on its own."
+    },
+    {
+      "id": "E14",
+      "kind": "company_page",
+      "tier": 5,
+      "source": {
+        "name": "Shell, 'Reducing methane emissions'",
+        "publisher": "Shell plc",
+        "locator": "Also: 'In January 2025, we eliminated routine gas flaring from our Upstream operated assets – five years ahead of the World Bank's Zero Routine Flaring by 2030 initiative, of which we are a signatory.'"
+      },
+      "url": "https://www.shell.com/what-we-do/oil-and-natural-gas/methane-emissions.html",
+      "quote": "Total methane emissions from assets under Shell operational control were reduced by 78% between 2016 (138,000 tonnes) and 2025 (31,000 tonnes).",
+      "verified": true,
+      "verification": "fetched_exact",
+      "retrieved": "2026-09-19",
+      "stage": "consistency",
+      "links": [
+        {
+          "target": "C10",
+          "relation": "context"
+        },
+        {
+          "target": "C16",
+          "relation": "context"
+        },
+        {
+          "target": "C18",
+          "relation": "context"
+        }
+      ]
+    },
+    {
+      "id": "E15",
+      "kind": "company_page",
+      "tier": 5,
+      "source": {
+        "name": "Shell, 'Flaring: Zero routine flaring by 2025'",
+        "publisher": "Shell plc"
+      },
+      "url": "https://www.shell.com/what-we-do/oil-and-natural-gas/flaring.html",
+      "quote": "Shell reached our target of eliminating routine gas flaring from our Upstream-operated assets in 2025, moving faster than the World Bank's Zero Routine Flaring by 2030 initiative, to which we are a signatory.",
+      "verified": true,
+      "verification": "fetched_exact",
+      "retrieved": "2026-09-19",
+      "stage": "consistency",
+      "links": [
+        {
+          "target": "C18",
+          "relation": "context"
+        }
+      ],
+      "note": "Scope is 'Upstream-operated assets'; the page under analysis says 'upstream operations' (L23)."
+    },
+    {
+      "id": "E16",
+      "kind": "standard",
+      "tier": 3,
+      "source": {
+        "name": "SASB Standard, Oil & Gas – Exploration & Production (EM-EP): disclosure topics",
+        "publisher": "IFRS Foundation (SASB Standards)"
+      },
+      "url": "https://sasb.ifrs.org/standards/",
+      "verified": false,
+      "verification": "unverified",
+      "retrieved": "2026-09-19",
+      "stage": "omissions",
+      "links": [
+        {
+          "target": "O1",
+          "relation": "criteria"
+        },
+        {
+          "target": "O2",
+          "relation": "criteria"
+        },
+        {
+          "target": "O3",
+          "relation": "criteria"
+        },
+        {
+          "target": "O4",
+          "relation": "criteria"
+        }
+      ],
+      "note": "Topics: Greenhouse Gas Emissions; Air Quality; Water Management; Biodiversity Impacts; Security, Human Rights & Rights of Indigenous Peoples; Community Relations; Health, Safety & Emergency Management; Critical Incident Risk Management; Business Ethics & Payments Transparency; Reserves Valuation & Capital Expenditures; Management of the Legal & Regulatory Environment. Taken from the SASB industry brief via search; verify against the standard page before display."
+    },
+    {
+      "id": "E17",
+      "kind": "dataset",
+      "tier": 3,
+      "source": {
+        "name": "OGMP 2.0 member companies list (29 December 2025)",
+        "publisher": "UNEP Oil & Gas Methane Partnership 2.0",
+        "date": "2025-12-29"
+      },
+      "url": "https://www.ogmpartnership.org/sites/default/files/documents/2025-12/List_of_OGMP2.0_Member_Companies_29.12.pdf",
+      "quote": "Shell Netherlands",
+      "verified": true,
+      "verification": "fetched_exact",
+      "retrieved": "2026-09-19",
+      "stage": "verify",
+      "links": [
+        {
+          "target": "C10",
+          "relation": "context"
+        },
+        {
+          "target": "C16",
+          "relation": "context"
+        }
+      ],
+      "note": "Membership only; Gold Standard reporting status was not established in this session."
+    },
+    {
+      "id": "E18",
+      "kind": "filing",
+      "tier": 2,
+      "source": {
+        "name": "Shell Annual Report and Accounts 2025, production",
+        "publisher": "Shell plc / SEC EDGAR",
+        "date": "2026-03",
+        "locator": "p. 22 of the PDF edition"
+      },
+      "url": "https://www.sec.gov/Archives/edgar/data/1306965/000162828026017027/shellannualreportandacco.htm",
+      "quote": "Oil and gas production available for sale in 2025 was 2,800 thousand boe/d, compared with 2,836 thousand boe/d in 2024. This decrease was mainly driven by divestments and field decline, partly offset by new production.",
+      "verified": true,
+      "verification": "fetched_exact",
+      "retrieved": "2026-09-19",
+      "stage": "verify",
+      "links": [
+        {
+          "target": "C2",
+          "relation": "context"
+        },
+        {
+          "target": "C14",
+          "relation": "context"
+        },
+        {
+          "target": "C20",
+          "relation": "contradicts_framing"
+        }
+      ]
+    },
+    {
+      "id": "E19",
+      "kind": "filing",
+      "tier": 2,
+      "source": {
+        "name": "Shell Annual Report and Accounts 2025, strategy section",
+        "publisher": "Shell plc / SEC EDGAR",
+        "date": "2026-03",
+        "locator": "strategy section of the PDF edition"
+      },
+      "url": "https://www.sec.gov/Archives/edgar/data/1306965/000162828026017027/shellannualreportandacco.htm",
+      "quote": "we have a target to cut the net carbon intensity (NCI) of the products we sell by 15--20% by 2030 compared with 2016. And, we are on track, delivering 9% by end-2025 compared with 2016.",
+      "verified": true,
+      "verification": "fetched_exact",
+      "retrieved": "2026-09-19",
+      "stage": "verify",
+      "links": [
+        {
+          "target": "C11",
+          "relation": "context"
+        },
+        {
+          "target": "C17",
+          "relation": "context"
+        }
+      ],
+      "note": "'On track' with 9 points in nine years and 6-11 more needed in five (X7, X8)."
+    },
+    {
+      "id": "X1",
+      "kind": "computation",
+      "tier": 2,
+      "source": {
+        "name": "Share of the reported footprint covered by the only absolute target (Scope 1+2)",
+        "publisher": "Recomputed by the External verification evaluator"
+      },
+      "quote": "Scope 1 and 2 (53 Mt) are 4.7% of total reported emissions (1,118 Mt).",
+      "verified": true,
+      "verification": "computed",
+      "retrieved": "2026-09-19",
+      "stage": "verify",
+      "links": [
+        {
+          "target": "C2",
+          "relation": "context"
+        },
+        {
+          "target": "C9",
+          "relation": "context"
+        },
+        {
+          "target": "C14",
+          "relation": "context"
+        },
+        {
+          "target": "O1",
+          "relation": "supports"
+        }
+      ],
+      "computation": {
+        "formula": "scope12 / (scope12 + scope3)",
+        "inputs": {
+          "scope12_mt": 53,
+          "scope3_mt": 1065
+        },
+        "result": "Scope 1 and 2 (53 Mt) are 4.7% of total reported emissions (1,118 Mt)."
+      },
+      "derived_from": [
+        "E4",
+        "E5"
+      ]
+    },
+    {
+      "id": "X2",
+      "kind": "computation",
+      "tier": 2,
+      "source": {
+        "name": "Capex share, Renewables & Energy Solutions, 2025",
+        "publisher": "Recomputed by the External verification evaluator"
+      },
+      "quote": "Renewables & Energy Solutions took 8.9% of 2025 cash capital expenditure.",
+      "verified": true,
+      "verification": "computed",
+      "retrieved": "2026-09-19",
+      "stage": "verify",
+      "links": [
+        {
+          "target": "C1",
+          "relation": "contradicts_framing"
+        },
+        {
+          "target": "C6",
+          "relation": "contradicts_framing"
+        },
+        {
+          "target": "O2",
+          "relation": "supports"
+        }
+      ],
+      "computation": {
+        "formula": "res / total",
+        "inputs": {
+          "res_musd": 1866,
+          "total_musd": 20915
+        },
+        "result": "Renewables & Energy Solutions took 8.9% of 2025 cash capital expenditure."
+      },
+      "derived_from": [
+        "E2"
+      ]
+    },
+    {
+      "id": "X3",
+      "kind": "computation",
+      "tier": 2,
+      "source": {
+        "name": "Capex share, Upstream + Integrated Gas, 2025",
+        "publisher": "Recomputed by the External verification evaluator"
+      },
+      "quote": "Upstream and Integrated Gas took 67.0% of 2025 cash capital expenditure.",
+      "verified": true,
+      "verification": "computed",
+      "retrieved": "2026-09-19",
+      "stage": "verify",
+      "links": [
+        {
+          "target": "O2",
+          "relation": "supports"
+        }
+      ],
+      "computation": {
+        "formula": "(upstream + integrated_gas) / total",
+        "inputs": {
+          "upstream_musd": 9316,
+          "integrated_gas_musd": 4689,
+          "total_musd": 20915
+        },
+        "result": "Upstream and Integrated Gas took 67.0% of 2025 cash capital expenditure."
+      },
+      "derived_from": [
+        "E2"
+      ]
+    },
+    {
+      "id": "X4",
+      "kind": "computation",
+      "tier": 2,
+      "source": {
+        "name": "Check of 'around 70%' of the 2030 Scope 1+2 target",
+        "publisher": "Recomputed by the External verification evaluator"
+      },
+      "quote": "36/50 = 72%, consistent with 'around 70%'.",
+      "verified": true,
+      "verification": "computed",
+      "retrieved": "2026-09-19",
+      "stage": "verify",
+      "links": [
+        {
+          "target": "C15",
+          "relation": "supports"
+        }
+      ],
+      "computation": {
+        "formula": "achieved_pct / target_pct",
+        "inputs": {
+          "achieved_pct": 36,
+          "target_pct": 50
+        },
+        "result": "36/50 = 72%, consistent with 'around 70%'."
+      },
+      "derived_from": [
+        "E5"
+      ]
+    },
+    {
+      "id": "X5",
+      "kind": "computation",
+      "tier": 2,
+      "source": {
+        "name": "Check of the 18% oil-product Scope 3 reduction vs 2021",
+        "publisher": "Recomputed by the External verification evaluator"
+      },
+      "quote": "(569 - 467) / 569 = 17.9%, consistent with '18%'.",
+      "verified": true,
+      "verification": "computed",
+      "retrieved": "2026-09-19",
+      "stage": "verify",
+      "links": [
+        {
+          "target": "C19",
+          "relation": "supports"
+        }
+      ],
+      "computation": {
+        "formula": "(y2021 - y2025) / y2021",
+        "inputs": {
+          "y2021_mt": 569,
+          "y2025_mt": 467
+        },
+        "result": "(569 - 467) / 569 = 17.9%, consistent with '18%'."
+      },
+      "derived_from": [
+        "E4b"
+      ]
+    },
+    {
+      "id": "X6",
+      "kind": "computation",
+      "tier": 2,
+      "source": {
+        "name": "Absolute Scope 3 change 2024 to 2025",
+        "publisher": "Recomputed by the External verification evaluator"
+      },
+      "quote": "Absolute Scope 3 fell 1.8% in 2025.",
+      "verified": true,
+      "verification": "computed",
+      "retrieved": "2026-09-19",
+      "stage": "verify",
+      "links": [
+        {
+          "target": "C4",
+          "relation": "context"
+        },
+        {
+          "target": "O1",
+          "relation": "supports"
+        }
+      ],
+      "computation": {
+        "formula": "(y2024 - y2025) / y2024",
+        "inputs": {
+          "y2024_mt": 1084,
+          "y2025_mt": 1065
+        },
+        "result": "Absolute Scope 3 fell 1.8% in 2025."
+      },
+      "derived_from": [
+        "E4"
+      ]
+    },
+    {
+      "id": "X7",
+      "kind": "computation",
+      "tier": 2,
+      "source": {
+        "name": "NCI pace achieved",
+        "publisher": "Recomputed by the External verification evaluator"
+      },
+      "quote": "1.0 point per year on average since 2016; zero change from 2024 to 2025 (71 to 71 gCO2e/MJ).",
+      "verified": true,
+      "verification": "computed",
+      "retrieved": "2026-09-19",
+      "stage": "verify",
+      "links": [
+        {
+          "target": "C11",
+          "relation": "contradicts_framing"
+        },
+        {
+          "target": "C13",
+          "relation": "contradicts_framing"
+        },
+        {
+          "target": "C17",
+          "relation": "contradicts_framing"
+        }
+      ],
+      "computation": {
+        "formula": "points / years; last-year change",
+        "inputs": {
+          "points_2016_2025": 9,
+          "years": 9,
+          "nci_2024_g_per_mj": 71,
+          "nci_2025_g_per_mj": 71
+        },
+        "result": "1.0 point per year on average since 2016; zero change from 2024 to 2025 (71 to 71 gCO2e/MJ)."
+      },
+      "derived_from": [
+        "E5"
+      ]
+    },
+    {
+      "id": "X8",
+      "kind": "computation",
+      "tier": 2,
+      "source": {
+        "name": "NCI pace needed for 15-20% by 2030",
+        "publisher": "Recomputed by the External verification evaluator"
+      },
+      "quote": "1.2 to 2.2 points per year needed from 2026 to 2030, against 1.0 achieved and 0 last year.",
+      "verified": true,
+      "verification": "computed",
+      "retrieved": "2026-09-19",
+      "stage": "verify",
+      "links": [
+        {
+          "target": "C11",
+          "relation": "contradicts_framing"
+        }
+      ],
+      "computation": {
+        "formula": "(target - achieved) / years_left",
+        "inputs": {
+          "target_low": 15,
+          "target_high": 20,
+          "achieved": 9,
+          "years_left": 5
+        },
+        "result": "1.2 to 2.2 points per year needed from 2026 to 2030, against 1.0 achieved and 0 last year."
+      },
+      "derived_from": [
+        "E19",
+        "X7"
+      ]
+    }
+  ],
+  "scores": [
+    {
+      "claim_id": "C1",
+      "dimension": "clarity",
+      "score": 0.4,
+      "confidence": 0.8,
+      "basis": "The term is defined only on the FAQ page, but the scope (operations and use of sold products) is stated on this page.",
+      "evidence_ids": [
+        "E13"
+      ]
+    },
+    {
+      "claim_id": "C1",
+      "dimension": "support",
+      "score": 0.7,
+      "confidence": 0.8,
+      "basis": "The target exists, but Renewables & Energy Solutions took 8.9% of 2025 capex, LNG sales are planned to grow 4-5% a year to 2030, the 2035 milestone was retired and TPI rates 2028 performance not aligned.",
+      "evidence_ids": [
+        "E2",
+        "X2",
+        "E3",
+        "E7",
+        "E10",
+        "E8",
+        "E9"
+      ]
+    },
+    {
+      "claim_id": "C1",
+      "dimension": "materiality",
+      "score": 0.3,
+      "confidence": 0.8,
+      "basis": "Covers Scope 3, which is over 90% of the reported footprint: the right scope.",
+      "evidence_ids": [
+        "E13"
+      ]
+    },
+    {
+      "claim_id": "C1",
+      "dimension": "consistency",
+      "score": 0.85,
+      "confidence": 0.9,
+      "basis": "The page's cautionary note and the annual report say the business plan cannot reflect the 2050 target, and the target is conditional on society reaching net zero.",
+      "evidence_ids": [
+        "E1",
+        "E1b"
+      ]
+    },
+    {
+      "claim_id": "C2",
+      "dimension": "clarity",
+      "score": 0.2,
+      "confidence": 0.9,
+      "basis": "Plain factual statement about operations."
+    },
+    {
+      "claim_id": "C2",
+      "dimension": "support",
+      "score": 0.15,
+      "confidence": 0.8,
+      "basis": "Scope 1+2 fell from 58 to 53 Mt in 2025, 36% below 2016, within an EY limited-assurance GHG statement.",
+      "evidence_ids": [
+        "E5",
+        "E6"
+      ]
+    },
+    {
+      "claim_id": "C2",
+      "dimension": "materiality",
+      "score": 0.5,
+      "confidence": 0.9,
+      "basis": "Operations are 4.7% of the reported footprint; part of the fall came from divestments.",
+      "evidence_ids": [
+        "X1",
+        "E18"
+      ]
+    },
+    {
+      "claim_id": "C2",
+      "dimension": "consistency",
+      "score": 0.2,
+      "confidence": 0.7,
+      "basis": "Consistent with filings.",
+      "evidence_ids": [
+        "E5"
+      ]
+    },
+    {
+      "claim_id": "C3",
+      "dimension": "clarity",
+      "score": 0.85,
+      "confidence": 0.9,
+      "basis": "'Cleaner' is a comparative with no baseline and no definition."
+    },
+    {
+      "claim_id": "C3",
+      "dimension": "support",
+      "score": 0.5,
+      "confidence": 0.4,
+      "basis": "Nothing on the page or in the filings defines or measures 'cleaner energy solutions'.",
+      "evidence_ids": [
+        "E11"
+      ]
+    },
+    {
+      "claim_id": "C3",
+      "dimension": "materiality",
+      "score": 0.6,
+      "confidence": 0.7,
+      "basis": "Customer-facing products are the material lever, but the claim does not say which products."
+    },
+    {
+      "claim_id": "C3",
+      "dimension": "consistency",
+      "score": 0.3,
+      "confidence": 0.5,
+      "basis": "No contradiction found; the phrase recurs across Shell material."
+    },
+    {
+      "claim_id": "C4",
+      "dimension": "clarity",
+      "score": 0.75,
+      "confidence": 0.9,
+      "basis": "Slogan; 'less emissions' has no baseline."
+    },
+    {
+      "claim_id": "C4",
+      "dimension": "support",
+      "score": 0.4,
+      "confidence": 0.6,
+      "basis": "Total reported emissions fell 1.8% in 2025; the slogan does not say against what.",
+      "evidence_ids": [
+        "X6"
+      ]
+    },
+    {
+      "claim_id": "C4",
+      "dimension": "materiality",
+      "score": 0.5,
+      "confidence": 0.6,
+      "basis": "Pairs value and emissions as if aligned while 67% of capex goes to upstream and gas.",
+      "evidence_ids": [
+        "X3"
+      ]
+    },
+    {
+      "claim_id": "C4",
+      "dimension": "consistency",
+      "score": 0.3,
+      "confidence": 0.5,
+      "basis": "Consistent with Shell's strategy wording."
+    },
+    {
+      "claim_id": "C5",
+      "dimension": "clarity",
+      "score": 0.5,
+      "confidence": 0.8,
+      "basis": "Direction stated, no quantities."
+    },
+    {
+      "claim_id": "C5",
+      "dimension": "support",
+      "score": 0.45,
+      "confidence": 0.4,
+      "basis": "The annual report mentions renewable electricity and efficiency, but no figure on the page can be checked."
+    },
+    {
+      "claim_id": "C5",
+      "dimension": "materiality",
+      "score": 0.5,
+      "confidence": 0.8,
+      "basis": "Operations only.",
+      "evidence_ids": [
+        "X1"
+      ]
+    },
+    {
+      "claim_id": "C5",
+      "dimension": "consistency",
+      "score": 0.2,
+      "confidence": 0.5,
+      "basis": "No contradiction found."
+    },
+    {
+      "claim_id": "C6",
+      "dimension": "clarity",
+      "score": 0.85,
+      "confidence": 0.9,
+      "basis": "'Energy system of the future' and 'low-carbon' are undefined."
+    },
+    {
+      "claim_id": "C6",
+      "dimension": "support",
+      "score": 0.5,
+      "confidence": 0.5,
+      "basis": "No measurable content; LNG is listed as a customer decarbonisation lever elsewhere on the page.",
+      "evidence_ids": [
+        "E8"
+      ]
+    },
+    {
+      "claim_id": "C6",
+      "dimension": "materiality",
+      "score": 0.7,
+      "confidence": 0.8,
+      "basis": "8.9% of 2025 capex went to Renewables & Energy Solutions.",
+      "evidence_ids": [
+        "E2",
+        "X2"
+      ]
+    },
+    {
+      "claim_id": "C6",
+      "dimension": "consistency",
+      "score": 0.3,
+      "confidence": 0.5,
+      "basis": "No contradiction found."
+    },
+    {
+      "claim_id": "C7",
+      "dimension": "clarity",
+      "score": 0.5,
+      "confidence": 0.8,
+      "basis": "Hedged ('we believe') and a weak verb ('supports')."
+    },
+    {
+      "claim_id": "C7",
+      "dimension": "support",
+      "score": 0.6,
+      "confidence": 0.7,
+      "basis": "TPI rates the 2050 target 1.5°C-aligned but 2028 performance not aligned; LNG growth plans conflict with a 1.5°C pathway; the Paris court found the same claim family misleading at TotalEnergies.",
+      "evidence_ids": [
+        "E10",
+        "E3",
+        "E9"
+      ]
+    },
+    {
+      "claim_id": "C7",
+      "dimension": "materiality",
+      "score": 0.4,
+      "confidence": 0.7,
+      "basis": "Alignment of the target, not of the company's trajectory.",
+      "evidence_ids": [
+        "E10"
+      ]
+    },
+    {
+      "claim_id": "C7",
+      "dimension": "consistency",
+      "score": 0.4,
+      "confidence": 0.6,
+      "basis": "Filings say the plan cannot reflect the 2050 target.",
+      "evidence_ids": [
+        "E1"
+      ]
+    },
+    {
+      "claim_id": "C8",
+      "dimension": "clarity",
+      "score": 0.1,
+      "confidence": 0.9,
+      "basis": "Explicit scope statement."
+    },
+    {
+      "claim_id": "C8",
+      "dimension": "support",
+      "score": 0.1,
+      "confidence": 0.9,
+      "basis": "The company's own definition of its target scope, stated the same way in the FAQ and the annual report; a definition cannot be externally false, only inconsistently applied.",
+      "evidence_ids": [
+        "E13",
+        "E1"
+      ]
+    },
+    {
+      "claim_id": "C8",
+      "dimension": "materiality",
+      "score": 0.1,
+      "confidence": 0.9,
+      "basis": "Scope 3 included.",
+      "evidence_ids": [
+        "E13"
+      ]
+    },
+    {
+      "claim_id": "C8",
+      "dimension": "consistency",
+      "score": 0.1,
+      "confidence": 0.9,
+      "basis": "Consistent."
+    },
+    {
+      "claim_id": "C9",
+      "dimension": "clarity",
+      "score": 0.35,
+      "confidence": 0.8,
+      "basis": "'On a net basis' is stated but technical; it permits credits."
+    },
+    {
+      "claim_id": "C9",
+      "dimension": "support",
+      "score": 0.3,
+      "confidence": 0.7,
+      "basis": "36% achieved by 2025 and the 2030 target sits inside the 10-year plan.",
+      "evidence_ids": [
+        "E5",
+        "E1"
+      ]
+    },
+    {
+      "claim_id": "C9",
+      "dimension": "materiality",
+      "score": 0.5,
+      "confidence": 0.9,
+      "basis": "Operations are 4.7% of the footprint; some progress is divestment.",
+      "evidence_ids": [
+        "X1",
+        "E18"
+      ]
+    },
+    {
+      "claim_id": "C9",
+      "dimension": "consistency",
+      "score": 0.2,
+      "confidence": 0.8,
+      "basis": "Consistent with filings.",
+      "evidence_ids": [
+        "E1"
+      ]
+    },
+    {
+      "claim_id": "C10",
+      "dimension": "clarity",
+      "score": 0.2,
+      "confidence": 0.8,
+      "basis": "Specific metric and dates."
+    },
+    {
+      "claim_id": "C10",
+      "dimension": "support",
+      "score": 0.2,
+      "confidence": 0.6,
+      "basis": "Company-reported 0.04% and a 78% absolute methane cut since 2016; OGMP 2.0 member; no independent measurement checked.",
+      "evidence_ids": [
+        "E14",
+        "E17"
+      ]
+    },
+    {
+      "claim_id": "C10",
+      "dimension": "materiality",
+      "score": 0.3,
+      "confidence": 0.7,
+      "basis": "Methane is material but a small share of the total."
+    },
+    {
+      "claim_id": "C10",
+      "dimension": "consistency",
+      "score": 0.1,
+      "confidence": 0.7,
+      "basis": "Consistent across Shell pages.",
+      "evidence_ids": [
+        "E14"
+      ]
+    },
+    {
+      "claim_id": "C11",
+      "dimension": "clarity",
+      "score": 0.55,
+      "confidence": 0.9,
+      "basis": "Intensity metric net of credits; the footnote defines it; it can fall while absolute emissions rise."
+    },
+    {
+      "claim_id": "C11",
+      "dimension": "support",
+      "score": 0.5,
+      "confidence": 0.7,
+      "basis": "The target exists; 9% delivered by 2025 against 15-20% by 2030, with no progress in 2025 and a required pace above the pace achieved.",
+      "evidence_ids": [
+        "E19",
+        "X7",
+        "X8"
+      ]
+    },
+    {
+      "claim_id": "C11",
+      "dimension": "materiality",
+      "score": 0.6,
+      "confidence": 0.8,
+      "basis": "Intensity, not absolute; LNG emissions rose in 2025.",
+      "evidence_ids": [
+        "E4"
+      ]
+    },
+    {
+      "claim_id": "C11",
+      "dimension": "consistency",
+      "score": 0.8,
+      "confidence": 0.95,
+      "basis": "The target was 20% until March 2024 and the 2035 target of 45% was retired; the page shows neither.",
+      "evidence_ids": [
+        "E7"
+      ]
+    },
+    {
+      "claim_id": "C12",
+      "dimension": "clarity",
+      "score": 0.45,
+      "confidence": 0.8,
+      "basis": "Presented among targets on this page; called an ambition in the FAQ and the 2024 strategy.",
+      "evidence_ids": [
+        "E13"
+      ]
+    },
+    {
+      "claim_id": "C12",
+      "dimension": "support",
+      "score": 0.3,
+      "confidence": 0.7,
+      "basis": "17.9% achieved by 2025, driven by the sale of the Singapore refinery and lower Mobility sales.",
+      "evidence_ids": [
+        "E4b"
+      ]
+    },
+    {
+      "claim_id": "C12",
+      "dimension": "materiality",
+      "score": 0.55,
+      "confidence": 0.8,
+      "basis": "Oil products only; gas and LNG, whose emissions are rising, are excluded.",
+      "evidence_ids": [
+        "E4"
+      ]
+    },
+    {
+      "claim_id": "C12",
+      "dimension": "consistency",
+      "score": 0.5,
+      "confidence": 0.8,
+      "basis": "Target/ambition wording differs across Shell pages.",
+      "evidence_ids": [
+        "E13"
+      ]
+    },
+    {
+      "claim_id": "C13",
+      "dimension": "clarity",
+      "score": 0.5,
+      "confidence": 0.9,
+      "basis": "'Achieved' five times without the target history."
+    },
+    {
+      "claim_id": "C13",
+      "dimension": "support",
+      "score": 0.2,
+      "confidence": 0.8,
+      "basis": "The FAQ confirms each year's figure.",
+      "evidence_ids": [
+        "E13"
+      ]
+    },
+    {
+      "claim_id": "C13",
+      "dimension": "materiality",
+      "score": 0.5,
+      "confidence": 0.8,
+      "basis": "Short-horizon targets of 2-13%, on an intensity metric."
+    },
+    {
+      "claim_id": "C13",
+      "dimension": "consistency",
+      "score": 0.7,
+      "confidence": 0.9,
+      "basis": "2024 and 2025 both rest on the same 9%; the 2030 target was lowered and the 2035 target retired in 2024.",
+      "evidence_ids": [
+        "E7",
+        "E5",
+        "X7"
+      ]
+    },
+    {
+      "claim_id": "C14",
+      "dimension": "clarity",
+      "score": 0.15,
+      "confidence": 0.9,
+      "basis": "Specific figure and baseline."
+    },
+    {
+      "claim_id": "C14",
+      "dimension": "support",
+      "score": 0.15,
+      "confidence": 0.8,
+      "basis": "Annual report: 53 Mt vs 58 Mt, 36% below 2016; EY limited assurance.",
+      "evidence_ids": [
+        "E5",
+        "E6"
+      ]
+    },
+    {
+      "claim_id": "C14",
+      "dimension": "materiality",
+      "score": 0.5,
+      "confidence": 0.9,
+      "basis": "Operations are 4.7% of the reported footprint; divestments contributed.",
+      "evidence_ids": [
+        "X1",
+        "E18"
+      ]
+    },
+    {
+      "claim_id": "C14",
+      "dimension": "consistency",
+      "score": 0.3,
+      "confidence": 0.7,
+      "basis": "Consistent with filings.",
+      "evidence_ids": [
+        "E5"
+      ]
+    },
+    {
+      "claim_id": "C15",
+      "dimension": "clarity",
+      "score": 0.15,
+      "confidence": 0.9,
+      "basis": "Approximate but arithmetically correct."
+    },
+    {
+      "claim_id": "C15",
+      "dimension": "support",
+      "score": 0.1,
+      "confidence": 0.9,
+      "basis": "36/50 = 72%.",
+      "evidence_ids": [
+        "X4"
+      ]
+    },
+    {
+      "claim_id": "C15",
+      "dimension": "materiality",
+      "score": 0.5,
+      "confidence": 0.9,
+      "basis": "Same footprint share as C14.",
+      "evidence_ids": [
+        "X1"
+      ]
+    },
+    {
+      "claim_id": "C15",
+      "dimension": "consistency",
+      "score": 0.1,
+      "confidence": 0.9,
+      "basis": "Consistent."
+    },
+    {
+      "claim_id": "C16",
+      "dimension": "clarity",
+      "score": 0.2,
+      "confidence": 0.8,
+      "basis": "Specific figures."
+    },
+    {
+      "claim_id": "C16",
+      "dimension": "support",
+      "score": 0.25,
+      "confidence": 0.6,
+      "basis": "Company-reported, within the EY-assured GHG statement; no independent measurement.",
+      "evidence_ids": [
+        "E14",
+        "E6",
+        "E17"
+      ]
+    },
+    {
+      "claim_id": "C16",
+      "dimension": "materiality",
+      "score": 0.3,
+      "confidence": 0.7,
+      "basis": "Methane intensity is a small share of the total."
+    },
+    {
+      "claim_id": "C16",
+      "dimension": "consistency",
+      "score": 0.1,
+      "confidence": 0.8,
+      "basis": "Consistent.",
+      "evidence_ids": [
+        "E14"
+      ]
+    },
+    {
+      "claim_id": "C17",
+      "dimension": "clarity",
+      "score": 0.4,
+      "confidence": 0.9,
+      "basis": "'Within the 2025 target range' at the bottom edge (9.0% of 9-13%)."
+    },
+    {
+      "claim_id": "C17",
+      "dimension": "support",
+      "score": 0.15,
+      "confidence": 0.9,
+      "basis": "Annual report: NCI 71 gCO2e/MJ, 9% below 2016.",
+      "evidence_ids": [
+        "E5",
+        "E19"
+      ]
+    },
+    {
+      "claim_id": "C17",
+      "dimension": "materiality",
+      "score": 0.5,
+      "confidence": 0.8,
+      "basis": "Intensity, net of credits."
+    },
+    {
+      "claim_id": "C17",
+      "dimension": "consistency",
+      "score": 0.6,
+      "confidence": 0.9,
+      "basis": "The FAQ calls it 'a continued 9%'; no year-on-year progress.",
+      "evidence_ids": [
+        "E13",
+        "E5",
+        "X7"
+      ]
+    },
+    {
+      "claim_id": "C18",
+      "dimension": "clarity",
+      "score": 0.35,
+      "confidence": 0.8,
+      "basis": "'Upstream operations' reads wider than 'Upstream-operated assets' on Shell's flaring page.",
+      "evidence_ids": [
+        "E15"
+      ]
+    },
+    {
+      "claim_id": "C18",
+      "dimension": "support",
+      "score": 0.25,
+      "confidence": 0.6,
+      "basis": "Company-reported January 2025; World Bank ZRF signatory; no third-party confirmation.",
+      "evidence_ids": [
+        "E14",
+        "E15"
+      ]
+    },
+    {
+      "claim_id": "C18",
+      "dimension": "materiality",
+      "score": 0.3,
+      "confidence": 0.7,
+      "basis": "Flaring is a small share of the footprint."
+    },
+    {
+      "claim_id": "C18",
+      "dimension": "consistency",
+      "score": 0.2,
+      "confidence": 0.8,
+      "basis": "Consistent across Shell pages.",
+      "evidence_ids": [
+        "E14",
+        "E15"
+      ]
+    },
+    {
+      "claim_id": "C19",
+      "dimension": "clarity",
+      "score": 0.3,
+      "confidence": 0.8,
+      "basis": "Explicit scope and baseline."
+    },
+    {
+      "claim_id": "C19",
+      "dimension": "support",
+      "score": 0.15,
+      "confidence": 0.9,
+      "basis": "Annual report: 467 vs 569 Mt in 2021, 17.9%.",
+      "evidence_ids": [
+        "E4b",
+        "X5"
+      ]
+    },
+    {
+      "claim_id": "C19",
+      "dimension": "materiality",
+      "score": 0.5,
+      "confidence": 0.8,
+      "basis": "Oil products only; the 2025 fall was driven by selling the Singapore refinery.",
+      "evidence_ids": [
+        "E4b"
+      ]
+    },
+    {
+      "claim_id": "C19",
+      "dimension": "consistency",
+      "score": 0.3,
+      "confidence": 0.8,
+      "basis": "Consistent.",
+      "evidence_ids": [
+        "E4b"
+      ]
+    },
+    {
+      "claim_id": "C20",
+      "dimension": "clarity",
+      "score": 0.5,
+      "confidence": 0.8,
+      "basis": "'Divesting assets' and 'sustaining our liquids production' sit inside a list of decarbonisation actions."
+    },
+    {
+      "claim_id": "C20",
+      "dimension": "support",
+      "score": 0.3,
+      "confidence": 0.7,
+      "basis": "Production fell mainly through divestments and field decline; liquids are to be held at 1.4 mb/d to 2030.",
+      "evidence_ids": [
+        "E18",
+        "E3"
+      ]
+    },
+    {
+      "claim_id": "C20",
+      "dimension": "materiality",
+      "score": 0.65,
+      "confidence": 0.85,
+      "basis": "Divestment transfers emissions rather than removing them.",
+      "evidence_ids": [
+        "E18",
+        "E4b"
+      ]
+    },
+    {
+      "claim_id": "C20",
+      "dimension": "consistency",
+      "score": 0.4,
+      "confidence": 0.7,
+      "basis": "Consistent with strategy documents, which are candid about it.",
+      "evidence_ids": [
+        "E3"
+      ]
+    },
+    {
+      "claim_id": "C21",
+      "dimension": "clarity",
+      "score": 0.7,
+      "confidence": 0.8,
+      "basis": "'High-quality' names no standard; double hedge."
+    },
+    {
+      "claim_id": "C21",
+      "dimension": "support",
+      "score": 0.5,
+      "confidence": 0.3,
+      "basis": "No standard or registry named; Dutch rulings found Shell's offset claims misleading.",
+      "evidence_ids": [
+        "E8c"
+      ]
+    },
+    {
+      "claim_id": "C21",
+      "dimension": "materiality",
+      "score": 0.4,
+      "confidence": 0.6,
+      "basis": "Credits are a minor lever for operations."
+    },
+    {
+      "claim_id": "C21",
+      "dimension": "consistency",
+      "score": 0.2,
+      "confidence": 0.5,
+      "basis": "Consistent."
+    },
+    {
+      "claim_id": "C22",
+      "dimension": "clarity",
+      "score": 0.55,
+      "confidence": 0.8,
+      "basis": "'Growing' unquantified; renewable share unstated."
+    },
+    {
+      "claim_id": "C22",
+      "dimension": "support",
+      "score": 0.45,
+      "confidence": 0.5,
+      "basis": "No figure on the page; the 2024 strategy says power sales growth will be lower than planned.",
+      "evidence_ids": [
+        "E7"
+      ]
+    },
+    {
+      "claim_id": "C22",
+      "dimension": "materiality",
+      "score": 0.4,
+      "confidence": 0.6,
+      "basis": "Power sales are a small part of the mix."
+    },
+    {
+      "claim_id": "C22",
+      "dimension": "consistency",
+      "score": 0.5,
+      "confidence": 0.7,
+      "basis": "The 2030 target was cut because power growth was lowered.",
+      "evidence_ids": [
+        "E7"
+      ]
+    },
+    {
+      "claim_id": "C23",
+      "dimension": "clarity",
+      "score": 0.6,
+      "confidence": 0.9,
+      "basis": "Two proportions, no absolute numbers; the heading supplies the environmental meaning."
+    },
+    {
+      "claim_id": "C23",
+      "dimension": "support",
+      "score": 0.75,
+      "confidence": 0.9,
+      "basis": "Annual report: emissions from the LNG sold rose in 2025; LNG sales are planned to grow 4-5% a year to 2030.",
+      "evidence_ids": [
+        "E4",
+        "E3"
+      ]
+    },
+    {
+      "claim_id": "C23",
+      "dimension": "materiality",
+      "score": 0.8,
+      "confidence": 0.9,
+      "basis": "The sales mix is the most material lever on the page and is presented as a ratio.",
+      "evidence_ids": [
+        "E4",
+        "E13"
+      ]
+    },
+    {
+      "claim_id": "C23",
+      "dimension": "consistency",
+      "score": 0.3,
+      "confidence": 0.7,
+      "basis": "Consistent with strategy documents.",
+      "evidence_ids": [
+        "E3"
+      ]
+    },
+    {
+      "claim_id": "C24",
+      "dimension": "clarity",
+      "score": 0.55,
+      "confidence": 0.8,
+      "basis": "Unquantified."
+    },
+    {
+      "claim_id": "C24",
+      "dimension": "support",
+      "score": 0.5,
+      "confidence": 0.3,
+      "basis": "No figures on the page; nothing checked."
+    },
+    {
+      "claim_id": "C24",
+      "dimension": "materiality",
+      "score": 0.5,
+      "confidence": 0.6,
+      "basis": "Low-carbon fuels are a small share of sales."
+    },
+    {
+      "claim_id": "C24",
+      "dimension": "consistency",
+      "score": 0.3,
+      "confidence": 0.4,
+      "basis": "No contradiction found."
+    },
+    {
+      "claim_id": "C25",
+      "dimension": "clarity",
+      "score": 0.4,
+      "confidence": 0.8,
+      "basis": "'Remaining' undefined."
+    },
+    {
+      "claim_id": "C25",
+      "dimension": "support",
+      "score": 0.2,
+      "confidence": 0.7,
+      "basis": "Consistent with the NCI methodology and the FAQ.",
+      "evidence_ids": [
+        "E13"
+      ]
+    },
+    {
+      "claim_id": "C25",
+      "dimension": "materiality",
+      "score": 0.4,
+      "confidence": 0.6,
+      "basis": "Credits count toward NCI; the EU bans offset-based product neutrality claims from 27 September 2026.",
+      "evidence_ids": [
+        "E12"
+      ]
+    },
+    {
+      "claim_id": "C25",
+      "dimension": "consistency",
+      "score": 0.1,
+      "confidence": 0.8,
+      "basis": "Consistent."
+    }
+  ],
+  "arguments": [
+    {
+      "claim_id": "C1",
+      "role": "prosecutor",
+      "text": "The hero sentence gives a reasonable reader the impression that Shell is on a path to net zero. Shell's own filing says its plans do not contain that path; the only interim milestone beyond 2030 was withdrawn in 2024; nine dollars in ten of capital go to oil, gas and products; and gas volumes are planned to grow through 2030. A regulator has already found Shell's transition advertising misleading for omitting the fossil share of its business, and a court has found the same claim family misleading at TotalEnergies.",
+      "evidence_ids": [
+        "E1",
+        "E7",
+        "E2",
+        "X2",
+        "E3",
+        "E8",
+        "E9"
+      ]
+    },
+    {
+      "claim_id": "C1",
+      "role": "defence",
+      "text": "A 2050 target necessarily sits beyond any 10-year plan; the plan does reflect the 2030 targets, and Scope 1+2 is 36% down with limited assurance. TPI gives Shell the top management-quality level and rates the 2050 target itself 1.5°C-aligned. The cautionary language is standard securities disclosure, and the conditionality on society reaching net zero is honest about a Scope 3 target the company cannot deliver alone.",
+      "evidence_ids": [
+        "E1",
+        "E5",
+        "E6",
+        "E10",
+        "E1b"
+      ]
+    },
+    {
+      "claim_id": "C11",
+      "role": "prosecutor",
+      "text": "The 2030 target shown here was 20% until March 2024; the 2035 target of 45% was deleted the same day. Net carbon intensity has stood at 9% below 2016 for two years, and the pace needed to reach even 15% by 2030 is above anything Shell has delivered. The page shows none of this.",
+      "evidence_ids": [
+        "E7",
+        "E5",
+        "X7",
+        "X8"
+      ]
+    },
+    {
+      "claim_id": "C11",
+      "role": "defence",
+      "text": "The target is real, published and reported against every year, with a defined methodology. Shell disclosed the change and its reason in its 2024 strategy, which the page links to. An intensity metric is a legitimate way to track a changing product mix.",
+      "evidence_ids": [
+        "E7",
+        "E19"
+      ]
+    },
+    {
+      "claim_id": "C14",
+      "role": "prosecutor",
+      "text": "Operations are under 5% of Shell's reported emissions, and part of the reduction is assets sold to other operators, whose emissions continue.",
+      "evidence_ids": [
+        "X1",
+        "E18"
+      ]
+    },
+    {
+      "claim_id": "C14",
+      "role": "defence",
+      "text": "The figure matches the annual report, carries EY limited assurance, and reflects real abatement as well as portfolio change; a 36% cut on the emissions Shell directly controls is progress by any standard.",
+      "evidence_ids": [
+        "E5",
+        "E6"
+      ]
+    },
+    {
+      "claim_id": "C23",
+      "role": "prosecutor",
+      "text": "Under a heading about helping customers decarbonise, the page describes selling more gas. Shell's own annual report says emissions from the LNG it sells rose in 2025, and it plans to grow LNG sales 4-5% a year to 2030. The ratio language hides that.",
+      "evidence_ids": [
+        "E4",
+        "E3"
+      ]
+    },
+    {
+      "claim_id": "C23",
+      "role": "defence",
+      "text": "The proportions did shift as stated, and Shell's strategy documents are open about LNG growth. Gas replacing coal in power generation does lower emissions for those customers.",
+      "evidence_ids": [
+        "E3"
+      ]
+    }
+  ],
+  "verdicts": [
+    {
+      "claim_id": "C1",
+      "likelihood": 0.85,
+      "confidence": 0.85,
+      "category": "contradicted",
+      "tags": [
+        "hidden_trade_off",
+        "no_proof"
+      ],
+      "rationale": "The literal statement is true: the target exists. The impression is not supported: a 'net-zero emissions energy business' is presented as a destination the company is travelling toward, while its own filing says its plans do not reflect it and its capital and volume plans point the other way. The defence's strongest point, that 2050 is outside any plan, would carry more weight if the 2035 milestone had not been retired.",
+      "fix": "Publish the pathway: a 2035 milestone for absolute Scope 3, the capex share needed to reach it, and how LNG growth to 2030 is reconciled with it; or state plainly that the plan does not yet contain the target. The ASA accepted a 2025 Shell ad because it stated on screen that 68% of investments included oil and gas and 23% low-carbon.",
+      "rewrite": "Shell has a target to reach net-zero emissions by 2050, including emissions from the use of the products we sell. Our business plans, which run ten years, do not yet reflect this target. In 2025 our total reported emissions were about 1.1 billion tonnes CO2e, 95% of them from customers using our products. To 2030 we plan to grow LNG sales by 4-5% a year and hold oil production at 1.4 million barrels a day; 9% of our 2025 capital spending went to renewables and energy solutions.",
+      "evidence_ids": [
+        "E1",
+        "E1b",
+        "E2",
+        "X2",
+        "E3",
+        "E7",
+        "E10",
+        "E8",
+        "E8b",
+        "E9"
+      ]
+    },
+    {
+      "claim_id": "C2",
+      "likelihood": 0.5,
+      "confidence": 0.8,
+      "category": "supported",
+      "tags": [],
+      "rationale": "Operational emissions are falling and the figure is assured; the caveat is materiality: operations are under 5% of the reported footprint and part of the fall is divestment.",
+      "evidence_ids": [
+        "E5",
+        "E6",
+        "X1",
+        "E18"
+      ]
+    },
+    {
+      "claim_id": "C3",
+      "likelihood": 0.85,
+      "confidence": 0.9,
+      "category": "unsubstantiated",
+      "tags": [
+        "vagueness"
+      ],
+      "rationale": "'Cleaner' compares to nothing and names nothing; it cannot be checked, and the CMA code treats such terms as implying an overall benefit that must be provable.",
+      "fix": "Name the products and the comparison: cleaner than which fuel, on which measure.",
+      "rewrite": "helping customers buy more gas, biofuels, renewable power and EV charging from us",
+      "evidence_ids": [
+        "E11",
+        "E12",
+        "E8"
+      ]
+    },
+    {
+      "claim_id": "C4",
+      "likelihood": 0.75,
+      "confidence": 0.85,
+      "category": "unsubstantiated",
+      "tags": [
+        "vagueness"
+      ],
+      "rationale": "A slogan with no baseline. Shell's total reported emissions did fall 1.8% in 2025, but the phrase does not say that and pairs it with 'more value' as if the two moved together.",
+      "fix": "State the baseline and the measure.",
+      "rewrite": "Our total reported emissions fell 1.8% in 2025 while cash capital expenditure held at $20.9 billion, 67% of it in upstream and gas.",
+      "evidence_ids": [
+        "X6",
+        "X3"
+      ]
+    },
+    {
+      "claim_id": "C5",
+      "likelihood": 0.5,
+      "confidence": 0.5,
+      "category": "unsubstantiated",
+      "tags": [
+        "no_proof"
+      ],
+      "rationale": "True in direction but unquantified, and it concerns operations only.",
+      "evidence_ids": [
+        "X1"
+      ]
+    },
+    {
+      "claim_id": "C6",
+      "likelihood": 0.85,
+      "confidence": 0.85,
+      "category": "unsubstantiated",
+      "tags": [
+        "vagueness",
+        "hidden_trade_off"
+      ],
+      "rationale": "'Energy system of the future' has no checkable content, and the products it gestures at received 8.9% of 2025 capital spending.",
+      "fix": "Say which products, how much was invested and what share of sales they are.",
+      "evidence_ids": [
+        "E2",
+        "X2",
+        "E8"
+      ]
+    },
+    {
+      "claim_id": "C7",
+      "likelihood": 0.6,
+      "confidence": 0.7,
+      "category": "misleading_by_framing",
+      "tags": [
+        "hidden_trade_off"
+      ],
+      "rationale": "The target itself is rated 1.5°C-aligned by TPI, so the literal, hedged statement stands; the impression that the company is Paris-aligned is not, since near-term performance is rated not aligned and LNG growth is planned to 2030.",
+      "fix": "Cite the TPI assessment in full, including the near-term rating.",
+      "rewrite": "An independent assessment rates our 2050 target as consistent with 1.5°C and our performance to 2028 as not aligned.",
+      "evidence_ids": [
+        "E10",
+        "E3",
+        "E9",
+        "E1"
+      ]
+    },
+    {
+      "claim_id": "C8",
+      "likelihood": 0.1,
+      "confidence": 0.9,
+      "category": "supported",
+      "tags": [],
+      "rationale": "The scope statement is accurate and confirmed by the FAQ and the annual report; Scope 3 is included.",
+      "evidence_ids": [
+        "E13",
+        "E1"
+      ]
+    },
+    {
+      "claim_id": "C9",
+      "likelihood": 0.5,
+      "confidence": 0.7,
+      "category": "supported",
+      "tags": [],
+      "rationale": "A credible, quantified target inside the planning period, 36% delivered; the caveats are the 'net basis' qualifier and the small share of the footprint it covers.",
+      "evidence_ids": [
+        "E5",
+        "X1",
+        "E1"
+      ]
+    },
+    {
+      "claim_id": "C10",
+      "likelihood": 0.3,
+      "confidence": 0.6,
+      "category": "supported",
+      "tags": [],
+      "rationale": "Specific target with company-reported progress far inside it; confidence is limited because no independent measurement was checked.",
+      "evidence_ids": [
+        "E14",
+        "E17"
+      ]
+    },
+    {
+      "claim_id": "C11",
+      "likelihood": 0.8,
+      "confidence": 0.9,
+      "category": "misleading_by_framing",
+      "tags": [
+        "greenrinsing",
+        "hidden_trade_off"
+      ],
+      "rationale": "The literal target is accurately stated. It is presented without the fact that it was lowered and its 2035 successor withdrawn, on an intensity metric that can fall while absolute emissions rise, with no progress in the latest year.",
+      "fix": "Show the target history on the timeline; report absolute Scope 3 next to NCI.",
+      "rewrite": "We aim to cut the net carbon intensity of the energy we sell by 15-20% by 2030 against 2016. In March 2024 we lowered this target from 20% and withdrew our 2035 target of 45%.",
+      "evidence_ids": [
+        "E7",
+        "E5",
+        "E19",
+        "X7",
+        "X8",
+        "E4"
+      ]
+    },
+    {
+      "claim_id": "C12",
+      "likelihood": 0.55,
+      "confidence": 0.75,
+      "category": "misleading_by_framing",
+      "tags": [
+        "hidden_trade_off"
+      ],
+      "rationale": "The number is delivered, but the scope excludes gas and LNG, whose emissions are rising, and the page calls a target what Shell's other documents call an ambition.",
+      "fix": "Add the gas and LNG figure alongside, and use one word for it across Shell's pages.",
+      "rewrite": "Our ambition is to reduce customer emissions from the use of our oil products by 15-20% by 2030 against 2021; emissions from the gas and LNG we sell are rising.",
+      "evidence_ids": [
+        "E4",
+        "E4b",
+        "E13"
+      ]
+    },
+    {
+      "claim_id": "C13",
+      "likelihood": 0.7,
+      "confidence": 0.85,
+      "category": "misleading_by_framing",
+      "tags": [
+        "greenrinsing"
+      ],
+      "rationale": "Each 'achieved' is true. Five ticks for one- to three-year targets of 2-13%, two of them resting on the same 9%, shown next to a 2030 target that was lowered and a 2035 target that was removed, read as unbroken delivery.",
+      "fix": "Drop 'achieved' for a year with no progress, or say 'unchanged'; show the retired 2035 target.",
+      "rewrite": "Net carbon intensity was 9% below 2016 at the end of both 2024 and 2025.",
+      "evidence_ids": [
+        "E7",
+        "E13",
+        "E5",
+        "X7"
+      ]
+    },
+    {
+      "claim_id": "C14",
+      "likelihood": 0.5,
+      "confidence": 0.8,
+      "category": "supported",
+      "tags": [],
+      "rationale": "Accurate and assured. It should render as supported, with the materiality note visible: operations are 4.7% of the reported footprint and divestments contributed.",
+      "fix": "State the share of the footprint the figure covers and how much of the fall is divestment.",
+      "rewrite": "Emissions from our own operations, under 5% of our reported footprint, were 36% below 2016 at the end of 2025, partly through selling assets.",
+      "evidence_ids": [
+        "E5",
+        "E6",
+        "X1",
+        "E18"
+      ]
+    },
+    {
+      "claim_id": "C15",
+      "likelihood": 0.5,
+      "confidence": 0.9,
+      "category": "supported",
+      "tags": [],
+      "rationale": "The arithmetic checks (72%); same materiality caveat as C14.",
+      "evidence_ids": [
+        "X4",
+        "X1"
+      ]
+    },
+    {
+      "claim_id": "C16",
+      "likelihood": 0.3,
+      "confidence": 0.6,
+      "category": "supported",
+      "tags": [],
+      "rationale": "Specific, company-reported figures inside an assured GHG statement; no independent measurement was checked, which caps confidence.",
+      "evidence_ids": [
+        "E14",
+        "E6",
+        "E17"
+      ]
+    },
+    {
+      "claim_id": "C17",
+      "likelihood": 0.6,
+      "confidence": 0.85,
+      "category": "misleading_by_framing",
+      "tags": [
+        "greenrinsing"
+      ],
+      "rationale": "True at the bottom edge of the range: 9.0% against 9-13%, unchanged from 2024. 'Within the 2025 target range' presents a flat year as delivery.",
+      "fix": "Report the year-on-year change.",
+      "rewrite": "Net carbon intensity was 9.0% below 2016 at the end of 2025, unchanged from 2024, at the bottom of the 9-13% target range.",
+      "evidence_ids": [
+        "E5",
+        "E13",
+        "E19",
+        "X7"
+      ]
+    },
+    {
+      "claim_id": "C18",
+      "likelihood": 0.35,
+      "confidence": 0.65,
+      "category": "supported",
+      "tags": [],
+      "rationale": "Company-reported and consistent across Shell's pages; the scope is operated assets rather than all upstream operations, and no third party has confirmed it.",
+      "fix": "Say 'Upstream-operated assets'.",
+      "evidence_ids": [
+        "E14",
+        "E15"
+      ]
+    },
+    {
+      "claim_id": "C19",
+      "likelihood": 0.5,
+      "confidence": 0.8,
+      "category": "supported",
+      "tags": [],
+      "rationale": "The number is right and the scope is stated. The caveat, not on the page, is that the 2025 fall came largely from selling the Singapore refinery and chemicals park.",
+      "fix": "State the driver of the reduction.",
+      "rewrite": "Emissions from the use of our oil products were 18% below 2021 at the end of 2025, largely because we sold the Singapore energy and chemicals park and sold less fuel.",
+      "evidence_ids": [
+        "E4b",
+        "X5"
+      ]
+    },
+    {
+      "claim_id": "C20",
+      "likelihood": 0.65,
+      "confidence": 0.8,
+      "category": "misleading_by_framing",
+      "tags": [
+        "hidden_trade_off"
+      ],
+      "rationale": "Divesting assets moves emissions off Shell's books but not out of the atmosphere, and 'sustaining our liquids production' admits oil output will not fall; both sit inside a list of decarbonisation actions.",
+      "fix": "Report divestment-driven reductions separately from abatement.",
+      "rewrite": "We are selling some assets, which lowers our reported emissions without lowering theirs, and holding oil production at 1.4 million barrels a day to 2030.",
+      "evidence_ids": [
+        "E18",
+        "E3",
+        "E4b"
+      ]
+    },
+    {
+      "claim_id": "C21",
+      "likelihood": 0.7,
+      "confidence": 0.7,
+      "category": "unsubstantiated",
+      "tags": [
+        "vagueness"
+      ],
+      "rationale": "'High-quality' names no standard, and Shell's offset-based consumer claims have been found misleading three times in the Netherlands.",
+      "fix": "Name the standard and registry, and the share of the target to be met with credits.",
+      "evidence_ids": [
+        "E8c",
+        "E12"
+      ]
+    },
+    {
+      "claim_id": "C22",
+      "likelihood": 0.55,
+      "confidence": 0.6,
+      "category": "unsubstantiated",
+      "tags": [
+        "no_proof"
+      ],
+      "rationale": "Unquantified, and Shell's 2024 strategy says power sales will grow less than previously planned, which is the reason the 2030 target was cut.",
+      "evidence_ids": [
+        "E7"
+      ]
+    },
+    {
+      "claim_id": "C23",
+      "likelihood": 0.8,
+      "confidence": 0.9,
+      "category": "misleading_by_framing",
+      "tags": [
+        "hidden_trade_off",
+        "lesser_of_two_evils"
+      ],
+      "rationale": "The proportion claim is literally true; the decarbonisation framing is contradicted by Shell's own numbers, since absolute emissions from the LNG it sells went up. The gas-versus-coal argument is implied by the heading, not made on the page.",
+      "fix": "Give absolute emissions by product line and state the LNG growth plan alongside the proportion.",
+      "rewrite": "We are selling more gas and LNG and less oil. In 2025 emissions from the LNG we sell rose; our total Scope 3 emissions fell 1.8% because oil-product sales fell, largely after we sold our Singapore refinery and chemicals park.",
+      "evidence_ids": [
+        "E4",
+        "E3",
+        "E13"
+      ]
+    },
+    {
+      "claim_id": "C24",
+      "likelihood": 0.55,
+      "confidence": 0.5,
+      "category": "unsubstantiated",
+      "tags": [
+        "no_proof"
+      ],
+      "rationale": "Unquantified; nothing on the page can be checked."
+    },
+    {
+      "claim_id": "C25",
+      "likelihood": 0.4,
+      "confidence": 0.6,
+      "category": "supported",
+      "tags": [],
+      "rationale": "An accurate description of practice, consistent with the NCI methodology; 'remaining' is undefined, and offset-based product claims are banned in the EU from 27 September 2026.",
+      "evidence_ids": [
+        "E13",
+        "E12"
+      ]
+    }
+  ],
+  "omissions": [
+    {
+      "id": "O1",
+      "topic": "The absolute size and trend of Shell's total emissions",
+      "why_material": "The page gives one absolute target (Scope 1+2), which covers 4.7% of the reported footprint, and otherwise only intensities and percentages.",
+      "materiality_reference": "SASB EM-EP: Greenhouse Gas Emissions; CMA principle 3 (must not omit or hide important information)",
+      "complete_text": "Our total reported emissions in 2025 were about 1,118 million tonnes CO2e (Scope 1+2: 53; Scope 3: 1,065), down 1.8% on 2024; we believe they peaked at 1.73 billion tonnes in 2018.",
+      "score": 0.7,
+      "confidence": 0.85,
+      "evidence_ids": [
+        "E4",
+        "E5",
+        "E7",
+        "E13",
+        "X1",
+        "X6",
+        "E16",
+        "E11"
+      ]
+    },
+    {
+      "id": "O2",
+      "topic": "Capital allocation",
+      "why_material": "Whether a 'net-zero emissions energy business' is being built is decided by where the money goes: 8.9% of 2025 cash capex went to Renewables & Energy Solutions and 67% to Upstream and Integrated Gas. The ASA cleared a 2025 Shell ad precisely because it stated the split.",
+      "materiality_reference": "SASB EM-EP: Reserves Valuation & Capital Expenditures",
+      "complete_text": "In 2025 we invested $1.9 billion of $20.9 billion in renewables and energy solutions.",
+      "score": 0.75,
+      "confidence": 0.9,
+      "evidence_ids": [
+        "E2",
+        "X2",
+        "X3",
+        "E8",
+        "E8b",
+        "E16",
+        "E11"
+      ]
+    },
+    {
+      "id": "O3",
+      "topic": "Production and sales volume plans",
+      "why_material": "LNG sales are planned to grow 4-5% a year to 2030 and oil output to be held at 1.4 million barrels a day; the only hint is 'while sustaining our liquids production' inside a list of decarbonisation actions.",
+      "materiality_reference": "SASB EM-EP: Reserves Valuation & Capital Expenditures; Greenhouse Gas Emissions",
+      "complete_text": "We plan to grow LNG sales by 4-5% a year and hold oil production at 1.4 million barrels a day to 2030.",
+      "score": 0.65,
+      "confidence": 0.9,
+      "evidence_ids": [
+        "E3",
+        "E16",
+        "E11"
+      ]
+    },
+    {
+      "id": "O4",
+      "topic": "The history of the targets",
+      "why_material": "The 2030 NCI target was lowered from 20% to 15-20% and the 2035 target of 45% withdrawn in March 2024; the timeline shows neither.",
+      "materiality_reference": "CMA principle 3; D5 self-consistency (targets weakened, delayed or dropped)",
+      "complete_text": "In 2024 we lowered our 2030 target and withdrew our 2035 target.",
+      "score": 0.6,
+      "confidence": 0.9,
+      "evidence_ids": [
+        "E7",
+        "E16",
+        "E11"
+      ]
+    }
+  ],
+  "summary": {
+    "headline": {
+      "score": 0.8,
+      "confidence": 0.85
+    },
+    "dimensions": {
+      "clarity": {
+        "score": 0.55,
+        "confidence": 0.85
+      },
+      "support": {
+        "score": 0.45,
+        "confidence": 0.8
+      },
+      "materiality": {
+        "score": 0.65,
+        "confidence": 0.85
+      },
+      "consistency": {
+        "score": 0.7,
+        "confidence": 0.9
+      },
+      "completeness": {
+        "score": 0.7,
+        "confidence": 0.85
+      }
+    },
+    "verdict_distribution": {
+      "supported": 10,
+      "unsubstantiated": 7,
+      "misleading_by_framing": 7,
+      "contradicted": 1
+    },
+    "top_issues": [
+      {
+        "rank": 1,
+        "target": "C1",
+        "title": "The page's own cautionary note says the plan cannot reflect the headline net-zero target"
+      },
+      {
+        "rank": 2,
+        "target": "C23",
+        "title": "Growing gas sales presented as customer decarbonisation while LNG emissions rose"
+      },
+      {
+        "rank": 3,
+        "target": "O2",
+        "title": "Not mentioned: 9% of capital went to renewables and energy solutions"
+      },
+      {
+        "rank": 4,
+        "target": "C11",
+        "title": "Weakened targets shown as unbroken achievement"
+      },
+      {
+        "rank": 5,
+        "target": "C3",
+        "title": "'Cleaner', 'low-carbon' and 'energy system of the future' cannot be checked"
+      }
+    ],
+    "credit": [
+      {
+        "target": "C14",
+        "title": "Operational emissions 36% below 2016, assured"
+      },
+      {
+        "target": "C16",
+        "title": "Methane intensity far inside the target"
+      },
+      {
+        "target": "C18",
+        "title": "Routine flaring ended in January 2025"
+      },
+      {
+        "target": "C8",
+        "title": "The target scope includes Scope 3"
+      }
+    ],
+    "claim_count": 25,
+    "omission_count": 4,
+    "narrative": "Open the page; watch the five 'achieved' ticks settle to amber as the 2024 strategy arrives; click C1 and scroll the panel to the cautionary-note quote; toggle Omissions to show the capex card; zoom out to the company view."
+  }
+}
