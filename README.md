@@ -36,6 +36,7 @@ sharing the link keeps it. The backtick key toggles the events panel; `d` toggle
 | `contract/` | The data contract: `schema.json` and the tooling that builds, validates and folds event logs. |
 | `fixtures/` | Event logs the app can replay, and the envelope rules (`fixtures/README.md`). |
 | `demo-documents/` | The demo texts, verbatim, with retrieval notes. |
+| `demo.md` | The run of show: what to say, in what order, and what to do when something breaks. |
 
 ## Checks
 

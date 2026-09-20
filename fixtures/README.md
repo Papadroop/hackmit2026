@@ -67,6 +67,21 @@ shows up in the app's fixture list instead of failing silently.
   (`golden-reference.md`) as 239 events over about 24 seconds: document, 25 claims, 24 language
   signals, 31 evidence items, 100 dimension scores, 8 arguments, 25 verdicts, 4 omissions, summary.
   `shell-climate.analysis.json` is the same analysis folded into one object.
+- `shell-our-climate-target.jsonl`: **the only end-to-end live run in the repo.** The pipeline
+  over the Wayback capture of Shell's predecessor climate page of 14 March 2024, recorded
+  2026-09-20 in 577 seconds: 27 claims, 27 verdicts, 11 omissions, every one of the nine stages
+  run rather than replayed, and it validates clean. This is what the demo opens, because it is
+  the recording of which "everything you see is the tool reading the page" is true. Its top
+  finding is that the page never mentions Shell has since retired the 2035 intensity target it
+  states, and its sharpest claim-level one is C4, where "supports the more ambitious goal of
+  the UN Paris Agreement" is contradicted by the Transition Pathway Initiative's finding that
+  Shell's intensity targets imply over 2°C.
+
+  Every other recording of a Shell page in `backend/data/runs/` has between five and seven of
+  its nine stages **replayed from `shell-climate.jsonl`** rather than run — they were made
+  before step 18 removed the replay machinery, and their `stage.started` events say so in a
+  `note`. None of them is a live run, so none is committed here. Three more, all exactly 24.0
+  seconds long and byte-identical, are test artifacts built with faked model output.
 - `smoke.jsonl`: transport smoke test. Lifecycle events only, about six seconds. Used for
   the roadmap step 3 visual check and as the quickest way to prove the stream works.
 - `shell-climate.analysis.json` and `shell-climate.events.jsonl`: the hand analysis of the
