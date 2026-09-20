@@ -265,12 +265,17 @@ class FakeExtractor:
         self.calls: list[dict] = []
         self.error: Exception | None = None
 
-    async def __call__(self, document: dict, llm=None):
+    async def __call__(self, document: dict, llm=None, on_progress=None):
         from auditor.extract import ExtractResult, assemble
 
         self.calls.append(document)
         if self.error is not None:
             raise self.error
+        # The real extractor reports each claim as the model writes it, before any of them can
+        # be emitted; the fake does the same so the pipeline's heartbeat is exercised.
+        for n in range(1, len(self.extraction.claims) + 1):
+            if on_progress is not None:
+                await on_progress(n)
         result: ExtractResult = assemble(self.extraction, document)
         result.notes.append(f"fake extractor: {len(result.claims)} claims")
         return result
@@ -278,7 +283,7 @@ class FakeExtractor:
 
 @pytest.fixture(autouse=True)
 def fake_extract(monkeypatch) -> FakeExtractor:
-    """No test calls Claude: the pipeline's extractor is this fake unless a test sets it up."""
+    """No test calls the model: the pipeline's extractor is this fake unless a test sets it up."""
     from auditor import extract as extract_module
 
     fake = FakeExtractor()
@@ -335,7 +340,7 @@ class FakeReviewer:
 
 @pytest.fixture(autouse=True)
 def fake_language(monkeypatch) -> FakeReviewer:
-    """No test calls Claude: the pipeline's linguistic evaluator is this fake unless a test sets it up."""
+    """No test calls the model: the pipeline's linguistic evaluator is this fake unless a test sets it up."""
     from auditor import language as language_module
 
     fake = FakeReviewer()
@@ -397,7 +402,7 @@ class FakeSubstantiator:
 
 @pytest.fixture(autouse=True)
 def fake_substantiate(monkeypatch) -> FakeSubstantiator:
-    """No test calls Claude: the pipeline's substantiation evaluator is this fake unless a test sets it up."""
+    """No test calls the model: the pipeline's substantiation evaluator is this fake unless a test sets it up."""
     from auditor import substantiate as substantiate_module
 
     fake = FakeSubstantiator()
@@ -517,7 +522,7 @@ class FakeVerifier:
 
 @pytest.fixture(autouse=True)
 def fake_verify(monkeypatch) -> FakeVerifier:
-    """No test calls Claude or the network: the pipeline's external verification is this fake
+    """No test calls the model or the network: the pipeline's external verification is this fake
     unless a test sets it up."""
     from auditor import verify as verify_module
 
@@ -582,7 +587,7 @@ class FakeJudge:
 
 @pytest.fixture(autouse=True)
 def fake_verdict(monkeypatch) -> FakeJudge:
-    """No test calls Claude: the pipeline's verdict layer is this fake unless a test sets it up."""
+    """No test calls the model: the pipeline's verdict layer is this fake unless a test sets it up."""
     from auditor import verdict as verdict_module
 
     fake = FakeJudge()
@@ -676,7 +681,7 @@ class FakeConsistency:
 
 @pytest.fixture(autouse=True)
 def fake_consistency(monkeypatch) -> FakeConsistency:
-    """No test calls Claude and no test touches the Wayback Machine: the pipeline's
+    """No test calls the model and no test touches the Wayback Machine: the pipeline's
     self-consistency evaluator is this fake unless a test sets it up."""
     from auditor import consistency as consistency_module
 
@@ -748,7 +753,7 @@ class FakeOmissions:
 
 @pytest.fixture(autouse=True)
 def fake_omissions(monkeypatch) -> FakeOmissions:
-    """No test calls Claude: the pipeline's omissions stage is this fake unless a test sets it up."""
+    """No test calls the model: the pipeline's omissions stage is this fake unless a test sets it up."""
     from auditor import omissions as omissions_module
 
     fake = FakeOmissions()
@@ -797,7 +802,7 @@ class FakeSummariser:
 
 @pytest.fixture(autouse=True)
 def fake_summary(monkeypatch) -> FakeSummariser:
-    """No test calls Claude: the pipeline's summary stage is this fake unless a test sets it up."""
+    """No test calls the model: the pipeline's summary stage is this fake unless a test sets it up."""
     from auditor import summary as summary_module
 
     fake = FakeSummariser()

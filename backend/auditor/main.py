@@ -19,11 +19,15 @@ from fastapi.responses import FileResponse, StreamingResponse
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, Field, model_validator
 
-from . import company, pipeline
+from . import company, llm, pipeline
 from .documents import DocumentsResponse, document_title, list_documents, load_demo_documents, log_name
 from .envelope import LogError, is_safe_name, log_summary, read_log
 from .replay import run_replay
 from .store import Analysis, AnalysisStore, Status
+
+# When this process started, reported by /api/health: a server keeps the environment it was
+# started with, so this is how you tell a stale one from a change that did not take.
+STARTED_AT = datetime.now().astimezone().isoformat(timespec="seconds")
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
 KEEPALIVE_SECONDS = 15.0
@@ -177,10 +181,23 @@ def create_app(settings: Settings | None = None) -> FastAPI:
 
     @app.get("/api/health")
     async def health() -> dict[str, Any]:
+        """Also says which model a live run would call and where. A server holds its process
+        environment for as long as it runs, so one started before `.env` changed will keep
+        using the old endpoint and answer with that provider's errors — which reads as a bug in
+        the code rather than a stale process. This is how you tell in one request. The key is
+        never returned, only whether one was found."""
+        key, base_url = llm.credentials()
+        llm_settings = llm.LlmSettings.from_env()
         return {
             "status": "ok",
             "fixtures_dir": str(settings.fixtures_dir),
             "runs_dir": str(settings.runs_dir) if settings.runs_dir else None,
+            "model": {
+                "name": llm_settings.model,
+                "endpoint": base_url,
+                "credentials": "found" if key else "missing",
+                "started": STARTED_AT,
+            },
         }
 
     @app.get("/api/fixtures")

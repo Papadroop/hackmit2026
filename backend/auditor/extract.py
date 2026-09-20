@@ -2,7 +2,7 @@
 claims, each with a verbatim span, the type that routes its evaluation, its scope and what it
 asserts.
 
-Claude reads the whole canonical text and returns claims as structured output. Nothing it
+The model reads the whole canonical text and returns claims as structured output. Nothing it
 returns is trusted until its quote is found in the text: character for character first, then
 after normalising quotation marks and dashes, then ignoring case. Offsets are computed here,
 never by the model, and a claim whose quote cannot be placed is dropped and reported. Claims are
@@ -20,6 +20,7 @@ import json
 import os
 import re
 import sys
+from collections.abc import Awaitable, Callable
 from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any, Literal
@@ -233,15 +234,37 @@ def assemble(extraction: Extraction, document: dict[str, Any], *, first_number: 
     return ExtractResult(built, dropped)
 
 
-async def extract_claims(document: dict[str, Any], llm: Llm | None = None) -> ExtractResult:
-    """Run the extractor on an ingested document. Raises LlmError when Claude cannot answer."""
+async def extract_claims(
+    document: dict[str, Any],
+    llm: Llm | None = None,
+    on_progress: Callable[[int], Awaitable[None]] | None = None,
+) -> ExtractResult:
+    """Run the extractor on an ingested document. Raises LlmError when the model cannot answer.
+
+    `on_progress` is awaited with the running count as the model writes each claim. It is a
+    heartbeat, not the live progression of D7: a claim's id follows its position in the
+    document, which is only known once the whole list is in, so the claims themselves are still
+    emitted together and in order by the caller. Without it the stage is silent for as long as
+    the model takes, which on DeepSeek is over a minute of reasoning before the first word of
+    the answer — long enough to read as a hang."""
     llm = llm or get_llm()
-    extraction, usage = await llm.extract(
-        TASK, Extraction, system=document_system(document), cache=True, max_tokens=MAX_OUTPUT_TOKENS, effort=EXTRACT_EFFORT
+    found = 0
+
+    async def on_element(key: str, item: dict[str, Any]) -> None:
+        nonlocal found
+        if key != "claims":
+            return
+        found += 1
+        if on_progress is not None:
+            await on_progress(found)
+
+    extraction, usage = await llm.extract_streaming(
+        TASK, Extraction, on_element=on_element, system=document_system(document), cache=True,
+        max_tokens=MAX_OUTPUT_TOKENS, effort=EXTRACT_EFFORT,
     )
     result = assemble(extraction, document)
     result.usage = usage
-    result.notes.append(f"Claude returned {len(extraction.claims)} claims; {len(result.claims)} placed in the text" + (f", {len(result.dropped)} dropped because their quote is not in the document" if result.dropped else "") + f" ({usage.describe()})")
+    result.notes.append(f"The model returned {len(extraction.claims)} claims; {len(result.claims)} placed in the text" + (f", {len(result.dropped)} dropped because their quote is not in the document" if result.dropped else "") + f" ({usage.describe()})")
     for quote in result.dropped[:5]:
         result.notes.append(f"Dropped, not found verbatim: {quote[:120]!r}")
     return result

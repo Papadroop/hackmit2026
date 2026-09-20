@@ -1,7 +1,7 @@
 """External verification: retrieved sources become evidence with the tier their independence
 earns, every quote is checked against the page it names and never displayed unless it is
 found, numbers are recomputed here before anyone sees them, and Support and Materiality are
-scored from all of it. No test calls Claude and no test touches the network."""
+scored from all of it. No test calls the model and no test touches the network."""
 
 from __future__ import annotations
 
@@ -309,7 +309,7 @@ class StreamingLlm:
     async def extract_streaming(self, prompt, output, *, on_element, **kwargs):
         self.calls.append(dict(kwargs, prompt=prompt, output=output))
         if self.fail is output:
-            raise LlmError("Claude's stream went quiet")
+            raise LlmError("the model's stream went quiet")
         whole = self.results[output]
         items = list(getattr(whole, self.keys[output]))
         if "<review>" in prompt:

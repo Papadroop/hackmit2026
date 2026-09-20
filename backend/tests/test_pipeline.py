@@ -371,31 +371,31 @@ def test_live_clarity_moves_the_verdicts_the_layer_issues(client, shell_pages, r
 
 def test_language_failure_is_reported_at_language(client, fake_fetch, fake_extract, fake_language):
     fake_extract.extraction = Extraction(claims=[ExtractedClaim(quote="We are carbon neutral", type="vague_attribute", scope="company", attribute="carbon neutral")])
-    fake_language.error = LlmError("Claude's stream went quiet")
+    fake_language.error = LlmError("the model's stream went quiet")
     summary = client.post("/api/analyses", json={"kind": "text", "text": "We are carbon neutral."}).json()
     received = read_sse(client, summary["events_url"])
     failed = received[-1][1]["payload"]
-    assert failed["stage"] == "language" and failed["error"] == "Language review failed: Claude's stream went quiet"
+    assert failed["stage"] == "language" and failed["error"] == "Language review failed: the model's stream went quiet"
     assert "claim.extracted" in types_of(received), "the claims found are kept"
 
 
 def test_extraction_failure_is_reported_at_extract(client, fake_fetch, fake_extract):
-    fake_extract.error = LlmError("No Claude credentials found.")
+    fake_extract.error = LlmError("No the model credentials found.")
     summary = client.post("/api/analyses", json={"kind": "text", "text": "We are carbon neutral."}).json()
     received = read_sse(client, summary["events_url"])
     assert types_of(received)[-1] == "analysis.failed"
     failed = received[-1][1]["payload"]
-    assert failed["stage"] == "extract" and "Claim extraction failed: No Claude credentials found." == failed["error"]
+    assert failed["stage"] == "extract" and "Claim extraction failed: No the model credentials found." == failed["error"]
     assert "document.ingested" in types_of(received)
 
 
 def test_substantiation_failure_is_reported_at_substantiate(client, fake_fetch, fake_extract, fake_substantiate):
     fake_extract.extraction = Extraction(claims=[ExtractedClaim(quote="We are carbon neutral", type="vague_attribute", scope="company", attribute="carbon neutral")])
-    fake_substantiate.error = LlmError("Claude's stream went quiet")
+    fake_substantiate.error = LlmError("the model's stream went quiet")
     summary = client.post("/api/analyses", json={"kind": "text", "text": "We are carbon neutral."}).json()
     received = read_sse(client, summary["events_url"])
     failed = received[-1][1]["payload"]
-    assert failed["stage"] == "substantiate" and failed["error"] == "Substantiation failed: Claude's stream went quiet"
+    assert failed["stage"] == "substantiate" and failed["error"] == "Substantiation failed: the model's stream went quiet"
     assert "language.signal" not in types_of(received) and "dimension.scored" in types_of(received), "the language stage's output is kept"
 
 
@@ -438,13 +438,13 @@ def test_verdict_failure_is_reported_at_verdict(client, shell_pages, real_shell,
     caught. It must still name itself the way every other stage does, rather than falling
     through to the store's generic producer-failed handler."""
     fake_extract.extraction = golden_extraction()
-    fake_verdict.error = LlmError("Claude did not answer within 600 s.")
+    fake_verdict.error = LlmError("the model did not answer within 600 s.")
     summary = client.post("/api/analyses", json={"kind": "url", "url": SHELL_URL, "speed": 1e6}).json()
     received = read_sse(client, summary["events_url"])
     types = types_of(received)
     assert types[-1] == "analysis.failed" and types.count("analysis.failed") == 1
     failed = received[-1][1]["payload"]
     assert failed["stage"] == "verdict", "not the store's untyped 'LlmError: ...' fallback"
-    assert failed["error"] == "The verdict layer failed: Claude did not answer within 600 s."
+    assert failed["error"] == "The verdict layer failed: the model did not answer within 600 s."
     assert [e["payload"]["stage"] for _, e in received if e["type"] == "stage.started"][-1] == "verdict"
     assert "summary.updated" not in types, "the replay stopped rather than carrying on to the summary"

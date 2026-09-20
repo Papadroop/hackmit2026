@@ -3,7 +3,7 @@ does each claim meet the criteria for its term, and has similar wording been rul
 
 Two curated stores (`knowledge/`, loaded by `auditor.knowledge`) supply the evidence: the
 substantiation criteria drawn from regulator guidance and law, and the precedents, past
-rulings on environmental claims. Claude reads the document (the cached prefix every stage
+rulings on environmental claims. The model reads the document (the cached prefix every stage
 sends), the claims, and the index of both stores, and does two things in parallel:
 
 1. Matching, one call at low effort: which criteria each claim is measured against and which
@@ -22,7 +22,7 @@ scoring is off (`score=False`) and external verification (step 14) scores Suppor
 these criteria and precedents and the facts it retrieves together, because the contract allows
 one score per claim per dimension and that is the dimension's definition (D6). The scoring
 here stays for `--no-score`'s opposite: measuring what the stores alone can settle. A claim
-the model skips gets a neutral placeholder at low confidence. A precedent that adjudicated the
+The model skips gets a neutral placeholder at low confidence. A precedent that adjudicated the
 very page under analysis is held out (demo-documents.md §6).
 
     python -m auditor.substantiate <file or url> [--golden fixtures/shell-climate.analysis.json] [--no-score] [--json]
@@ -307,7 +307,7 @@ async def substantiate(
     """Run the evaluator on an ingested document and its claims, emitting each evidence item
     and score as it arrives. With `score=False` only the matching runs, which is what the
     pipeline asks for now that external verification (step 14) scores Support from the rules
-    and the facts together. Raises LlmError when Claude cannot answer."""
+    and the facts together. Raises LlmError when the model cannot answer."""
     knowledge = (knowledge or get_knowledge()).for_document((document.get("source") or {}).get("url"))
     if not claims:
         return SubstantiationResult([], [], list(knowledge.held_out), notes=["No claims to substantiate."])
@@ -388,7 +388,7 @@ async def substantiate(
         raise errors.exceptions[0]
     result = assembler.finish()
     result.usage = combine_usage(usages, time.perf_counter() - started)
-    note = f"Claude matched {returned['matches']} store items in one call"
+    note = f"The model matched {returned['matches']} store items in one call"
     if first:
         note += f" (first item after {first[0]:.1f} s)"
     if score:

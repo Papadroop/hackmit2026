@@ -5,7 +5,7 @@ The document summary (`auditor.summary`) reads one page from the claims beneath 
 a company from the pages beneath it, under the same discipline: every number is arithmetic over
 rows that are listed underneath it, each number records the documents that drove it in
 `ext.drivers`, each document records its own `weight` and its `share` of the headline, and
-`--explain` prints the whole derivation without calling a model. Claude is asked for one thing,
+`--explain` prints the whole derivation without calling a model. The model is asked for one thing,
 after the numbers are settled: the narrative.
 
 **Leaning to the worst of the record.** The dilution risk repeats one level up: a company with
@@ -210,7 +210,7 @@ class Record:
 
     def titles(self) -> dict[str, str]:
         """What each of this document's claims and omissions is called: the title its own summary
-        gave it (written by Claude at document level, so it names the finding), and otherwise the
+        gave it (written by the model at document level, so it names the finding), and otherwise the
         claim's own words."""
         written = {
             entry["target"]: entry["title"]
@@ -667,7 +667,7 @@ async def describe_company(
     halflife_days: float = HALFLIFE_DAYS,
 ) -> CompanyResult:
     """Aggregate the company's analyses and write the narrative. One call, for the words only;
-    every number is fixed before Claude sees anything. Raises LlmError when Claude cannot answer."""
+    every number is fixed before the model sees anything. Raises LlmError when the model cannot answer."""
     view, parts = aggregate_company(records, company=company, power=power, halflife_days=halflife_days)
     started = time.perf_counter()
     words, usage = Words(), None
@@ -687,7 +687,7 @@ async def describe_company(
         f"by recency and confidence; trend {view['trend']['direction']} at confidence {view['trend']['confidence']}"
     )
     if usage is not None:
-        note += f"; Claude wrote the narrative ({result.usage.describe()})"
+        note += f"; the model wrote the narrative ({result.usage.describe()})"
     result.notes.append(note)
     result.notes.extend(explain(view, parts))
     return result

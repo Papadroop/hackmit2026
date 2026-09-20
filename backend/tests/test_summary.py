@@ -1,6 +1,6 @@
 """Document aggregation: every number in the header is arithmetic over the claims beneath it
 and says which ones it came from, a page cannot bury a bad headline under true trivia, and the
-model is asked for the words only. No test calls Claude."""
+model is asked for the words only. No test calls the model."""
 
 from __future__ import annotations
 
@@ -285,7 +285,7 @@ def test_a_page_with_nothing_to_rank_needs_no_call_at_all():
 def test_a_failing_writer_fails_the_stage_with_a_plain_error():
     claims, scores, verdicts = page(full("C1", 0.9))
     with pytest.raises(LlmError, match="went quiet"):
-        asyncio.run(summarise(DOC, claims, scores, verdicts, [], llm=FakeWriter(error=LlmError("Claude's stream went quiet"))))
+        asyncio.run(summarise(DOC, claims, scores, verdicts, [], llm=FakeWriter(error=LlmError("the model's stream went quiet"))))
 
 
 def test_the_comparison_reports_what_moved():

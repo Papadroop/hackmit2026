@@ -4,12 +4,12 @@ really on the page it is attributed to?
 
 Three things happen here, and the third is what makes the first two worth showing.
 
-1. **Live retrieval.** Claude reads the document (the cached prefix every stage sends) and the
+1. **Live retrieval.** the model reads the document (the cached prefix every stage sends) and the
    claims, and searches the web for the evidence that would settle them: the company's audited
    or assured filings, government and intergovernmental data, independent datasets and
    standards, regulator rulings. The search and the fetch run on Anthropic's servers
    (`llm.web_tools`); what comes back is a source with a URL and a verbatim quote.
-2. **Citation integrity.** Nothing Claude quotes is believed. Every URL is fetched from here
+2. **Citation integrity.** Nothing the model quotes is believed. Every URL is fetched from here
    (`knowledge.page_text`, the same reader the store check uses) and the quote looked for in
    the page with whitespace, quotation marks and dashes normalised and case ignored
    (`knowledge.quote_in`). Found: `verified`, `fetched_exact`, the quote is displayed. Not
@@ -18,7 +18,7 @@ Three things happen here, and the third is what makes the first two worth showin
 3. **Numbers recomputed.** A second call turns the retrieved figures into the arithmetic the
    claims turn on: the share of the footprint a target covers, a capital expenditure split, a
    stated percentage checked against its inputs, the pace a target needs against the pace
-   achieved. Claude writes the expression, the inputs and the number it makes them; this
+   achieved. The model writes the expression, the inputs and the number it makes them; this
    module evaluates the expression itself (plain arithmetic, no names but the inputs) and
    drops any computation whose arithmetic does not reproduce the number, or whose sentence
    does not state it. A computation is evidence (`kind: computation`), so "we recomputed this"
@@ -63,7 +63,7 @@ from .knowledge import page_text, quote_in
 from .language import claims_listing, clamp01, combine_usage
 from .llm import Llm, LlmError, Usage, get_llm, web_tools
 
-# ----------------------------------------------------------------------------- what Claude returns
+# ----------------------------------------------------------------------------- what the model returns
 
 Relation = Literal["supports", "contradicts", "contradicts_framing", "context"]
 SourceKind = Literal["filing", "report", "dataset", "standard", "company_page", "press_release", "news", "archive", "law", "ruling", "other"]
@@ -825,7 +825,7 @@ async def verify(
     result = assembler.finish()
     result.usage = combine_usage(usages, time.perf_counter() - started)
     note = (
-        f"Claude searched for evidence on {len(claims)} claims over {len(batches)} parallel calls of up to {BATCH_SIZE}"
+        f"The model searched for evidence on {len(claims)} claims over {len(batches)} parallel calls of up to {BATCH_SIZE}"
         + (f" (first source after {first[0]:.1f} s)" if first else "")
         + f", returned {counts['findings']} findings and {counts['computations']} computations, and scored {counts['assessments']} claims over {len(score_batches)} calls"
     )

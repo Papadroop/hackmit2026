@@ -17,14 +17,15 @@ against 24 real regulatory rulings so you can say how often it is right.
 Run these in order. The whole point of the rehearsal is that none of them touch the network.
 
 ```sh
-cd backend && .venv/bin/python -m pytest -q          # 333 passing
+cd backend && .venv/bin/python -m pytest -q          # 340 passing
 cd ../frontend && npm run build                       # writes frontend/dist
 cd ../backend && .venv/bin/python -m uvicorn auditor.main:app --port 8400
 ```
 
 The backend serves `frontend/dist` when it exists, so the demo is one process on
-**http://localhost:8400**. Ports 8000 and 5173 belong to another project on the dev machine;
-8400 and 5174 are ours.
+**http://localhost:8400**. Replay needs no API key at all — the model is only called by a live
+run — so a missing or empty `DEEPSEEK_API_KEY` cannot break the demo. Ports 8000 and 5173
+belong to another project on the dev machine; 8400 and 5174 are ours.
 
 Then, with the wifi **off**, check all four:
 

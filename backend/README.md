@@ -3,7 +3,7 @@
 FastAPI service: creates analyses, streams their events over Server-Sent Events, and replays
 saved event logs with their original timing. The pipeline stages (roadmap steps 10–18) plug
 into `auditor/pipeline.py`, and all of them are built, so any document runs all the way
-through: a request reads its text, URL or PDF into a contract Document, Claude finds the
+through: a request reads its text, URL or PDF into a contract Document, the model finds the
 claims, marks how they are worded and scores each claim's Clarity, matches every claim to the
 criteria it is measured against and the precedents on similar wording from the curated stores
 in `knowledge/`, searches the web for the facts and checks every quote it brings back against
@@ -33,21 +33,36 @@ client-side routes (`/a/<analysis id>`) survive a reload. One server then runs t
 
 Tests: `.venv/bin/python -m pytest`. Check a fixture: `.venv/bin/python -m auditor.validate ../fixtures/smoke.jsonl`.
 
-## Claude
+## The model
 
-The pipeline stages call Claude through `auditor/llm.py`: one client, one set of defaults, three
-call shapes (`complete` for text, `extract` for a typed pydantic result via structured outputs,
-and `extract_streaming`, which is `extract` plus a callback that receives each item of the
-result's lists the moment it is complete in the stream, so a stage can emit as Claude writes).
-Every request streams with adaptive thinking, and returns its token usage.
+The pipeline stages call **DeepSeek** through `auditor/llm.py`: one client, one set of defaults,
+three call shapes (`complete` for text, `extract` for a typed pydantic result, and
+`extract_streaming`, which is `extract` plus a callback that receives each item of the result's
+lists the moment it is complete in the stream, so a stage can emit as the model writes). Every
+request streams, and returns its token usage.
+
+The client is the Anthropic SDK pointed at DeepSeek's **Anthropic-compatible endpoint**
+(`https://api.deepseek.com/anthropic`), so the message shapes, streaming and tool protocol are
+unchanged. What that layer does *not* carry was measured rather than assumed, and `llm.py`'s
+docstring records it. Two things follow:
+
+- **Structured outputs are gone.** `output_format=<model>` comes back with no parsed result and
+  no text at all. So a typed call sends the model's JSON Schema in the prompt and validates the
+  reply here (`json_instruction`, `parse_typed`). `extract_streaming` is unaffected, because it
+  always scanned raw text.
+- **`web_fetch` is gone** (rejected as an unknown variant), so fetching is a *local* tool: the
+  model asks for a URL and `llm.py` reads it through the same ingester a document goes through.
+  `web_search` survives and still runs at DeepSeek's end.
 
 ```sh
-cp .env.example .env            # then put your key in ANTHROPIC_API_KEY
-.venv/bin/python -m auditor.llm check     # one small call each way; prints model, effort, tokens
+cp .env.example .env            # then put your key in DEEPSEEK_API_KEY
+.venv/bin/python -m auditor.llm check     # one small call each way; prints model, endpoint, tokens
 ```
 
-Defaults, overridable in `.env` or the environment: `AUDITOR_MODEL=claude-sonnet-5` (the team's
-choice for now; `claude-opus-5` is the step up) and `AUDITOR_EFFORT=high` (`low` to `max`). The
+Defaults, overridable in `.env` or the environment: `AUDITOR_MODEL=deepseek-flash` and
+`AUDITOR_EFFORT=high` (`low` to `max`). **DeepSeek ignores effort**; it is still carried because
+ten stages pass it and it means something again the moment `DEEPSEEK_BASE_URL` points back at
+Anthropic. The
 built stages override the effort: claim extraction reads at `medium` (`AUDITOR_EXTRACT_EFFORT`),
 because on the Shell page it found the same 24 of 25 golden claims as `high` in a third of the
 time; the linguistic evaluator judges at `medium` too (`AUDITOR_LANGUAGE_EFFORT`), where it found
@@ -64,21 +79,23 @@ and scores at `medium` (`AUDITOR_CONSISTENCY_EFFORT`) in calls of
 `AUDITOR_CONSISTENCY_SCORE_BATCH` (default 9); `AUDITOR_CONSISTENCY_SNAPSHOTS` (default 3) is how
 many captures of the page it reads, and 0 turns the archive axis off when a demo cannot wait for
 the Internet Archive.
-`python -m auditor.llm check --model claude-opus-5 --effort xhigh` tries another setting without
-changing the file. Put the document text in `system` and pass `cache=True`: the cache breakpoint
-goes on the system block, so every stage that sends the same document reads it from the cache
-whatever its own task says.
+`python -m auditor.llm check --model deepseek-reasoner` tries another setting without changing
+the file. Put the document text in `system` and pass `cache=True`: the breakpoint goes on the
+system block, so every stage that sends the same document shares it. DeepSeek caches context by
+itself and reports the hits in usage, so the mark costs nothing either way.
 
-Retrieval is the one stage that gives Claude tools: `web_tools()` in `llm.py` builds the search and
-fetch server tools, which run on Anthropic's servers. It builds the **direct** pair
-(`web_search_20250305`, `web_fetch_20250910`), not the newer dynamic-filtering pair, which runs the
-search inside a code-execution sandbox: on the Ørsted page the filtering pair spent 228 s writing
-plumbing and returned nothing quotable, the direct pair returned five verbatim quotes in 30 s. A
-stage whose product is a quote wants the page in the context. `AUDITOR_WEB_TOOLS=filtering` switches
-back, and `max_content_tokens` caps what one fetch may pour into the turn — without it a batch of SEC
-filings puts a retrieval call over the 1M context window. A turn that runs server tools can stop with
-`pause_turn`; `Llm._stream` sends it back to continue, up to `MAX_PAUSES` times, so a stage never
-sees a half-finished answer.
+Retrieval is the one stage that gives the model tools, and after the switch they are a mixed
+pair. `web_tools()` in `llm.py` returns DeepSeek's **server** search (`web_search_20250305`,
+capped with `max_uses`) and a **local** `web_fetch`: the compatibility layer rejects Anthropic's
+`web_fetch_20250910` outright, so when the model asks for a URL, `Llm._run_tools` fetches it
+here, through `auditor.ingest`, and sends the readable text back as a `tool_result`. Reading a
+cited page the same way a document is read is the point — otherwise a verified quote would not
+mean the same thing. `AUDITOR_FETCH_CONTENT_TOKENS` caps what one page may pour into the turn;
+without it a batch of SEC filings buries the request. A fetch that fails answers with the reason
+instead of raising, because "nothing found" is a result the evidence stages know how to record.
+A turn can stop to run a tool (`tool_use`, up to `MAX_TOOL_ROUNDS`) or pause after a server
+search (`pause_turn`, up to `MAX_PAUSES`); `Llm._stream` feeds it back either way, so a stage
+never sees a half-finished answer.
 
 ## Endpoints
 
@@ -127,7 +144,7 @@ Every analysis is also appended, event by event, to `backend/data/runs/<timestam
   Without a recording the run stops at `verdict`, because the verdict layer runs inside the
   replay and the summary (step 18) is not built.
 - `omissions.py`: roadmap step 16, D4 Q3 — the margin cards. The materiality reference for the
-  company's industry (`materiality.py`) is the list "not mentioned" is measured against; Claude
+  company's industry (`materiality.py`) is the list "not mentioned" is measured against; the model
   says for each of its topics whether the page addresses it and writes a card where it does
   not, with the nearest passage the page does contain. That passage is placed in the text
   (`extract.locate`) and dropped if it is not there, and each topic's own words are looked for
@@ -142,7 +159,7 @@ Every analysis is also appended, event by event, to `backend/data/runs/<timestam
   industry, an external standard (SASB, GRI 11, ESRS E1) with the disclosure topics that
   industry's documents are read against, and per topic the words that appear when a page does
   address it. A document is placed by its `Document.industry` codes, then by its label; one
-  the store cannot place is placed by Claude, and every document is also measured against the
+  the store cannot place is placed by the model, and every document is also measured against the
   cross-industry entry. `check [--fetch]` validates the store and looks for every quote on its
   page; `coverage <file or url>` prints which of the reference's words are in a document and
   which are not, with no model in the loop.
@@ -169,7 +186,7 @@ Every analysis is also appended, event by event, to `backend/data/runs/<timestam
   confidence and the square of how bad it is — because a plain mean would let twenty true
   footnotes bury one false headline, the document-level form of the failure weakest-link
   prevents at claim level. Completeness comes from the omissions, which have no prominence.
-  Claude is asked for one thing, at the end: a title for each issue and each credit, and the
+  The model is asked for one thing, at the end: a title for each issue and each credit, and the
   narrative. Measure it without calling a model:
   `.venv/bin/python -m auditor.summary ../fixtures/shell-climate.analysis.json --explain`
   prints the arithmetic and compares the header with the reference's hand-written one.
@@ -184,14 +201,14 @@ Every analysis is also appended, event by event, to `backend/data/runs/<timestam
   carries its own confidence and a `note` that says plainly when there is too little to call
   ("two documents 933 days apart: a step, not a trend"). Documents are dated by the capture
   behind an `archive_url` when there is one, because the ingester stamps `retrieved` with today
-  even when it reads a 2024 snapshot. Claude is asked for the narrative only, and only by the
+  even when it reads a 2024 snapshot. The model is asked for the narrative only, and only by the
   CLI: `.venv/bin/python -m auditor.company "Shell plc" --explain` prints the whole derivation
   and calls no model.
 - `verdict.py`: roadmap step 17. A prosecutor and a defence argue each claim in two calls that
   cannot see each other, from one dossier: the claim, its four dimension scores with their
   bases, its language marks and every evidence item linked to it. A judge then reads both and
   writes the rationale, the pattern tags, the fix and the honest rewrite. The numbers are not
-  the model's: likelihood is the largest of the four scores (weakest link, contract §6) and
+  The model's: likelihood is the largest of the four scores (weakest link, contract §6) and
   the category follows the contract's rule. Confidence is the formula §6 left to this step —
   the deciding dimension's confidence, capped by what the evidence is worth, less a flat
   humility and penalties for evaluator conflict and for a judge that did not reach the same
@@ -272,7 +289,7 @@ Every analysis is also appended, event by event, to `backend/data/runs/<timestam
   14 scores Support once, from the rules and the facts together.
   `compare_links` and `compare_support` measure a result against the golden reference:
   `.venv/bin/python -m auditor.substantiate ../demo-documents/shell-climate-2026-09-19.md --golden ../fixtures/shell-climate.analysis.json`.
-- `language.py`: roadmap step 12. Claude returns word-level language signals (the contract's 18
+- `language.py`: roadmap step 12. The model returns word-level language signals (the contract's 18
   kinds, three polarities) and a Clarity score per claim as structured output. The claims go
   out in parallel batches of `AUDITOR_LANGUAGE_BATCH` (default 9) plus one call for the page as
   a whole, because one call over every claim thinks for minutes before writing a word; each
@@ -283,7 +300,7 @@ Every analysis is also appended, event by event, to `backend/data/runs/<timestam
   and `compare_clarity` measure a result against the golden reference. Try it (the reference's
   own claims are the input, so the evaluator is measured on the hand-analysed claims):
   `.venv/bin/python -m auditor.language ../demo-documents/shell-climate-2026-09-19.md --golden ../fixtures/shell-climate.analysis.json`.
-- `extract.py`: roadmap step 11. Claude returns claims as structured output; every quote is
+- `extract.py`: roadmap step 11. The model returns claims as structured output; every quote is
   placed in the canonical text (exact, then quotation marks and dashes normalised, then
   case-insensitive), numbered in document order and labelled with its paragraph. `compare`
   scores a result against a reference by span overlap. Try it:

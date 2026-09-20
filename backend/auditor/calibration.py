@@ -28,7 +28,7 @@ meaningless on so few negatives. The report says so in as many words rather than
 number that flatters. The calibration curve is the honest one: it asks whether claims the audit
 scores 0.7 really do turn out misleading about 70% of the time.
 
-    python -m auditor.calibration run --out data/calibration.json    # calls Claude, ~2 per case
+    python -m auditor.calibration run --out data/calibration.json    # calls the model, ~2 per case
     python -m auditor.calibration report data/calibration.json       # metrics only, no model
 
 `run` saves every case's scores with its label, so the metrics can be recomputed, the thresholds
@@ -465,7 +465,7 @@ def main(argv: list[str]) -> int:
     parser.add_argument("--settled-positive", action="store_true", help="count settled cases as misleading instead of leaving them out")
     parser.add_argument("--json", action="store_true", help="print the whole report as JSON")
     sub = parser.add_subparsers(dest="command", required=True)
-    run = sub.add_parser("run", help="score every precedent leave-one-out; calls Claude")
+    run = sub.add_parser("run", help="score every precedent leave-one-out; calls the model")
     run.add_argument("--out", help="write the report here (e.g. data/calibration.json)")
     run.add_argument("--limit", type=int, help="only the first N precedents")
     run.add_argument("--concurrency", type=int, default=CONCURRENCY, help=f"cases at once (default {CONCURRENCY})")

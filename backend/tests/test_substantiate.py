@@ -1,6 +1,6 @@
 """The substantiation evaluator: matches become evidence items with the right links, scores
 follow with their citations, everything streams in contract order, and the comparison with
-the golden reference measures the result. No test calls Claude."""
+the golden reference measures the result. No test calls the model."""
 
 from __future__ import annotations
 
@@ -139,7 +139,7 @@ class StreamingLlm:
         self.calls.append(dict(kwargs, prompt=prompt, output=output))
         if output is Matches:
             if self.fail_matcher:
-                raise LlmError("Claude's stream went quiet")
+                raise LlmError("the model's stream went quiet")
             await asyncio.sleep(0.01)  # the scorer is faster: its scores must wait for these
             for match in self.matches.matches[: self.hand_over]:
                 await on_element("matches", match.model_dump())
@@ -173,7 +173,7 @@ def test_substantiate_streams_evidence_before_scores_and_catches_up_the_rest(mon
     assert [e["evidence"]["id"] for t, e in events if t == "evidence.added"] == ["K1", "K2", "P1"], "the matcher's items, then the scorer's extra citation"
     assert sorted(e["score"]["claim_id"] for t, e in events if t == "dimension.scored") == ["C1", "C2"]
     assert result.usage is not None and result.usage.input_tokens == 20, "two calls (one matcher, one scoring batch)"
-    assert "Claude matched 2 store items in one call (first item after" in result.notes[0] and "scored 2 claims over 1 parallel calls of up to 9 claims, 1 malformed" in result.notes[0]
+    assert "The model matched 2 store items in one call (first item after" in result.notes[0] and "scored 2 claims over 1 parallel calls of up to 9 claims, 1 malformed" in result.notes[0]
     matcher = next(c for c in llm.calls if c["output"] is Matches)
     assert matcher["effort"] == "low" and matcher["cache"] is True and matcher["system"].startswith("You are")
     scorer = next(c for c in llm.calls if c["output"] is Assessments)

@@ -1,14 +1,14 @@
 """Linguistic evaluator (roadmap step 12; design-doc D4 Q2 and D6 Clarity): how each claim is
 worded, marked at word level, and a Clarity score for every claim.
 
-Claude reads the document (the same cached prefix extraction sent) and the claims found in it,
+The model reads the document (the same cached prefix extraction sent) and the claims found in it,
 and returns language signals and clarity scores as structured output. The claims go out in
 parallel batches (`BATCH_SIZE` each; one more call reads the page as a whole for the
 document-level signals), because one call over every claim thinks for minutes before it writes
 a word, and the point of this stage is that marks appear while it works. Each signal is handed
 over the moment it is complete in its stream, placed in the text and emitted, so the Language
 layer fills in while the model is still writing; clarity scores follow the same way. Nothing
-the model returns is trusted until its words are found in the text: exactly, then with
+The model returns is trusted until its words are found in the text: exactly, then with
 quotation marks and dashes normalised, then ignoring case; inside the claim's own spans first,
 then its paragraph, then anywhere. A claim-level signal whose words cannot be placed is dropped
 and reported. Every claim ends up with exactly one clarity score: a claim the model skipped
@@ -449,7 +449,7 @@ async def review_language(
 ) -> LanguageResult:
     """Run the evaluator on an ingested document and its claims, emitting each signal and score
     as it arrives: the claims in parallel batches of `BATCH_SIZE`, plus one call for the page as
-    a whole. Raises LlmError when Claude cannot answer."""
+    a whole. Raises LlmError when the model cannot answer."""
     if not claims:
         return LanguageResult([], [], notes=["No claims to review; the language stage has nothing to mark."])
     llm = llm or get_llm()
@@ -529,7 +529,7 @@ async def review_language(
         raise errors.exceptions[0]
     result = assembler.finish()
     result.usage = combine_usage(usages, time.perf_counter() - started)
-    note = f"Claude returned {returned['signals']} signals and {returned['clarity']} clarity scores over {len(batches) + 1} parallel calls ({len(batches)} of up to {size} claims each, 1 for the page)"
+    note = f"The model returned {returned['signals']} signals and {returned['clarity']} clarity scores over {len(batches) + 1} parallel calls ({len(batches)} of up to {size} claims each, 1 for the page)"
     if returned["invalid"]:
         note += f", {returned['invalid']} malformed"
     if returned["out_of_batch"]:

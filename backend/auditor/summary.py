@@ -4,7 +4,7 @@ from the real results beneath it.
 The step's visual check is that every number in the header can be explained from the claims
 underneath, so nothing here is a model's opinion: the profile, the headline and the ranking
 are arithmetic over what the evaluators and the verdict layer already produced, and each one
-records in `ext` the claims it was computed from. Claude is asked for one thing only, at the
+records in `ext` the claims it was computed from. The model is asked for one thing only, at the
 end: the words. A title for each issue and each piece of credit, and the narrative line.
 
 **Leaning to the worst of the page.** A mean would let a page bury a false headline under twenty true
@@ -201,7 +201,7 @@ def aggregate(
     power: float = POWER,
 ) -> tuple[dict[str, Any], dict[str, Aggregate]]:
     """The header's numbers, and the aggregate behind each one so it can be explained. The
-    titles are left empty: `summarise` asks Claude for those."""
+    titles are left empty: `summarise` asks the model for those."""
     by_id = {c["id"]: c for c in claims}
     parts: dict[str, Aggregate] = {}
     for dimension in DIMENSIONS:
@@ -382,8 +382,8 @@ async def summarise(
     power: float = POWER,
 ) -> SummaryResult:
     """Aggregate the analysis and emit the header. One call, for the words only; the numbers
-    are arithmetic and are already fixed before Claude sees anything. Raises LlmError when
-    Claude cannot answer."""
+    are arithmetic and are already fixed before the model sees anything. Raises LlmError when
+    The model cannot answer."""
     summary, parts = aggregate(claims, scores, verdicts, omissions, power=power)
     by_id = {c["id"]: c for c in claims}
     by_verdict = {v["claim_id"]: v for v in verdicts}
@@ -404,7 +404,7 @@ async def summarise(
         f"{len(claims)} claims and {len(omissions)} omissions, leaning to the worst of the page by prominence and confidence"
     )
     if usage is not None:
-        note += f"; Claude wrote {len(header.issues)} issue and {len(header.credit)} credit titles ({result.usage.describe()})"
+        note += f"; the model wrote {len(header.issues)} issue and {len(header.credit)} credit titles ({result.usage.describe()})"
     result.notes.append(note)
     result.notes.extend(explain(summary, parts))
     if untitled:

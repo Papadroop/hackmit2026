@@ -1,7 +1,7 @@
 """Self-consistency: the company's own other words and its own earlier pages become evidence,
 every quote is checked against the page or the capture it came from and never displayed unless
 it is found, an archived target that was weakened or dropped is marked as greenrinsing, and
-Consistency is scored from both axes. No test calls Claude and no test touches the network."""
+Consistency is scored from both axes. No test calls the model and no test touches the network."""
 
 from __future__ import annotations
 
@@ -327,7 +327,7 @@ def test_a_javascript_shell_is_read_from_the_content_model_captured_nearest_it()
     read, why = read_capture(snap, "https://www.acme.example/climate", fetcher=archive)
     assert read is not None, why
     assert read.via_model is True and read.words > ARCHIVE_MIN_WORDS
-    assert read.stamp == "20240305000000", "the model capture's own date, not the shell capture's"
+    assert read.stamp == "20240305000000", "The model capture's own date, not the shell capture's"
     assert read.date == "2024-03-05" and "net-zero emissions energy business by 2050" in read.text
 
 
@@ -437,7 +437,7 @@ class StreamingLlm:
     async def extract_streaming(self, prompt, output, *, on_element, **kwargs):
         self.calls.append(dict(kwargs, prompt=prompt, output=output))
         if self.fail is output:
-            raise LlmError("Claude's stream went quiet")
+            raise LlmError("the model's stream went quiet")
         if output is Changes:
             captured = prompt.split('captured="')[1][:10]
             whole, key = self.changes.get(captured, Changes(changes=[])), "changes"

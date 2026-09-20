@@ -1,6 +1,6 @@
 """Live analysis: every stage of the pipeline, on any document (roadmap phase 2, complete).
 
-A request reads its text, URL or PDF into a contract Document; Claude decomposes it into atomic
+A request reads its text, URL or PDF into a contract Document; the model decomposes it into atomic
 claims; the linguistic evaluator marks how each is worded and scores its Clarity; the
 substantiation evaluator matches every claim to the criteria it is measured against and the
 precedents on similar wording; external verification searches the web for the facts, checks
@@ -30,6 +30,7 @@ from __future__ import annotations
 
 import asyncio
 import re
+import time
 from collections import defaultdict
 from pathlib import Path
 from typing import Any
@@ -112,8 +113,16 @@ async def run_live(
     # -- extract (step 11)
     recording = recording_for_url(fixtures_dir, document.get("source", {}).get("url"))
     analysis.emit(STAGE_STARTED, {"stage": "extract", "label": EXTRACT_LABEL})
+    reading = time.perf_counter()
+
+    async def found_so_far(count: int) -> None:
+        # The claims cannot be emitted yet - their ids follow document order, which needs the
+        # whole list - so this is the only sign the stage is alive while the model writes.
+        if count == 1 or count % 3 == 0:
+            analysis.emit("debug.note", {"text": f"Reading: {count} claims so far ({time.perf_counter() - reading:.0f} s)."})
+
     try:
-        result = await extract_module.extract_claims(document)
+        result = await extract_module.extract_claims(document, on_progress=found_so_far)
     except LlmError as exc:
         analysis.emit(ANALYSIS_FAILED, {"error": f"Claim extraction failed: {exc}", "stage": "extract"})
         return
@@ -133,7 +142,7 @@ async def run_live(
         await asyncio.sleep(CLAIM_STAGGER_SECONDS / speed)
     analysis.emit(STAGE_COMPLETED, {"stage": "extract"})
 
-    # -- language (step 12): every signal and score is emitted as Claude writes it
+    # -- language (step 12): every signal and score is emitted as the model writes it
     analysis.emit(STAGE_STARTED, {"stage": "language", "label": LANGUAGE_LABEL})
     try:
         review = await language_module.review_language(document, result.claims, emit=analysis.emit)

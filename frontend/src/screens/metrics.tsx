@@ -107,8 +107,8 @@ function Unrun({ detail }: { detail: string }) {
       </p>
       <p className="mt-3 text-[15px] leading-relaxed text-muted-foreground">
         The run scores every curated precedent with its own ruling taken out of
-        the knowledge store. It calls Claude once per case, so it is done ahead
-        of time and read from disk here.
+        the knowledge store. It calls the model once per case, so it is done
+        ahead of time and read from disk here.
       </p>
     </div>
   )

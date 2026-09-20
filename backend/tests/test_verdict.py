@@ -1,7 +1,7 @@
 """The verdict layer: the debate streams before the verdict it decides, the likelihood and the
 category are derived by the contract's rules rather than judged, the confidence formula is the
 one the module documents, and the whole thing reproduces the golden reference's verdicts from
-the reference's own scores. No test calls Claude."""
+the reference's own scores. No test calls the model."""
 
 from __future__ import annotations
 
@@ -392,7 +392,7 @@ class StreamingLlm:
         self.order.append(role)
         if role == "defence":
             if self.fail_defence:
-                raise LlmError("Claude's stream went quiet")
+                raise LlmError("the model's stream went quiet")
             await asyncio.sleep(0.01)  # the prosecutor answers first; the judge waits for both
         if output is Cases:
             items = [Case(claim_id=cid, text=f"{role} on {cid}.", evidence_ids=["E1"]) for cid in self._ids(prompt)]
@@ -425,7 +425,7 @@ def test_the_two_advocates_run_in_parallel_and_the_judge_runs_after_both():
     assert sorted(a["claim_id"] + a["role"][0] for a in result.arguments) == ["C1d", "C1p", "C2d", "C2p"]
     assert [v["claim_id"] for v in result.verdicts] == ["C1", "C2"] and result.placeholders == []
     assert result.usage is not None and result.usage.input_tokens == 30, "three calls"
-    assert "Claude argued 4 cases and judged 2 claims over 1 batches of up to 6 claims" in result.notes[0]
+    assert "The model argued 4 cases and judged 2 claims over 1 batches of up to 6 claims" in result.notes[0]
     assert "3 malformed" in result.notes[0], "one per streaming call, and none reaches a verdict"
     judge_call = next(c for c in llm.calls if c["role"] == "judge")
     assert judge_call["effort"] == "high" and "Prosecutor: prosecutor on C1." in judge_call["prompt"]

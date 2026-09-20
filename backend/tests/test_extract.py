@@ -111,12 +111,22 @@ def test_extract_claims_sends_the_document_as_the_cached_system_prefix():
         def __init__(self) -> None:
             self.calls: list[dict] = []
 
-        async def extract(self, prompt, output, **kwargs):
+        async def extract_streaming(self, prompt, output, *, on_element, **kwargs):
             self.calls.append({"prompt": prompt, "output": output, **kwargs})
-            return golden_extraction(), Usage("claude-sonnet-5", 5000, 900, 0, 5000, "end_turn", "req", 3.0)
+            extraction = golden_extraction()
+            # The real client hands over each claim as it closes in the stream.
+            for claim in extraction.claims:
+                await on_element("claims", claim.model_dump())
+            return extraction, Usage("deepseek-flash", 5000, 900, 0, 5000, "end_turn", "req", 3.0)
 
     llm = FakeLlm()
-    result = asyncio.run(extract_claims(document, llm))  # type: ignore[arg-type]
+    seen: list[int] = []
+
+    async def on_progress(count: int) -> None:
+        seen.append(count)
+
+    result = asyncio.run(extract_claims(document, llm, on_progress=on_progress))  # type: ignore[arg-type]
+    assert seen == list(range(1, 26)), "the stage is told each claim as it is written, so it can show it is alive"
     assert len(result.claims) == 25 and result.usage is not None and result.usage.output_tokens == 900
     [call] = llm.calls
     assert call["output"] is Extraction and call["cache"] is True and call["effort"] == "medium"

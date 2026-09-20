@@ -747,7 +747,7 @@ async def issue_verdicts(
 ) -> VerdictResult:
     """Debate and decide every claim, emitting each argument and verdict as it arrives. The
     prosecutor and the defence run in parallel and cannot see each other; the judge reads both.
-    Raises LlmError when Claude cannot answer."""
+    Raises LlmError when the model cannot answer."""
     assembler = Assembler(claims, scores, evidence, signals, emit)
     if not claims:
         return assembler.finish()
@@ -876,7 +876,7 @@ async def issue_verdicts(
     result = assembler.finish()
     result.usage = combine_usage(usages, time.perf_counter() - started)
     note = (
-        f"Claude argued {returned['cases']} cases and judged {returned['judgments']} claims over "
+        f"The model argued {returned['cases']} cases and judged {returned['judgments']} claims over "
         f"{len(batches)} batches of up to {size} claims"
         + (f", each judged {samples} times" if samples > 1 else "")
     )

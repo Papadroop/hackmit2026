@@ -10,7 +10,7 @@ dependencies = [
   "beautifulsoup4>=4.12",   # ingest: HTML
   "lxml>=5",                # ingest: HTML parser for BeautifulSoup
   "pymupdf>=1.24",          # ingest: PDF text with layout
-  "anthropic>=1.7",         # llm: Claude calls for the pipeline stages
+  "anthropic>=1.7",         # llm: the SDK, pointed at DeepSeek's Anthropic-compatible endpoint
   "python-dotenv>=1.0",     # llm: backend/.env
 ]
 

@@ -1,7 +1,7 @@
 """Company aggregation: one bad page cannot be buried under bland ones a level up either, the
 current page weighs more than an archived one without the record being erased, the trend says
 plainly when there is too little of it to call, and the model is asked for the words only. No
-test calls Claude."""
+test calls the model."""
 
 from __future__ import annotations
 
@@ -491,7 +491,7 @@ def test_nothing_to_describe_needs_no_call_at_all():
 
 def test_a_failing_writer_fails_with_a_plain_error():
     with pytest.raises(LlmError, match="went quiet"):
-        asyncio.run(describe_company([page("a", "2026-01-01", 0.8)], llm=FakeWriter(error=LlmError("Claude's stream went quiet"))))
+        asyncio.run(describe_company([page("a", "2026-01-01", 0.8)], llm=FakeWriter(error=LlmError("the model's stream went quiet"))))
 
 
 # ----------------------------------------------------------------------------- the contract

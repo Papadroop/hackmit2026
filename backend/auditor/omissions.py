@@ -6,11 +6,11 @@ recycled cups.
 materiality reference (`auditor.materiality`, `knowledge/materiality.json`): one entry per
 industry, an external standard naming the disclosure topics that industry is read against. The
 document declares its industry in the contract's `Document.industry`; when it declares one the
-store does not know, Claude places it among the store's industries in a small call first, and
+store does not know, the model places it among the store's industries in a small call first, and
 the choice is written to the log. Every document is also measured against the cross-industry
 entry, so a page whose industry is unknown still has a list.
 
-Then one call: Claude reads the document (the cached prefix every stage sends), the claims,
+Then one call: the model reads the document (the cached prefix every stage sends), the claims,
 the evidence the earlier evaluators have already put on the table, and the topic list, and
 says for each topic whether the page addresses it, with a verbatim quote — either the words
 that address it, or the nearest the page comes. Where it does not, it writes the margin card:
@@ -21,7 +21,7 @@ Two checks stand between that and a margin card, because "not mentioned" is a cl
 text and has to be falsifiable (step 16's visual check is "a material topic that is truly
 absent from the document"):
 
-1. **Every quote is placed in the document.** A quote Claude attributes to the page is located
+1. **Every quote is placed in the document.** A quote the model attributes to the page is located
    in it (`extract.locate`, the anchoring the claims use). One that is not there is dropped and
    the run says so; it never reaches a card.
 2. **The reference's own words are looked for.** Each topic carries `terms`, the words that
@@ -376,7 +376,7 @@ def apply_omissions(
 
 
 async def choose_industry(document: dict[str, Any], store: Materiality, llm: Llm) -> tuple[Match | None, Placement | None, Usage | None]:
-    """Place a document whose industry the store does not know. Returns the match, what Claude
+    """Place a document whose industry the store does not know. Returns the match, what the model
     answered, and what the call cost. An empty or unknown code leaves the document with the
     cross-industry topics alone."""
     if not store.industries_listing().strip():
@@ -399,7 +399,7 @@ async def find_omissions(
     first_number: int = 1,
 ) -> OmissionsResult:
     """Run the stage on an ingested document, its claims and the evidence gathered so far.
-    Raises LlmError when Claude cannot answer and KnowledgeError when the store cannot be read."""
+    Raises LlmError when the model cannot answer and KnowledgeError when the store cannot be read."""
     store = store or get_materiality()
     llm = llm or get_llm()
     prior_evidence = prior_evidence or []
@@ -414,10 +414,10 @@ async def find_omissions(
         if usage is not None:
             usages.append(usage)
         if match is not None and placement is not None:
-            matches.insert(0, Match(match.evidence_id, match.entry, f"Claude placed it in {match.entry.index.industry} (confidence {placement.confidence:.2f}): {placement.basis}"))
-            notes.append(f"The document declares industry {industry!r}, which the materiality store does not know; Claude placed it in {match.entry.index.industry} ({match.entry.index.sasb_code}), confidence {placement.confidence:.2f}: {placement.basis}")
+            matches.insert(0, Match(match.evidence_id, match.entry, f"The model placed it in {match.entry.index.industry} (confidence {placement.confidence:.2f}): {placement.basis}"))
+            notes.append(f"The document declares industry {industry!r}, which the materiality store does not know; the model placed it in {match.entry.index.industry} ({match.entry.index.sasb_code}), confidence {placement.confidence:.2f}: {placement.basis}")
         elif placement is not None:
-            notes.append(f"The document declares industry {industry!r} and Claude matched it to no industry in the store ({placement.basis or 'no basis given'}); the cross-industry topics alone are used.")
+            notes.append(f"The document declares industry {industry!r} and the model matched it to no industry in the store ({placement.basis or 'no basis given'}); the cross-industry topics alone are used.")
     else:
         notes.append(f"Industry {industry!r} -> " + "; ".join(f"{m.evidence_id} {m.entry.index.industry} ({m.how})" for m in matches))
 
@@ -450,7 +450,7 @@ async def find_omissions(
 
     result = assembler.finish()
     result.usage = combine_usage(usages, time.perf_counter() - started)
-    note = f"Claude read {returned['coverage']} topics in one call"
+    note = f"The model read {returned['coverage']} topics in one call"
     if returned["invalid"]:
         note += f", {returned['invalid']} malformed"
     result.notes[:0] = [note + f" ({result.usage.describe()})", *notes]

@@ -1,5 +1,5 @@
 """The linguistic evaluator (step 12): placement of word-level marks, clarity bookkeeping,
-streaming assembly and the comparison with the golden reference. No test calls Claude."""
+streaming assembly and the comparison with the golden reference. No test calls the model."""
 
 from __future__ import annotations
 
@@ -281,7 +281,7 @@ def test_review_language_emits_while_streaming_and_catches_up_the_rest():
     assert [p.get("signal", p.get("score"))["id" if "signal" in p else "claim_id"] for _, p in events] == ["L1", "C1", "L2", "C2", "L3"]
     assert events[-1][1]["signal"]["level"] == "document" and events[-1][1]["signal"]["spans"] == []
     assert len(result.signals) == 3 and [s["claim_id"] for s in result.scores] == ["C1", "C2"]
-    assert result.notes[0].startswith("Claude returned 3 signals and 2 clarity scores over 2 parallel calls (1 of up to 9 claims each, 1 for the page) (fake: 2 in + 6 read from cache, 4 out, ")
+    assert result.notes[0].startswith("The model returned 3 signals and 2 clarity scores over 2 parallel calls (1 of up to 9 claims each, 1 for the page) (fake: 2 in + 6 read from cache, 4 out, ")
     assert result.usage is not None and result.usage.output_tokens == 4
     batch_call, page_call = llm.calls
     assert batch_call["cache"] is True and batch_call["output"] is LanguageReview and batch_call["system"].startswith("You are the reading stage")

@@ -188,7 +188,7 @@ class Materiality:
         """The references this document is measured against: the entry for its industry, when
         the document declares one the store knows, plus the cross-industry entry. A document
         whose industry the store cannot place gets the cross-industry entry alone, and the
-        evaluator asks Claude to place it (`choose_industry`)."""
+        evaluator asks the model to place it (`choose_industry`)."""
         industry = document.get("industry") or {}
         matches: list[Match] = []
         for code in industry.get("sasb_codes") or []:

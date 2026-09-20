@@ -7,7 +7,7 @@ agrees with its own author, which is why it is the demo headliner (D2): a compan
 by an independent source can argue about the source, and a company contradicted by its own
 annual report cannot. Two axes, searched in parallel:
 
-1. **Elsewhere.** Claude searches the company's own publications — the annual report and the
+1. **Elsewhere.** the model searches the company's own publications — the annual report and the
    20-F and above all their risk factors and cautionary statements, the assured GHG statement,
    the transition strategy report where targets are set and retired, the other pages on the
    same subject — for the same target stated with a different number, the same figure with a
@@ -67,7 +67,7 @@ from .knowledge import page_text, quote_in
 from .language import claims_listing, clamp01, combine_usage
 from .llm import Llm, LlmError, Usage, get_llm, web_tools
 
-# ----------------------------------------------------------------------------- what Claude returns
+# ----------------------------------------------------------------------------- what the model returns
 
 Relation = Literal["supports", "contradicts", "contradicts_framing", "context"]
 # What the company publishes about itself. Anything else belongs to step 14: this stage's whole
@@ -1045,7 +1045,7 @@ async def consistency(
     result = assembler.finish(versions)
     result.usage = combine_usage(usages, time.perf_counter() - started)
     note = (
-        f"Claude searched the company's own material for {len(claims)} claims over {len(batches)} parallel calls of up to {BATCH_SIZE}"
+        f"The model searched the company's own material for {len(claims)} claims over {len(batches)} parallel calls of up to {BATCH_SIZE}"
         + (f", compared {len(versions)} archived versions of the page" if versions else ", with no archived version to compare")
         + (f" (first item after {first[0]:.1f} s)" if first else "")
         + f", returned {counts['statements']} statements and {counts['changes']} changes, and scored {counts['assessments']} claims over {len(score_batches)} calls"

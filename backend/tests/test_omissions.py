@@ -1,7 +1,7 @@
 """Omissions (step 16): the materiality store loads and places a document in its industry, a
 margin card is only written for a topic the text really does not address, the reference that
 makes it material is emitted before the card that cites it, and everything validates against
-the contract. No test calls Claude."""
+the contract. No test calls the model."""
 
 from __future__ import annotations
 
@@ -144,7 +144,7 @@ def test_a_document_is_placed_by_code_then_by_label_and_always_gets_the_cross_in
     by_label = store.for_document(document(label="Petroleum", codes=[]))
     assert by_label[0].evidence_id == "M1" and "matched" in by_label[0].how
     unknown = store.for_document(document(label="Not identified", codes=[]))
-    assert [m.evidence_id for m in unknown] == ["M2"], "only the cross-industry entry; the evaluator then asks Claude"
+    assert [m.evidence_id for m in unknown] == ["M2"], "only the cross-industry entry; the evaluator then asks the model"
     assert store.by_code("TC-HW") is None
 
 
@@ -295,7 +295,7 @@ class StreamingLlm:
     async def extract_streaming(self, prompt, output, *, on_element, **kwargs):
         self.calls.append(dict(kwargs, prompt=prompt, output=output))
         if self.fail:
-            raise LlmError("Claude's stream went quiet")
+            raise LlmError("the model's stream went quiet")
         for item in self.coverages.coverage[: self.hand_over]:
             await on_element("coverage", item.model_dump())
         await on_element("coverage", {"topic_id": "M1.1", "score": "not a number"})
@@ -312,7 +312,7 @@ def test_the_stage_streams_what_it_can_and_catches_up_the_rest():
     result = asyncio.run(find_omissions(doc, [claim("C1", "cut the carbon intensity of our energy by 12% since 2016")], emit=emit, llm=llm, store=store))
     assert [o["id"] for o in result.omissions] == ["O1", "O2"]
     assert [t for t, _ in events][:2] == ["evidence.added", "evidence.added"], "both references, then the cards"
-    assert "Claude read 2 topics in one call, 1 malformed" in result.notes[0]
+    assert "The model read 2 topics in one call, 1 malformed" in result.notes[0]
     assert result.notes[1].startswith("Industry 'Oil & Gas – Integrated' -> M1 Oil & Gas (SASB code EM-EP)")
     assert result.notes[-1].startswith("Completeness 0.7")
     call = llm.calls[0]
@@ -321,14 +321,14 @@ def test_the_stage_streams_what_it_can_and_catches_up_the_rest():
     assert result.usage is not None and result.usage.input_tokens == 10
 
 
-def test_an_unknown_industry_is_placed_by_claude_and_the_choice_is_in_the_log():
+def test_an_unknown_industry_is_placed_by_the_model_and_the_choice_is_in_the_log():
     store = small_store()
     doc = document(label="Not identified", codes=[])
     llm = StreamingLlm(Coverages(coverage=[card("M1.1")]), Placement(sasb_code="EM-EP", industry="Oil and gas", confidence=0.8, basis="It talks about upstream operations."))
     result = asyncio.run(find_omissions(doc, [], llm=llm, store=store))
     assert [c["output"] for c in llm.calls] == [Placement, Coverages]
     assert llm.calls[0]["effort"] == "low"
-    assert "Claude placed it in Oil & Gas (EM-EP), confidence 0.80: It talks about upstream operations." in result.notes[1]
+    assert "the model placed it in Oil & Gas (EM-EP), confidence 0.80: It talks about upstream operations." in result.notes[1]
     assert [m.evidence_id for m in result.matches] == ["M1", "M2"]
     assert result.omissions[0]["evidence_ids"] == ["M1"]
 

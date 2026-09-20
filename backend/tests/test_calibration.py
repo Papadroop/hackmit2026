@@ -206,7 +206,7 @@ def test_every_case_is_run_against_a_store_without_itself(stages):
 def test_a_case_that_the_model_cannot_score_is_recorded_and_the_run_carries_on(stages, monkeypatch):
     from auditor import language as language_module
 
-    failing = FakeStages(error=LlmError("Claude's stream went quiet"))
+    failing = FakeStages(error=LlmError("the model's stream went quiet"))
     monkeypatch.setattr(language_module, "review_language", failing.review_language)
     knowledge = store(precedent("p1", "upheld"))
     cases, _ = asyncio.run(run_calibration(knowledge=knowledge))
