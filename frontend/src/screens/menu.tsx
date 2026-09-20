@@ -1,13 +1,7 @@
 import { useEffect, useRef, useState, type FormEvent } from "react"
 import { Play } from "lucide-react"
 import { ReactLenis } from "lenis/react"
-import {
-  motion,
-  useReducedMotion,
-  useScroll,
-  useTransform,
-  type MotionStyle,
-} from "motion/react"
+import { useReducedMotion, useScroll, useTransform } from "motion/react"
 import { toast } from "sonner"
 
 import "lenis/dist/lenis.css"
@@ -35,7 +29,7 @@ import {
   formatNumber,
   formatRelative,
 } from "@/lib/format"
-import { forestOpacity, headerInk } from "@/lib/menu-scroll"
+import { forestOpacity } from "@/lib/menu-scroll"
 import { readPref, writePref } from "@/lib/prefs"
 import { navigate, paths } from "@/lib/router"
 
@@ -64,8 +58,8 @@ const STATUS_TEXT = {
  *
  * The name says what the product does, so the screen shows it once, in order: the wash, the
  * rinse, and then what actually grew (../../menu-design.md §2). The card's own progress `p`
- * drives the rinse, the header's colour and the forest's arrival; the list's progress `f` grows
- * the trees. Everything below the card is unchanged and still.
+ * drives the rinse and the forest's arrival; the list's progress `f` grows the trees.
+ * Everything below the card is unchanged and still.
  */
 export function MenuScreen() {
   const [data, setData] = useState<DocumentsResponse | null>(null)
@@ -88,7 +82,6 @@ export function MenuScreen() {
     target: listRef,
     offset: ["start end", "end end"],
   })
-  const headerMix = useTransform(cardProgress, headerInk)
   const forestFade = useTransform(cardProgress, (p) =>
     reduced ? 1 : forestOpacity(p)
   )
@@ -139,12 +132,9 @@ export function MenuScreen() {
   const screen = (
     <div className="rinse-screen">
       <Forest progress={listProgress} opacity={forestFade} />
-      <motion.header
-        className="rinse-header"
-        style={{ "--ink-mix": headerMix } as MotionStyle}
-      >
+      <header className="rinse-header">
         <ThemeToggle />
-      </motion.header>
+      </header>
       <div ref={cardRef} className="rinse-card-wrapper">
         <TitleCard progress={cardProgress} />
       </div>

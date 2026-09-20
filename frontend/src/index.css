@@ -488,28 +488,14 @@
     background-color: var(--rinsed-paper);
   }
   /* The theme toggle is the whole header here: a link to the menu from the menu is pointless,
-     and the title is the wordmark. Its colour follows the water's edge past it. */
+     and the title is the wordmark. The card opens with its top quarter already rinsed, so the
+     toggle is on clean paper from the first frame and never sits on the pigment. */
   .rinse-header {
     position: fixed;
     top: 16px;
     right: 16px;
     z-index: 4;
-    /* White while it sits on the pigment, foreground once the water has passed it. White, not
-       Paper: Paper is dark slate in dark mode, which would hide the icon on the wash. */
-    color: color-mix(
-      in oklab,
-      var(--foreground) calc(var(--ink-mix, 1) * 100%),
-      #ffffff
-    );
-  }
-
-  /* The toggle is the only control that sits on the pigment, and Marker against the wash is
-     1.3:1 by luminance: visible by hue, not by contrast. The ring keeps its colour, per §4.1,
-     and gains a white outline outside it, which reads at 10:1 on the wash. Over the clean paper
-     the white disappears and Marker itself is 6:1. */
-  .rinse-header button:focus-visible {
-    outline: 2px solid #ffffff;
-    outline-offset: 4px;
+    color: var(--foreground);
   }
 
   /* Two viewports of wrapper hold one viewport of sticky card: long enough that the rinse is a
@@ -562,21 +548,23 @@
     stroke: var(--waterline);
     stroke-opacity: 0.6;
   }
+  /* On a near-black sheet the halo above the line reads as a smudge rather than as spray. */
+  .dark .rinse-waterline-glow {
+    stroke-opacity: 0.16;
+  }
 
-  /* One block, centred on the card and lifted a little above its middle so the cue at the
-     bottom has room. The word is drawn in this layer in white and again in `.rinse-card-ink`,
-     where the waterline clips it to the part of the sheet that has come clean. */
+  /* The block, drawn twice in the same place: once in this layer in white, and once in
+     `.rinse-card-ink`, where the waterline clips it to the part of the sheet that has come
+     clean. Every position here is measured from the top of the card, not from the block, so
+     the two copies cannot drift apart.
+
+     Type on the wash is white in both themes: the pigment is the same green in dark mode, and
+     Paper there is dark slate, which would put dark type on dark green. §4.1's contrast maths
+     ("white on Viridian is 5.5:1") is white, not the Paper token. */
   .rinse-card-inner {
     position: absolute;
     inset: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 0 24px 9svh;
-    /* Type on the wash is white in both themes: the pigment is the same green in dark mode, and
-       Paper there is dark slate, which would put dark type on dark green. §4.1's contrast maths
-       ("white on Viridian is 5.5:1") is white, not the Paper token. */
+    padding: 2.5svh 24px 0;
     color: #ffffff;
     text-align: center;
     pointer-events: none;
@@ -585,7 +573,12 @@
     color: var(--foreground);
   }
   .rinse-title {
-    font-size: clamp(76px, 17vw, 264px);
+    /* The card opens with the water a quarter of the way down (lib/waterline.ts `START`), and
+       the wordmark has to clear the highest crest of it. At 2.5svh from the top and a line box
+       of 0.9em, a cap of 22svh puts the baseline at 18.5svh against a crest at 21.8svh. Raise
+       either number and the water cuts the letters on a short window. The floor is a phone,
+       where the crest is far higher up and 14vw would leave the word too small to be a title. */
+    font-size: clamp(72px, min(14vw, 22svh), 210px);
     line-height: 0.9;
     letter-spacing: -0.015em;
     color: inherit;
@@ -593,17 +586,18 @@
   .rinse-letter {
     display: inline-block;
   }
+  /* Below the opening waterline, so the tagline starts white on the wash and the water uncovers
+     it in ink, the same way it uncovers the wordmark. */
   .rinse-tagline {
-    margin-top: 20px;
+    position: absolute;
+    top: 40svh;
+    right: 24px;
+    left: 24px;
+    margin-inline: auto;
     max-width: 34ch;
     font-size: 21px;
     line-height: 1.4;
     color: inherit;
-  }
-  /* The ink copy carries the tagline's box and none of its ink: both words are centred on the
-     same block, so both copies have to lay out the same way. */
-  .rinse-tagline-ghost {
-    visibility: hidden;
   }
   .rinse-cue {
     position: absolute;

@@ -26,14 +26,6 @@ export const rinseEdge = (p: number): number => ramp(p, RINSE.from, RINSE.to)
 
 /** The cue goes first: the reader has started, so it has done its job. */
 export const cueOpacity = (p: number): number => 1 - ramp(p, 0, 0.08)
-/**
- * The tagline clears before the water reaches it, so it is never half-legible. The front itself
- * arrives at the tagline around p 0.47 and the rivulet above it reaches a tenth of the card
- * further ahead (lib/waterline.ts), so the last of it is gone by p 0.40.
- */
-export const taglineOpacity = (p: number): number => 1 - ramp(p, 0.28, 0.4)
-/** The line crosses the toggle in the top corner well before it reaches the wordmark. */
-export const headerInk = (p: number): number => ramp(p, 0.21, 0.27)
 /** The forest arrives while the last of the pigment drains. */
 export const forestOpacity = (p: number): number => ramp(p, 0.7, 0.9)
 /** The clean card does not carry a stranded word down into the list. */

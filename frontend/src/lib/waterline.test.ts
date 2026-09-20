@@ -4,9 +4,12 @@ import {
   OVERSHOOT,
   RIVULETS,
   SAMPLES,
+  START,
   WAVES,
   frontAt,
   rivuletDepth,
+  startCrest,
+  verticalScale,
   waterlinePaths,
   waterlineSamples,
   waterlineY,
@@ -16,12 +19,14 @@ const TIMES = [0, 0.7, 2.3, 9.1, 40, 137.5]
 const EDGES = [0, 0.05, 0.2, 0.5, 0.8, 0.95, 1]
 /** The most the waves alone can lift or drop the line. */
 const SWING = WAVES.reduce((total, wave) => total + wave.amp, 0)
+/** The furthest ahead of the front any one rivulet reaches. */
+const DEEPEST = Math.max(...RIVULETS.map((rivulet) => rivulet.depth))
 
 const spread = (ys: number[]) => Math.max(...ys) - Math.min(...ys)
 
 describe("the front", () => {
-  it("starts a card's overshoot above the card and ends the same below it", () => {
-    expect(frontAt(0)).toBeCloseTo(-OVERSHOOT, 10)
+  it("starts a quarter of the way down the card and ends an overshoot below it", () => {
+    expect(frontAt(0)).toBeCloseTo(START, 10)
     expect(frontAt(1)).toBeCloseTo(1 + OVERSHOOT, 10)
   })
 
@@ -34,22 +39,66 @@ describe("the front", () => {
     }
   })
 
-  it("leaves the whole card wet at the start and clean at the end, whatever the waves do", () => {
+  it("opens with the top quarter clean and three quarters still wet", () => {
     for (const time of TIMES) {
-      const start = waterlineSamples(frontAt(0), time, rivuletDepth(0))
-      expect(Math.max(...start)).toBeLessThan(0)
-      const end = waterlineSamples(frontAt(1), time, rivuletDepth(1))
-      expect(Math.min(...end)).toBeGreaterThan(1)
+      const ys = waterlineSamples(frontAt(0), time, rivuletDepth(0))
+      expect(Math.min(...ys)).toBeGreaterThan(0.1)
+      expect(Math.max(...ys)).toBeLessThan(0.45)
     }
   })
 
-  it("never lets a wave or a rivulet reach past the overshoot", () => {
+  it("never lets the opening line reach the wordmark", () => {
+    // `.rinse-title` in index.css puts the baseline at 19.3svh at its cap, and the word has no
+    // descenders. Nothing the waves do at the start may come above that.
+    expect(startCrest()).toBeGreaterThan(0.21)
+    for (const scale of [1, 0.6, 0.34]) {
+      for (const time of TIMES) {
+        const ys = waterlineSamples(frontAt(0), time, rivuletDepth(0), scale)
+        expect(Math.min(...ys)).toBeGreaterThanOrEqual(startCrest(scale) - 1e-9)
+        expect(Math.min(...ys)).toBeGreaterThan(0.21)
+      }
+    }
+  })
+
+  it("ends with the whole card clean, whatever the waves do", () => {
+    for (const time of TIMES) {
+      const ys = waterlineSamples(frontAt(1), time, rivuletDepth(1))
+      expect(Math.min(...ys)).toBeGreaterThan(1)
+    }
+  })
+
+  it("never lets a wave or a rivulet reach past the card's own slack", () => {
     for (const edge of EDGES) {
       for (const time of TIMES) {
         const ys = waterlineSamples(frontAt(edge), time, rivuletDepth(edge))
-        expect(Math.min(...ys)).toBeGreaterThan(-OVERSHOOT - SWING)
-        expect(Math.max(...ys)).toBeLessThan(1 + OVERSHOOT + SWING)
+        expect(Math.min(...ys)).toBeGreaterThan(START - SWING)
+        expect(Math.max(...ys)).toBeLessThan(1 + OVERSHOOT + SWING + DEEPEST)
       }
+    }
+  })
+})
+
+describe("the vertical scale", () => {
+  it("leaves a laptop alone and flattens a phone", () => {
+    expect(verticalScale(1440, 900)).toBe(1)
+    expect(verticalScale(2560, 1080)).toBe(1)
+    expect(verticalScale(390, 844)).toBe(0.34)
+    expect(verticalScale(768, 1024)).toBeCloseTo(0.469, 3)
+  })
+
+  it("keeps the deepest rivulet's slope within a factor of two of the laptop's", () => {
+    const deepest = RIVULETS.reduce((a, b) => (a.depth > b.depth ? a : b))
+    const slope = (w: number, h: number) =>
+      (deepest.depth * verticalScale(w, h) * h) / (deepest.width * w)
+    const laptop = slope(1440, 900)
+    for (const [w, h] of [
+      [390, 844],
+      [768, 1024],
+      [1920, 1080],
+      [2560, 1440],
+    ]) {
+      expect(slope(w, h)).toBeGreaterThan(laptop / 2)
+      expect(slope(w, h)).toBeLessThan(laptop * 2)
     }
   })
 })

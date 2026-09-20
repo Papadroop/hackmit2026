@@ -754,3 +754,52 @@ def fake_omissions(monkeypatch) -> FakeOmissions:
     fake = FakeOmissions()
     monkeypatch.setattr(omissions_module, "find_omissions", fake)
     return fake
+
+
+# ----------------------------------------------------------------------------- the summary (step 18)
+
+
+def golden_header() -> "Header":
+    """What a perfect writer would return for the Shell page: the reference's own titles for
+    whichever targets the ranking picked, and its narrative. The numbers are not in here; the
+    stage computes those from the claims it is given."""
+    from auditor.summary import Header, Title
+
+    analysis = json.loads((REPO / "fixtures" / "shell-climate.analysis.json").read_text(encoding="utf-8"))
+    summary = analysis["summary"]
+    return Header(
+        issues=[Title(target=t["target"], title=t["title"]) for t in summary["top_issues"]],
+        credit=[Title(target=t["target"], title=t["title"]) for t in summary["credit"]],
+        narrative=summary.get("narrative", ""),
+    )
+
+
+class FakeSummariser:
+    """Stands in for auditor.summary.summarise: runs the real aggregation over whatever the
+    pipeline produced and applies canned titles (default: none, so every target falls back to
+    its own words), emitting the header as production does."""
+
+    def __init__(self) -> None:
+        self.header = None
+        self.calls: list[dict] = []
+        self.error: Exception | None = None
+
+    async def __call__(self, document: dict, claims: list[dict], scores: list[dict], verdicts: list[dict], omissions: list[dict], *, emit=None, llm=None, power=None):
+        from auditor.summary import POWER, build_summary
+
+        self.calls.append({"document": document, "claims": claims, "scores": scores, "verdicts": verdicts, "omissions": omissions})
+        if self.error is not None:
+            raise self.error
+        result = build_summary(document, claims, scores, verdicts, omissions, self.header, emit, power=power or POWER)
+        result.notes.insert(0, f"fake summariser: headline {result.summary['headline']['score']}")
+        return result
+
+
+@pytest.fixture(autouse=True)
+def fake_summary(monkeypatch) -> FakeSummariser:
+    """No test calls Claude: the pipeline's summary stage is this fake unless a test sets it up."""
+    from auditor import summary as summary_module
+
+    fake = FakeSummariser()
+    monkeypatch.setattr(summary_module, "summarise", fake)
+    return fake

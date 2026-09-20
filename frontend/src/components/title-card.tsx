@@ -13,7 +13,6 @@ import {
   cueOpacity,
   rinseEdge,
   shaderRunning,
-  taglineOpacity,
   titleExitOpacity,
   titleExitY,
 } from "@/lib/menu-scroll"
@@ -33,13 +32,14 @@ import {
 
 /**
  * The first viewport of the menu: wet green pigment on white paper, moving as if under running
- * water, with the word "rinse" the only other thing on it. Scrolling drains the pigment from the
- * top down, and the wordmark is white where the water still covers it and ink where the sheet has
- * come clean (../../menu-design.md §6).
+ * water, with the word "rinse" the only other thing on it. The card opens with the top quarter
+ * already drained, so the wordmark reads in ink from the first frame and the tagline under it is
+ * still white on the wash; scrolling takes the rest of the pigment down with it
+ * (../../menu-design.md §6).
  *
- * The word is drawn twice, once in each colour, and the waterline clips the ink copy: the water
- * itself uncovers the letters rather than a crossfade turning them grey halfway. That also means
- * the word never sits at a colour that fails contrast against whatever is behind it.
+ * Everything on the card is drawn twice, once in each colour, and the waterline clips the ink
+ * copy: the water itself uncovers the type rather than a crossfade turning it grey halfway. That
+ * also means nothing ever sits at a colour that fails contrast against what is behind it.
  *
  * `progress` is the card wrapper's scroll progress, 0 with its top at the top of the viewport and
  * 1 with its bottom at the bottom. Everything here is a function of that one number, so it
@@ -180,11 +180,10 @@ export function TitleCard({ progress }: { progress: MotionValue<number> }) {
   const card = useRef<HTMLDivElement>(null)
   const { width, height } = useElementSize(card)
 
-  const titleOpacity = useTransform(progress, titleExitOpacity)
-  const titleY = useTransform(progress, (p) =>
+  const blockOpacity = useTransform(progress, titleExitOpacity)
+  const blockY = useTransform(progress, (p) =>
     reduced ? "0svh" : `${titleExitY(p)}svh`
   )
-  const tagline = useTransform(progress, taglineOpacity)
   const cue = useTransform(progress, cueOpacity)
 
   // Nothing below the card should cost GPU, so the shader and the waterline's own drift stop
@@ -226,7 +225,7 @@ export function TitleCard({ progress }: { progress: MotionValue<number> }) {
     return () => cancelAnimationFrame(frame)
   }, [width, height, drifting, progress])
 
-  const wordStyle = { opacity: titleOpacity, y: titleY }
+  const block = { opacity: blockOpacity, y: blockY }
   const measured = width > 0 && height > 0
   /** The meniscus is drawn in card pixels, so its weight follows the smaller of the two. */
   const unit = Math.min(width, height)
@@ -297,32 +296,15 @@ export function TitleCard({ progress }: { progress: MotionValue<number> }) {
         </svg>
       )}
 
-      {/* The word as the water leaves it: white, over the whole card. */}
-      <div className="rinse-card-inner">
+      {/* The block as the water leaves it: white, over the whole card. */}
+      <motion.div className="rinse-card-inner" style={block}>
         <Wordmark
           label="rinse"
           ready={ready}
           reduced={reduced}
           rippling={rippling}
-          style={wordStyle}
         />
-        {/* The rinse drives the outer opacity and the load sequence the inner one: Motion
-            lets a style value win over an animation on the same element, so the two have to
-            sit on elements of their own. */}
-        <motion.div style={{ opacity: tagline }}>
-          <motion.p
-            className="rinse-tagline"
-            initial={reduced ? false : { opacity: 0, y: "0.3em" }}
-            animate={ready ? { opacity: 1, y: "0em" } : { opacity: 0 }}
-            transition={{
-              duration: 0.6,
-              delay: TAGLINE_DELAY,
-              ease: LETTER_EASE,
-            }}
-          >
-            {TAGLINE}
-          </motion.p>
-        </motion.div>
+        <Tagline ready={ready} reduced={reduced} />
         <motion.div className="rinse-cue" style={{ opacity: cue }}>
           <motion.p
             initial={reduced ? false : { opacity: 0 }}
@@ -332,26 +314,22 @@ export function TitleCard({ progress }: { progress: MotionValue<number> }) {
             Choose a document
           </motion.p>
         </motion.div>
-      </div>
+      </motion.div>
 
-      {/* The same word in ink, clipped to the part of the sheet the water has already left.
-          The hidden tagline is what keeps the two words in the same place: the block is
-          centred on both of them together. */}
-      <div
+      {/* The same block in ink, clipped to the part of the sheet the water has already left.
+          Ink goes on top of white rather than under it, so the antialiased edge that shows
+          through is white on pale paper and not dark on green. */}
+      <motion.div
         className="rinse-card-inner rinse-card-ink"
         aria-hidden="true"
-        style={{ clipPath: measured ? "url(#rinse-clean)" : "inset(100% 0 0)" }}
+        style={{
+          ...block,
+          clipPath: measured ? "url(#rinse-clean)" : "inset(0 0 100%)",
+        }}
       >
-        <Wordmark
-          ready={ready}
-          reduced={reduced}
-          rippling={rippling}
-          style={wordStyle}
-        />
-        <div className="rinse-tagline-ghost">
-          <p className="rinse-tagline">{TAGLINE}</p>
-        </div>
-      </div>
+        <Wordmark ready={ready} reduced={reduced} rippling={rippling} />
+        <Tagline ready={ready} reduced={reduced} />
+      </motion.div>
 
       {rippling && (
         <RippleFilter scale={(RIPPLE_SCALE * titleSize()) / RIPPLE_AT} />
@@ -366,20 +344,17 @@ function Wordmark({
   ready,
   reduced,
   rippling,
-  style,
 }: {
   label?: string
   ready: boolean
   reduced: boolean
   rippling: boolean
-  style: { opacity: MotionValue<number>; y: MotionValue<string> }
 }) {
   return (
     <motion.h1
       className="wordmark rinse-title"
       aria-label={label}
-      aria-hidden={label === undefined ? "true" : undefined}
-      style={{ ...style, filter: rippling ? "url(#rinse-ripple)" : "none" }}
+      style={{ filter: rippling ? "url(#rinse-ripple)" : "none" }}
     >
       {LETTERS.map((letter, i) => (
         <motion.span
@@ -404,6 +379,20 @@ function Wordmark({
         </motion.span>
       ))}
     </motion.h1>
+  )
+}
+
+/** The tagline, in the same place in both copies of the block. */
+function Tagline({ ready, reduced }: { ready: boolean; reduced: boolean }) {
+  return (
+    <motion.p
+      className="rinse-tagline"
+      initial={reduced ? false : { opacity: 0, y: "0.3em" }}
+      animate={ready ? { opacity: 1, y: "0em" } : { opacity: 0 }}
+      transition={{ duration: 0.6, delay: TAGLINE_DELAY, ease: LETTER_EASE }}
+    >
+      {TAGLINE}
+    </motion.p>
   )
 }
 

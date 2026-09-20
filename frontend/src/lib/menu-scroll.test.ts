@@ -4,11 +4,9 @@ import {
   TREE_WINDOWS,
   cueOpacity,
   forestOpacity,
-  headerInk,
   ramp,
   rinseEdge,
   shaderRunning,
-  taglineOpacity,
   titleExitOpacity,
   titleExitY,
   treeProgress,
@@ -54,20 +52,10 @@ describe("the card's cues", () => {
     expect(cueOpacity(0.08)).toBe(0)
   })
 
-  it("clears the tagline before the rinse can reach it", () => {
-    // The tagline sits at roughly 55 % of the card, and the rivulet over it runs a tenth of the
-    // card ahead of the front, so the last of the tagline is gone by the time the front is 0.44.
-    expect(taglineOpacity(0.28)).toBe(1)
-    expect(taglineOpacity(0.4)).toBe(0)
-    expect(frontAt(rinseEdge(0.4))).toBeLessThan(0.44)
-  })
-
-  it("turns the header while the line is still in the top corner", () => {
-    expect(headerInk(0.2)).toBe(0)
-    expect(headerInk(0.27)).toBe(1)
-    // 3 svh down the card is where the toggle sits.
-    expect(frontAt(rinseEdge(0.24))).toBeGreaterThan(0)
-    expect(frontAt(rinseEdge(0.24))).toBeLessThan(0.06)
+  it("crosses the tagline early, while the reader is still at the top of the card", () => {
+    // The tagline sits at 40 svh and runs two lines, so the water is through it by p 0.25.
+    expect(frontAt(rinseEdge(0.1))).toBeLessThan(0.4)
+    expect(frontAt(rinseEdge(0.25))).toBeGreaterThan(0.47)
   })
 
   it("takes the title away once the card is clean, and not before", () => {

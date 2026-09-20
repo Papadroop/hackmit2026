@@ -19,7 +19,9 @@ another binary). Extra arguments are JavaScript expressions run in the page befo
 shot, so a state can be set up: `'document.querySelector("[data-claim=\"C9\"]").click()'`.
 `VISION=achromatopsia` (or `deuteranopia`, `protanopia`, `tritanopia`) renders the page as
 that viewer sees it, for checking the verdict encoding without colour. `MOTION=reduce`
-emulates `prefers-reduced-motion` for the menu screen's reduced-motion pass.
+emulates `prefers-reduced-motion` for the menu screen's reduced-motion pass. `CLIP=x,y,w,h`
+shoots one CSS-pixel rectangle of the page instead of the whole viewport, for looking closely
+at a detail such as the menu's waterline.
 
 ## Where things are
 
@@ -27,11 +29,12 @@ emulates `prefers-reduced-motion` for the menu screen's reduced-motion pass.
 |---|---|
 | `src/lib/router.ts` | The URL is the screen: `/` is the menu, `/a/<id>` an analysis. A reload keeps the analysis (the server holds its log). |
 | `src/screens/menu.tsx` | Choose a document, and the screen that carries the name: a title card that rinses as you scroll, the forest behind the list, then the documents, the own-text form and recent analyses. Documents and recordings come from `GET /api/documents`; pace is a per-viewer preference. |
-| `src/components/title-card.tsx` | The first viewport: the Water shader over the generated pigment, the word "rinse", and the mask that drains the pigment from the top down as the reader scrolls. |
+| `src/components/title-card.tsx` | The first viewport: the Water shader over the generated pigment, the word "rinse" in ink above the waterline and the tagline in white below it, and the rAF loop that writes the waterline's paths as the reader scrolls. The block is drawn twice, and the line clips the ink copy to the part of the sheet that has come clean. |
 | `src/components/forest.tsx` | The fixed SVG layer behind the content. Places each tree and writes one CSS variable per tree per frame; CSS derives every dash offset and leaf scale from it. |
 | `src/lib/pigment.ts` | The wet-pigment image the shader refracts, drawn on a canvas from a fixed seed so it is reproducible, plus the luminance maths the contrast checks use. |
 | `src/lib/forest.ts` | The tree generator: limbs as Bézier curves in a unit space, leaves as smoothed blots, and the growth window each carries. Where the five trees stand, and which of them a viewport shows. |
-| `src/lib/menu-scroll.ts` | The menu's scroll choreography as pure functions: the rinse's mask edge, the title's colour and exit, the cue and tagline fades, and each tree's own progress. |
+| `src/lib/menu-scroll.ts` | The menu's scroll choreography as pure functions: how far the rinse has run, the cue's fade, the block's exit, the forest's arrival and each tree's own progress. |
+| `src/lib/waterline.ts` | The edge the rinse leaves: drifting waves and rivulets sampled across the card and smoothed into one path, which clips the wash on one side and the ink wordmark on the other. Pure, so it is tested and scrubs both ways. |
 | `src/lib/random.ts` | mulberry32, the seeded PRNG behind the pigment and the forest, so a demo looks the same on every load. |
 | `src/screens/analysis.tsx` | One analysis: header, workspace (document pane and claim panel, or a bottom sheet below 56rem), and the events panel. Selection lives here. |
 | `src/components/document-pane.tsx` | The sheet: text from the layout, claim highlights cut by claims then by language marks, margin ids, the honest version's redlines and inserted omissions, and whatever sits on the desk above it. |

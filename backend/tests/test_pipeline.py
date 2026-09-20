@@ -7,7 +7,7 @@ import json
 
 import importlib.util
 
-from conftest import REPO, SHELL_URL, golden_consistency, golden_debate, golden_extraction, golden_omissions, golden_review, golden_substantiation, golden_verification, pdf_base64, read_sse, shell_fixture_document
+from conftest import REPO, SHELL_URL, golden_consistency, golden_debate, golden_extraction, golden_header, golden_omissions, golden_review, golden_substantiation, golden_verification, pdf_base64, read_sse, shell_fixture_document
 
 from auditor.extract import ExtractedClaim, Extraction
 from auditor.llm import LlmError
@@ -34,7 +34,7 @@ def check_contract(received, *, analysis_level: bool = False) -> dict:
     return folded
 
 
-def test_url_request_ingests_live_and_replays_the_recording_downstream(client, shell_pages, real_shell, fake_extract, fake_language, fake_substantiate, fake_verify, fake_consistency, fake_omissions, fake_verdict):
+def test_url_request_runs_every_stage_live_and_measures_itself_against_the_recording(client, shell_pages, real_shell, fake_extract, fake_language, fake_substantiate, fake_verify, fake_consistency, fake_omissions, fake_verdict, fake_summary):
     fake_extract.extraction = golden_extraction()
     fake_language.review = golden_review()
     fake_substantiate.matches, fake_substantiate.assessments = golden_substantiation()
@@ -42,6 +42,7 @@ def test_url_request_ingests_live_and_replays_the_recording_downstream(client, s
     fake_consistency.statements, fake_consistency.assessments, consistency_ids, fake_consistency.pages = golden_consistency()
     fake_omissions.coverages = golden_omissions()
     fake_verdict.prosecution, fake_verdict.defence, fake_verdict.judgments = golden_debate()
+    fake_summary.header = golden_header()
     created = client.post("/api/analyses", json={"kind": "url", "url": SHELL_URL, "speed": 1e6})
     assert created.status_code == 201, created.text
     summary = created.json()
@@ -79,9 +80,9 @@ def test_url_request_ingests_live_and_replays_the_recording_downstream(client, s
     assert any("11 of 11 reference criteria and precedent links found (11 from the same source)" in n for n in notes), notes
     assert any("10 sources retrieved for 17 of 25 claims, 10 with a quote found on the page" in n and "5 numbers recomputed" in n for n in notes), notes
     assert any("3 of 3 reference sources matched by host (ogmpartnership.org, sec.gov, transitionpathwayinitiative.org)" in n and "support scored for 25 reference claims, mean absolute difference 0.00" in n for n in notes), notes
-    assert any("Stages after verdict are replayed from recording 'shell-climate', pending roadmap step 18." in n and "0 recorded events" in n and "51 language-stage, 8 substantiate-stage, 70 verify-stage, 33 consistency-stage, 7 omissions-stage and 35 verdict-stage events are replaced" in n for n in notes), notes
-    assert [env["payload"]["stage"] for _, env in received if env["type"] == "stage.started" and "note" in env["payload"]] == ["summary"], "only the summary is still the recording's"
-    assert not any("re-derived from the live" in n for n in notes), "nothing is replayed that needs re-deriving"
+    assert any("header profile within 0.08 of the reference on average" in n and "3 of 5 top issues" in n for n in notes), notes
+    assert not any("replayed from recording" in n for n in notes), "the recording is a reference to measure against, not a source of events"
+    assert [env["payload"]["stage"] for _, env in received if env["type"] == "stage.started" and "note" in env["payload"]] == [], "no stage is replayed"
     assert any("25 of 25 categories agree, mean absolute likelihood difference 0.00" in n for n in notes), notes
     evidence = {env["payload"]["evidence"]["id"]: env["payload"]["evidence"] for _, env in received if env["type"] == "evidence.added"}
     assert not {"E8", "E8b", "E8c", "E9", "E11", "E12"} & set(evidence), "the recording's criteria and precedents are replaced"
@@ -160,7 +161,7 @@ def test_url_request_ingests_live_and_replays_the_recording_downstream(client, s
     assert client.get("/api/analyses").json()[0]["title"] == "Climate | Shell Global"
 
 
-def test_text_request_shows_the_document_and_stops_at_the_verdict_stage(client, fake_fetch, fake_extract, fake_language, fake_substantiate, fake_verify):
+def test_text_request_runs_the_whole_pipeline_on_a_page_with_no_recording(client, fake_fetch, fake_extract, fake_language, fake_substantiate, fake_verify):
     from auditor.language import ClarityScore, FoundSignal, LanguageReview
     from auditor.substantiate import Match, Matches
     from auditor.verify import Assessment, Assessments, Bearing, Computation, Computations, Finding, Findings
@@ -197,10 +198,11 @@ def test_text_request_shows_the_document_and_stops_at_the_verdict_stage(client, 
     types = types_of(received)
     assert types[:2] == ["analysis.started", "stage.started"]
     assert "document.ingested" in types
-    assert types[-2:] == ["stage.started", "analysis.failed"]
-    assert received[-2][1]["payload"]["stage"] == "verdict"
-    failed = received[-1][1]["payload"]
-    assert failed["stage"] == "verdict" and "not built yet" in failed["error"] and "step 18" in failed["error"]
+    assert types[-2:] == ["stage.completed", "analysis.completed"]
+    assert received[-2][1]["payload"]["stage"] == "summary", "nothing is replayed, so the run finishes on its own"
+    header = next(env["payload"] for _, env in received if env["type"] == "summary.updated")
+    assert header["final"] is True and header["summary"]["claim_count"] == 1
+    assert header["summary"]["ext"]["drivers"]["headline"] == ["C1"], "the header says which claim it came from"
     signal = next(env["payload"]["signal"] for _, env in received if env["type"] == "language.signal")
     assert signal["id"] == "L1" and signal["spans"] == [{"text": "carbon neutral", "start": 14, "end": 28}] and signal["claim_ids"] == ["C1"]
     scores = [env["payload"]["score"] for _, env in received if env["type"] == "dimension.scored"]
@@ -218,7 +220,7 @@ def test_text_request_shows_the_document_and_stops_at_the_verdict_stage(client, 
     assert items["N1"]["ext"]["recomputed"] == 80.0 and items["N1"]["verification"] == "computed"
     assert types.index("evidence.added") < types.index("dimension.scored", types.index("evidence.added")), "the criteria item exists before the score cites it"
     stages = [(env["type"], env["payload"]["stage"]) for _, env in received if env["type"] in ("stage.started", "stage.completed")]
-    assert stages == [(t, stage) for stage in ("ingest", "extract", "language", "substantiate", "verify", "consistency", "omissions") for t in ("stage.started", "stage.completed")] + [("stage.started", "verdict")]
+    assert stages == [(t, stage) for stage in ("ingest", "extract", "language", "substantiate", "verify", "consistency", "omissions", "verdict", "summary") for t in ("stage.started", "stage.completed")]
     check_contract(received)
     document = next(env for _, env in received if env["type"] == "document.ingested")["payload"]["document"]
     assert document["text"] == "Label\n\nWe are carbon neutral." and document["title"] == "Label"
@@ -227,7 +229,7 @@ def test_text_request_shows_the_document_and_stops_at_the_verdict_stage(client, 
     assert claims[0]["paragraph"] == "P1"
     extract_index = types.index("stage.started", 2)
     assert types.index("claim.extracted") > extract_index and types.index("stage.completed", extract_index) > types.index("claim.extracted")
-    assert client.get(f"/api/analyses/{summary['analysis_id']}").json()["status"] == "failed"
+    assert client.get(f"/api/analyses/{summary['analysis_id']}").json()["status"] == "completed"
 
 
 def test_pdf_request(client, fake_fetch):
@@ -238,7 +240,7 @@ def test_pdf_request(client, fake_fetch):
     received = read_sse(client, summary["events_url"])
     document = next(env for _, env in received if env["type"] == "document.ingested")["payload"]["document"]
     assert document["title"] == "Acme plc: Towards net zero" and document["text_type"] == "report"
-    assert types_of(received)[-1] == "analysis.failed"
+    assert types_of(received)[-1] == "analysis.completed"
     assert client.post("/api/analyses", json={"kind": "pdf", "filename": "x.pdf", "data_base64": "%%%"}).status_code == 201
     assert client.post("/api/analyses", json={"kind": "pdf"}).status_code == 422
 
@@ -272,7 +274,7 @@ def test_live_run_is_saved_like_any_other(client, fake_fetch, runs_dir):
     assert any(line["type"] == "document.ingested" for line in lines)
 
 
-def test_partial_extraction_keeps_only_the_matched_recorded_stages(client, shell_pages, real_shell, fake_extract):
+def test_a_claim_the_recording_never_had_is_analysed_like_the_rest(client, shell_pages, real_shell, fake_extract):
     """Three golden claims found (one with its quote slightly off), plus one claim the golden
     reference does not have. Every evaluator runs live, so the fourth claim is scored on all
     four dimensions and decided like the rest; what the recording still supplies reaches only
@@ -306,7 +308,8 @@ def test_partial_extraction_keeps_only_the_matched_recorded_stages(client, shell
             assert all(l["target"] in {"C1", "C14", "C23"} or l["target"].startswith("O") for l in env["payload"]["evidence"]["links"])
     final = next(env["payload"]["summary"] for _, env in received if env["type"] == "summary.updated")
     assert final["claim_count"] == 4 and sum(final["verdict_distribution"].values()) == 4
-    assert all(x["target"] in {"C1", "C14", "C23"} or x["target"].startswith("O") for x in final["top_issues"] + final["credit"])
+    assert all(x["target"] in {"C1", "C14", "C23", "C26"} or x["target"].startswith("O") for x in final["top_issues"] + final["credit"])
+    assert "C26" in {x["target"] for x in final["top_issues"] + final["credit"]}, "the new claim reaches the header like any other"
     assert [x["rank"] for x in final["top_issues"]] == list(range(1, len(final["top_issues"]) + 1))
     completed = received[-1][1]["payload"]["counts"]
     assert completed["claims"] == 4 and completed["omissions"] == 0, "the omissions stage ran live and this test gives it nothing to find"

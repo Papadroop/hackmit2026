@@ -14,7 +14,14 @@
  */
 import { clamp01 } from "@/lib/menu-scroll"
 
-/** Slack past each end of the card, so the line starts wholly above it and ends wholly below. */
+/**
+ * Where the water already is when the card arrives. The card does not open under a full sheet
+ * of pigment: the top quarter has drained already, so the wordmark is in ink from the first
+ * frame and the tagline under it is still white on the wash. `.rinse-title` in index.css is
+ * capped to keep the word clear of `startCrest()`.
+ */
+export const START = 0.28
+/** Slack past the bottom of the card, so the line ends wholly below it. */
 export const OVERSHOOT = 0.28
 /** Points sampled across the card. Enough that the quadratic smoothing keeps the narrowest
  *  rivulet narrow, which is what separates a channel of water from a rolling hill. */
@@ -68,9 +75,13 @@ const TAU = Math.PI * 2
 const LEADING = 0.66
 const TRAILING = 1.5
 
-/** The front's own height, from `OVERSHOOT` above the card to `OVERSHOOT` below it. */
+/** The front's own height, from `START` to `OVERSHOOT` below the bottom of the card. */
 export const frontAt = (edge: number): number =>
-  clamp01(edge) * (1 + 2 * OVERSHOOT) - OVERSHOOT
+  START + clamp01(edge) * (1 + OVERSHOOT - START)
+
+/** The highest the opening line can reach: every wave at its crest, and no rivulets yet. */
+export const startCrest = (scale: number = 1): number =>
+  START - scale * WAVES.reduce((total, wave) => total + wave.amp, 0)
 
 /** Rivulets build as the rinse runs and are gone at both ends, where the line is off the card. */
 export const rivuletDepth = (edge: number): number =>

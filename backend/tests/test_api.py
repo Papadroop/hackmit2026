@@ -97,10 +97,12 @@ def test_live_request_goes_through_the_same_stream(client, fake_fetch):
     received = read_sse(client, summary["events_url"])
     types = [env["type"] for _, env in received]
     assert types[:2] == ["analysis.started", "stage.started"]
-    assert "document.ingested" in types and types[-1] == "analysis.failed"
-    assert "not built yet" in received[-1][1]["payload"]["error"]
-    assert received[-1][1]["payload"]["stage"] == "verdict", "ingest through omissions are built; the verdict layer needs a recording to run inside"
-    assert client.get(f"/api/analyses/{summary['analysis_id']}").json()["status"] == "failed"
+    assert "document.ingested" in types and types[-1] == "analysis.completed"
+    assert [env["payload"]["stage"] for _, env in received if env["type"] == "stage.started"] == [
+        "ingest", "extract", "language", "substantiate", "verify", "consistency", "omissions", "verdict", "summary",
+    ], "every stage runs live; a page with no recording of its own goes all the way through"
+    assert "summary.updated" in types and received[-2][1]["payload"]["stage"] == "summary"
+    assert client.get(f"/api/analyses/{summary['analysis_id']}").json()["status"] == "completed"
 
 
 def test_cancel_emits_a_terminal_event(client):

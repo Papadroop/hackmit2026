@@ -1,21 +1,22 @@
 # Backend
 
 FastAPI service: creates analyses, streams their events over Server-Sent Events, and replays
-saved event logs with their original timing. The pipeline stages (roadmap steps 10–17) plug
-into `auditor/pipeline.py`. All of them are built: a live request reads its text, URL or PDF
-into a contract Document, Claude finds the claims, marks how they are worded and scores each
-claim's Clarity, matches every claim to the criteria it is measured against and the precedents
-on similar wording from the curated stores in `knowledge/`, searches the web for the facts and
-checks every quote it brings back against the page it came from, recomputes the numbers and
-scores Support and Materiality, reads the company against itself — its own filings and pages,
-and the Wayback Machine's captures of this very page — and scores Consistency, measures the
-page against the material topics its industry's reference names and writes a margin card for
-each one it leaves out, and finally argues every claim between a prosecutor and a defence and
-has a judge decide it, with the likelihood, category and confidence derived by the contract's
-rules from the four dimension scores. Every entity is streamed as it is written. Only the
-document summary (step 18) still replays from a recording of the same document, so a page with
-no recording runs the whole pipeline and then stops at `verdict` with a clear message and
-everything found still shown.
+saved event logs with their original timing. The pipeline stages (roadmap steps 10–18) plug
+into `auditor/pipeline.py`, and all of them are built, so any document runs all the way
+through: a request reads its text, URL or PDF into a contract Document, Claude finds the
+claims, marks how they are worded and scores each claim's Clarity, matches every claim to the
+criteria it is measured against and the precedents on similar wording from the curated stores
+in `knowledge/`, searches the web for the facts and checks every quote it brings back against
+the page it came from, recomputes the numbers and scores Support and Materiality, reads the
+company against itself — its own filings and pages, and the Wayback Machine's captures of this
+very page — and scores Consistency, measures the page against the material topics its
+industry's reference names and writes a margin card for each one it leaves out, argues every
+claim between a prosecutor and a defence and has a judge decide it, and finally aggregates the
+lot into the summary header. Every entity is streamed as it is written.
+
+Nothing is replayed. A recording of the same page, where one exists, is a reference to measure
+against: each stage emits a `debug.note` comparing what it found with the golden reference, and
+those notes are each step's visual check. A page nobody has recorded runs the same way.
 
 ## Run
 
@@ -144,6 +145,17 @@ Every analysis is also appended, event by event, to `backend/data/runs/<timestam
   cross-industry entry. `check [--fetch]` validates the store and looks for every quote on its
   page; `coverage <file or url>` prints which of the reference's words are in a document and
   which are not, with no model in the loop.
+- `summary.py`: roadmap step 18, D6 "Aggregation" — the header, from the results beneath it.
+  Nothing here is a model's opinion: the profile, the headline and the ranking are arithmetic,
+  and each number records in `ext.drivers` the claims it came from, which is the step's visual
+  check. The mean leans to the worst of the page — each claim's say is its prominence, its
+  confidence and the square of how bad it is — because a plain mean would let twenty true
+  footnotes bury one false headline, the document-level form of the failure weakest-link
+  prevents at claim level. Completeness comes from the omissions, which have no prominence.
+  Claude is asked for one thing, at the end: a title for each issue and each credit, and the
+  narrative. Measure it without calling a model:
+  `.venv/bin/python -m auditor.summary ../fixtures/shell-climate.analysis.json --explain`
+  prints the arithmetic and compares the header with the reference's hand-written one.
 - `verdict.py`: roadmap step 17. A prosecutor and a defence argue each claim in two calls that
   cannot see each other, from one dossier: the claim, its four dimension scores with their
   bases, its language marks and every evidence item linked to it. A judge then reads both and
