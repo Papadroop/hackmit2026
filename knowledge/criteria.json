@@ -1,0 +1,529 @@
+[
+  {
+    "id": "cma-green-claims-code-generic-terms",
+    "kind": "standard",
+    "tier": 1,
+    "source": {
+      "name": "CMA Green Claims Code: generic terms",
+      "publisher": "UK Competition and Markets Authority",
+      "date": "2021-09-20",
+      "locator": "Principle (a), 'Claims must be truthful and accurate'"
+    },
+    "url": "https://www.gov.uk/government/publications/green-claims-code-making-environmental-claims/environmental-claims-on-goods-and-services",
+    "quote": "Terms like ‘green’, ‘sustainable’ or ‘eco-friendly,’ especially if used without explanation, are likely to be seen as suggesting that a product, service, process, brand or business as a whole has a positive environmental impact, or at least no adverse impact. Unless a business can prove that, it risks falling short of its legal obligations.",
+    "verified": true,
+    "verification": "fetched_exact",
+    "retrieved": "2026-09-20",
+    "note": "The Code's six principles: claims must be truthful and accurate; clear and unambiguous; must not omit or hide important relevant information; comparisons must be fair and meaningful; claims must consider the full life cycle; claims must be substantiated.",
+    "index": {
+      "jurisdiction": "UK",
+      "terms": ["sustainable", "green", "eco-friendly", "environmentally friendly", "climate friendly", "cleaner", "clean energy", "low-carbon", "lower-carbon", "kinder to the planet", "energy system of the future", "high-quality", "responsible"],
+      "applies_to": ["vague_attribute"],
+      "rule": "A general term such as 'green', 'sustainable', 'eco-friendly', 'cleaner' or 'low-carbon' implies that the product, brand or business as a whole is beneficial or at least harmless to the environment; used without explanation it is legitimate only if the business can prove that overall benefit, otherwise the claim must be limited to the specific benefit it can substantiate."
+    }
+  },
+  {
+    "id": "cma-green-claims-code-comparisons",
+    "kind": "standard",
+    "tier": 1,
+    "source": {
+      "name": "CMA Green Claims Code: comparisons",
+      "publisher": "UK Competition and Markets Authority",
+      "date": "2021-09-20",
+      "locator": "Principle (d), 'Comparisons must be fair and meaningful'"
+    },
+    "url": "https://www.gov.uk/government/publications/green-claims-code-making-environmental-claims/environmental-claims-on-goods-and-services",
+    "quote": "A comparative claim that a clothing range is now ‘greener’ is unlikely to be fair and meaningful on its own and risks misleading consumers.",
+    "verified": true,
+    "verification": "fetched_exact",
+    "retrieved": "2026-09-20",
+    "note": "The Code adds that comparisons should be based on clear, up to date and objective information, should compare like with like, and should be capable of being substantiated by evidence consumers can verify.",
+    "index": {
+      "jurisdiction": "UK",
+      "terms": ["cleaner", "greener", "lower", "less emissions", "more efficient", "lower-carbon", "better", "reduced", "than"],
+      "applies_to": ["comparative"],
+      "rule": "A comparative claim ('cleaner', 'lower-carbon', 'less emissions', 'more efficient') is legitimate only when the text makes clear what is compared with what, on what measure and over what period, and the comparison rests on objective, current evidence; a comparative with no stated baseline misleads on its own."
+    }
+  },
+  {
+    "id": "cma-green-claims-code-omissions",
+    "kind": "standard",
+    "tier": 1,
+    "source": {
+      "name": "CMA Green Claims Code: omissions",
+      "publisher": "UK Competition and Markets Authority",
+      "date": "2021-09-20",
+      "locator": "Principle (c), 'Claims must not omit or hide important information'"
+    },
+    "url": "https://www.gov.uk/government/publications/green-claims-code-making-environmental-claims/environmental-claims-on-goods-and-services",
+    "quote": "Claims made by businesses must not omit or hide information that consumers need to make informed choices.",
+    "verified": true,
+    "verification": "fetched_exact",
+    "retrieved": "2026-09-20",
+    "note": "The Code says the whole of a business's activities may be relevant to whether a claim misleads: a claim about a small part of the business must not be presented as if it described the whole.",
+    "index": {
+      "jurisdiction": "UK",
+      "terms": ["net zero", "net-zero", "transition", "helping", "supporting", "proportion", "share", "part of our business", "investing in"],
+      "applies_to": [],
+      "rule": "A claim about one activity, product line or share of a business is legitimate only if the text does not leave out information a reader needs to judge it, such as how large that activity is relative to the rest of the business; presenting a minor activity as the whole is a misleading omission."
+    }
+  },
+  {
+    "id": "eu-2024-825-offset-neutrality",
+    "kind": "law",
+    "tier": 1,
+    "source": {
+      "name": "Directive (EU) 2024/825: offset-based neutrality claims banned",
+      "publisher": "European Union",
+      "date": "2024-02-28",
+      "locator": "Annex, point (2), inserting point 4c into Annex I of Directive 2005/29/EC; applies in Member States from 27 September 2026"
+    },
+    "url": "https://eur-lex.europa.eu/eli/dir/2024/825/oj/eng",
+    "quote": "Claiming, based on the offsetting of greenhouse gas emissions, that a product has a neutral, reduced or positive impact on the environment in terms of greenhouse gas emissions.",
+    "verified": true,
+    "verification": "fetched_exact",
+    "retrieved": "2026-09-20",
+    "note": "A practice on the Annex I blacklist is unfair in all circumstances. Recital 12 names 'climate neutral', 'CO2 neutral certified', 'carbon positive', 'climate net zero', 'climate compensated', 'reduced climate impact' and 'limited CO2 footprint' as claims that may only rest on the product's actual life-cycle impact, not on offsets outside its value chain. Business-to-consumer product claims are in scope; corporate targets are not directly.",
+    "index": {
+      "jurisdiction": "EU",
+      "terms": ["carbon neutral", "climate neutral", "CO2 neutral", "net zero product", "carbon positive", "climate compensated", "offset", "carbon credits", "compensate"],
+      "applies_to": ["certification", "vague_attribute", "factual"],
+      "rule": "From 27 September 2026 a claim that a product (good or service) is carbon neutral, climate neutral, has reduced climate impact or is climate positive is banned outright in the EU when it rests on offsetting; such a claim is legitimate only when it describes the product's actual life-cycle emissions, with any credits presented separately as an investment rather than as neutrality."
+    }
+  },
+  {
+    "id": "eu-2024-825-generic-claims",
+    "kind": "law",
+    "tier": 1,
+    "source": {
+      "name": "Directive (EU) 2024/825: generic environmental claims banned",
+      "publisher": "European Union",
+      "date": "2024-02-28",
+      "locator": "Annex, point (2), inserting point 4a into Annex I of Directive 2005/29/EC; applies from 27 September 2026"
+    },
+    "url": "https://eur-lex.europa.eu/eli/dir/2024/825/oj/eng",
+    "quote": "Making a generic environmental claim for which the trader is not able to demonstrate recognised excellent environmental performance relevant to the claim.",
+    "verified": true,
+    "verification": "fetched_exact",
+    "retrieved": "2026-09-20",
+    "note": "Recital 9 gives 'environmentally friendly', 'eco-friendly', 'green', 'nature's friend', 'ecological', 'environmentally correct', 'climate friendly', 'gentle on the environment', 'carbon friendly', 'energy efficient', 'biodegradable', 'biobased' and similar as generic claims. Recognised excellent performance means an EU Ecolabel or equivalent, or top-class performance under EU law.",
+    "index": {
+      "jurisdiction": "EU",
+      "terms": ["green", "sustainable", "eco-friendly", "environmentally friendly", "climate friendly", "cleaner", "clean", "low-carbon", "energy efficient", "responsible"],
+      "applies_to": ["vague_attribute"],
+      "rule": "From 27 September 2026 a generic environmental claim ('green', 'climate friendly', 'eco-friendly', 'clean') made to consumers in the EU is banned unless the trader can show recognised excellent environmental performance relevant to the claim; a generic term is legitimate only when the same message states clearly and prominently what specific environmental benefit it refers to."
+    }
+  },
+  {
+    "id": "eu-2024-825-future-performance",
+    "kind": "law",
+    "tier": 1,
+    "source": {
+      "name": "Directive (EU) 2024/825: claims about future environmental performance",
+      "publisher": "European Union",
+      "date": "2024-02-28",
+      "locator": "Article 1(2)(b), adding point (d) to Article 6(2) of Directive 2005/29/EC; applies from 27 September 2026"
+    },
+    "url": "https://eur-lex.europa.eu/eli/dir/2024/825/oj/eng",
+    "quote": "making an environmental claim related to future environmental performance without clear, objective, publicly available and verifiable commitments set out in a detailed and realistic implementation plan that includes measurable and time-bound targets and other relevant elements necessary to support its implementation, such as allocation of resources",
+    "verified": true,
+    "verification": "fetched_exact",
+    "retrieved": "2026-09-20",
+    "note": "The provision continues: the plan must be regularly verified by an independent third-party expert whose findings are made available to consumers. Recital 11 says the plan should be publicly available, updated and its progress reported.",
+    "index": {
+      "jurisdiction": "EU",
+      "terms": ["net zero by", "carbon neutral by", "by 2030", "by 2040", "by 2050", "target", "ambition", "aim to", "commit to", "goal", "pledge"],
+      "applies_to": ["commitment"],
+      "rule": "A claim about future environmental performance (a net-zero or carbon-neutral target, an emissions-reduction goal) is misleading unless it rests on clear, publicly available, verifiable commitments in a detailed and realistic implementation plan with measurable, time-bound targets, resource allocation, and regular independent verification; a target stated with no such plan is unsubstantiated."
+    }
+  },
+  {
+    "id": "eu-2024-825-sustainability-labels",
+    "kind": "law",
+    "tier": 1,
+    "source": {
+      "name": "Directive (EU) 2024/825: sustainability labels",
+      "publisher": "European Union",
+      "date": "2024-02-28",
+      "locator": "Annex, point (1), inserting point 2a into Annex I of Directive 2005/29/EC; applies from 27 September 2026"
+    },
+    "url": "https://eur-lex.europa.eu/eli/dir/2024/825/oj/eng",
+    "quote": "Displaying a sustainability label that is not based on a certification scheme or not established by public authorities.",
+    "verified": true,
+    "verification": "fetched_exact",
+    "retrieved": "2026-09-20",
+    "note": "A certification scheme must be open, have published conditions, and have compliance monitored objectively by a party independent of both the scheme owner and the trader. A company's own logo or mark is not a certification.",
+    "index": {
+      "jurisdiction": "EU",
+      "terms": ["certified", "certification", "label", "logo", "mark", "seal", "verified by", "validated by", "awarded", "rated"],
+      "applies_to": ["certification"],
+      "rule": "A sustainability label, mark or logo is legitimate only when it is based on a certification scheme with published conditions and independent third-party monitoring, or was established by a public authority; a company's own mark, or a scheme the company controls, cannot carry a label claim."
+    }
+  },
+  {
+    "id": "eu-2024-825-part-as-whole",
+    "kind": "law",
+    "tier": 1,
+    "source": {
+      "name": "Directive (EU) 2024/825: a claim about part presented as the whole",
+      "publisher": "European Union",
+      "date": "2024-02-28",
+      "locator": "Annex, point (2), inserting point 4b into Annex I of Directive 2005/29/EC; applies from 27 September 2026"
+    },
+    "url": "https://eur-lex.europa.eu/eli/dir/2024/825/oj/eng",
+    "quote": "Making an environmental claim about the entire product or the trader’s entire business when it concerns only a certain aspect of the product or a specific activity of the trader’s business.",
+    "verified": true,
+    "verification": "fetched_exact",
+    "retrieved": "2026-09-20",
+    "note": "Recital 10 gives the example of a claim that packaging is made of recycled material while only part of it is, and a claim about a business as a whole that rests on one product line or activity.",
+    "index": {
+      "jurisdiction": "EU",
+      "terms": ["our operations", "our products", "our business", "the company", "we are", "across", "all", "every"],
+      "applies_to": ["factual", "vague_attribute", "comparative"],
+      "rule": "A claim worded as if it covered the whole product or the whole business is legitimate only if it does; when the benefit concerns one component, one product line, one site or operated assets only, the text must say so where the claim is made."
+    }
+  },
+  {
+    "id": "ftc-green-guides-general-benefit",
+    "kind": "law",
+    "tier": 1,
+    "source": {
+      "name": "FTC Green Guides, 16 CFR § 260.4: general environmental benefit claims",
+      "publisher": "US Federal Trade Commission",
+      "date": "2012-10-11",
+      "locator": "§ 260.4(b) and (c)"
+    },
+    "url": "https://www.ecfr.gov/current/title-16/chapter-I/subchapter-B/part-260",
+    "quote": "Because it is highly unlikely that marketers can substantiate all reasonable interpretations of these claims, marketers should not make unqualified general environmental benefit claims.",
+    "verified": true,
+    "verification": "fetched_exact",
+    "retrieved": "2026-09-20",
+    "note": "Marketers can qualify a general claim with clear and prominent language that limits it to a specific benefit, and should not imply that any specific benefit is significant if it is negligible.",
+    "index": {
+      "jurisdiction": "US",
+      "terms": ["eco-friendly", "green", "environmentally friendly", "sustainable", "cleaner", "clean", "better for the planet", "kinder to the planet"],
+      "applies_to": ["vague_attribute"],
+      "rule": "An unqualified general environmental benefit claim ('eco-friendly', 'green', 'clean') cannot be substantiated in all its reasonable interpretations and should not be made; the claim is legitimate only when qualified, clearly and prominently, to the specific benefit the marketer can prove."
+    }
+  },
+  {
+    "id": "ftc-green-guides-carbon-offsets",
+    "kind": "law",
+    "tier": 1,
+    "source": {
+      "name": "FTC Green Guides, 16 CFR § 260.5: carbon offsets",
+      "publisher": "US Federal Trade Commission",
+      "date": "2012-10-11",
+      "locator": "§ 260.5(a) to (c)"
+    },
+    "url": "https://www.ecfr.gov/current/title-16/chapter-I/subchapter-B/part-260",
+    "quote": "Given the complexities of carbon offsets, sellers should employ competent and reliable scientific and accounting methods to properly quantify claimed emission reductions and to ensure that they do not sell the same reduction more than one time.",
+    "verified": true,
+    "verification": "fetched_exact",
+    "retrieved": "2026-09-20",
+    "note": "The section adds that it is deceptive to misrepresent that an offset represents reductions that have already occurred or will occur in the immediate future when the reduction is more than two years away, and to claim an offset for a reduction the law already requires.",
+    "index": {
+      "jurisdiction": "US",
+      "terms": ["carbon credits", "offset", "offsetting", "compensate", "high-quality carbon credits", "nature-based", "carbon neutral", "net of credits"],
+      "applies_to": ["commitment", "factual", "certification"],
+      "rule": "A claim that rests on carbon credits or offsets is legitimate only when the reductions are quantified by reliable methods, are not double-counted, are additional to what the law requires, and have occurred or will occur within two years; a claim that names 'high-quality' credits without a standard, registry or vintage gives the reader none of this."
+    }
+  },
+  {
+    "id": "ftc-green-guides-renewable-energy",
+    "kind": "law",
+    "tier": 1,
+    "source": {
+      "name": "FTC Green Guides, 16 CFR § 260.15: renewable energy claims",
+      "publisher": "US Federal Trade Commission",
+      "date": "2012-10-11",
+      "locator": "§ 260.15(b) to (d)"
+    },
+    "url": "https://www.ecfr.gov/current/title-16/chapter-I/subchapter-B/part-260",
+    "quote": "If a marketer generates renewable electricity but sells renewable energy certificates for all of that electricity, it would be deceptive for the marketer to represent, directly or by implication, that it uses renewable energy.",
+    "verified": true,
+    "verification": "fetched_exact",
+    "retrieved": "2026-09-20",
+    "note": "A 'made with renewable energy' claim is deceptive unless all or virtually all of the significant manufacturing processes are powered by renewable energy or by non-renewable energy matched with renewable energy certificates; otherwise the percentage must be stated clearly and prominently.",
+    "index": {
+      "jurisdiction": "US",
+      "terms": ["renewable electricity", "100 percent renewable", "100% renewable", "clean electricity", "clean energy", "wind and solar", "powered by", "renewable energy"],
+      "applies_to": ["factual", "commitment", "certification"],
+      "rule": "A claim of renewable or clean electricity is legitimate only when it says what share of the relevant energy use it covers and whether it rests on generation, purchase, or certificates that match non-renewable use; '100 percent clean electricity' without the mechanism or the boundary overstates."
+    }
+  },
+  {
+    "id": "ftc-green-guides-certifications",
+    "kind": "law",
+    "tier": 1,
+    "source": {
+      "name": "FTC Green Guides, 16 CFR § 260.6: certifications and seals of approval",
+      "publisher": "US Federal Trade Commission",
+      "date": "2012-10-11",
+      "locator": "§ 260.6(c) and (d)"
+    },
+    "url": "https://www.ecfr.gov/current/title-16/chapter-I/subchapter-B/part-260",
+    "quote": "A marketer's use of an environmental certification or seal of approval likely conveys that the product offers a general environmental benefit (see § 260.4) if the certification or seal does not convey the basis for the certification or seal, either through the name or some other means.",
+    "verified": true,
+    "verification": "fetched_exact",
+    "retrieved": "2026-09-20",
+    "note": "A third-party certification does not remove the marketer's own duty to substantiate every claim the certification reasonably communicates, and a material connection between marketer and certifier must be disclosed.",
+    "index": {
+      "jurisdiction": "US",
+      "terms": ["certified", "certification", "seal", "verified", "validated", "assured", "rated", "award", "leader"],
+      "applies_to": ["certification"],
+      "rule": "A certification, seal, rating or award is legitimate as a claim only when the text conveys what it certifies and against what standard, the certifier is independent of the company, and the company can itself substantiate what the certification implies; a bare seal implies a general benefit the company must be able to prove."
+    }
+  },
+  {
+    "id": "ftc-green-guides-recyclable",
+    "kind": "law",
+    "tier": 1,
+    "source": {
+      "name": "FTC Green Guides, 16 CFR § 260.12 and § 260.13: recyclable and recycled content claims",
+      "publisher": "US Federal Trade Commission",
+      "date": "2012-10-11",
+      "locator": "§ 260.12(a) and (b); § 260.13"
+    },
+    "url": "https://www.ecfr.gov/current/title-16/chapter-I/subchapter-B/part-260",
+    "quote": "A product or package should not be marketed as recyclable unless it can be collected, separated, or otherwise recovered from the waste stream through an established recycling program for reuse or use in manufacturing or assembling another item.",
+    "verified": true,
+    "verification": "fetched_exact",
+    "retrieved": "2026-09-20",
+    "note": "An unqualified recyclable claim needs recycling facilities available to at least 60 percent of consumers or communities where the item is sold. A recycled-content claim must be substantiated for the stated percentage and, for pre-consumer material, show that it would otherwise have entered the waste stream.",
+    "index": {
+      "jurisdiction": "US",
+      "terms": ["recyclable", "recycled", "recycled content", "recycled material", "fiber-based packaging", "plastic-free", "circular"],
+      "applies_to": ["factual", "certification", "vague_attribute"],
+      "rule": "A recyclable claim is legitimate only when an established recycling programme actually recovers the item for most of the consumers it is sold to; a recycled-content claim is legitimate only when the percentage and its basis (by weight, pre- or post-consumer) are substantiated."
+    }
+  },
+  {
+    "id": "cap-code-section-11-absolute-claims",
+    "kind": "standard",
+    "tier": 1,
+    "source": {
+      "name": "UK CAP Code, section 11: environmental claims",
+      "publisher": "Committee of Advertising Practice / Advertising Standards Authority",
+      "date": "2025-10-24",
+      "locator": "Rules 11.1 to 11.4"
+    },
+    "url": "https://www.asa.org.uk/type/non_broadcast/code_section/11.html",
+    "quote": "Absolute claims must be supported by a high level of substantiation. Comparative claims such as \"greener\" or \"friendlier\" can be justified, for example, if the advertised product provides a total environmental benefit over that of the marketer's previous product or competitor products and the basis of the comparison is clear.",
+    "verified": true,
+    "verification": "fetched_exact",
+    "retrieved": "2026-09-20",
+    "note": "Rule 11.1: the basis of environmental claims must be clear, and unqualified claims could mislead if they omit material information. Rule 11.2: the meaning of all terms must be clear. Rule 11.4: claims must be based on the full life cycle unless stated otherwise.",
+    "index": {
+      "jurisdiction": "UK",
+      "terms": ["sustainable", "carbon neutral", "net zero", "zero emissions", "eliminated", "100%", "greener", "cleaner", "friendlier", "responsible"],
+      "applies_to": ["vague_attribute", "comparative", "factual", "certification"],
+      "rule": "An absolute environmental claim ('sustainable', 'carbon neutral', 'zero', 'eliminated') is legitimate only with a high level of substantiation and with its basis stated; a claim based on part of a product's life cycle or on part of a business must say so."
+    }
+  },
+  {
+    "id": "cap-guidance-carbon-neutral-net-zero",
+    "kind": "standard",
+    "tier": 1,
+    "source": {
+      "name": "CAP and BCAP guidance on carbon neutral and net zero claims",
+      "publisher": "Committee of Advertising Practice / Advertising Standards Authority",
+      "date": "2023-02-10",
+      "locator": "Updated guidance, 'The environment: misleading claims and social responsibility in advertising'"
+    },
+    "url": "https://www.asa.org.uk/news/updated-environment-guidance-carbon-neutral-and-net-zero-claims-in-advertising.html",
+    "quote": "Avoid using unqualified carbon neutral, net zero or similar claims. Information explaining the basis for these claims helps consumers’ understanding, and such information should therefore not be omitted.",
+    "verified": true,
+    "verification": "fetched_exact",
+    "retrieved": "2026-09-20",
+    "note": "The guidance also says marketers should state whether, and how far, a claim rests on actual reductions or on offsetting, and where offsets are used, name the scheme. Its research found consumers assumed 'carbon neutral' meant an absolute reduction had taken place and felt misled when offsetting was revealed.",
+    "index": {
+      "jurisdiction": "UK",
+      "terms": ["carbon neutral", "net zero", "net-zero", "climate neutral", "CO2 neutral", "offset", "carbon credits", "neutral"],
+      "applies_to": ["certification", "commitment", "vague_attribute", "factual"],
+      "rule": "A carbon-neutral or net-zero claim is legitimate only when the same text explains its basis: what is counted, how far it rests on actual reductions rather than offsetting, and which offsetting scheme is used; an unqualified 'carbon neutral' or 'net zero' is likely to mislead."
+    }
+  },
+  {
+    "id": "cap-guidance-future-net-zero-goals",
+    "kind": "standard",
+    "tier": 1,
+    "source": {
+      "name": "CAP and BCAP guidance on net zero and carbon neutral goals",
+      "publisher": "Committee of Advertising Practice / Advertising Standards Authority",
+      "date": "2023-02-10",
+      "locator": "Updated guidance, 'The environment: misleading claims and social responsibility in advertising'"
+    },
+    "url": "https://www.asa.org.uk/news/updated-environment-guidance-carbon-neutral-and-net-zero-claims-in-advertising.html",
+    "quote": "Claims based on future goals relating to reaching net zero or achieving carbon neutrality should be based on a verifiable strategy to deliver them.",
+    "verified": true,
+    "verification": "fetched_exact",
+    "retrieved": "2026-09-20",
+    "note": "Qualifying information must sit close enough to the main claim for consumers to see it before deciding; the further away and the less prominent it is, the more likely the claim misleads.",
+    "index": {
+      "jurisdiction": "UK",
+      "terms": ["net zero by 2050", "net-zero emissions", "carbon neutral by", "target", "ambition", "goal", "aim", "transition"],
+      "applies_to": ["commitment"],
+      "rule": "A net-zero or carbon-neutral goal is legitimate as a claim only when a verifiable strategy to deliver it exists and the text points to it: interim milestones, what is in scope, and what the company itself will do; a target date alone is not a strategy."
+    }
+  },
+  {
+    "id": "acm-guidelines-sustainability-claims",
+    "kind": "standard",
+    "tier": 1,
+    "source": {
+      "name": "ACM Guidelines on Sustainability Claims",
+      "publisher": "Netherlands Authority for Consumers and Markets",
+      "date": "2021-01-28",
+      "locator": "Five rules of thumb; updated 2023"
+    },
+    "url": "https://www.acm.nl/en/publications/guidelines-sustainability-claims",
+    "quote": "Companies must be honest about sustainability. They can only use clear, truthful, and relevant sustainability claims.",
+    "verified": true,
+    "verification": "fetched_exact",
+    "retrieved": "2026-09-20",
+    "note": "The five rules of thumb: make clear what sustainability benefit the product offers; substantiate claims with facts and keep them up to date; comparisons must be fair; be honest and specific about the company's own efforts; visual claims and labels must be useful, not confusing.",
+    "index": {
+      "jurisdiction": "Netherlands",
+      "terms": ["sustainable", "climate neutral", "CO2 neutral", "compensated", "green", "responsible", "future", "ambition"],
+      "applies_to": [],
+      "rule": "A sustainability claim is legitimate only when it says concretely which benefit it refers to, is backed by current facts, and is specific about the company's own effort rather than a general aspiration; claims about the future must be concrete, measurable and accompanied by the plan."
+    }
+  },
+  {
+    "id": "competition-bureau-canada-environmental-claims",
+    "kind": "standard",
+    "tier": 1,
+    "source": {
+      "name": "Competition Bureau Canada, 'Environmental claims and the Competition Act'",
+      "publisher": "Competition Bureau Canada",
+      "date": "2025-06-05",
+      "locator": "Principle 5, 'Environmental claims should be clear and specific – not vague'; Principle 6 on claims about the future"
+    },
+    "url": "https://competition-bureau.canada.ca/en/how-we-foster-competition/education-and-outreach/publications/environmental-claims-and-competition-act",
+    "quote": "Businesses should avoid vague environmental claims in favour of clear and specific ones. Vague environmental claims may convey a general impression to consumers that the environmental benefit is broader or of greater magnitude than it actually is.",
+    "verified": true,
+    "verification": "fetched_exact",
+    "retrieved": "2026-09-20",
+    "note": "Principle 6: environmental claims about the future should be supported by substantiation and a clear plan. Since June 2024 the Act requires claims about the environmental benefits of a business or business activity to rest on adequate and proper substantiation; the March 2026 amendment removed the 'internationally recognized methodology' wording.",
+    "index": {
+      "jurisdiction": "Canada",
+      "terms": ["eco-friendly", "sustainable", "green", "on its way to net zero", "net zero by", "clean", "responsible"],
+      "applies_to": ["vague_attribute", "commitment"],
+      "rule": "A vague environmental claim is legitimate only when replaced or qualified by a clear, specific statement of the benefit; a claim about a business's future environmental performance is legitimate only with substantiation and a clear plan behind it."
+    }
+  },
+  {
+    "id": "un-hleg-integrity-matters",
+    "kind": "standard",
+    "tier": 3,
+    "source": {
+      "name": "UN High-Level Expert Group, 'Integrity Matters: Net Zero Commitments by Businesses, Financial Institutions, Cities and Regions'",
+      "publisher": "United Nations",
+      "date": "2022-11-08",
+      "locator": "Recommendations 1 and 2: announcing a pledge; setting targets"
+    },
+    "url": "https://www.un.org/en/climatechange/high-level-expert-group",
+    "quote": "Non-State actors should publish a pledge including targets for 2025, 2030 and 2035 and plans to reach net zero by 2050.",
+    "verified": true,
+    "verification": "fetched_exact",
+    "retrieved": "2026-09-20",
+    "note": "The recommendations continue: set short-, medium- and long-term absolute reduction targets covering all scopes; do not use cheap credits in place of reductions; align lobbying and capital expenditure with the pledge; report progress annually.",
+    "index": {
+      "jurisdiction": "International",
+      "terms": ["net zero", "net-zero", "by 2050", "target", "ambition", "pledge", "intensity", "absolute"],
+      "applies_to": ["commitment"],
+      "rule": "A credible net-zero pledge has interim targets for 2025, 2030 and 2035, absolute (not only intensity) reductions across all scopes, no reliance on cheap credits in place of cuts, and capital spending and lobbying aligned with it; a 2050 target with no interim absolute milestones or with capital going the other way is not substantiated as a commitment."
+    }
+  },
+  {
+    "id": "sbti-corporate-net-zero-standard",
+    "kind": "standard",
+    "tier": 3,
+    "source": {
+      "name": "SBTi Corporate Net-Zero Standard",
+      "publisher": "Science Based Targets initiative",
+      "date": "2021-10-28",
+      "locator": "Version 1.3.1 (target validation through 2026); Version 2.0 published 2026"
+    },
+    "url": "https://sciencebasedtargets.org/net-zero",
+    "quote": "The Corporate Net-Zero Standard is the world’s first science-based framework for corporate net-zero target setting.",
+    "verified": true,
+    "verification": "fetched_exact",
+    "retrieved": "2026-09-20",
+    "note": "Under the Standard a validated net-zero target requires near-term (5 to 10 year) science-based targets, a long-term target to cut at least 90 percent of emissions across scopes 1, 2 and 3 by 2050 at the latest, and neutralisation of only the residual; SBTi validation is the recognised test of whether a corporate net-zero target is science-based.",
+    "index": {
+      "jurisdiction": "International",
+      "terms": ["net zero", "science-based", "SBTi", "validated", "1.5°C", "Paris Agreement", "aligned"],
+      "applies_to": ["commitment", "certification", "comparative"],
+      "rule": "A claim that a target is science-based, Paris-aligned or 1.5°C-aligned is legitimate only when it has been validated by SBTi or an equivalent independent body against published criteria (near-term targets, at least 90 percent absolute reduction by 2050, all scopes); a company's own belief that its target 'supports' the Paris goal is not validation."
+    }
+  },
+  {
+    "id": "ghg-protocol-scope-2-guidance",
+    "kind": "standard",
+    "tier": 3,
+    "source": {
+      "name": "GHG Protocol Scope 2 Guidance",
+      "publisher": "Greenhouse Gas Protocol (WRI and WBCSD)",
+      "date": "2015-01-20",
+      "locator": "Scope 2 Quality Criteria for contractual instruments; dual reporting"
+    },
+    "url": "https://ghgprotocol.org/scope-2-guidance",
+    "quote": "Eight Scope 2 Quality Criteria that all contractual instruments must meet in order to be a reliable data source for the scope 2 market-based method",
+    "verified": true,
+    "verification": "fetched_exact",
+    "retrieved": "2026-09-20",
+    "note": "Companies must report Scope 2 both location-based and market-based; a renewable-electricity claim based on certificates or contracts is only as good as instruments that meet the quality criteria (tracked, retired, in the same market, not double-counted).",
+    "index": {
+      "jurisdiction": "International",
+      "terms": ["renewable electricity", "100% renewable", "clean electricity", "market-based", "certificates", "Scope 2", "powered by"],
+      "applies_to": ["factual", "commitment"],
+      "rule": "A claim to use renewable electricity is legitimate only when it says whether it rests on direct supply or on contractual instruments (certificates, power purchase agreements) that meet the Scope 2 quality criteria, and over what boundary; a bare '100 percent renewable' claim leaves the reader unable to tell."
+    }
+  },
+  {
+    "id": "iso-14021-self-declared-claims",
+    "kind": "standard",
+    "tier": 3,
+    "source": {
+      "name": "ISO 14021:2016, Environmental labels and declarations, self-declared environmental claims (Type II)",
+      "publisher": "International Organization for Standardization",
+      "date": "2016-03",
+      "locator": "Clause 5.3 (vague or non-specific claims), clause 5.7 (specific requirements), clause 6 (comparative claims)"
+    },
+    "url": "https://www.iso.org/standard/66652.html",
+    "verified": false,
+    "verification": "unverified",
+    "retrieved": "2026-09-20",
+    "note": "The standard says vague or non-specific claims such as 'environmentally safe', 'green', 'nature's friend' or 'non-polluting' shall not be used, that a self-declared claim must be specific, accurate, verifiable and relevant, and that a comparative claim must state the basis of comparison. The ISO page is behind a purchase wall, so no passage is quoted.",
+    "index": {
+      "jurisdiction": "International",
+      "terms": ["green", "environmentally friendly", "sustainable", "non-polluting", "cleaner", "lower", "reduced"],
+      "applies_to": ["vague_attribute", "comparative"],
+      "rule": "A self-declared environmental claim is legitimate only when it is specific, accurate, verifiable and relevant to the product's life cycle; vague terms shall not be used, and a comparative claim must state what it is compared against and on what basis."
+    }
+  },
+  {
+    "id": "iso-14068-1-carbon-neutrality",
+    "kind": "standard",
+    "tier": 3,
+    "source": {
+      "name": "ISO 14068-1:2023, Climate change management, transition to net zero, part 1: carbon neutrality",
+      "publisher": "International Organization for Standardization",
+      "date": "2023-11",
+      "locator": "Requirements for a carbon neutrality claim: quantification, reduction hierarchy, offsetting of residual, public statement"
+    },
+    "url": "https://www.iso.org/standard/43279.html",
+    "verified": false,
+    "verification": "unverified",
+    "retrieved": "2026-09-20",
+    "note": "The standard (successor to PAS 2060) requires a carbon-neutrality claim to rest on a quantified footprint, a management plan that puts reduction before offsetting, offsets of the residual with credits meeting stated quality criteria, and a public carbon-neutrality statement that names the subject, the boundary, the period and the standard. The ISO page is behind a purchase wall, so no passage is quoted.",
+    "index": {
+      "jurisdiction": "International",
+      "terms": ["carbon neutral", "carbon neutrality", "climate neutral", "net zero product", "offset", "carbon credits", "residual emissions"],
+      "applies_to": ["certification", "factual", "commitment"],
+      "rule": "A carbon-neutrality claim is legitimate only when its subject and boundary are stated, the footprint is quantified, reductions come before offsetting, the residual is offset with credits of stated quality, and the standard followed is named; 'carbon neutral' with no boundary, no reduction figure and no standard is unsubstantiated."
+    }
+  }
+]

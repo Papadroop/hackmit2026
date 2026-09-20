@@ -1,4 +1,4 @@
-# Greenwashing Auditor — Visual design plan
+# rinse — Visual design plan
 
 *Companion to `design-doc.md` (D7) and `roadmap.md` (Phase 1). First pass, for team review before any interface code is written. Edit the tokens here rather than in code until the plan is agreed.*
 
@@ -67,7 +67,7 @@ Three regions per D7, all left-aligned. Summary header is one dense band, not st
 
 ```
 ┌────────────────────────────────────────────────────────────────────┐
-│ Greenwashing Auditor   Shell plc, Climate page   Layers ▣ ▢ ▢   Honest version ○ │
+│ rinse   Shell plc, Climate page   Layers ▣ ▢ ▢   Honest version ○ │
 ├────────────────────────────────────────────────────────────────────┤
 │ Likelihood 0.78 (confidence 0.71)  Clarity ▮▮▮▯ Support ▮▮▮▯ …    │
 │ 4 contradicted  5 unsubstantiated  6 misleading  3 supported       │
@@ -204,6 +204,7 @@ Checked against the common AI-generated looks; what was changed and why.
 
 - Rejected cream paper with a serif and a clay accent. Paper is white on a grey desk; the accent is ultramarine.
 - Rejected green as the brand colour, including the leaf icon in the current smoke test. Green appears only as the Supported verdict, and a cool verdigris rather than eco-green.
+  The menu screen is the one exception, made deliberately when the product was named **rinse** on 2026-09-20: the name is about washing green off, so that screen has to show green to take it away. It is still not the brand colour. Green there is a material — wet pigment on paper, in the Supported hue — that the reader rinses off the card, and afterwards it survives only in the leaves of the trees, which is the auditor's argument in one image. The analysis screen is untouched. See `menu-design.md`.
 - Swapped Geist (the installed shadcn default) for Public Sans, chosen for the subject rather than habit.
 - Dropped uppercase tier labels and any middle-dot meta strings.
 - Watch items while building: broadsheet hairlines everywhere (rules only where they separate evidence items) and the SaaS card kit (evidence is rows, the summary is one band, no uniform shadows).
@@ -213,3 +214,15 @@ Checked against the common AI-generated looks; what was changed and why.
 - Agree or edit the verdict hues; check all four against each other in greyscale before step 5.
 - The document pane keeps the source page's headings and hierarchy as-is (built that way in step 4); confirm or change.
 - Dark mode palette, after light is agreed.
+
+## The menu, rinse (built 2026-09-20)
+
+The first screen was rebuilt to the specification in `menu-design.md`, which owns the detail. What the rest of this plan needs to know:
+
+- **The name.** The product is **rinse**, lowercase everywhere. The wordmark is italic Literata, the voice of the honest rewrite in the application, so the name reads as the honest version. It is the one place the interface borrows the document's typeface. "Greenwashing Auditor" is retired from the interface.
+- **The green, and where it stops.** Menu-only tokens live beside the base palette in `index.css`: Rinsed paper `#E6EEE9`, Viridian (the Supported hue), Pine `#0F3B2E`, Sap `#6F9B3A`, Wet paper `#D5E3DA`. Nothing on the analysis screen changed, and Marker is still the interactive accent — no button turned green.
+- **One orchestrated moment, spread across the scroll.** The first viewport is green pigment moving under water with the word "rinse" on it; scrolling drains the pigment from the top down and the word turns from white to ink as the water passes; below it, ink trees draw themselves in growth order and leaf last. Nothing below the card fades or slides in — the forest is the motion there.
+- **Why white type that becomes ink.** Ink on dense pigment is 2.8:1. Making the word white on the wash and letting it become ink as the water clears turns the constraint into the moment. Measured on the built screen: the title is 6.1:1 against the wash on average and 3.8:1 at its worst pixel; the tagline 4.6:1 at worst; the cue 4.7:1.
+- **Reach.** Green is a material, never a light: no neon, no glow, no gradient text, no leaf icon. Paper stays white, never cream.
+
+Three things were changed against `menu-design.md` while building, each recorded there with the reason: the Water shader needed a crop and an offset to stop it seaming and to keep the title's contrast; the forest's limbs cannot use `vector-effect: non-scaling-stroke` because it breaks the draw-on; and leaves are smoothed blots at a lower opacity, because hard hexagons at 0.72 multiply to black wherever the canopy is dense.

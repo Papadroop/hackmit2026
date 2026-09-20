@@ -5,13 +5,19 @@ import { useTheme } from "@/components/theme-provider"
 import { Button } from "@/components/ui/button"
 import { paths } from "@/lib/router"
 
+/**
+ * The product name, always lowercase and always in italic Literata: in the application that
+ * italic is the voice of the honest rewrite, so the name reads as the honest version
+ * (../../menu-design.md §4.2). The menu screen shows no small wordmark; its title is the
+ * wordmark.
+ */
 export function Wordmark() {
   return (
     <Link
       href={paths.menu()}
-      className="rounded-sm text-[15px] font-medium whitespace-nowrap outline-none focus-visible:ring-3 focus-visible:ring-ring/50"
+      className="wordmark wordmark-sm rounded-sm whitespace-nowrap outline-none focus-visible:ring-3 focus-visible:ring-ring/50"
     >
-      Greenwashing Auditor
+      rinse
     </Link>
   )
 }

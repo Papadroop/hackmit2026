@@ -19,6 +19,9 @@ HEADERS = {
 TIMEOUT = 20.0
 MAX_BYTES = 25 * 1024 * 1024
 WAYBACK_AVAILABLE = "https://archive.org/wayback/available"
+WAYBACK_CDX = "https://web.archive.org/cdx/search/cdx"
+# The CDX index answers in its own time; a page's whole history is worth waiting longer for.
+CDX_TIMEOUT = 45.0
 
 
 class FetchError(Exception):
@@ -97,3 +100,69 @@ def wayback_snapshot(url: str, *, timeout: float = TIMEOUT) -> tuple[str, str] |
 
 def wayback_url(url: str, stamp: str = "2") -> str:
     return f"https://web.archive.org/web/{stamp}id_/{quote(url, safe=':/?&=%')}"
+
+
+@dataclass
+class Snapshot:
+    """One Wayback Machine capture of a page: when it was taken, and where to read it."""
+
+    stamp: str
+    """The capture's timestamp, `YYYYMMDDhhmmss`."""
+    url: str
+    """The capture with the archive's toolbar suppressed (`id_`), which is what to fetch."""
+    digest: str = ""
+
+    @property
+    def date(self) -> str:
+        return f"{self.stamp[:4]}-{self.stamp[4:6]}-{self.stamp[6:8]}"
+
+    @property
+    def viewable(self) -> str:
+        """The capture as a person opens it, with the archive's banner. This is the URL to put
+        on an evidence item: the reader needs to see that they are looking at the archive."""
+        return self.url.replace("id_/", "/", 1)
+
+
+def wayback_history(url: str, *, limit: int = 400, timeout: float = CDX_TIMEOUT) -> list[Snapshot]:
+    """Every distinct capture of the URL the Wayback Machine holds, oldest first. Consecutive
+    captures with identical content are collapsed, so what comes back is the list of times the
+    page actually changed — which is what the self-consistency evaluator (step 15) is asking
+    about. Returns an empty list when the archive has nothing or is rate-limiting; the caller
+    reports that and carries on, because no page is guaranteed to be archived.
+
+    `limit` is applied here, not by the archive: the CDX server's own limit keeps the *oldest*
+    rows, which would hide everything the page has said recently. Collapsed by digest the whole
+    history is a few hundred rows (123 and 14 KB for the Shell page), so it is cheaper to read
+    it all and trim the middle than to ask for a window and get the wrong end of it.
+    """
+    params = {
+        "url": url,
+        "output": "json",
+        "fl": "timestamp,original,digest,statuscode",
+        "filter": "statuscode:200",
+        "collapse": "digest",
+    }
+    try:
+        with httpx.Client(follow_redirects=True, headers=HEADERS, timeout=timeout) as client:
+            response = client.get(WAYBACK_CDX, params=params)
+        rows = response.json()
+    except (httpx.HTTPError, ValueError):
+        return []
+    if not isinstance(rows, list) or len(rows) < 2:
+        return []
+    out: list[Snapshot] = []
+    seen: set[str] = set()
+    for row in rows[1:]:  # row 0 is the header
+        if not isinstance(row, list) or len(row) < 2:
+            continue
+        stamp, original = str(row[0]), str(row[1])
+        digest = str(row[2]) if len(row) > 2 else ""
+        if not re.fullmatch(r"\d{14}", stamp) or stamp in seen:
+            continue
+        seen.add(stamp)
+        out.append(Snapshot(stamp, wayback_url(original, stamp), digest))
+    out.sort(key=lambda s: s.stamp)
+    if len(out) > limit:  # keep both ends: the page's earliest words and its latest
+        half = limit // 2
+        out = out[:half] + out[len(out) - (limit - half):]
+    return out

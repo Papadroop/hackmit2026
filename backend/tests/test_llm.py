@@ -12,16 +12,17 @@ import pytest
 from pydantic import BaseModel
 
 from auditor import llm as llm_module
-from auditor.llm import DEFAULT_EFFORT, DEFAULT_MODEL, Llm, LlmError, LlmSettings
+from auditor.llm import DEFAULT_EFFORT, DEFAULT_MODEL, JsonArrayElements, Llm, LlmError, LlmSettings
 
 
 class FakeMessages:
     """Records the params of each `stream(...)` call and answers with a canned final message."""
 
-    def __init__(self, message=None, error: Exception | None = None) -> None:
+    def __init__(self, message=None, error: Exception | None = None, chunks: list[str] | None = None) -> None:
         self.calls: list[dict] = []
         self.message = message or text_message("OK")
         self.error = error
+        self.chunks = chunks
 
     @asynccontextmanager
     async def stream(self, **params):
@@ -29,8 +30,18 @@ class FakeMessages:
         if self.error is not None:
             raise self.error
         message = self.message
+        chunks = self.chunks or []
 
         class Stream:
+            def __init__(self) -> None:
+                self.iterated = False
+
+            async def __aiter__(self):
+                self.iterated = True
+                yield SimpleNamespace(type="thinking", thinking="hmm")
+                for chunk in chunks:
+                    yield SimpleNamespace(type="text", text=chunk, snapshot="")
+
             async def get_final_message(self):
                 return message
 
@@ -110,7 +121,11 @@ def test_per_call_overrides_and_caching():
     [params] = fake.calls
     assert params["model"] == "claude-opus-5"
     assert params["output_config"] == {"effort": "max"} and params["max_tokens"] == 500
-    assert params["cache_control"] == {"type": "ephemeral"}
+    assert params["cache_control"] == {"type": "ephemeral"}, "no system block: the breakpoint goes on the whole request"
+    run(make_llm(fake).complete("x", system="Doc.", cache=True))
+    params = fake.calls[-1]
+    assert params["system"] == [{"type": "text", "text": "Doc.", "cache_control": {"type": "ephemeral"}}], "the breakpoint sits on the document block so every stage shares it"
+    assert "cache_control" not in params
     with pytest.raises(ValueError):
         run(make_llm(fake).complete("x", effort="huge"))
 
@@ -157,6 +172,8 @@ def api_error(cls, status: int, headers: dict | None = None):
         (anthropic.APITimeoutError(httpx.Request("POST", "https://api.anthropic.com/v1/messages")), "within 600 s"),
         (anthropic.APIConnectionError(request=httpx.Request("POST", "https://api.anthropic.com/v1/messages")), "could not be reached"),
         (TypeError("Could not resolve authentication method. Expected one of api_key, auth_token, or credentials to be set."), "No Claude credentials"),
+        (httpx.ReadTimeout(""), "went quiet"),
+        (httpx.RemoteProtocolError("peer closed connection"), "stream broke"),
     ],
 )
 def test_sdk_errors_become_plain_messages(error, message):
@@ -173,3 +190,75 @@ def test_shared_client_is_constructed_lazily(monkeypatch):
     assert shared is llm_module.get_llm()
     assert shared.settings.model == DEFAULT_MODEL
     assert shared._client is None, "no SDK client until the first call"
+
+
+# ----------------------------------------------------------------------------- streaming elements
+
+
+ROOT = '{"signals": [{"kind": "hedge", "quotes": ["we {believe}", "a \\"quoted\\" ]word"], "n": {"x": [1, {"y": 2}]}}, {"kind": "vague_term"}], "note": "x [y] {z}", "tags": ["a", "b"], "clarity": [{"claim_id": "C1", "score": 0.5}]}'
+
+
+@pytest.mark.parametrize("size", [1, 2, 5, 13, 10_000])
+def test_json_array_elements_hands_over_each_object_as_it_closes(size):
+    scanner = JsonArrayElements()
+    out: list[tuple[str, str]] = []
+    for i in range(0, len(ROOT), size):
+        out += scanner.feed(ROOT[i : i + size])
+    assert [k for k, _ in out] == ["signals", "signals", "clarity"]
+    import json
+
+    assert json.loads(out[0][1]) == {"kind": "hedge", "quotes": ["we {believe}", 'a "quoted" ]word'], "n": {"x": [1, {"y": 2}]}}
+    assert json.loads(out[1][1]) == {"kind": "vague_term"}
+    assert json.loads(out[2][1]) == {"claim_id": "C1", "score": 0.5}
+
+
+def test_json_array_elements_ignores_scalars_and_strings_that_look_like_keys():
+    scanner = JsonArrayElements()
+    assert scanner.feed('{"a": "items", "items": [1, "two", {"k": "v"}], "b": {"items": [{"nested": 1}]}}') == [("items", '{"k": "v"}')]
+
+
+class Review(BaseModel):
+    class Item(BaseModel):
+        kind: str
+
+    signals: list[Item]
+    clarity: list[dict]
+
+
+def test_extract_streaming_hands_over_elements_then_returns_the_whole():
+    text = '{"signals": [{"kind": "hedge"}, {"kind": "vague"}], "clarity": [{"claim_id": "C1"}]}'
+    parsed = Review(signals=[Review.Item(kind="hedge"), Review.Item(kind="vague")], clarity=[{"claim_id": "C1"}])
+    messages = FakeMessages(text_message(text, parsed=parsed), chunks=[text[:15], text[15:40], text[40:]])
+    llm = make_llm(messages)
+    seen: list[tuple[str, dict]] = []
+
+    async def on_element(key, item):
+        seen.append((key, item))
+
+    result, usage = run(llm.extract_streaming("go", Review, on_element=on_element, system="doc", cache=True))
+    assert seen == [("signals", {"kind": "hedge"}), ("signals", {"kind": "vague"}), ("clarity", {"claim_id": "C1"})]
+    assert result is parsed and usage.output_tokens == 3
+    params = messages.calls[0]
+    assert params["output_format"] is Review and params["system"] == [{"type": "text", "text": "doc", "cache_control": {"type": "ephemeral"}}]
+
+
+def test_extract_streaming_without_a_parsed_result_is_an_error():
+    messages = FakeMessages(text_message("{}", parsed=None), chunks=["{}"])
+
+    async def on_element(key, item):
+        raise AssertionError("nothing to hand over")
+
+    with pytest.raises(LlmError, match="returned no Review"):
+        run(make_llm(messages).extract_streaming("go", Review, on_element=on_element))
+
+
+def test_a_shape_mismatch_inside_the_stream_is_a_plain_error():
+    from pydantic import ValidationError
+
+    try:
+        Review.model_validate({"signals": "nope"})
+    except ValidationError as exc:
+        error = exc
+    llm = make_llm(FakeMessages(error=error))
+    with pytest.raises(LlmError, match="did not match the expected shape"):
+        run(llm.complete("hi"))

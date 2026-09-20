@@ -1,0 +1,698 @@
+[
+  {
+    "id": "asa-2023-shell-uk-omission",
+    "kind": "ruling",
+    "tier": 1,
+    "source": {
+      "name": "ASA ruling G22-1170842, Shell UK Ltd",
+      "publisher": "UK Advertising Standards Authority",
+      "date": "2023-06-07",
+      "locator": "Upheld (omission of the fossil share of the business); not upheld (renewable-electricity customer figures)"
+    },
+    "url": "https://www.asa.org.uk/rulings/shell-uk-ltd-g22-1170842-shell-uk-ltd.html",
+    "quote": "because ads (a), (b) and (c) gave the overall impression that a significant proportion of Shell’s business comprised lower-carbon energy products, further information about the proportion of Shell’s overall business model that comprised lower-carbon energy products was material information that should have been included. Because the ads did not include such information, we concluded that they omitted material information and were likely to mislead.",
+    "verified": true,
+    "verification": "fetched_exact",
+    "retrieved": "2026-09-20",
+    "note": "The ASA told Shell to ensure future ads with environmental claims did not mislead by exaggerating or omitting material information about the proportion of its business made up of lower-carbon activities.",
+    "index": {
+      "jurisdiction": "UK",
+      "body": "Advertising Standards Authority",
+      "company": "Shell",
+      "industry": "oil and gas",
+      "claim_text": "Poster, TV and online ads presenting Shell's renewable electricity tariff, electric-vehicle charging and biofuels as Shell helping the UK move to cleaner energy",
+      "outcome": "upheld",
+      "reasoning": "The ads gave the impression that a significant share of Shell's business was lower-carbon energy while large-scale oil and gas made up the vast majority of it; leaving out the proportion was a material omission.",
+      "terms": ["cleaner energy", "lower-carbon", "low-carbon", "transition", "helping", "renewable", "net zero", "energy solutions"],
+      "applies_to": ["vague_attribute", "commitment", "factual"],
+      "adjudicated_urls": []
+    }
+  },
+  {
+    "id": "asa-2025-shell-uk-investment-split",
+    "kind": "ruling",
+    "tier": 1,
+    "source": {
+      "name": "ASA ruling G24-1248246, Shell UK Ltd",
+      "publisher": "UK Advertising Standards Authority",
+      "date": "2025-04-09",
+      "locator": "Not upheld"
+    },
+    "url": "https://www.asa.org.uk/rulings/shell-uk-ltd-g24-1248246-shell-uk-ltd.html",
+    "quote": "The ad had therefore not given a misleading overall impression of Shell’s environmental impact.",
+    "verified": true,
+    "verification": "fetched_exact",
+    "retrieved": "2026-09-20",
+    "note": "The TV ad's superimposed text stated that in 2023, 68% of Shell's global investments included oil and gas, 23% low-carbon energy solutions and 9% non-energy products. The ASA found that text let viewers understand the balance of Shell's investments, so the ad was cleared: the precedent for the fix to an omission.",
+    "index": {
+      "jurisdiction": "UK",
+      "body": "Advertising Standards Authority",
+      "company": "Shell",
+      "industry": "oil and gas",
+      "claim_text": "In 2023, 68% of Shell’s global investments included oil & gas, 23% included low-carbon energy solutions and 9% non-energy products. Shell’s target is to become a net zero emissions (NZE) energy business by 2050",
+      "outcome": "not_upheld",
+      "reasoning": "Stating the investment split on screen gave viewers the proportion of higher- and lower-carbon activity, so a transition message from an oil and gas company was not misleading; the same message without the split had been found misleading in 2023.",
+      "terms": ["net zero", "net-zero emissions energy business", "transition", "investments", "low-carbon", "powering progress"],
+      "applies_to": ["commitment", "vague_attribute"],
+      "adjudicated_urls": []
+    }
+  },
+  {
+    "id": "rcc-2022-shell-co2-neutral-driving",
+    "kind": "ruling",
+    "tier": 1,
+    "source": {
+      "name": "Reclame Code Commissie, College van Beroep 2022/00100, Shell 'Rij CO2-neutraal'",
+      "publisher": "Stichting Reclame Code",
+      "date": "2022-10-20",
+      "locator": "Upheld on appeal; first instance RCC 2021/00190 of 26 August 2021"
+    },
+    "url": "https://www.reclamecode.nl/uitspraak/?uitspraakId=365319",
+    "quote": "Shell heeft zelf gekozen voor een claim met een absoluut karakter en dit impliceert dat zij nader bewijs dient te (kunnen) leveren van de juistheid van de claim",
+    "verified": true,
+    "verification": "fetched_exact",
+    "retrieved": "2026-09-20",
+    "note": "Translation: Shell chose a claim of an absolute character, which implies it must be able to provide further proof of the claim's correctness. First-instance ruling: https://www.reclamecode.nl/uitspraak/?uitspraakId=304997.",
+    "index": {
+      "jurisdiction": "Netherlands",
+      "body": "Reclame Code Commissie (advertising self-regulation), appeal board",
+      "company": "Shell",
+      "industry": "oil and gas",
+      "claim_text": "Maak het verschil. Rij CO2-neutraal. (Make the difference. Drive CO2-neutral.)",
+      "outcome": "upheld",
+      "reasoning": "An offset-based 'CO2-neutral' claim is absolute; the advertiser must be able to prove that the credits fully compensate the emissions, and Shell could not show that for the forestry credits behind the campaign.",
+      "terms": ["CO2 neutral", "carbon neutral", "climate neutral", "offset", "compensate", "carbon credits", "high-quality carbon credits"],
+      "applies_to": ["certification", "factual", "commitment"],
+      "adjudicated_urls": []
+    }
+  },
+  {
+    "id": "rcc-2023-shell-energy-co2-compensated-gas",
+    "kind": "ruling",
+    "tier": 1,
+    "source": {
+      "name": "Reclame Code Commissie 2023/00091, Shell Energy 'CO2-gecompenseerd gas'",
+      "publisher": "Stichting Reclame Code",
+      "date": "2023-10-09",
+      "locator": "Upheld"
+    },
+    "url": "https://www.reclamecode.nl/uitspraak/?uitspraakId=427115",
+    "quote": "Bij ons kun je kiezen voor gewoon-, maar ook voor CO2-gecompenseerd gas.",
+    "verified": true,
+    "verification": "fetched_exact",
+    "retrieved": "2026-09-20",
+    "note": "The quoted words are the challenged claim on shellenergy.nl. The Commissie found the 'CO2-compensated gas' offer misleading: the consumer is led to believe the emissions from the gas are neutralised, which the credits used could not be shown to achieve.",
+    "index": {
+      "jurisdiction": "Netherlands",
+      "body": "Reclame Code Commissie (advertising self-regulation)",
+      "company": "Shell",
+      "industry": "energy retail",
+      "claim_text": "Bij ons kun je kiezen voor gewoon-, maar ook voor CO2-gecompenseerd gas. (With us you can choose ordinary gas, or CO2-compensated gas.)",
+      "outcome": "upheld",
+      "reasoning": "Selling fossil gas as 'CO2-compensated' tells the consumer the emissions are cancelled out; without proof that the credits do so, the claim misleads.",
+      "terms": ["compensated", "offset", "carbon credits", "CO2 neutral", "carbon neutral", "remaining emissions"],
+      "applies_to": ["factual", "certification"],
+      "adjudicated_urls": []
+    }
+  },
+  {
+    "id": "paris-2025-totalenergies-carbon-neutrality",
+    "kind": "ruling",
+    "tier": 1,
+    "source": {
+      "name": "Tribunal judiciaire de Paris, judgment of 23 October 2025, RG 22/02955, Greenpeace France et al. v TotalEnergies (court communiqué)",
+      "publisher": "Tribunal judiciaire de Paris",
+      "date": "2025-10-23",
+      "locator": "Misleading commercial practices; TotalEnergies said on 24 October 2025 it would not appeal"
+    },
+    "url": "https://www.tribunal-de-paris.justice.fr/sites/default/files/2025-10/Communiqu%C3%A9%20Greenpeace%20Amis%20de%20la%20Terre%20et%20Notre%20Affaire%20%C3%A0%20Tous%20c.%20Totalenergies%2023102025.pdf",
+    "quote": "en ayant recours à cette terminologie, sans préciser aux consommateurs que le groupe avait son propre scénario pour atteindre la neutralité carbone, et qu’il continuait à augmenter sa production et ses investissements dans le pétrole et le gaz, à rebours des préconisations des experts scientifiques fondées sur l’Accord de Paris, le groupe avait fait état d’allégations environnementales de nature à induire en erreur le consommateur",
+    "verified": true,
+    "verification": "fetched_exact",
+    "retrieved": "2026-09-20",
+    "note": "Translation: by using this terminology without telling consumers that the group had its own scenario for reaching carbon neutrality, and that it kept increasing its oil and gas production and investment, against the scientific recommendations based on the Paris Agreement, the group made environmental claims liable to mislead the consumer. Claims about fossil gas and agrofuels were outside the action.",
+    "index": {
+      "jurisdiction": "France",
+      "body": "Tribunal judiciaire de Paris (civil court)",
+      "company": "TotalEnergies",
+      "industry": "oil and gas",
+      "claim_text": "leur ambition d’atteindre la neutralité carbone d’ici 2050 et d’être un acteur majeur dans la transition énergétique (their ambition to reach carbon neutrality by 2050 and to be a major player in the energy transition)",
+      "outcome": "upheld",
+      "reasoning": "Invoking carbon neutrality by 2050 in the sense of the Paris Agreement, while following the company's own scenario and growing oil and gas production and investment, misleads unless those facts are disclosed with the claim.",
+      "terms": ["net zero by 2050", "carbon neutral by 2050", "net-zero emissions energy business", "energy transition", "major player", "Paris Agreement", "1.5°C", "ambition"],
+      "applies_to": ["commitment", "comparative", "vague_attribute"],
+      "adjudicated_urls": ["https://www.totalenergies.fr/"]
+    }
+  },
+  {
+    "id": "lg-frankfurt-2025-apple-watch-co2-neutral",
+    "kind": "ruling",
+    "tier": 1,
+    "source": {
+      "name": "Landgericht Frankfurt am Main, judgment of 26 August 2025, Az. 3-06 O 8/24, Deutsche Umwelthilfe v Apple (court press release)",
+      "publisher": "Hessen ordentliche Gerichtsbarkeit",
+      "date": "2025-08-26",
+      "locator": "Injunction granted on the 'CO2 neutral product' claim; complaint about the 'Carbon Neutral' logo rejected; not final, appeal to the OLG Frankfurt possible"
+    },
+    "url": "https://ordentliche-gerichtsbarkeit.hessen.de/presse/co2-neutrales-produkt",
+    "quote": "In ihrem heutigen Urteil erkannte die Kammer jedoch, dass diese Pachtverträge in Bezug auf 75 % der Projektfläche nur bis 2029 bestünden. Eine CO2-Kompensation sei daher lediglich bis zum Jahr 2029 gewährleistet.",
+    "verified": true,
+    "verification": "fetched_exact",
+    "retrieved": "2026-09-20",
+    "note": "Translation: the chamber found that the leases for 75% of the project area run only to 2029, so CO2 compensation is assured only until 2029. Consumers, the court said, expect a carbon-neutral product's compensation to be secured to about 2050 in line with the Paris Agreement. The Verra buffer account did not make up the difference. As of 3 September 2026 no appellate decision had been published.",
+    "index": {
+      "jurisdiction": "Germany",
+      "body": "Landgericht Frankfurt am Main (regional court)",
+      "company": "Apple",
+      "industry": "technology hardware",
+      "claim_text": "Die Apple Watch ist unser erstes CO2 neutrales Produkt. (The Apple Watch is our first carbon neutral product.)",
+      "outcome": "upheld",
+      "reasoning": "A product marketed as carbon neutral on the strength of forestry offsets misleads when the offset project is secured only to 2029 while consumers understand neutrality as compensation secured for the long term.",
+      "terms": ["carbon neutral", "carbon neutral product", "CO2 neutral", "climate neutral", "carbon credits", "nature-based", "offset", "remaining emissions"],
+      "applies_to": ["certification", "factual", "commitment"],
+      "adjudicated_urls": []
+    }
+  },
+  {
+    "id": "ndcal-2026-dib-v-apple-carbon-neutral",
+    "kind": "other",
+    "tier": 3,
+    "source": {
+      "name": "Dib v. Apple Inc., N.D. Cal., order of 20 February 2026 (Sabin Center climate litigation database entry)",
+      "publisher": "Sabin Center for Climate Change Law, Columbia Law School",
+      "date": "2026-02-20",
+      "locator": "Motion to dismiss granted with leave to amend; plaintiffs later gave notice they would not amend"
+    },
+    "url": "https://www.climatecasechart.com/collections/dib-v-apple-inc-_b5b1ad",
+    "quote": "The federal district court for the Northern District of California dismissed claims that Apple Inc. made false and misleading representations that its corporate global emissions since 2020 and certain Apple Watches were carbon neutral.",
+    "verified": true,
+    "verification": "fetched_exact",
+    "retrieved": "2026-09-20",
+    "note": "The court held the plaintiffs had not plausibly alleged that Apple's carbon-neutrality claims were false; the same product claim was found misleading by the Frankfurt court in 2025, so the verdict on offset-based product neutrality depends on the jurisdiction.",
+    "index": {
+      "jurisdiction": "US",
+      "body": "US District Court for the Northern District of California",
+      "company": "Apple",
+      "industry": "technology hardware",
+      "claim_text": "carbon neutral Apple Watch (Series 9, SE and Ultra 2) and carbon neutral corporate operations since 2020",
+      "outcome": "dismissed",
+      "reasoning": "Under US consumer law the buyers had to plead that the neutrality claims were false; alleging that the carbon credits behind them were of doubtful quality was not enough.",
+      "terms": ["carbon neutral", "carbon neutral product", "carbon credits", "offset", "nature-based projects"],
+      "applies_to": ["certification", "factual"],
+      "adjudicated_urls": []
+    }
+  },
+  {
+    "id": "bgh-2024-katjes-klimaneutral",
+    "kind": "ruling",
+    "tier": 1,
+    "source": {
+      "name": "Bundesgerichtshof, judgment of 27 June 2024, I ZR 98/23 (Katjes, 'klimaneutral'), press release 138/2024",
+      "publisher": "Bundesgerichtshof",
+      "date": "2024-06-27",
+      "locator": "Appeal allowed; the advertiser ordered to cease the claim"
+    },
+    "url": "https://www.bundesgerichtshof.de/SharedDocs/Pressemitteilungen/DE/2024/2024138.html",
+    "quote": "die Werbung mit einem mehrdeutigen umweltbezogenen Begriff (hier: \"klimaneutral\") regelmäßig nur dann zulässig ist, wenn in der Werbung selbst erläutert wird, welche konkrete Bedeutung diesem Begriff zukommt",
+    "verified": true,
+    "verification": "fetched_exact",
+    "retrieved": "2026-09-20",
+    "note": "Translation: advertising with an ambiguous environmental term (here 'climate neutral') is as a rule permissible only if the advertisement itself explains what the term concretely means. The court added that reduction and compensation are not equivalent ways of reaching climate neutrality, reduction taking priority, so an explanation elsewhere (a website) is not enough.",
+    "index": {
+      "jurisdiction": "Germany",
+      "body": "Bundesgerichtshof (Federal Court of Justice)",
+      "company": "Katjes",
+      "industry": "food",
+      "claim_text": "Seit 2021 produziert Katjes alle Produkte klimaneutral (Since 2021 Katjes produces all products climate-neutrally)",
+      "outcome": "upheld",
+      "reasoning": "'Climate neutral' can mean reduced or merely offset emissions; because the two are not equivalent, the ad itself must say which, and a link to a website does not cure the ambiguity.",
+      "terms": ["climate neutral", "carbon neutral", "CO2 neutral", "klimaneutral", "offset", "compensate", "net zero"],
+      "applies_to": ["certification", "factual", "vague_attribute"],
+      "adjudicated_urls": []
+    }
+  },
+  {
+    "id": "rb-amsterdam-2024-klm-fly-responsibly",
+    "kind": "ruling",
+    "tier": 1,
+    "source": {
+      "name": "Rechtbank Amsterdam, judgment of 20 March 2024, ECLI:NL:RBAMS:2024:1512, Fossielvrij NL v KLM",
+      "publisher": "De Rechtspraak",
+      "date": "2024-03-20",
+      "locator": "Collective action; 15 of 19 challenged statements found misleading; no appeal"
+    },
+    "url": "https://uitspraken.rechtspraak.nl/details?id=ECLI:NL:RBAMS:2024:1512",
+    "text_url": "https://data.rechtspraak.nl/uitspraken/content?id=ECLI:NL:RBAMS:2024:1512",
+    "quote": "Zo maakt KLM milieuclaims die zijn gebaseerd op vage en algemene verklaringen over milieuvoordelen en daarmee misleidt KLM de consument.",
+    "verified": true,
+    "verification": "fetched_exact",
+    "retrieved": "2026-09-20",
+    "note": "Translation: KLM makes environmental claims based on vague and general statements about environmental benefits and thereby misleads the consumer. The court also found KLM painted too rosy a picture of measures such as sustainable aviation fuel and reforestation, which only marginally reduce the harm of flying.",
+    "index": {
+      "jurisdiction": "Netherlands",
+      "body": "Rechtbank Amsterdam (district court)",
+      "company": "KLM",
+      "industry": "aviation",
+      "claim_text": "Fly Responsibly; CO2ZERO compensation; statements that KLM was committed to the Paris Agreement goals and that flying could be made sustainable",
+      "outcome": "upheld",
+      "reasoning": "Vague and general statements of environmental benefit, offset products presented as neutralising a flight, and a rosy picture of sustainable aviation fuel and reforestation mislead the consumer under the unfair commercial practices rules.",
+      "terms": ["sustainable", "responsibly", "compensate", "offset", "CO2ZERO", "Paris Agreement", "committed to", "sustainable aviation fuel", "future"],
+      "applies_to": ["vague_attribute", "commitment", "certification"],
+      "adjudicated_urls": []
+    }
+  },
+  {
+    "id": "asa-2022-oatly-73-percent",
+    "kind": "ruling",
+    "tier": 1,
+    "source": {
+      "name": "ASA ruling G21-1096286, Oatly UK Ltd",
+      "publisher": "UK Advertising Standards Authority",
+      "date": "2022-01-26",
+      "locator": "Upheld in part: four of five issues upheld"
+    },
+    "url": "https://www.asa.org.uk/rulings/oatly-uk-ltd-g21-1096286-oatly-uk-ltd.html",
+    "quote": "The ASA considered consumers would understand the claim “Oatly generates 73% less CO2e vs. milk” to mean that all Oatly products generated 73% less CO2e compared to any type of cows’ milk.",
+    "verified": true,
+    "verification": "fetched_exact",
+    "retrieved": "2026-09-20",
+    "note": "The evidence covered only one Oatly product against whole milk, so the general comparison was not substantiated. The live Oatly page now carries the narrower '44% to 76% lower climate impact than comparable cow's milk'.",
+    "index": {
+      "jurisdiction": "UK",
+      "body": "Advertising Standards Authority",
+      "company": "Oatly",
+      "industry": "food",
+      "claim_text": "Oatly generates 73% less CO2e vs. milk",
+      "outcome": "upheld_in_part",
+      "reasoning": "A percentage comparison across a whole product range is read as applying to every product and every comparator; evidence for one product against one comparator does not substantiate it.",
+      "terms": ["less CO2e", "less emissions", "lower carbon footprint", "% less", "vs.", "than", "compared to", "reduction"],
+      "applies_to": ["comparative", "factual"],
+      "adjudicated_urls": []
+    }
+  },
+  {
+    "id": "asa-2022-hsbc-net-zero-financing",
+    "kind": "ruling",
+    "tier": 1,
+    "source": {
+      "name": "ASA ruling G21-1127656, HSBC UK Bank plc",
+      "publisher": "UK Advertising Standards Authority",
+      "date": "2022-10-19",
+      "locator": "Upheld"
+    },
+    "url": "https://www.asa.org.uk/rulings/hsbc-uk-bank-plc-g21-1127656-hsbc-uk-bank-plc.html",
+    "quote": "We concluded that the ads omitted material information and were therefore misleading.",
+    "verified": true,
+    "verification": "fetched_exact",
+    "retrieved": "2026-09-20",
+    "note": "The posters were accurate in isolation, but the ASA held that HSBC's continued financing of high-emitting businesses was material information a reader needed to judge the overall message of net-zero contribution.",
+    "index": {
+      "jurisdiction": "UK",
+      "body": "Advertising Standards Authority",
+      "company": "HSBC",
+      "industry": "banking",
+      "claim_text": "HSBC is aiming to provide up to $1 trillion in financing and investment globally to help our clients transition to net zero",
+      "outcome": "upheld",
+      "reasoning": "A true statement about a company's climate contribution misleads when it omits that the company's main activity continues to cause significant emissions; the omission, not the statement, is the breach.",
+      "terms": ["net zero", "transition", "helping", "aiming to", "up to", "financing", "invest"],
+      "applies_to": ["commitment", "factual", "vague_attribute"],
+      "adjudicated_urls": []
+    }
+  },
+  {
+    "id": "asa-2023-etihad-sustainable-aviation",
+    "kind": "ruling",
+    "tier": 1,
+    "source": {
+      "name": "ASA ruling A22-1174208, Etihad Airways",
+      "publisher": "UK Advertising Standards Authority",
+      "date": "2023-04-12",
+      "locator": "Upheld on both issues"
+    },
+    "url": "https://www.asa.org.uk/rulings/etihad-airways-a22-1174208-etihad-airways.html",
+    "quote": "there were currently no initiatives or commercially viable technologies in operation within the aviation industry which would adequately substantiate an absolute green claim such as “sustainable aviation” as we considered consumers would interpret it in this context.",
+    "verified": true,
+    "verification": "fetched_exact",
+    "retrieved": "2026-09-20",
+    "note": "Awards and incremental measures (efficient aircraft, less single-use plastic) did not substantiate the absolute claim; the ads exaggerated the environmental benefit of flying with the airline.",
+    "index": {
+      "jurisdiction": "UK",
+      "body": "Advertising Standards Authority",
+      "company": "Etihad Airways",
+      "industry": "aviation",
+      "claim_text": "we’re taking a louder, bolder approach to sustainable aviation",
+      "outcome": "upheld",
+      "reasoning": "'Sustainable' is an absolute claim needing a high level of substantiation; where the industry has no technology that makes the activity sustainable, the word misleads however many awards the company holds.",
+      "terms": ["sustainable", "sustainable aviation", "conscious choice", "smaller footprint", "environmental airline of the year", "award"],
+      "applies_to": ["vague_attribute", "certification"],
+      "adjudicated_urls": []
+    }
+  },
+  {
+    "id": "asa-2023-repsol-net-zero-biofuels",
+    "kind": "ruling",
+    "tier": 1,
+    "source": {
+      "name": "ASA ruling A23-1185942, Repsol SA",
+      "publisher": "UK Advertising Standards Authority",
+      "date": "2023-06-07",
+      "locator": "Upheld on both issues"
+    },
+    "url": "https://www.asa.org.uk/rulings/repsol-sa-a23-1185942-repsol-sa.html",
+    "quote": "further information to contextualise how and when Repsol would achieve net zero emissions, and the role that the development of biofuels would play in that plan, was material to consumers’ understanding of the ad’s overall message, and should have appeared in the ad itself.",
+    "verified": true,
+    "verification": "fetched_exact",
+    "retrieved": "2026-09-20",
+    "note": "Repsol's biofuel and synthetic-fuel initiatives were largely not yet in operation, its emissions were 171 million tonnes CO2e in 2021 and it produced about 600,000 barrels of oil a day; the ad implied those fuels were a significant current element of progress to net zero.",
+    "index": {
+      "jurisdiction": "UK",
+      "body": "Advertising Standards Authority",
+      "company": "Repsol",
+      "industry": "oil and gas",
+      "claim_text": "At Repsol, we are developing biofuels and synthetic fuels to achieve net zero emissions. Renewable fuels for more sustainable mobility.",
+      "outcome": "upheld",
+      "reasoning": "An oil company's net-zero message built on low-carbon fuels misleads when it leaves out how and when net zero would be reached and how small a part those fuels play in the business today.",
+      "terms": ["net zero", "biofuels", "low-carbon fuels", "hydrogen", "renewable fuels", "sustainable mobility", "developing", "to achieve"],
+      "applies_to": ["commitment", "factual", "vague_attribute"],
+      "adjudicated_urls": []
+    }
+  },
+  {
+    "id": "asa-2022-persil-kinder-to-our-planet",
+    "kind": "ruling",
+    "tier": 1,
+    "source": {
+      "name": "ASA ruling A22-1150985, Unilever UK Ltd (Persil)",
+      "publisher": "UK Advertising Standards Authority",
+      "date": "2022-08-31",
+      "locator": "Upheld"
+    },
+    "url": "https://www.asa.org.uk/rulings/unilever-uk-ltd-a22-1150985-unilever-uk-ltd.html",
+    "quote": "We concluded that the basis of the claim “kinder to our planet” had not been made clear.",
+    "verified": true,
+    "verification": "fetched_exact",
+    "retrieved": "2026-09-20",
+    "note": "The ASA read 'kinder to our planet' as a comparative claim and had seen no full life-cycle evidence that the product had a lower environmental impact than the previous formulation or competitors.",
+    "index": {
+      "jurisdiction": "UK",
+      "body": "Advertising Standards Authority",
+      "company": "Unilever",
+      "industry": "consumer goods",
+      "claim_text": "kinder to our planet",
+      "outcome": "upheld",
+      "reasoning": "A comparative environmental claim without a stated basis of comparison and without full life-cycle evidence of the benefit misleads.",
+      "terms": ["kinder to the planet", "better for the planet", "greener", "cleaner", "less", "lower", "more sustainable"],
+      "applies_to": ["comparative", "vague_attribute"],
+      "adjudicated_urls": []
+    }
+  },
+  {
+    "id": "asa-2022-innocent-healthier-planet",
+    "kind": "ruling",
+    "tier": 1,
+    "source": {
+      "name": "ASA ruling G21-1111827, Innocent Ltd",
+      "publisher": "UK Advertising Standards Authority",
+      "date": "2022-02-23",
+      "locator": "Upheld"
+    },
+    "url": "https://www.asa.org.uk/rulings/innocent-ltd-g21-1111827-innocent-ltd.html",
+    "quote": "Because the ads implied that purchasing Innocent products was a choice which would have a positive environmental impact when that was not the case we concluded that the ads were misleading.",
+    "verified": true,
+    "verification": "fetched_exact",
+    "retrieved": "2026-09-20",
+    "note": "Imagery of a damaged planet being fixed while the drinks were consumed implied a net positive impact; the company's initiatives did not show its products had a net positive impact over their life cycle, and the bottles contained non-recycled plastic.",
+    "index": {
+      "jurisdiction": "UK",
+      "body": "Advertising Standards Authority",
+      "company": "Innocent",
+      "industry": "food and drink",
+      "claim_text": "Little drinks with big dreams for a healthier planet",
+      "outcome": "upheld",
+      "reasoning": "Nature imagery and purpose language that imply buying the product helps the planet are an environmental claim; without evidence of a net positive life-cycle impact they mislead.",
+      "terms": ["healthier planet", "better for the planet", "planet", "nature", "purpose", "journey", "dreams"],
+      "applies_to": ["vague_attribute"],
+      "adjudicated_urls": []
+    }
+  },
+  {
+    "id": "asa-2024-virgin-atlantic-100-saf",
+    "kind": "ruling",
+    "tier": 1,
+    "source": {
+      "name": "ASA ruling G23-1224417, Virgin Atlantic Airways Ltd",
+      "publisher": "UK Advertising Standards Authority",
+      "date": "2024-08-07",
+      "locator": "Upheld"
+    },
+    "url": "https://www.asa.org.uk/rulings/virgin-atlantic-airways-ltd-g23-1224417-virgin-atlantic-airways-ltd.html",
+    "quote": "the world’s first commercial airline to fly transatlantic on 100% sustainable aviation fuel",
+    "verified": true,
+    "verification": "fetched_exact",
+    "retrieved": "2026-09-20",
+    "note": "The quoted words are the challenged claim from the radio ad. The ASA held that listeners would not understand what 'sustainable aviation fuel' meant or that it still produces emissions when burned, so an unexplained '100% sustainable' fuel claim was likely to mislead about the flight's environmental impact.",
+    "index": {
+      "jurisdiction": "UK",
+      "body": "Advertising Standards Authority",
+      "company": "Virgin Atlantic",
+      "industry": "aviation",
+      "claim_text": "the world’s first commercial airline to fly transatlantic on 100% sustainable aviation fuel",
+      "outcome": "upheld",
+      "reasoning": "A technical term with 'sustainable' in its name reads as an absolute environmental benefit; without explaining the term and its limits, the claim misleads.",
+      "terms": ["sustainable aviation fuel", "SAF", "100%", "sustainable", "low-carbon fuels", "biofuels", "first"],
+      "applies_to": ["factual", "vague_attribute", "comparative"],
+      "adjudicated_urls": []
+    }
+  },
+  {
+    "id": "ftc-2022-kohls-walmart-bamboo",
+    "kind": "press_release",
+    "tier": 1,
+    "source": {
+      "name": "FTC, United States v. Kohl's Inc. and United States v. Walmart Inc.: 'bamboo' textiles and eco-friendly claims",
+      "publisher": "US Federal Trade Commission",
+      "date": "2022-04-08",
+      "locator": "Proposed orders and civil penalties of $2.5 million and $3 million under the Penalty Offense Authority"
+    },
+    "url": "https://www.ftc.gov/news-events/news/press-releases/2022/04/ftc-uses-penalty-offense-authority-seek-largest-ever-civil-penalty-bogus-bamboo-marketing-kohls",
+    "quote": "Both companies also are charged with making deceptive environmental claims, touting that the “bamboo” textiles were made using ecofriendly processes, while in reality converting bamboo into rayon requires the use of toxic chemicals and results in hazardous pollutants.",
+    "verified": true,
+    "verification": "fetched_exact",
+    "retrieved": "2026-09-20",
+    "note": "The FTC's Bureau of Consumer Protection director: 'False environmental claims harm both consumers and honest businesses, and companies that greenwash can expect to pay a price.'",
+    "index": {
+      "jurisdiction": "US",
+      "body": "Federal Trade Commission (with the Department of Justice)",
+      "company": "Kohl's and Walmart",
+      "industry": "retail",
+      "claim_text": "textiles marketed as 'bamboo' made with ecofriendly processes, free of harmful chemicals",
+      "outcome": "settled",
+      "reasoning": "An eco-friendly process claim is deceptive when the actual process uses toxic chemicals; a material claim about what the product is made of must be accurate.",
+      "terms": ["eco-friendly", "natural", "sustainable materials", "recycled materials", "renewable materials", "free of"],
+      "applies_to": ["vague_attribute", "factual"],
+      "adjudicated_urls": []
+    }
+  },
+  {
+    "id": "ftc-2016-volkswagen-clean-diesel",
+    "kind": "press_release",
+    "tier": 1,
+    "source": {
+      "name": "FTC v. Volkswagen Group of America: 'Clean Diesel' advertising",
+      "publisher": "US Federal Trade Commission",
+      "date": "2016-03-29",
+      "locator": "Complaint filed 29 March 2016; settled in June 2016 as part of the up to $14.7 billion agreements"
+    },
+    "url": "https://www.ftc.gov/news-events/news/press-releases/2016/03/ftc-charges-volkswagen-deceived-consumers-its-clean-diesel-campaign",
+    "quote": "the FTC alleges that during this seven-year period Volkswagen deceived consumers by selling or leasing more than 550,000 diesel cars based on false claims that the cars were low-emission, environmentally friendly, met emissions standards and would maintain a high resale value.",
+    "verified": true,
+    "verification": "fetched_exact",
+    "retrieved": "2026-09-20",
+    "note": "The cars carried defeat devices that masked emissions during tests; the 'clean' claims were false on the facts, the clearest case of a specific environmental claim contradicted by the data.",
+    "index": {
+      "jurisdiction": "US",
+      "body": "Federal Trade Commission",
+      "company": "Volkswagen",
+      "industry": "automotive",
+      "claim_text": "Clean Diesel: low-emission, environmentally friendly cars that met emissions standards",
+      "outcome": "settled",
+      "reasoning": "A specific, checkable environmental claim ('low-emission', 'meets standards') is deceptive when the measured facts contradict it; specificity is no defence when the numbers are false.",
+      "terms": ["clean", "cleaner", "low-emission", "low emissions", "environmentally friendly", "meets standards"],
+      "applies_to": ["factual", "comparative", "vague_attribute"],
+      "adjudicated_urls": []
+    }
+  },
+  {
+    "id": "nyag-2025-jbs-net-zero-2040",
+    "kind": "press_release",
+    "tier": 1,
+    "source": {
+      "name": "New York Attorney General v. JBS USA: 'net zero by 2040' claims, assurance of discontinuance",
+      "publisher": "Office of the New York State Attorney General",
+      "date": "2025-11-03",
+      "locator": "Suit filed 28 February 2024; $1.1 million settlement with marketing reforms and three years of reporting; NAD and NARB had earlier recommended the claims be discontinued"
+    },
+    "url": "https://ag.ny.gov/press-release/2025/attorney-general-james-secures-11-million-climate-smart-agriculture-worlds",
+    "quote": "In reality, an OAG investigation showed that the JBS Group had no viable plan or factual basis to reach such a goal and, instead, was making plans to increase production – thereby increasing its carbon footprint.",
+    "verified": true,
+    "verification": "fetched_exact",
+    "retrieved": "2026-09-20",
+    "note": "When JBS announced 'Net Zero by 2040' it had not calculated its total emissions, developed a plan, or determined whether the goal was feasible. Complaint: https://ag.ny.gov/press-release/2024/attorney-general-james-sues-worlds-largest-beef-producer-misrepresenting",
+    "index": {
+      "jurisdiction": "US",
+      "body": "New York State Attorney General (consumer protection)",
+      "company": "JBS",
+      "industry": "meat processing",
+      "claim_text": "JBS will achieve net zero greenhouse gas emissions by 2040, reducing its direct and indirect emissions and offsetting all residual emissions",
+      "outcome": "settled",
+      "reasoning": "A net-zero target advertised with no calculated baseline, no plan and plans to grow production is a misleading claim about the future; the target date is not substantiation.",
+      "terms": ["net zero by 2040", "net zero", "net-zero", "target", "commitment", "pledge", "offsetting residual emissions", "by 2030"],
+      "applies_to": ["commitment"],
+      "adjudicated_urls": []
+    }
+  },
+  {
+    "id": "competition-bureau-2022-keurig-recyclable",
+    "kind": "press_release",
+    "tier": 1,
+    "source": {
+      "name": "Competition Bureau Canada: Keurig Canada consent agreement on recyclable coffee-pod claims",
+      "publisher": "Competition Bureau Canada",
+      "date": "2022-01-06",
+      "locator": "Consent agreement registered with the Competition Tribunal; $3 million penalty, $800,000 donation, corrective notices"
+    },
+    "url": "https://www.canada.ca/en/competition-bureau/news/2022/01/keurig-canada-to-pay-3-million-penalty-to-settle-competition-bureaus-concerns-over-coffee-pod-recycling-claims.html",
+    "quote": "The Bureau found that, outside the provinces of British Columbia and Quebec, K-Cup pods are currently not widely accepted in municipal recycling programs.",
+    "verified": true,
+    "verification": "second_party_fetch",
+    "retrieved": "2026-09-20",
+    "note": "The pods were marketed as recyclable across Canada while most municipal programmes did not accept them; the Bureau treated the unqualified recyclable claim as false or misleading where recycling was not available.",
+    "index": {
+      "jurisdiction": "Canada",
+      "body": "Competition Bureau Canada",
+      "company": "Keurig",
+      "industry": "consumer goods",
+      "claim_text": "K-Cup pods are recyclable",
+      "outcome": "settled",
+      "reasoning": "A recyclable claim is misleading where the item is not in fact accepted by the recycling programmes available to most of the consumers it is sold to.",
+      "terms": ["recyclable", "recycled", "recycling", "circular", "packaging"],
+      "applies_to": ["factual", "certification"],
+      "adjudicated_urls": []
+    }
+  },
+  {
+    "id": "accc-2025-clorox-glad-ocean-plastic",
+    "kind": "ruling",
+    "tier": 1,
+    "source": {
+      "name": "ACCC v Clorox Australia: Federal Court penalty for '50% Ocean Plastic Recycled' claims",
+      "publisher": "Australian Competition and Consumer Commission",
+      "date": "2025-04-14",
+      "locator": "Federal Court of Australia; penalty of A$8.25 million; Clorox admitted the contraventions"
+    },
+    "url": "https://www.accc.gov.au/media-release/clorox-ordered-to-pay-825m-in-penalties-for-misleading-ocean-plastic-claims-about-certain-glad-products",
+    "quote": "there is a particular societal harm that arises when conduct undermines consumers' confidence in environmental claims",
+    "verified": true,
+    "verification": "second_party_fetch",
+    "retrieved": "2026-09-20",
+    "note": "The bags were about 50% plastic collected from communities up to 50 km from a shoreline in Indonesia, not from the ocean; the blue colour and wave imagery reinforced the ocean impression.",
+    "index": {
+      "jurisdiction": "Australia",
+      "body": "Federal Court of Australia, on ACCC proceedings",
+      "company": "Clorox",
+      "industry": "consumer goods",
+      "claim_text": "50% Ocean Plastic Recycled",
+      "outcome": "upheld",
+      "reasoning": "A specific recycled-content claim is false when the material does not come from where the claim says; imagery counts as part of the claim.",
+      "terms": ["recycled", "recycled content", "ocean plastic", "recycled materials", "% recycled"],
+      "applies_to": ["factual", "certification"],
+      "adjudicated_urls": []
+    }
+  },
+  {
+    "id": "agcm-2020-eni-diesel-plus",
+    "kind": "ruling",
+    "tier": 1,
+    "source": {
+      "name": "AGCM decision PS11400, Eni 'Diesel+' green advertising",
+      "publisher": "Autorità Garante della Concorrenza e del Mercato (Italy)",
+      "date": "2020-01-15",
+      "locator": "Fine of 5 million euro for misleading advertising"
+    },
+    "url": "https://www.agcm.it/media/comunicati-stampa/2020/1/PS11400",
+    "quote": "L’Autorità Garante della Concorrenza e del Mercato ha irrogato una sanzione di 5 milioni di euro alla società Eni S.p.A. per la diffusione di messaggi pubblicitari ingannevoli utilizzati nella campagna promozionale che ha riguardato il carburante Eni Diesel+",
+    "verified": true,
+    "verification": "fetched_exact",
+    "retrieved": "2026-09-20",
+    "note": "Translation: the authority fined Eni 5 million euro for misleading advertising in the campaign for the fuel Eni Diesel+, both as to its claimed positive environmental impact and as to the asserted savings in consumption and emissions. The fuel was called 'green diesel' although it was 85% fossil diesel.",
+    "index": {
+      "jurisdiction": "Italy",
+      "body": "Autorità Garante della Concorrenza e del Mercato (competition and consumer authority)",
+      "company": "Eni",
+      "industry": "oil and gas",
+      "claim_text": "Eni Diesel+: 'green diesel', 'renewable', with a positive environmental impact and lower consumption and emissions",
+      "outcome": "upheld",
+      "reasoning": "Calling a fuel that is mostly fossil 'green' and 'renewable', and asserting emission and consumption savings that the evidence did not support, misleads consumers.",
+      "terms": ["green", "renewable", "low-carbon fuels", "biofuels", "lower emissions", "positive impact"],
+      "applies_to": ["vague_attribute", "factual", "comparative"],
+      "adjudicated_urls": []
+    }
+  },
+  {
+    "id": "asa-2025-shell-energy-baker-hughes",
+    "kind": "ruling",
+    "tier": 1,
+    "source": {
+      "name": "ASA ruling A25-1288971, Shell Energy UK Ltd",
+      "publisher": "UK Advertising Standards Authority",
+      "date": "2025-10-01",
+      "locator": "Not upheld"
+    },
+    "url": "https://www.asa.org.uk/rulings/shell-energy-uk-a25-1288971-shell-energy-uk-ltd.html",
+    "quote": "The complainant challenged whether the ad gave a misleading impression of the overall environmental impact of Shell’s business activities.",
+    "verified": true,
+    "verification": "fetched_exact",
+    "retrieved": "2026-09-20",
+    "note": "A LinkedIn video about Shell Energy's work with one corporate client (Baker Hughes) on its energy needs and decarbonisation. The ASA found the ad's limited claims about that project did not imply an overall environmental benefit for Shell's business, so no material information was omitted.",
+    "index": {
+      "jurisdiction": "UK",
+      "body": "Advertising Standards Authority",
+      "company": "Shell",
+      "industry": "energy retail",
+      "claim_text": "Our work with Baker Hughes to help meet their energy needs and decarbonise operations. Progress together",
+      "outcome": "not_upheld",
+      "reasoning": "A claim limited to one client's project, which does not present the company as a whole as low-carbon, need not state the fossil share of the business; the scope of the claim decides what must be disclosed.",
+      "terms": ["decarbonise", "helping", "support our customers", "progress", "energy needs"],
+      "applies_to": ["factual", "vague_attribute"],
+      "adjudicated_urls": []
+    }
+  },
+  {
+    "id": "asa-2020-ryanair-lowest-emissions",
+    "kind": "ruling",
+    "tier": 1,
+    "source": {
+      "name": "ASA ruling on Ryanair Ltd, 'Europe's lowest emissions airline' (Sabin Center climate litigation database copy)",
+      "publisher": "UK Advertising Standards Authority",
+      "date": "2020-02-05",
+      "locator": "Upheld; the ruling is no longer on asa.org.uk, the database holds a copy"
+    },
+    "url": "https://www.climatecasechart.com/document/asa-ruling-on-ryanair-ltd-t-a-ryanair-ltd_2b02",
+    "verified": false,
+    "verification": "unverified",
+    "retrieved": "2026-09-20",
+    "note": "Ads in September 2019 claimed 'Europe's lowest emissions airline' and 'low CO2 emissions' on a figure of 66 g CO2 per passenger-kilometre. The ASA found the basis of the comparison insufficiently clear (the calculation's dependence on seat density and fleet age was not disclosed) and the data partial, so the claims were misleading. No passage is quoted because the copy was not fetched by the team.",
+    "index": {
+      "jurisdiction": "UK",
+      "body": "Advertising Standards Authority",
+      "company": "Ryanair",
+      "industry": "aviation",
+      "claim_text": "Europe's lowest emissions airline; low CO2 emissions",
+      "outcome": "upheld",
+      "reasoning": "A superlative comparison on an intensity metric misleads when the ad does not make the basis of the comparison clear and the metric's drivers (seat density) are undisclosed.",
+      "terms": ["lowest", "lowest emissions", "low emissions", "leader", "world's first", "#1", "best", "intensity", "per passenger"],
+      "applies_to": ["comparative", "certification", "factual"],
+      "adjudicated_urls": []
+    }
+  }
+]

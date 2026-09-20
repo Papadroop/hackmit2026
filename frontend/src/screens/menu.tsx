@@ -1,9 +1,21 @@
-import { useEffect, useState, type FormEvent } from "react"
+import { useEffect, useRef, useState, type FormEvent } from "react"
 import { Play } from "lucide-react"
+import { ReactLenis } from "lenis/react"
+import {
+  motion,
+  useReducedMotion,
+  useScroll,
+  useTransform,
+  type MotionStyle,
+} from "motion/react"
 import { toast } from "sonner"
 
-import { ThemeToggle, Wordmark } from "@/components/chrome"
+import "lenis/dist/lenis.css"
+
+import { ThemeToggle } from "@/components/chrome"
+import { Forest } from "@/components/forest"
 import { Link } from "@/components/link"
+import { TitleCard } from "@/components/title-card"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
@@ -23,6 +35,7 @@ import {
   formatNumber,
   formatRelative,
 } from "@/lib/format"
+import { forestOpacity, headerInk } from "@/lib/menu-scroll"
 import { readPref, writePref } from "@/lib/prefs"
 import { navigate, paths } from "@/lib/router"
 
@@ -48,6 +61,11 @@ const STATUS_TEXT = {
  * The first screen: choose a document to analyse. Documents come from the backend, which
  * joins the demo texts with their recorded analyses; the interface never shows what the team
  * expects the verdict to be.
+ *
+ * The name says what the product does, so the screen shows it once, in order: the wash, the
+ * rinse, and then what actually grew (../../menu-design.md §2). The card's own progress `p`
+ * drives the rinse, the header's colour and the forest's arrival; the list's progress `f` grows
+ * the trees. Everything below the card is unchanged and still.
  */
 export function MenuScreen() {
   const [data, setData] = useState<DocumentsResponse | null>(null)
@@ -55,6 +73,25 @@ export function MenuScreen() {
   const [recent, setRecent] = useState<AnalysisSummary[]>([])
   const [pace, setPace] = useState<Pace>(() => readPref(PACE_KEY, 1, isPace))
   const [starting, setStarting] = useState<string | null>(null)
+  const reduced = useReducedMotion() ?? false
+  const cardRef = useRef<HTMLDivElement>(null)
+  const listRef = useRef<HTMLElement>(null)
+
+  // `p`: the card wrapper, 0 with its top at the top of the viewport and 1 with its bottom at
+  // the bottom. `f`: the list, 0 as it enters at the bottom of the viewport and 1 at the end of
+  // the page.
+  const { scrollYProgress: cardProgress } = useScroll({
+    target: cardRef,
+    offset: ["start start", "end end"],
+  })
+  const { scrollYProgress: listProgress } = useScroll({
+    target: listRef,
+    offset: ["start end", "end end"],
+  })
+  const headerMix = useTransform(cardProgress, headerInk)
+  const forestFade = useTransform(cardProgress, (p) =>
+    reduced ? 1 : forestOpacity(p)
+  )
 
   useEffect(() => {
     let cancelled = false
@@ -99,23 +136,25 @@ export function MenuScreen() {
     }
   }
 
-  return (
-    <div className="min-h-svh">
-      <header className="flex items-center gap-3 px-6 py-3">
-        <Wordmark />
-        <div className="ml-auto">
-          <ThemeToggle />
-        </div>
-      </header>
-      <main className="mx-auto w-full max-w-3xl px-6 pt-4 pb-16">
-        <p className="max-w-prose text-muted-foreground">
-          Reads a corporate text, finds each environmental claim, and shows what
-          the evidence supports, with its sources and how sure the finding is.
-        </p>
-
-        <section className="mt-10" aria-labelledby="documents-heading">
+  const screen = (
+    <div className="rinse-screen">
+      <Forest progress={listProgress} opacity={forestFade} />
+      <motion.header
+        className="rinse-header"
+        style={{ "--ink-mix": headerMix } as MotionStyle}
+      >
+        <ThemeToggle />
+      </motion.header>
+      <div ref={cardRef} className="rinse-card-wrapper">
+        <TitleCard progress={cardProgress} />
+      </div>
+      <main
+        ref={listRef}
+        className="rinse-content mx-auto w-full max-w-3xl px-6"
+      >
+        <section aria-labelledby="documents-heading">
           <div className="flex flex-wrap items-end justify-between gap-3">
-            <h2 id="documents-heading" className="text-lg font-medium">
+            <h2 id="documents-heading" className="text-[22px] font-medium">
               Documents
             </h2>
             <div className="flex items-center gap-2">
@@ -179,7 +218,7 @@ export function MenuScreen() {
         </section>
 
         <section className="mt-10" aria-labelledby="own-heading">
-          <h2 id="own-heading" className="text-lg font-medium">
+          <h2 id="own-heading" className="text-[22px] font-medium">
             Your own text
           </h2>
           {data?.live_analysis ? (
@@ -194,7 +233,7 @@ export function MenuScreen() {
 
         {recent.length > 0 && (
           <section className="mt-10" aria-labelledby="recent-heading">
-            <h2 id="recent-heading" className="text-lg font-medium">
+            <h2 id="recent-heading" className="text-[22px] font-medium">
               Recent
             </h2>
             <ul className="mt-3 divide-y divide-border border-y">
@@ -224,6 +263,15 @@ export function MenuScreen() {
         )}
       </main>
     </div>
+  )
+
+  // Lenis smooths the wheel on this screen only; the analysis screen has its own scroll
+  // containers. It scrolls the native document, so sticky and useScroll keep working.
+  if (reduced) return screen
+  return (
+    <ReactLenis root options={{ anchors: true }}>
+      {screen}
+    </ReactLenis>
   )
 }
 

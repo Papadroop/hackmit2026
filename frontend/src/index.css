@@ -2,172 +2,217 @@
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
 @import "@fontsource-variable/public-sans";
-@import "@fontsource-variable/literata";
+@import "@fontsource-variable/literata/opsz.css";
+@import "@fontsource-variable/literata/opsz-italic.css";
 
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
-    --font-heading: var(--font-sans);
-    --font-sans: 'Public Sans Variable', ui-sans-serif, system-ui, sans-serif;
-    --font-serif: 'Literata Variable', Georgia, serif;
+  --font-heading: var(--font-sans);
+  --font-sans: "Public Sans Variable", ui-sans-serif, system-ui, sans-serif;
+  --font-serif: "Literata Variable", Georgia, serif;
 
-    /* design-plan.md palette as Tailwind colours: bg-paper, text-ink, text-verdict-contradicted, ... */
-    --color-desk: var(--desk);
-    --color-paper: var(--paper);
-    --color-ink: var(--ink);
-    --color-graphite: var(--graphite);
-    --color-marker: var(--marker);
-    --color-verdict-contradicted: var(--verdict-contradicted);
-    --color-verdict-misleading: var(--verdict-misleading);
-    --color-verdict-unsubstantiated: var(--verdict-unsubstantiated);
-    --color-verdict-supported: var(--verdict-supported);
+  /* design-plan.md palette as Tailwind colours: bg-paper, text-ink, text-verdict-contradicted, ... */
+  --color-desk: var(--desk);
+  --color-paper: var(--paper);
+  --color-ink: var(--ink);
+  --color-graphite: var(--graphite);
+  --color-marker: var(--marker);
+  --color-verdict-contradicted: var(--verdict-contradicted);
+  --color-verdict-misleading: var(--verdict-misleading);
+  --color-verdict-unsubstantiated: var(--verdict-unsubstantiated);
+  --color-verdict-supported: var(--verdict-supported);
 
-    --color-sidebar-ring: var(--sidebar-ring);
-    --color-sidebar-border: var(--sidebar-border);
-    --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
-    --color-sidebar-accent: var(--sidebar-accent);
-    --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
-    --color-sidebar-primary: var(--sidebar-primary);
-    --color-sidebar-foreground: var(--sidebar-foreground);
-    --color-sidebar: var(--sidebar);
-    --color-chart-5: var(--chart-5);
-    --color-chart-4: var(--chart-4);
-    --color-chart-3: var(--chart-3);
-    --color-chart-2: var(--chart-2);
-    --color-chart-1: var(--chart-1);
-    --color-ring: var(--ring);
-    --color-input: var(--input);
-    --color-border: var(--border);
-    --color-destructive: var(--destructive);
-    --color-accent-foreground: var(--accent-foreground);
-    --color-accent: var(--accent);
-    --color-muted-foreground: var(--muted-foreground);
-    --color-muted: var(--muted);
-    --color-secondary-foreground: var(--secondary-foreground);
-    --color-secondary: var(--secondary);
-    --color-primary-foreground: var(--primary-foreground);
-    --color-primary: var(--primary);
-    --color-popover-foreground: var(--popover-foreground);
-    --color-popover: var(--popover);
-    --color-card-foreground: var(--card-foreground);
-    --color-card: var(--card);
-    --color-foreground: var(--foreground);
-    --color-background: var(--background);
-    --radius-sm: calc(var(--radius) * 0.6);
-    --radius-md: calc(var(--radius) * 0.8);
-    --radius-lg: var(--radius);
-    --radius-xl: calc(var(--radius) * 1.4);
-    --radius-2xl: calc(var(--radius) * 1.8);
-    --radius-3xl: calc(var(--radius) * 2.2);
-    --radius-4xl: calc(var(--radius) * 2.6);
+  /* menu-design.md §4.1, the menu screen only: bg-rinsed-paper, text-pine, fill-sap, ... */
+  --color-rinsed-paper: var(--rinsed-paper);
+  --color-viridian: var(--viridian);
+  --color-pine: var(--pine);
+  --color-sap: var(--sap);
+  --color-wet-paper: var(--wet-paper);
+
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --color-foreground: var(--foreground);
+  --color-background: var(--background);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
 }
 
 :root {
-    /* Base palette (design-plan.md). Desk is the app chrome; Paper is for the document pane only. */
-    --desk: #e9ecee;
-    --paper: #ffffff;
-    --ink: #1c2733;
-    --graphite: #5b6572;
-    --marker: #2a4d9b;
+  /* Base palette (design-plan.md). Desk is the app chrome; Paper is for the document pane only. */
+  --desk: #e9ecee;
+  --paper: #ffffff;
+  --ink: #1c2733;
+  --graphite: #5b6572;
+  --marker: #2a4d9b;
 
-    /* Verdict scale. Hue is the category; highlight alpha is confidence; underline style is
+  /* Verdict scale. Hue is the category; highlight alpha is confidence; underline style is
        the second channel (solid, wavy, dashed, dotted). Team review pending. */
-    --verdict-contradicted: #b3261e;
-    --verdict-misleading: #b8700a;
-    --verdict-unsubstantiated: #6e6a85;
-    --verdict-supported: #1e7566;
+  --verdict-contradicted: #b3261e;
+  --verdict-misleading: #b8700a;
+  --verdict-unsubstantiated: #6e6a85;
+  --verdict-supported: #1e7566;
 
-    /* shadcn variables mapped onto the palette. */
-    --background: var(--desk);
-    --foreground: var(--ink);
-    --card: #f4f5f6;
-    --card-foreground: var(--ink);
-    --popover: #f4f5f6;
-    --popover-foreground: var(--ink);
-    --primary: var(--marker);
-    --primary-foreground: #ffffff;
-    --secondary: #dde1e4;
-    --secondary-foreground: var(--ink);
-    --muted: #dde1e4;
-    --muted-foreground: var(--graphite);
-    --accent: #dde1e4;
-    --accent-foreground: var(--ink);
-    --destructive: var(--verdict-contradicted);
-    --border: #cbd1d6;
-    --input: #cbd1d6;
-    --ring: var(--marker);
-    --chart-1: var(--verdict-supported);
-    --chart-2: var(--verdict-unsubstantiated);
-    --chart-3: var(--verdict-misleading);
-    --chart-4: var(--verdict-contradicted);
-    --chart-5: var(--graphite);
-    --radius: 0.5rem;
-    --sidebar: #f4f5f6;
-    --sidebar-foreground: var(--ink);
-    --sidebar-primary: var(--marker);
-    --sidebar-primary-foreground: #ffffff;
-    --sidebar-accent: #dde1e4;
-    --sidebar-accent-foreground: var(--ink);
-    --sidebar-border: #cbd1d6;
-    --sidebar-ring: var(--marker);
+  /* rinse, the menu screen (menu-design.md §4.1). Green is a material here, never a light:
+       pigment on wet paper. It reaches this one screen; the analysis screen stays ink on paper.
+       Viridian is the Supported hue, so both screens share one green. */
+  --rinsed-paper: #e6eee9;
+  --viridian: var(--verdict-supported);
+  --pine: #0f3b2e;
+  --sap: #6f9b3a;
+  --wet-paper: #d5e3da;
+  /* The meniscus the water leaves along the rinse's edge: bright against the pigment. */
+  --waterline: #ffffff;
+
+  /* shadcn variables mapped onto the palette. */
+  --background: var(--desk);
+  --foreground: var(--ink);
+  --card: #f4f5f6;
+  --card-foreground: var(--ink);
+  --popover: #f4f5f6;
+  --popover-foreground: var(--ink);
+  --primary: var(--marker);
+  --primary-foreground: #ffffff;
+  --secondary: #dde1e4;
+  --secondary-foreground: var(--ink);
+  --muted: #dde1e4;
+  --muted-foreground: var(--graphite);
+  --accent: #dde1e4;
+  --accent-foreground: var(--ink);
+  --destructive: var(--verdict-contradicted);
+  --border: #cbd1d6;
+  --input: #cbd1d6;
+  --ring: var(--marker);
+  --chart-1: var(--verdict-supported);
+  --chart-2: var(--verdict-unsubstantiated);
+  --chart-3: var(--verdict-misleading);
+  --chart-4: var(--verdict-contradicted);
+  --chart-5: var(--graphite);
+  --radius: 0.5rem;
+  --sidebar: #f4f5f6;
+  --sidebar-foreground: var(--ink);
+  --sidebar-primary: var(--marker);
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #dde1e4;
+  --sidebar-accent-foreground: var(--ink);
+  --sidebar-border: #cbd1d6;
+  --sidebar-ring: var(--marker);
 }
 
 .dark {
-    /* Provisional. Derived mechanically from the light palette so the theme toggle never shows
+  /* Provisional. Derived mechanically from the light palette so the theme toggle never shows
        a broken screen; the team designs dark mode after light is agreed (design-plan.md). */
-    --desk: #14181c;
-    --paper: #1e242b;
-    --ink: #e6e9ec;
-    --graphite: #9aa3ad;
-    --marker: #8aa6ee;
-    --verdict-contradicted: #e0655c;
-    --verdict-misleading: #e0a03a;
-    --verdict-unsubstantiated: #a29dbb;
-    --verdict-supported: #4fb3a2;
+  --desk: #14181c;
+  --paper: #1e242b;
+  --ink: #e6e9ec;
+  --graphite: #9aa3ad;
+  --marker: #8aa6ee;
+  --verdict-contradicted: #e0655c;
+  --verdict-misleading: #e0a03a;
+  --verdict-unsubstantiated: #a29dbb;
+  --verdict-supported: #4fb3a2;
 
-    --background: var(--desk);
-    --foreground: var(--ink);
-    --card: #1b2026;
-    --card-foreground: var(--ink);
-    --popover: #1b2026;
-    --popover-foreground: var(--ink);
-    --primary: var(--marker);
-    --primary-foreground: #0f1419;
-    --secondary: #262d35;
-    --secondary-foreground: var(--ink);
-    --muted: #262d35;
-    --muted-foreground: var(--graphite);
-    --accent: #262d35;
-    --accent-foreground: var(--ink);
-    --destructive: var(--verdict-contradicted);
-    --border: #2f3841;
-    --input: #2f3841;
-    --ring: var(--marker);
-    --chart-1: var(--verdict-supported);
-    --chart-2: var(--verdict-unsubstantiated);
-    --chart-3: var(--verdict-misleading);
-    --chart-4: var(--verdict-contradicted);
-    --chart-5: var(--graphite);
-    --sidebar: #1b2026;
-    --sidebar-foreground: var(--ink);
-    --sidebar-primary: var(--marker);
-    --sidebar-primary-foreground: #0f1419;
-    --sidebar-accent: #262d35;
-    --sidebar-accent-foreground: var(--ink);
-    --sidebar-border: #2f3841;
-    --sidebar-ring: var(--marker);
+  --rinsed-paper: #161d1a;
+  --viridian: #1e7566;
+  --pine: #175c50;
+  --sap: #7fa845;
+  --wet-paper: #35524a;
+  --waterline: #cfe8de;
+
+  --background: var(--desk);
+  --foreground: var(--ink);
+  --card: #1b2026;
+  --card-foreground: var(--ink);
+  --popover: #1b2026;
+  --popover-foreground: var(--ink);
+  --primary: var(--marker);
+  --primary-foreground: #0f1419;
+  --secondary: #262d35;
+  --secondary-foreground: var(--ink);
+  --muted: #262d35;
+  --muted-foreground: var(--graphite);
+  --accent: #262d35;
+  --accent-foreground: var(--ink);
+  --destructive: var(--verdict-contradicted);
+  --border: #2f3841;
+  --input: #2f3841;
+  --ring: var(--marker);
+  --chart-1: var(--verdict-supported);
+  --chart-2: var(--verdict-unsubstantiated);
+  --chart-3: var(--verdict-misleading);
+  --chart-4: var(--verdict-contradicted);
+  --chart-5: var(--graphite);
+  --sidebar: #1b2026;
+  --sidebar-foreground: var(--ink);
+  --sidebar-primary: var(--marker);
+  --sidebar-primary-foreground: #0f1419;
+  --sidebar-accent: #262d35;
+  --sidebar-accent-foreground: var(--ink);
+  --sidebar-border: #2f3841;
+  --sidebar-ring: var(--marker);
+}
+
+/* The forest's growth is three numbers per element (menu-design.md §7.3). Registering them as
+   numbers keeps the clamp() arithmetic below well typed and gives every path a starting value
+   before the first frame writes one. */
+@property --g {
+  syntax: "<number>";
+  inherits: true;
+  initial-value: 0;
+}
+@property --b {
+  syntax: "<number>";
+  inherits: false;
+  initial-value: 0;
+}
+@property --s {
+  syntax: "<number>";
+  inherits: false;
+  initial-value: 1;
 }
 
 @layer base {
   * {
     @apply border-border outline-ring/50;
-    }
+  }
   body {
     @apply bg-background text-foreground;
-    }
+  }
   html {
     @apply font-sans;
-    }
+  }
 }
 
 /* The document pane (design-plan.md: the document is the exhibit, set in Literata on Paper).
@@ -256,7 +301,11 @@
   .claim-mark {
     --mark-hue: var(--graphite);
     --mark-alpha: 0.15;
-    background-color: color-mix(in oklab, var(--mark-hue) calc(var(--mark-alpha) * 100%), transparent);
+    background-color: color-mix(
+      in oklab,
+      var(--mark-hue) calc(var(--mark-alpha) * 100%),
+      transparent
+    );
     color: inherit;
     padding-block: 0.12em;
     border-radius: 2px;
@@ -322,13 +371,21 @@
   .language-mark {
     text-decoration-line: underline;
     text-decoration-style: dotted;
-    text-decoration-color: color-mix(in oklab, var(--graphite) 90%, transparent);
+    text-decoration-color: color-mix(
+      in oklab,
+      var(--graphite) 90%,
+      transparent
+    );
     text-decoration-thickness: 1px;
     text-underline-offset: 0.04em;
     text-decoration-skip-ink: none;
   }
   .language-mark[data-polarity="benign"] {
-    text-decoration-color: color-mix(in oklab, var(--graphite) 40%, transparent);
+    text-decoration-color: color-mix(
+      in oklab,
+      var(--graphite) 40%,
+      transparent
+    );
   }
   .language-mark[data-polarity="credit"] {
     text-decoration-style: solid;
@@ -398,6 +455,220 @@
   @media (prefers-reduced-motion: reduce) {
     .claim-mark,
     .document-gutter-label {
+      transition: none;
+    }
+  }
+}
+
+/* rinse, the menu screen (../../menu-design.md §4 to §7). The green lives here and nowhere
+   else: it is pigment on wet paper, a material with a reason to move (water) and a reason to
+   disappear (rinsing). Every selector below is a single class so nothing cancels out, and every
+   class is prefixed `rinse-` so nothing reaches the analysis screen. */
+@layer components {
+  /* The wordmark is italic Literata at every size; only the optical size changes. */
+  .wordmark {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-variation-settings:
+      "opsz" 72,
+      "wght" 420;
+    color: var(--foreground);
+    text-decoration: none;
+  }
+  .wordmark-sm {
+    font-size: 18px;
+    font-variation-settings:
+      "opsz" 18,
+      "wght" 420;
+  }
+
+  .rinse-screen {
+    position: relative;
+    min-height: 100svh;
+    background-color: var(--rinsed-paper);
+  }
+  /* The theme toggle is the whole header here: a link to the menu from the menu is pointless,
+     and the title is the wordmark. Its colour follows the water's edge past it. */
+  .rinse-header {
+    position: fixed;
+    top: 16px;
+    right: 16px;
+    z-index: 4;
+    /* White while it sits on the pigment, foreground once the water has passed it. White, not
+       Paper: Paper is dark slate in dark mode, which would hide the icon on the wash. */
+    color: color-mix(
+      in oklab,
+      var(--foreground) calc(var(--ink-mix, 1) * 100%),
+      #ffffff
+    );
+  }
+
+  /* The toggle is the only control that sits on the pigment, and Marker against the wash is
+     1.3:1 by luminance: visible by hue, not by contrast. The ring keeps its colour, per §4.1,
+     and gains a white outline outside it, which reads at 10:1 on the wash. Over the clean paper
+     the white disappears and Marker itself is 6:1. */
+  .rinse-header button:focus-visible {
+    outline: 2px solid #ffffff;
+    outline-offset: 4px;
+  }
+
+  /* Two viewports of wrapper hold one viewport of sticky card: long enough that the rinse is a
+     gesture, short enough that the clean card is not a blank scroll before the list. */
+  .rinse-card-wrapper {
+    position: relative;
+    z-index: 3;
+    height: 200svh;
+  }
+  .rinse-card {
+    position: sticky;
+    top: 0;
+    height: 100svh;
+    overflow: hidden;
+  }
+  .rinse-wash {
+    position: absolute;
+    inset: 0;
+  }
+  .rinse-shader {
+    position: absolute;
+    inset: 0;
+  }
+  /* Without WebGL2 the same pigment sits still behind the same rinse. */
+  .rinse-wash-still {
+    position: absolute;
+    inset: 0;
+    background-position: center;
+    background-size: cover;
+  }
+  /* The waterline itself: the meniscus the rinse leaves, and the diluted band under it. The
+     paths are written per frame by components/title-card.tsx; the SVG's user units are the
+     card's pixels, which is also the space the two clip paths are read in. */
+  .rinse-waterline {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+  }
+  /* The meniscus and the diluted band under it. Both weights come from the card's own size, in
+     components/title-card.tsx: on a phone a 44 px halo would swallow the line it belongs to. */
+  .rinse-waterline-glow {
+    fill: none;
+    stroke: var(--waterline);
+    stroke-opacity: 0.3;
+  }
+  .rinse-waterline-edge {
+    fill: none;
+    stroke: var(--waterline);
+    stroke-opacity: 0.6;
+  }
+
+  /* One block, centred on the card and lifted a little above its middle so the cue at the
+     bottom has room. The word is drawn in this layer in white and again in `.rinse-card-ink`,
+     where the waterline clips it to the part of the sheet that has come clean. */
+  .rinse-card-inner {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 0 24px 9svh;
+    /* Type on the wash is white in both themes: the pigment is the same green in dark mode, and
+       Paper there is dark slate, which would put dark type on dark green. §4.1's contrast maths
+       ("white on Viridian is 5.5:1") is white, not the Paper token. */
+    color: #ffffff;
+    text-align: center;
+    pointer-events: none;
+  }
+  .rinse-card-ink {
+    color: var(--foreground);
+  }
+  .rinse-title {
+    font-size: clamp(76px, 17vw, 264px);
+    line-height: 0.9;
+    letter-spacing: -0.015em;
+    color: inherit;
+  }
+  .rinse-letter {
+    display: inline-block;
+  }
+  .rinse-tagline {
+    margin-top: 20px;
+    max-width: 34ch;
+    font-size: 21px;
+    line-height: 1.4;
+    color: inherit;
+  }
+  /* The ink copy carries the tagline's box and none of its ink: both words are centred on the
+     same block, so both copies have to lay out the same way. */
+  .rinse-tagline-ghost {
+    visibility: hidden;
+  }
+  .rinse-cue {
+    position: absolute;
+    right: 0;
+    bottom: 56px;
+    left: 0;
+    font-size: 15px;
+    color: inherit;
+  }
+
+  .rinse-content {
+    position: relative;
+    z-index: 2;
+    padding-top: 4rem;
+    /* Long enough that the forest has a scroll range even with three documents. */
+    min-height: 170svh;
+    padding-bottom: 8rem;
+  }
+
+  /* The forest sits under everything and shows only where the content has no Paper surface. */
+  .rinse-forest {
+    position: fixed;
+    z-index: 1;
+    inset: 0;
+    pointer-events: none;
+  }
+  .rinse-branch {
+    fill: none;
+    stroke: var(--ink);
+    stroke-dasharray: 1;
+    /* Paths carry pathLength="1", so one number draws a limb on from its own birth.
+       Not `vector-effect: non-scaling-stroke`: in Chromium that makes dashes screen-measured
+       and pathLength stops normalising them, so every limb renders fully drawn whatever the
+       offset. components/forest.tsx divides each width by the tree's scale instead, which is
+       what non-scaling-stroke was there for. */
+    stroke-dashoffset: clamp(0, 1 - (var(--g, 0) - var(--b)) / var(--s), 1);
+    stroke-linecap: round;
+    stroke-opacity: 0.55;
+  }
+  .dark .rinse-branch {
+    stroke-opacity: 0.45;
+  }
+  .rinse-leaf {
+    fill: var(--sap);
+    /* Overlapping leaves darken like wet pigment. §7.3's 0.72 multiplies to black wherever the
+       canopy is dense, which stops reading as green at all; 0.42 pools instead of blackening.
+       Dark mode blends normally, so it keeps its 0.8. */
+    fill-opacity: 0.42;
+    mix-blend-mode: multiply;
+    transform: scale(clamp(0, (var(--g, 0) - var(--b)) / var(--s), 1));
+    transform-box: fill-box;
+    transform-origin: center;
+    transition: transform 220ms cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+  .rinse-leaf-viridian {
+    fill: var(--viridian);
+  }
+  .dark .rinse-leaf {
+    fill-opacity: 0.8;
+    /* Multiply vanishes on a dark page. */
+    mix-blend-mode: normal;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .rinse-leaf {
       transition: none;
     }
   }

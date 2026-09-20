@@ -1,8 +1,9 @@
-# Greenwashing Auditor
+# rinse
 
 HackMIT 2026. Reads a public corporate text, highlights each environmental claim, and shows
-the verdict, the evidence and the confidence behind it. Design in `design-doc.md`, plan in
-`roadmap.md`, visual direction in `design-plan.md`, hand analysis of the demo document in
+the verdict, the evidence and the confidence behind it. The name is what it does: the green
+comes off, and what is left is the evidence. Design in `design-doc.md`, plan in
+`roadmap.md`, visual direction in `design-plan.md` and `menu-design.md`, hand analysis of the demo document in
 `golden-reference.md`.
 
 ## Run the skeleton

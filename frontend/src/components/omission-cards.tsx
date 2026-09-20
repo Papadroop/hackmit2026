@@ -8,6 +8,16 @@ const NONE: ReadonlySet<string> = new Set()
 const noop = () => {}
 
 /**
+ * The nearest the page comes to the topic, when the omissions stage found anything at all
+ * (`auditor.omissions` puts the passage it located in the text here). It is what makes "not
+ * mentioned" answerable: the reader can see the words that are there instead.
+ */
+function nearestOf(omission: Omission): string | undefined {
+  const nearest = (omission.ext as { nearest?: unknown } | undefined)?.nearest
+  return typeof nearest === "string" && nearest !== "" ? nearest : undefined
+}
+
+/**
  * The Omissions layer (design-doc D4 Q3, contract §8): what the document does not say, as
  * slips of paper on the desk above the sheet, since an omission has no place in the text.
  * Each shows the topic, why it is material, what the page would say, the materiality score
@@ -51,6 +61,12 @@ export function OmissionCards({
                 {omission.complete_text}
               </blockquote>
             </>
+          )}
+          {nearestOf(omission) !== undefined && (
+            <p className="mt-2 text-xs leading-snug text-muted-foreground">
+              Nearest the page comes:{" "}
+              <span className="text-foreground">“{nearestOf(omission)}”</span>
+            </p>
           )}
           <p className="mt-2 flex items-center gap-2 tabular-nums">
             <span className="text-muted-foreground">Materiality</span>

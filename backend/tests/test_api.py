@@ -99,6 +99,7 @@ def test_live_request_goes_through_the_same_stream(client, fake_fetch):
     assert types[:2] == ["analysis.started", "stage.started"]
     assert "document.ingested" in types and types[-1] == "analysis.failed"
     assert "not built yet" in received[-1][1]["payload"]["error"]
+    assert received[-1][1]["payload"]["stage"] == "verdict", "ingest through omissions are built; the verdict layer needs a recording to run inside"
     assert client.get(f"/api/analyses/{summary['analysis_id']}").json()["status"] == "failed"
 
 

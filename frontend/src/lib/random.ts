@@ -1,0 +1,19 @@
+/**
+ * mulberry32, the one seeded PRNG behind the menu screen. The pigment image and the forest are
+ * both generated from fixed seeds so a demo looks the same on every load and the screenshots in
+ * ../../menu-design.md §14 are reproducible.
+ */
+export function mulberry32(seed: number): () => number {
+  let a = seed >>> 0
+  return () => {
+    a = (a + 0x6d2b79f5) | 0
+    let t = Math.imul(a ^ (a >>> 15), 1 | a)
+    t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296
+  }
+}
+
+/** A seeded value in [min, max). */
+export function between(rnd: () => number, min: number, max: number): number {
+  return min + rnd() * (max - min)
+}

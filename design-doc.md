@@ -145,7 +145,7 @@ Extends the document view in D2. Judges can only reward analysis they can see, s
 ## Open questions (design)
 
 1. Primary audience (consumer, investor, regulator, or the company's own compliance team); shapes how the output is presented. **Resolved 2026-09-19:** the analyst who has to defend a finding (regulator, journalist, investor analyst); see `design-plan.md`.
-2. Materiality reference for D4 Q3 (what counts as material per industry).
+2. Materiality reference for D4 Q3 (what counts as material per industry). **Resolved 2026-09-20:** a third curated store, `knowledge/materiality.json`, one entry per industry with the disclosure topics an external standard names for it (the SASB Standard for the industry, GRI 11 for oil and gas, ESRS E1 for the cross-industry entry every document is also measured against). Each topic carries the words that appear when a page does address it, so "not mentioned" is checkable rather than asserted; see `knowledge/README.md` and `auditor.omissions`.
 3. Demo narrative: which companies and documents. **Resolved 2026-09-19:** Shell (likely greenwashing), Apple (mixed), Ørsted (likely clean); see `demo-documents.md` for the selection and `golden-reference.md` for the hand analysis of the Shell page.
 
 ## Build plan

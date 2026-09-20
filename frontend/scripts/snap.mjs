@@ -1,5 +1,7 @@
 // Headless Chrome screenshot over the DevTools protocol (Node 24 has a WebSocket client).
-// usage: [VISION=achromatopsia] node snap.mjs <url> <out.png> [width] [height] [js expression to run before the shot]...
+// usage: [VISION=achromatopsia] [MOTION=reduce] [CLIP=x,y,w,h] node snap.mjs <url> <out.png> [width] [height] [js expression to run before the shot]...
+// CLIP shoots one CSS-pixel rectangle of the page instead of the viewport, for looking closely at a detail.
+// MOTION=reduce emulates prefers-reduced-motion for the reduced-motion pass of ../../menu-design.md §14.
 import { spawn } from "node:child_process"
 import { writeFileSync, mkdtempSync } from "node:fs"
 import { tmpdir } from "node:os"
@@ -36,6 +38,7 @@ try {
   await send("Page.enable")
   // VISION=achromatopsia|deuteranopia|protanopia|tritanopia|blurredVision renders the page as that viewer sees it.
   if (process.env.VISION) await send("Emulation.setEmulatedVisionDeficiency", { type: process.env.VISION })
+  if (process.env.MOTION) await send("Emulation.setEmulatedMedia", { features: [{ name: "prefers-reduced-motion", value: process.env.MOTION }] })
   await send("Page.navigate", { url })
   await sleep(2500)
   for (const js of steps) {
@@ -44,7 +47,11 @@ try {
     else if (r.result?.value !== undefined) console.log("step:", r.result.value)
     await sleep(700)
   }
-  const shot = await send("Page.captureScreenshot", { format: "png" })
+  const clip = process.env.CLIP?.split(",").map(Number)
+  const shot = await send("Page.captureScreenshot", {
+    format: "png",
+    ...(clip ? { clip: { x: clip[0], y: clip[1], width: clip[2], height: clip[3], scale: 1 } } : {}),
+  })
   writeFileSync(out, Buffer.from(shot.data, "base64"))
   console.log("wrote", out)
   ws.close()

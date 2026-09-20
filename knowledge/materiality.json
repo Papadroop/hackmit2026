@@ -1,0 +1,1379 @@
+[
+  {
+    "id": "esrs-e1-cross-industry-climate",
+    "kind": "law",
+    "tier": 1,
+    "source": {
+      "name": "ESRS E1 Climate change (Commission Delegated Regulation (EU) 2023/2772)",
+      "publisher": "European Commission",
+      "date": "2023-07-31",
+      "locator": "Annex I, ESRS E1, Disclosure Requirements E1-1, E1-4, E1-6"
+    },
+    "url": "https://eur-lex.europa.eu/eli/reg_del/2023/2772/oj/eng",
+    "quote": "(a) gross Scope 1 GHG emissions; (b) gross Scope 2 GHG emissions; (c) gross Scope 3 GHG emissions; and (d) total GHG emissions.",
+    "verified": true,
+    "verification": "fetched_exact",
+    "retrieved": "2026-09-20",
+    "note": "The cross-industry list: what any company telling a climate story is expected to put beside it, whatever its industry. E1-6 requires gross Scopes 1, 2 and 3 and the total; E1-1 the transition plan and the capital committed to it; E1-4 the targets with their baselines.",
+    "index": {
+      "industry": "Any company making environmental claims",
+      "reference": "ESRS",
+      "sasb_code": "*",
+      "aliases": [],
+      "keywords": [],
+      "topics": [
+        {
+          "code": "E1-6",
+          "name": "Total emissions across scopes 1, 2 and 3, and their trend",
+          "why_material": "An intensity figure, a percentage or a target covering part of the footprint can improve while the absolute total rises. The total across all three scopes, and its direction, is the number the rest of the page has to be read against.",
+          "expects": "The latest year's absolute emissions in tonnes of CO2e for scopes 1, 2 and 3 and the total, with the change against a stated earlier year.",
+          "terms": [
+            "total emissions",
+            "absolute emissions",
+            "million tonnes",
+            "mtco2e",
+            "mt co2e",
+            "tonnes of co2e",
+            "gigatonnes",
+            "billion tonnes",
+            "our footprint",
+            "total ghg emissions"
+          ]
+        },
+        {
+          "code": "E1-1",
+          "name": "Where the money goes",
+          "why_material": "A transition claim is decided by capital allocation: what share of investment goes to the low-carbon business and what share to the one being replaced. A page can describe a direction of travel that the spending does not show.",
+          "expects": "Capital expenditure for the latest year split between the low-carbon activities named and the rest of the business, in money or as a share.",
+          "terms": [
+            "capital expenditure",
+            "capital expenditures",
+            "capex",
+            "we invested",
+            "we will invest",
+            "investment of",
+            "billion in",
+            "share of investment",
+            "capital allocation",
+            "capital employed"
+          ]
+        },
+        {
+          "code": "E1-1",
+          "name": "The business the claim is made about, at its actual scale",
+          "why_material": "The hidden trade-off: a page can be built around an improvement in a small part of the business while the activity that causes most of the impact goes unmentioned. Scale is what tells a reader which is which.",
+          "expects": "What the company mainly makes, sells or does, in volumes or revenue, beside the activity the claim is about.",
+          "terms": [
+            "revenue",
+            "sales volume",
+            "volumes",
+            "units sold",
+            "production",
+            "output",
+            "market share",
+            "of our business"
+          ]
+        },
+        {
+          "code": "E1-4",
+          "name": "Targets that were changed, delayed or dropped",
+          "why_material": "A timeline that shows only the targets still standing reads as steady progress. A target that was weakened or withdrawn is part of the record of the same commitments.",
+          "expects": "Whether any target on the page has been revised, delayed or withdrawn since it was set, and when.",
+          "terms": [
+            "revised",
+            "withdrew",
+            "withdrawn",
+            "we no longer",
+            "replaced our target",
+            "updated our target",
+            "delayed",
+            "pushed back",
+            "retired the target"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "sasb-gri-oil-and-gas",
+    "kind": "standard",
+    "tier": 3,
+    "source": {
+      "name": "GRI 11: Oil and Gas Sector 2021, likely material topics; SASB Oil & Gas – Exploration & Production (EM-EP) and Refining & Marketing (EM-RM)",
+      "publisher": "Global Sustainability Standards Board (GRI); IFRS Foundation (SASB Standards)",
+      "date": "2021-10-05",
+      "locator": "GRI 11 section 2, topics 11.1-11.22; SASB EM-EP and EM-RM, Sustainability Disclosure Topics & Metrics"
+    },
+    "url": "https://www.globalreporting.org/standards/standards-development/sector-standard-for-oil-and-gas/",
+    "text_url": "https://www.globalreporting.org/pdf.ashx?id=12336",
+    "quote": "These topics are likely to be material for organizations in the oil and gas sector on the basis of the sector's most significant impacts on the economy, environment, and people, including on their human rights.",
+    "verified": true,
+    "verification": "fetched_exact",
+    "retrieved": "2026-09-20",
+    "note": "GRI 11 names 22 likely material topics for the sector; the SASB standards for EM-EP and EM-RM name the same impacts as disclosure topics. The topics below are the ones a climate or transition page is read against.",
+    "index": {
+      "industry": "Oil & Gas – Exploration, Production, Refining & Marketing",
+      "reference": "GRI 11 / SASB",
+      "sasb_code": "EM-EP",
+      "also_codes": [
+        "EM-RM",
+        "EM-MD",
+        "EM-SV"
+      ],
+      "aliases": [
+        "Oil & Gas",
+        "Oil and Gas",
+        "Oil & Gas – Integrated",
+        "Integrated Oil and Gas",
+        "Petroleum",
+        "Energy"
+      ],
+      "keywords": [
+        "oil",
+        "gas",
+        "lng",
+        "refinery",
+        "upstream",
+        "petroleum",
+        "barrels",
+        "drilling",
+        "crude"
+      ],
+      "topics": [
+        {
+          "code": "EM-EP-110a",
+          "name": "Emissions from the fuels sold, at their absolute size",
+          "why_material": "For an oil and gas company the emissions from burning what it sells are roughly nine tenths of its footprint. Targets and intensity figures that cover only its own operations leave that part out.",
+          "expects": "Absolute scope 3 emissions from the use of sold products for the latest year, their trend, and what share of the total footprint the page's targets cover.",
+          "terms": [
+            "scope 3",
+            "customer emissions",
+            "use of sold products",
+            "category 11",
+            "end-use emissions",
+            "million tonnes",
+            "mtco2e"
+          ]
+        },
+        {
+          "code": "EM-EP-420a",
+          "name": "Production and sales volume plans",
+          "why_material": "Future oil and gas volumes decide future emissions more than any efficiency measure. A transition story with no volume path in it is a story about how the barrels are produced, not how many.",
+          "expects": "Planned oil, gas and LNG production or sales to the end of the decade, in volumes or as a direction against today.",
+          "terms": [
+            "barrels",
+            "boe",
+            "production will",
+            "production to",
+            "output",
+            "lng sales",
+            "volumes will",
+            "million barrels",
+            "growth in production",
+            "sustaining our liquids"
+          ]
+        },
+        {
+          "code": "EM-EP-420a",
+          "name": "Capital expenditure split between low-carbon and fossil fuels",
+          "why_material": "Whether a company is building a low-carbon business is decided by where its money goes. Regulators have cleared transition advertising precisely when it stated the split and ruled against it when it did not.",
+          "expects": "Capital expenditure for the latest year in renewables and low-carbon energy against upstream and gas, in money or as a share of the total.",
+          "terms": [
+            "capital expenditure",
+            "capital expenditures",
+            "capex",
+            "we invested",
+            "invested $",
+            "billion in renewables",
+            "share of our investment",
+            "capital allocation"
+          ]
+        },
+        {
+          "code": "EM-EP-110a.2",
+          "name": "Methane and flaring",
+          "why_material": "Methane leaks and routine flaring are the industry's fastest-acting climate impact and its most-measured one, so a page that omits them omits the part a reader could check.",
+          "expects": "Methane emissions or intensity for the latest year, and whether routine flaring has ended, with the measurement basis.",
+          "terms": [
+            "methane",
+            "flaring",
+            "flare",
+            "fugitive",
+            "venting",
+            "leak detection"
+          ]
+        },
+        {
+          "code": "EM-EP-160a",
+          "name": "Biodiversity, spills and protected areas",
+          "why_material": "Exploration and production sit in sensitive places; spills and habitat loss are the sector's most visible local impacts and are not reduced by any climate target.",
+          "expects": "Hydrocarbon spills for the latest year, operations in protected or sensitive areas, and what is done about them.",
+          "terms": [
+            "spill",
+            "spills",
+            "biodiversity",
+            "protected area",
+            "habitat",
+            "ecosystem",
+            "nature",
+            "restoration"
+          ]
+        },
+        {
+          "code": "EM-EP-140a",
+          "name": "Water use in water-stressed places",
+          "why_material": "Produced water and freshwater withdrawal in water-stressed regions are material for the sector's licence to operate and are traded off against some emissions measures.",
+          "expects": "Water withdrawn and consumed, the share in water-stressed regions, and how produced water is handled.",
+          "terms": [
+            "water",
+            "freshwater",
+            "water-stressed",
+            "produced water",
+            "withdrawal",
+            "water consumption"
+          ]
+        },
+        {
+          "code": "EM-EP-210a",
+          "name": "Communities, indigenous rights and security",
+          "why_material": "The sector's operations affect the people who live where it works; consent, resettlement and the conduct of security forces are among its largest social impacts.",
+          "expects": "Where operations affect indigenous or local communities, what consent was sought, and any unresolved disputes.",
+          "terms": [
+            "indigenous",
+            "community",
+            "communities",
+            "consent",
+            "resettlement",
+            "human rights",
+            "land rights",
+            "grievance"
+          ]
+        },
+        {
+          "code": "EM-EP-530a",
+          "name": "Lobbying and trade association positions",
+          "why_material": "A company can hold a stated climate position while its trade associations argue the other way; what it spends on political influence is a test of whether the stated position is the real one.",
+          "expects": "Political and trade association spending, the climate positions of the associations it funds, and where it differs from them.",
+          "terms": [
+            "lobbying",
+            "trade association",
+            "political",
+            "advocacy",
+            "public policy",
+            "industry association"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "sasb-tc-hw-technology-hardware",
+    "kind": "standard",
+    "tier": 3,
+    "source": {
+      "name": "SASB Standard, Hardware (TC-HW): Sustainability Disclosure Topics & Metrics",
+      "publisher": "IFRS Foundation (SASB Standards)",
+      "date": "2023-12-01",
+      "locator": "TC-HW, version 2023-12, Table 1"
+    },
+    "url": "https://sasb.ifrs.org/standards/download/",
+    "verified": false,
+    "verification": "unverified",
+    "retrieved": "2026-09-20",
+    "note": "The SASB standards are behind a download form, so this entry is listed by name, as the ISO entries in criteria.json are. Topics as SASB names them: Product Security; Employee Diversity & Inclusion; Product Lifecycle Management; Supply Chain Management; Materials Sourcing — with the use-phase and manufacturing emissions that IFRS S2's industry-based guidance adds for the industry.",
+    "index": {
+      "industry": "Technology Hardware",
+      "reference": "SASB",
+      "sasb_code": "TC-HW",
+      "also_codes": [
+        "TC-SC",
+        "TC-CE"
+      ],
+      "aliases": [
+        "Hardware",
+        "Technology Hardware",
+        "Consumer Electronics",
+        "Electronic Manufacturing Services",
+        "Semiconductors"
+      ],
+      "keywords": [
+        "iphone",
+        "laptop",
+        "device",
+        "devices",
+        "chip",
+        "semiconductor",
+        "electronics",
+        "hardware",
+        "product line"
+      ],
+      "topics": [
+        {
+          "code": "TC-HW-410a",
+          "name": "Manufacturing emissions in the supply chain, at company scale",
+          "why_material": "Most of a device maker's footprint is made by its suppliers, not by its own sites, and it is much larger than the part any single product carries. A product-level claim says nothing about it.",
+          "expects": "The company's total emissions across scopes 1, 2 and 3 for the latest year and their trend, beside any per-product figure.",
+          "terms": [
+            "scope 3",
+            "total emissions",
+            "supply chain emissions",
+            "million metric tons",
+            "mtco2e",
+            "our footprint",
+            "corporate emissions"
+          ]
+        },
+        {
+          "code": "TC-HW-410a.1",
+          "name": "The use phase and product lifetime",
+          "why_material": "Electricity used over a device's life and how long that life is are decided by design: repairability, software support and battery replacement move more carbon than packaging does.",
+          "expects": "How long the product is supported and repairable, and the emissions from its use over that life.",
+          "terms": [
+            "repair",
+            "repairability",
+            "lifespan",
+            "longevity",
+            "software support",
+            "battery replacement",
+            "use phase",
+            "product lifetime"
+          ]
+        },
+        {
+          "code": "TC-HW-440a",
+          "name": "Materials sourcing: mined metals and conflict minerals",
+          "why_material": "The metals in a device come from mines whose impacts are large, local and not addressed by recycled content in one component.",
+          "expects": "Which materials are mined, where they come from and what share of each is recycled across the whole device rather than in one part.",
+          "terms": [
+            "conflict minerals",
+            "cobalt",
+            "lithium",
+            "rare earth",
+            "tin",
+            "tantalum",
+            "tungsten",
+            "mining",
+            "mined",
+            "smelter"
+          ]
+        },
+        {
+          "code": "TC-HW-430a",
+          "name": "Labour conditions at supplier factories",
+          "why_material": "Assembly is contracted out to factories whose working hours, wages and safety are the company's largest social impact and the part of its footprint it does not own.",
+          "expects": "Audit findings at supplier factories for the latest year and what was done about them.",
+          "terms": [
+            "supplier responsibility",
+            "labour",
+            "labor",
+            "working hours",
+            "factory",
+            "audit",
+            "workers",
+            "overtime",
+            "forced labour",
+            "forced labor"
+          ]
+        },
+        {
+          "code": "TC-HW-410a.4",
+          "name": "Electronic waste and what happens at end of life",
+          "why_material": "Devices become waste; how many are collected, refurbished or recycled decides whether recycled content in new products means anything.",
+          "expects": "Tonnes of e-waste collected or recycled for the latest year against units sold, and where the material goes.",
+          "terms": [
+            "e-waste",
+            "electronic waste",
+            "recycling",
+            "recycled",
+            "take-back",
+            "refurbish",
+            "trade-in",
+            "end of life",
+            "disposal"
+          ]
+        },
+        {
+          "code": "TC-SC-140a",
+          "name": "Water and chemicals in manufacturing",
+          "why_material": "Chip fabrication and component plating use large volumes of water and hazardous chemicals, often in water-stressed regions, and none of it is touched by a clean-electricity claim.",
+          "expects": "Water withdrawn and consumed in manufacturing, the share in water-stressed regions, and hazardous waste.",
+          "terms": [
+            "water",
+            "water-stressed",
+            "hazardous waste",
+            "chemicals",
+            "pfas",
+            "wastewater",
+            "effluent"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "sasb-if-eu-electric-utilities",
+    "kind": "standard",
+    "tier": 3,
+    "source": {
+      "name": "SASB Standard, Electric Utilities & Power Generators (IF-EU): Sustainability Disclosure Topics & Metrics",
+      "publisher": "IFRS Foundation (SASB Standards)",
+      "date": "2023-12-01",
+      "locator": "IF-EU, version 2023-12, Table 1"
+    },
+    "url": "https://sasb.ifrs.org/standards/download/",
+    "verified": false,
+    "verification": "unverified",
+    "retrieved": "2026-09-20",
+    "note": "Listed by name; the standard is behind a download form. Topics as SASB names them: Greenhouse Gas Emissions & Energy Resource Planning; Air Quality; Water Management; Coal Ash Management; Energy Affordability; Workforce Health & Safety; End-Use Efficiency & Demand; Nuclear Safety & Emergency Management; Grid Resiliency.",
+    "index": {
+      "industry": "Electric Utilities & Power Generators",
+      "reference": "SASB",
+      "sasb_code": "IF-EU",
+      "also_codes": [
+        "IF-GU",
+        "RR-ST",
+        "RR-WT",
+        "RR-SO"
+      ],
+      "aliases": [
+        "Electric Utilities",
+        "Power Generators",
+        "Utilities",
+        "Renewable Energy",
+        "Wind",
+        "Offshore Wind",
+        "Independent Power Producers"
+      ],
+      "keywords": [
+        "electricity",
+        "power",
+        "grid",
+        "wind farm",
+        "offshore wind",
+        "megawatt",
+        "gigawatt",
+        "generation",
+        "utility"
+      ],
+      "topics": [
+        {
+          "code": "IF-EU-110a",
+          "name": "The generation mix, in energy terms",
+          "why_material": "A utility's climate position is its generation mix: what share of the electricity it actually produced last year came from fossil fuels, and what the plan is for the rest.",
+          "expects": "Generation by fuel for the latest year in TWh or as a share, and when the remaining fossil capacity closes.",
+          "terms": [
+            "generation mix",
+            "twh",
+            "gwh",
+            "megawatt hours",
+            "capacity",
+            "coal",
+            "gas-fired",
+            "fossil",
+            "renewable share",
+            "installed capacity"
+          ]
+        },
+        {
+          "code": "IF-EU-110a.3",
+          "name": "Emissions from the energy sold, not only the energy generated",
+          "why_material": "A supplier can own clean generation and still sell electricity and gas bought elsewhere; the emissions of what it sells is the figure a customer's claim rests on.",
+          "expects": "Emissions of electricity and gas sold to customers, and how much of it was bought in.",
+          "terms": [
+            "sold to customers",
+            "electricity sold",
+            "gas sold",
+            "purchased power",
+            "traded",
+            "scope 3",
+            "energy supplied"
+          ]
+        },
+        {
+          "code": "IF-EU-110a.4",
+          "name": "Biomass, offsets and certificates behind a renewable figure",
+          "why_material": "A high renewable share can rest on burning biomass or on buying unbundled certificates rather than on the power that physically flowed; the mechanism is what makes it a real reduction or not.",
+          "expects": "Whether the renewable figure uses biomass, guarantees of origin or unbundled certificates, and how much.",
+          "terms": [
+            "biomass",
+            "wood pellets",
+            "guarantees of origin",
+            "certificates",
+            "recs",
+            "unbundled",
+            "market-based",
+            "offsets",
+            "carbon credits"
+          ]
+        },
+        {
+          "code": "IF-EU-140a",
+          "name": "Water use and thermal discharge",
+          "why_material": "Thermal generation withdraws and heats large volumes of water; it is the impact that does not fall with an emissions intensity target.",
+          "expects": "Water withdrawn and consumed for the latest year and the share in water-stressed regions.",
+          "terms": [
+            "water",
+            "cooling water",
+            "withdrawal",
+            "water-stressed",
+            "thermal discharge",
+            "effluent"
+          ]
+        },
+        {
+          "code": "IF-EU-120a",
+          "name": "Air quality beyond carbon dioxide",
+          "why_material": "Nitrogen oxides, sulphur dioxide and particulates from combustion are local health impacts that a carbon target does not measure.",
+          "expects": "NOx, SOx and particulate emissions for the latest year and the trend.",
+          "terms": [
+            "nox",
+            "sox",
+            "sulphur",
+            "sulfur",
+            "particulate",
+            "air quality",
+            "pollutants",
+            "mercury"
+          ]
+        },
+        {
+          "code": "IF-EU-160a",
+          "name": "Local impacts of new build: land, sea and communities",
+          "why_material": "Wind, solar and grid build have their own footprint: seabed and habitat, land use, and the communities that live with them. A page that reports only avoided emissions omits them.",
+          "expects": "What new build affects on land or at sea, and what is done about it.",
+          "terms": [
+            "biodiversity",
+            "habitat",
+            "seabed",
+            "birds",
+            "marine",
+            "land use",
+            "planning",
+            "local community",
+            "communities"
+          ]
+        },
+        {
+          "code": "IF-EU-550a",
+          "name": "Security of supply and what runs when the wind drops",
+          "why_material": "A renewables claim is bounded by what fills the gaps: backup gas, imports or storage. Leaving it out lets an intermittent supply read as a firm one.",
+          "expects": "What backs up the renewable generation, and the emissions of it.",
+          "terms": [
+            "back-up",
+            "backup",
+            "storage",
+            "batteries",
+            "peaking",
+            "reserve",
+            "intermittency",
+            "grid stability",
+            "reliability"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "sasb-tr-al-airlines",
+    "kind": "standard",
+    "tier": 3,
+    "source": {
+      "name": "SASB Standard, Airlines (TR-AL): Sustainability Disclosure Topics & Metrics",
+      "publisher": "IFRS Foundation (SASB Standards)",
+      "date": "2023-12-01",
+      "locator": "TR-AL, version 2023-12, Table 1"
+    },
+    "url": "https://sasb.ifrs.org/standards/download/",
+    "verified": false,
+    "verification": "unverified",
+    "retrieved": "2026-09-20",
+    "note": "Listed by name; the standard is behind a download form. Topics as SASB names them: Greenhouse Gas Emissions; Labour Practices; Competitive Behaviour; Accident & Safety Management.",
+    "index": {
+      "industry": "Airlines",
+      "reference": "SASB",
+      "sasb_code": "TR-AL",
+      "also_codes": [
+        "TR-AF"
+      ],
+      "aliases": [
+        "Airlines",
+        "Aviation",
+        "Air Freight & Logistics"
+      ],
+      "keywords": [
+        "flight",
+        "flights",
+        "passenger",
+        "aircraft",
+        "fleet",
+        "airline",
+        "aviation",
+        "seat"
+      ],
+      "topics": [
+        {
+          "code": "TR-AL-110a",
+          "name": "Fuel burned and the emissions of flying",
+          "why_material": "Nearly all of an airline's footprint is jet fuel burned in flight. Cabin waste, ground operations and offices are rounding errors beside it: the hidden trade-off the sector is known for.",
+          "expects": "Total fuel burned and emissions for the latest year, per passenger-kilometre and in absolute terms, with the trend.",
+          "terms": [
+            "jet fuel",
+            "fuel burn",
+            "fuel consumption",
+            "emissions per passenger",
+            "rpk",
+            "ask",
+            "absolute emissions",
+            "million tonnes"
+          ]
+        },
+        {
+          "code": "TR-AL-110a.3",
+          "name": "How much sustainable aviation fuel is actually used",
+          "why_material": "SAF is usually a fraction of a percent of fuel uplift; a page that names it without the share lets a trial read as the fuel supply.",
+          "expects": "The share of total fuel that was sustainable aviation fuel in the latest year, and what it is made from.",
+          "terms": [
+            "sustainable aviation fuel",
+            "saf",
+            "biofuel",
+            "percent of our fuel",
+            "blend",
+            "feedstock"
+          ]
+        },
+        {
+          "code": "TR-AL-110a.1",
+          "name": "Non-CO2 effects at altitude",
+          "why_material": "Contrails and nitrogen oxides at cruise altitude roughly double aviation's warming effect; a CO2-only figure understates the impact by about half.",
+          "expects": "Whether non-CO2 effects are counted and how.",
+          "terms": [
+            "contrail",
+            "non-co2",
+            "radiative forcing",
+            "nitrogen oxides at altitude",
+            "warming effect"
+          ]
+        },
+        {
+          "code": "TR-AL-000",
+          "name": "Fleet and capacity growth",
+          "why_material": "Emissions follow how many seats are flown. Efficiency per seat can improve while the total rises because the fleet grew.",
+          "expects": "Planned capacity or fleet growth, in seats, aircraft or flights.",
+          "terms": [
+            "fleet",
+            "aircraft on order",
+            "capacity growth",
+            "new routes",
+            "seats",
+            "expansion"
+          ]
+        },
+        {
+          "code": "TR-AL-310a",
+          "name": "Offsets behind a neutrality claim",
+          "why_material": "Airline neutrality claims have rested on offsets rather than on reductions, and regulators have ruled on exactly that.",
+          "expects": "Whether offsets are used, which projects, and what share of the claim they carry.",
+          "terms": [
+            "offset",
+            "offsets",
+            "carbon credits",
+            "compensate",
+            "neutral",
+            "corsia"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "sasb-em-mm-metals-and-mining",
+    "kind": "standard",
+    "tier": 3,
+    "source": {
+      "name": "SASB Standard, Metals & Mining (EM-MM): Sustainability Disclosure Topics & Metrics",
+      "publisher": "IFRS Foundation (SASB Standards)",
+      "date": "2023-12-01",
+      "locator": "EM-MM, version 2023-12, Table 1"
+    },
+    "url": "https://sasb.ifrs.org/standards/download/",
+    "verified": false,
+    "verification": "unverified",
+    "retrieved": "2026-09-20",
+    "note": "Listed by name; the standard is behind a download form. Topics as SASB names them: Greenhouse Gas Emissions; Air Quality; Energy Management; Water Management; Waste & Hazardous Materials Management; Biodiversity Impacts; Security, Human Rights & Rights of Indigenous Peoples; Community Relations; Labour Relations; Workforce Health & Safety; Business Ethics & Transparency; Tailings Storage Facilities Management.",
+    "index": {
+      "industry": "Metals & Mining",
+      "reference": "SASB",
+      "sasb_code": "EM-MM",
+      "also_codes": [
+        "EM-CO",
+        "EM-IS"
+      ],
+      "aliases": [
+        "Mining",
+        "Metals",
+        "Coal Operations",
+        "Iron & Steel Producers"
+      ],
+      "keywords": [
+        "mine",
+        "mining",
+        "ore",
+        "smelter",
+        "tailings",
+        "copper",
+        "nickel",
+        "bauxite",
+        "extraction"
+      ],
+      "topics": [
+        {
+          "code": "EM-MM-540a",
+          "name": "Tailings dams and what is stored behind them",
+          "why_material": "Tailings failures are the sector's catastrophic risk; the number, classification and monitoring of facilities is the disclosure that says whether it is managed.",
+          "expects": "Tailings facilities, their consequence classification and inspection regime.",
+          "terms": [
+            "tailings",
+            "dam",
+            "impoundment",
+            "storage facility",
+            "gistm",
+            "consequence classification"
+          ]
+        },
+        {
+          "code": "EM-MM-160a",
+          "name": "Land disturbed, biodiversity and rehabilitation",
+          "why_material": "Mining removes habitat and leaves land that has to be rehabilitated; a renewable-power claim at a mine does not touch it.",
+          "expects": "Hectares disturbed and rehabilitated, and operations in protected areas.",
+          "terms": [
+            "biodiversity",
+            "rehabilitat",
+            "land disturbed",
+            "protected area",
+            "habitat",
+            "closure",
+            "reclamation"
+          ]
+        },
+        {
+          "code": "EM-MM-140a",
+          "name": "Water in water-stressed catchments",
+          "why_material": "Processing ore uses large volumes of water, often in arid regions where it is contested.",
+          "expects": "Water withdrawn and consumed, and the share in water-stressed regions.",
+          "terms": [
+            "water",
+            "water-stressed",
+            "withdrawal",
+            "catchment",
+            "desalination",
+            "water consumption"
+          ]
+        },
+        {
+          "code": "EM-MM-210a",
+          "name": "Indigenous rights, consent and resettlement",
+          "why_material": "Mines are built where people live; consent and resettlement are the sector's largest social impacts and its most common cause of conflict.",
+          "expects": "Operations on or near indigenous land, consent obtained, and any disputes.",
+          "terms": [
+            "indigenous",
+            "consent",
+            "fpic",
+            "resettlement",
+            "community",
+            "land rights",
+            "grievance"
+          ]
+        },
+        {
+          "code": "EM-MM-320a",
+          "name": "Worker health and safety",
+          "why_material": "Fatalities and occupational disease are the sector's measured human cost and are reported industry-wide, so their absence from a page is a choice.",
+          "expects": "Fatalities and injury rates for the latest year.",
+          "terms": [
+            "fatalit",
+            "injury",
+            "lost time",
+            "safety",
+            "trifr",
+            "occupational"
+          ]
+        },
+        {
+          "code": "EM-MM-110a",
+          "name": "Emissions from processing and from the metal's later use",
+          "why_material": "Smelting is energy-intensive and much of the footprint sits downstream in the customer's product; a site-level renewable claim covers a small part of it.",
+          "expects": "Scope 1, 2 and 3 emissions for the latest year and the trend.",
+          "terms": [
+            "scope 3",
+            "absolute emissions",
+            "total emissions",
+            "smelting",
+            "processing emissions",
+            "mtco2e"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "sasb-cg-aa-apparel",
+    "kind": "standard",
+    "tier": 3,
+    "source": {
+      "name": "SASB Standard, Apparel, Accessories & Footwear (CG-AA): Sustainability Disclosure Topics & Metrics",
+      "publisher": "IFRS Foundation (SASB Standards)",
+      "date": "2023-12-01",
+      "locator": "CG-AA, version 2023-12, Table 1"
+    },
+    "url": "https://sasb.ifrs.org/standards/download/",
+    "verified": false,
+    "verification": "unverified",
+    "retrieved": "2026-09-20",
+    "note": "Listed by name; the standard is behind a download form. Topics as SASB names them: Management of Chemicals in Products; Environmental Impacts in the Supply Chain; Labour Conditions in the Supply Chain; Raw Materials Sourcing.",
+    "index": {
+      "industry": "Apparel, Accessories & Footwear",
+      "reference": "SASB",
+      "sasb_code": "CG-AA",
+      "also_codes": [
+        "CG-MR"
+      ],
+      "aliases": [
+        "Apparel",
+        "Footwear",
+        "Fashion",
+        "Textiles",
+        "Retail"
+      ],
+      "keywords": [
+        "garment",
+        "clothing",
+        "collection",
+        "cotton",
+        "polyester",
+        "fabric",
+        "shoes",
+        "wardrobe"
+      ],
+      "topics": [
+        {
+          "code": "CG-AA-430a",
+          "name": "How many items are made",
+          "why_material": "The footprint of a clothing company follows volume. A recycled fibre share can rise while the number of garments produced rises faster.",
+          "expects": "Units or tonnes of product made in the latest year and the trend.",
+          "terms": [
+            "units",
+            "garments produced",
+            "items",
+            "volume",
+            "pieces",
+            "tonnes of product"
+          ]
+        },
+        {
+          "code": "CG-AA-430a.1",
+          "name": "Emissions and water in the supply chain, at tier 2 and beyond",
+          "why_material": "Dyeing, finishing and fibre production happen at suppliers a brand does not own and account for most of the impact of a garment.",
+          "expects": "Scope 3 emissions and water use across the supply chain, with the tiers covered.",
+          "terms": [
+            "tier 2",
+            "scope 3",
+            "supply chain emissions",
+            "dyeing",
+            "wet processing",
+            "water",
+            "mills"
+          ]
+        },
+        {
+          "code": "CG-AA-250a",
+          "name": "Chemicals in products and effluent",
+          "why_material": "Textile processing discharges chemicals into rivers near the factories; it is the impact a recycled-content claim does not address.",
+          "expects": "Restricted substances, testing, and effluent from wet processing.",
+          "terms": [
+            "chemicals",
+            "zdhc",
+            "restricted substances",
+            "effluent",
+            "wastewater",
+            "discharge",
+            "pfas"
+          ]
+        },
+        {
+          "code": "CG-AA-430b",
+          "name": "Labour conditions in supplier factories",
+          "why_material": "Wages, hours and safety at cutting and sewing factories are the sector's largest social impact and sit outside the brand's own workforce.",
+          "expects": "Audit findings, living wage coverage and remediation for the latest year.",
+          "terms": [
+            "living wage",
+            "audit",
+            "factory",
+            "workers",
+            "overtime",
+            "forced labour",
+            "forced labor",
+            "freedom of association"
+          ]
+        },
+        {
+          "code": "CG-AA-440a",
+          "name": "What happens to the clothes afterwards",
+          "why_material": "Most garments are landfilled or exported; recycled input means little if the output is not recoverable.",
+          "expects": "Take-back, resale or recycling volumes against units sold, and where unsold stock goes.",
+          "terms": [
+            "take-back",
+            "resale",
+            "recycling",
+            "landfill",
+            "unsold",
+            "destroyed",
+            "circular",
+            "end of life"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "sasb-fb-processed-foods",
+    "kind": "standard",
+    "tier": 3,
+    "source": {
+      "name": "SASB Standard, Processed Foods (FB-PF) and Agricultural Products (FB-AG): Sustainability Disclosure Topics & Metrics",
+      "publisher": "IFRS Foundation (SASB Standards)",
+      "date": "2023-12-01",
+      "locator": "FB-PF and FB-AG, version 2023-12, Table 1"
+    },
+    "url": "https://sasb.ifrs.org/standards/download/",
+    "verified": false,
+    "verification": "unverified",
+    "retrieved": "2026-09-20",
+    "note": "Listed by name; the standard is behind a download form. Topics as SASB names them: Energy Management; Water Management; Food Safety; Health & Nutrition; Product Labelling & Marketing; Packaging Lifecycle Management; Environmental & Social Impacts of Ingredient Supply Chain; Ingredient Sourcing.",
+    "index": {
+      "industry": "Food & Beverage",
+      "reference": "SASB",
+      "sasb_code": "FB-PF",
+      "also_codes": [
+        "FB-AG",
+        "FB-MP",
+        "FB-NB",
+        "FB-RN"
+      ],
+      "aliases": [
+        "Processed Foods",
+        "Agricultural Products",
+        "Meat, Poultry & Dairy",
+        "Non-Alcoholic Beverages",
+        "Food and Beverage"
+      ],
+      "keywords": [
+        "food",
+        "ingredient",
+        "farm",
+        "dairy",
+        "beverage",
+        "crops",
+        "livestock",
+        "menu"
+      ],
+      "topics": [
+        {
+          "code": "FB-PF-430a",
+          "name": "Emissions from farming the ingredients",
+          "why_material": "Agriculture, not the factory or the packaging, is where most of a food company's emissions are made, and it is nearly all scope 3.",
+          "expects": "Scope 3 emissions from agriculture for the latest year and the trend.",
+          "terms": [
+            "scope 3",
+            "agriculture",
+            "farming",
+            "on-farm",
+            "supply chain emissions",
+            "flag",
+            "land use change"
+          ]
+        },
+        {
+          "code": "FB-AG-430a.3",
+          "name": "Deforestation and land conversion",
+          "why_material": "Soy, palm, beef, cocoa and paper drive the conversion of forest; a page on packaging or factory energy leaves the largest land impact out.",
+          "expects": "Volumes of forest-risk commodities, their origin, and deforestation-free coverage with a cut-off date.",
+          "terms": [
+            "deforestation",
+            "land conversion",
+            "palm",
+            "soy",
+            "cocoa",
+            "forest",
+            "traceability",
+            "cut-off date"
+          ]
+        },
+        {
+          "code": "FB-PF-410a",
+          "name": "Packaging over its whole life",
+          "why_material": "Recyclable in principle is not recycled in practice; the material used and what actually comes back decide the impact.",
+          "expects": "Tonnes of packaging used, recycled content, and real recycling or return rates in the markets sold to.",
+          "terms": [
+            "packaging",
+            "recyclable",
+            "recycled content",
+            "collection rate",
+            "return rate",
+            "plastic",
+            "tonnes of packaging"
+          ]
+        },
+        {
+          "code": "FB-PF-140a",
+          "name": "Water in growing and processing",
+          "why_material": "Irrigation and processing draw on catchments that are often already stressed, an impact unaffected by emissions targets.",
+          "expects": "Water withdrawn and consumed, the share in water-stressed regions, and irrigation in the supply chain.",
+          "terms": [
+            "water",
+            "irrigation",
+            "water-stressed",
+            "withdrawal",
+            "catchment",
+            "water footprint"
+          ]
+        },
+        {
+          "code": "FB-AG-430a.1",
+          "name": "Conditions for farm and processing workers",
+          "why_material": "Seasonal and migrant labour in growing and processing is the sector's largest social risk and sits outside the company's own workforce.",
+          "expects": "Labour standards and audit findings in the supply chain for the latest year.",
+          "terms": [
+            "farm workers",
+            "migrant",
+            "living income",
+            "labour",
+            "labor",
+            "audit",
+            "child labour",
+            "child labor"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "sasb-tr-au-automobiles",
+    "kind": "standard",
+    "tier": 3,
+    "source": {
+      "name": "SASB Standard, Automobiles (TR-AU): Sustainability Disclosure Topics & Metrics",
+      "publisher": "IFRS Foundation (SASB Standards)",
+      "date": "2023-12-01",
+      "locator": "TR-AU, version 2023-12, Table 1"
+    },
+    "url": "https://sasb.ifrs.org/standards/download/",
+    "verified": false,
+    "verification": "unverified",
+    "retrieved": "2026-09-20",
+    "note": "Listed by name; the standard is behind a download form. Topics as SASB names them: Product Safety; Labour Practices; Fuel Economy & Use-phase Emissions; Materials Sourcing; Materials Efficiency & Recycling.",
+    "index": {
+      "industry": "Automobiles",
+      "reference": "SASB",
+      "sasb_code": "TR-AU",
+      "also_codes": [
+        "TR-AP"
+      ],
+      "aliases": [
+        "Automobiles",
+        "Auto Parts",
+        "Car manufacturing",
+        "Vehicles"
+      ],
+      "keywords": [
+        "vehicle",
+        "vehicles",
+        "car",
+        "cars",
+        "engine",
+        "model year",
+        "fleet emissions",
+        "drivetrain"
+      ],
+      "topics": [
+        {
+          "code": "TR-AU-410a",
+          "name": "Emissions of the vehicles sold, over their life",
+          "why_material": "A carmaker's footprint is dominated by the fuel its sold vehicles burn. Factory energy and one electric model do not move it.",
+          "expects": "Fleet-average emissions of vehicles sold in the latest year and the absolute use-phase total.",
+          "terms": [
+            "fleet average",
+            "use phase",
+            "tailpipe",
+            "g/km",
+            "co2 per kilometre",
+            "scope 3",
+            "vehicles sold"
+          ]
+        },
+        {
+          "code": "TR-AU-410a.1",
+          "name": "The share of sales that is still combustion",
+          "why_material": "An electrification claim is bounded by how many of the cars sold last year burned fuel, and by when the last one will be sold.",
+          "expects": "The split of units sold by drivetrain for the latest year, and the date combustion sales end.",
+          "terms": [
+            "combustion",
+            "ice",
+            "petrol",
+            "diesel",
+            "hybrid",
+            "share of sales",
+            "units sold",
+            "phase out"
+          ]
+        },
+        {
+          "code": "TR-AU-440a",
+          "name": "Battery materials and where they come from",
+          "why_material": "Lithium, cobalt and nickel extraction carries the impacts an electric vehicle claim moves upstream rather than removes.",
+          "expects": "Battery material sourcing, mine-level due diligence and recycled content.",
+          "terms": [
+            "lithium",
+            "cobalt",
+            "nickel",
+            "battery",
+            "raw materials",
+            "mining",
+            "due diligence",
+            "recycled content"
+          ]
+        },
+        {
+          "code": "TR-AU-410a.3",
+          "name": "Manufacturing emissions and steel",
+          "why_material": "Making a vehicle, especially its steel and aluminium, is a large fixed carbon cost that grows as batteries get bigger.",
+          "expects": "Emissions to manufacture a vehicle, and the steel and aluminium used.",
+          "terms": [
+            "steel",
+            "aluminium",
+            "aluminum",
+            "manufacturing emissions",
+            "embodied",
+            "production emissions"
+          ]
+        },
+        {
+          "code": "TR-AU-250a",
+          "name": "Emissions testing and real-world performance",
+          "why_material": "The sector's defining scandal was the gap between tested and real emissions; how figures are measured is part of the claim.",
+          "expects": "The test cycle used and how real-world performance compares.",
+          "terms": [
+            "wltp",
+            "test cycle",
+            "real-world",
+            "epa",
+            "homologation",
+            "certified"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "sasb-fn-financials",
+    "kind": "standard",
+    "tier": 3,
+    "source": {
+      "name": "SASB Standard, Commercial Banks (FN-CB), Investment Banking & Brokerage (FN-IB) and Asset Management (FN-AC): Sustainability Disclosure Topics & Metrics",
+      "publisher": "IFRS Foundation (SASB Standards)",
+      "date": "2023-12-01",
+      "locator": "FN-CB, FN-IB and FN-AC, version 2023-12, Table 1"
+    },
+    "url": "https://sasb.ifrs.org/standards/download/",
+    "verified": false,
+    "verification": "unverified",
+    "retrieved": "2026-09-20",
+    "note": "Listed by name; the standard is behind a download form. Topics as SASB names them: Incorporation of Environmental, Social and Governance Factors in Credit Analysis; Financed Emissions; Business Ethics; Systemic Risk Management; Financial Inclusion & Capacity Building.",
+    "index": {
+      "industry": "Banks, Insurers & Asset Managers",
+      "reference": "SASB",
+      "sasb_code": "FN-CB",
+      "also_codes": [
+        "FN-IB",
+        "FN-AC",
+        "FN-IN",
+        "FN-MF"
+      ],
+      "aliases": [
+        "Commercial Banks",
+        "Investment Banking & Brokerage",
+        "Asset Management",
+        "Insurance",
+        "Financial Services"
+      ],
+      "keywords": [
+        "lending",
+        "loans",
+        "financing",
+        "portfolio",
+        "underwriting",
+        "assets under management",
+        "clients",
+        "bank"
+      ],
+      "topics": [
+        {
+          "code": "FN-CB-410b",
+          "name": "Financed emissions",
+          "why_material": "A bank's own offices are a rounding error; what it lends to and underwrites is its footprint, and it is where a green finance figure has to be read against the rest.",
+          "expects": "Absolute financed emissions by sector for the latest year and the trend.",
+          "terms": [
+            "financed emissions",
+            "portfolio emissions",
+            "scope 3 category 15",
+            "pcaf",
+            "attributed emissions"
+          ]
+        },
+        {
+          "code": "FN-IB-410a",
+          "name": "Fossil fuel financing beside the green total",
+          "why_material": "A sustainable finance target is not a reduction: a bank can raise both at once. The comparison is what says which way the balance moves.",
+          "expects": "New fossil fuel lending and underwriting for the latest year, beside the green finance figure.",
+          "terms": [
+            "fossil fuel financing",
+            "oil and gas lending",
+            "coal policy",
+            "energy supply ratio",
+            "new financing",
+            "underwriting"
+          ]
+        },
+        {
+          "code": "FN-AC-410a",
+          "name": "What the green label on a product means",
+          "why_material": "A fund or bond labelled sustainable can hold or fund the same activities as an unlabelled one; the criteria and the exclusions are the claim.",
+          "expects": "The criteria a product must meet, what is excluded, and who verifies it.",
+          "terms": [
+            "exclusion",
+            "screening",
+            "criteria",
+            "taxonomy",
+            "article 8",
+            "article 9",
+            "second party opinion",
+            "verified by"
+          ]
+        },
+        {
+          "code": "FN-CB-510a",
+          "name": "Where the target is measured and what it counts",
+          "why_material": "Cumulative money mobilised, counted over many years and including refinancing, is not comparable with a single year's lending.",
+          "expects": "The baseline, the period and whether the figure is cumulative or annual.",
+          "terms": [
+            "cumulative",
+            "since 2020",
+            "baseline",
+            "mobilised",
+            "mobilized",
+            "per year",
+            "annual"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "sasb-rt-cp-containers-and-packaging",
+    "kind": "standard",
+    "tier": 3,
+    "source": {
+      "name": "SASB Standard, Containers & Packaging (RT-CP): Sustainability Disclosure Topics & Metrics",
+      "publisher": "IFRS Foundation (SASB Standards)",
+      "date": "2023-12-01",
+      "locator": "RT-CP, version 2023-12, Table 1"
+    },
+    "url": "https://sasb.ifrs.org/standards/download/",
+    "verified": false,
+    "verification": "unverified",
+    "retrieved": "2026-09-20",
+    "note": "Listed by name; the standard is behind a download form. Topics as SASB names them: Greenhouse Gas Emissions; Air Quality; Energy Management; Water Management; Waste Management; Product Safety; Product Lifecycle Management; Supply Chain Management.",
+    "index": {
+      "industry": "Containers & Packaging",
+      "reference": "SASB",
+      "sasb_code": "RT-CP",
+      "also_codes": [
+        "RT-CH"
+      ],
+      "aliases": [
+        "Containers & Packaging",
+        "Packaging",
+        "Chemicals"
+      ],
+      "keywords": [
+        "packaging",
+        "bottle",
+        "carton",
+        "container",
+        "resin",
+        "plastic",
+        "pulp"
+      ],
+      "topics": [
+        {
+          "code": "RT-CP-410a",
+          "name": "What share is actually recycled where it is sold",
+          "why_material": "Recyclable describes a possibility; the collection and sorting that exist in the market decide what happens. Regulators have ruled on the difference.",
+          "expects": "Real recycling or return rates in the markets sold to, not only whether the material can be recycled.",
+          "terms": [
+            "recycling rate",
+            "collection rate",
+            "return rate",
+            "actually recycled",
+            "in practice",
+            "kerbside",
+            "curbside"
+          ]
+        },
+        {
+          "code": "RT-CP-410a.1",
+          "name": "Virgin material still used",
+          "why_material": "A recycled-content figure for one line says nothing about total virgin plastic or fibre, which is the number that has to fall.",
+          "expects": "Tonnes of virgin and recycled material used in the latest year, and the trend.",
+          "terms": [
+            "virgin",
+            "recycled content",
+            "tonnes of plastic",
+            "resin",
+            "fibre",
+            "fiber",
+            "material used"
+          ]
+        },
+        {
+          "code": "RT-CP-140a",
+          "name": "Water and effluent in production",
+          "why_material": "Pulp, paper and resin production use large volumes of water and discharge to it, which a recyclability claim does not touch.",
+          "expects": "Water withdrawn and consumed and the effluent from production.",
+          "terms": [
+            "water",
+            "effluent",
+            "wastewater",
+            "withdrawal",
+            "water-stressed",
+            "discharge"
+          ]
+        },
+        {
+          "code": "RT-CP-110a",
+          "name": "Emissions of making the material",
+          "why_material": "Switching material can raise emissions while reducing plastic; the comparison only holds if both are given.",
+          "expects": "Emissions per tonne of material and the total for the latest year, and the comparison with the material replaced.",
+          "terms": [
+            "emissions per tonne",
+            "scope 1",
+            "scope 3",
+            "life cycle",
+            "lca",
+            "compared with",
+            "carbon footprint of"
+          ]
+        }
+      ]
+    }
+  }
+]
