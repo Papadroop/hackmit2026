@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState, type FormEvent } from "react"
-import { Play } from "lucide-react"
+import { LoaderCircle, Play } from "lucide-react"
 import { ReactLenis } from "lenis/react"
 import { useReducedMotion, useScroll, useTransform } from "motion/react"
 import { toast } from "sonner"
@@ -58,8 +58,12 @@ const STATUS_TEXT = {
  *
  * The name says what the product does, so the screen shows it once, in order: the wash, the
  * rinse, and then what actually grew (../../menu-design.md §2). The card's own progress `p`
- * drives the rinse and the forest's arrival; the list's progress `f` grows the trees.
- * Everything below the card is unchanged and still.
+ * drives the rinse and the forest's arrival; `f`, the list's own approach to the top of the
+ * viewport, grows the trees, so the stand is full by the time the reader is reading.
+ *
+ * Below the card everything is a sheet of paper on the rinsed ground, each one still carrying a
+ * stripe of pigment down its edge. The only motion here answers the reader: the stripe drains
+ * when a sheet is under the pointer, and again, for good, when its analysis starts.
  */
 export function MenuScreen() {
   const [data, setData] = useState<DocumentsResponse | null>(null)
@@ -72,15 +76,15 @@ export function MenuScreen() {
   const listRef = useRef<HTMLElement>(null)
 
   // `p`: the card wrapper, 0 with its top at the top of the viewport and 1 with its bottom at
-  // the bottom. `f`: the list, 0 as it enters at the bottom of the viewport and 1 at the end of
-  // the page.
+  // the bottom. `f`: the list's approach, 0 as its top enters at the bottom of the viewport and
+  // 1 as that top reaches the top — one viewport of scroll, whatever the list is carrying.
   const { scrollYProgress: cardProgress } = useScroll({
     target: cardRef,
     offset: ["start start", "end end"],
   })
   const { scrollYProgress: listProgress } = useScroll({
     target: listRef,
-    offset: ["start end", "end end"],
+    offset: ["start end", "start start"],
   })
   const forestFade = useTransform(cardProgress, (p) =>
     reduced ? 1 : forestOpacity(p)
@@ -138,119 +142,115 @@ export function MenuScreen() {
       <div ref={cardRef} className="rinse-card-wrapper">
         <TitleCard progress={cardProgress} />
       </div>
-      <main
-        ref={listRef}
-        className="rinse-content mx-auto w-full max-w-3xl px-6"
-      >
-        <section aria-labelledby="documents-heading">
-          <div className="flex flex-wrap items-end justify-between gap-3">
-            <h2 id="documents-heading" className="text-[22px] font-medium">
-              Documents
-            </h2>
-            <div className="flex items-center gap-2">
-              <span id="pace-label" className="text-sm text-muted-foreground">
-                Pace
-              </span>
-              <ToggleGroup
-                type="single"
-                size="sm"
-                variant="outline"
-                spacing={0}
-                value={String(pace)}
-                onValueChange={choosePace}
-                aria-labelledby="pace-label"
-              >
-                {PACES.map((p) => (
-                  <ToggleGroupItem
-                    key={p.value}
-                    value={String(p.value)}
-                    className="px-2.5"
-                  >
-                    {p.label}
-                  </ToggleGroupItem>
-                ))}
-              </ToggleGroup>
-            </div>
-          </div>
-
-          {loadError !== null ? (
-            <p role="alert" className="mt-3 text-destructive">
-              Could not load the documents: {loadError}
-            </p>
-          ) : data === null ? (
-            <p className="mt-3 text-muted-foreground">Loading documents</p>
-          ) : data.documents.length === 0 ? (
-            <p className="mt-3 text-muted-foreground">
-              No documents yet. Add a text to demo-documents/ or a recording to
-              fixtures/.
-            </p>
-          ) : (
-            <ul className="mt-3 divide-y divide-border border bg-paper">
-              {data.documents.map((document) => (
-                <DocumentRow
-                  key={document.id}
-                  document={document}
-                  liveAnalysis={data.live_analysis}
-                  pace={pace}
-                  starting={starting}
-                  onStart={start}
-                />
-              ))}
-            </ul>
-          )}
-          {data !== null && data.invalid_recordings.length > 0 && (
-            <p className="mt-2 text-xs text-muted-foreground">
-              Not listed, invalid recording:{" "}
-              {data.invalid_recordings.map((r) => r.file).join(", ")}. Run the
-              validator for the reason.
-            </p>
-          )}
-        </section>
-
-        <section className="mt-10" aria-labelledby="own-heading">
-          <h2 id="own-heading" className="text-[22px] font-medium">
-            Your own text
-          </h2>
-          {data?.live_analysis ? (
-            <OwnTextForm starting={starting} onStart={start} />
-          ) : (
-            <p className="mt-2 max-w-prose text-muted-foreground">
-              Pasting a text or a link arrives with the live pipeline. Until
-              then, the documents above open a recorded analysis.
-            </p>
-          )}
-        </section>
-
-        {recent.length > 0 && (
-          <section className="mt-10" aria-labelledby="recent-heading">
-            <h2 id="recent-heading" className="text-[22px] font-medium">
-              Recent
-            </h2>
-            <ul className="mt-3 divide-y divide-border border-y">
-              {recent.map((analysis) => (
-                <li
-                  key={analysis.analysis_id}
-                  className="flex items-center gap-4 py-2.5"
+      <main ref={listRef} className="rinse-content">
+        <div className="rinse-column">
+          <section aria-labelledby="documents-heading">
+            <div className="rinse-heading">
+              <h2 id="documents-heading" className="rinse-heading-text">
+                Documents
+              </h2>
+              <div className="rinse-pace">
+                <span id="pace-label">Pace</span>
+                <ToggleGroup
+                  type="single"
+                  size="sm"
+                  variant="outline"
+                  spacing={0}
+                  value={String(pace)}
+                  onValueChange={choosePace}
+                  aria-labelledby="pace-label"
                 >
-                  <div className="min-w-0 flex-1">
-                    <p className="truncate font-serif">
-                      {analysis.title ?? describeSource(analysis)}
-                    </p>
-                    <p className="text-sm text-muted-foreground">
-                      {STATUS_TEXT[analysis.status]},{" "}
-                      {formatRelative(analysis.created_at)}
-                    </p>
-                  </div>
-                  <Button variant="ghost" size="sm" asChild>
-                    <Link href={paths.analysis(analysis.analysis_id)}>
-                      Open
-                    </Link>
-                  </Button>
-                </li>
-              ))}
-            </ul>
+                  {PACES.map((p) => (
+                    <ToggleGroupItem
+                      key={p.value}
+                      value={String(p.value)}
+                      className="px-2.5"
+                    >
+                      {p.label}
+                    </ToggleGroupItem>
+                  ))}
+                </ToggleGroup>
+              </div>
+            </div>
+
+            {loadError !== null ? (
+              <p role="alert" className="rinse-sheet rinse-sheet-note">
+                Could not load the documents: {loadError}
+              </p>
+            ) : data === null ? (
+              <p className="rinse-sheet rinse-sheet-note">Loading documents</p>
+            ) : data.documents.length === 0 ? (
+              <p className="rinse-sheet rinse-sheet-note">
+                No documents yet. Add a text to demo-documents/ or a recording
+                to fixtures/.
+              </p>
+            ) : (
+              <ul className="rinse-sheets">
+                {data.documents.map((document) => (
+                  <DocumentSheet
+                    key={document.id}
+                    document={document}
+                    liveAnalysis={data.live_analysis}
+                    pace={pace}
+                    starting={starting}
+                    onStart={start}
+                  />
+                ))}
+              </ul>
+            )}
+            {data !== null && data.invalid_recordings.length > 0 && (
+              <p className="rinse-aside">
+                Not listed, invalid recording:{" "}
+                {data.invalid_recordings.map((r) => r.file).join(", ")}. Run the
+                validator for the reason.
+              </p>
+            )}
           </section>
-        )}
+
+          <section aria-labelledby="own-heading">
+            <div className="rinse-heading">
+              <h2 id="own-heading" className="rinse-heading-text">
+                Your own text
+              </h2>
+            </div>
+            {data?.live_analysis ? (
+              <OwnTextForm starting={starting} onStart={start} />
+            ) : (
+              <p className="rinse-sheet rinse-sheet-note">
+                Pasting a text or a link arrives with the live pipeline. Until
+                then, the documents above open a recorded analysis.
+              </p>
+            )}
+          </section>
+
+          {recent.length > 0 && (
+            <section aria-labelledby="recent-heading">
+              <div className="rinse-heading">
+                <h2 id="recent-heading" className="rinse-heading-text">
+                  Recent
+                </h2>
+              </div>
+              <ul className="rinse-recent">
+                {recent.map((analysis) => (
+                  <li key={analysis.analysis_id}>
+                    <Link
+                      className="rinse-recent-row"
+                      href={paths.analysis(analysis.analysis_id)}
+                    >
+                      <span className="rinse-recent-title">
+                        {analysis.title ?? describeSource(analysis)}
+                      </span>
+                      <span className="rinse-recent-meta">
+                        {STATUS_TEXT[analysis.status]},{" "}
+                        {formatRelative(analysis.created_at)}
+                      </span>
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </section>
+          )}
+        </div>
       </main>
     </div>
   )
@@ -265,7 +265,12 @@ export function MenuScreen() {
   )
 }
 
-function DocumentRow({
+/**
+ * One document, as a sheet lying on the rinsed ground. The pigment down its left edge is what
+ * the analysis is about to take off: it drains under the pointer and stays gone once the
+ * analysis has started.
+ */
+function DocumentSheet({
   document,
   liveAnalysis,
   pace,
@@ -281,41 +286,38 @@ function DocumentRow({
   const recording = document.recordings[0]
   const meta = [
     document.text_type !== null ? TEXT_TYPE_LABELS[document.text_type] : null,
+    document.words !== null ? `${formatNumber(document.words)} words` : null,
     document.retrieved !== null
       ? `retrieved ${formatDate(document.retrieved)}`
       : null,
-    document.words !== null ? `${formatNumber(document.words)} words` : null,
   ].filter((part): part is string => part !== null)
   const busy = starting !== null
   const key = recording
     ? `recording:${recording.fixture}`
     : `live:${document.id}`
+  const mine = starting === key
 
   return (
-    <li className="flex flex-col gap-3 px-5 py-4 sm:flex-row sm:items-center">
-      <div className="min-w-0 flex-1">
+    <li className="rinse-sheet" data-rinsing={mine ? "" : undefined}>
+      <span className="rinse-pigment" aria-hidden="true" />
+      <div className="rinse-sheet-text">
         {document.company !== null && (
-          <p className="text-sm text-muted-foreground">{document.company}</p>
+          <p className="rinse-sheet-company">{document.company}</p>
         )}
-        <h3 className="font-serif text-lg leading-snug">{document.title}</h3>
-        <p className="mt-1 text-sm text-muted-foreground">
+        <h3 className="rinse-sheet-title">{document.title}</h3>
+        <p className="rinse-sheet-meta">
           {meta.join(", ")}
           {document.url !== null && (
             <>
               {meta.length > 0 && ", "}
-              <a
-                href={document.url}
-                target="_blank"
-                rel="noreferrer"
-                className="underline underline-offset-4 hover:text-foreground"
-              >
+              <a href={document.url} target="_blank" rel="noreferrer">
                 source
               </a>
             </>
           )}
         </p>
       </div>
-      <div className="shrink-0 sm:text-right">
+      <div className="rinse-sheet-action">
         {recording ? (
           <>
             <Button
@@ -328,10 +330,17 @@ function DocumentRow({
                 })
               }
             >
-              <Play data-icon="inline-start" />
-              {starting === key ? "Starting" : "Analyse"}
+              {mine ? (
+                <LoaderCircle
+                  data-icon="inline-start"
+                  className="animate-spin"
+                />
+              ) : (
+                <Play data-icon="inline-start" />
+              )}
+              {mine ? "Starting" : "Analyse"}
             </Button>
-            <p className="mt-1 text-xs text-muted-foreground">
+            <p className="rinse-sheet-note">
               Recorded analysis, {formatDuration(recording.duration_ms)}
               {document.recordings.length > 1 &&
                 ` (${document.recordings.length} recordings)`}
@@ -345,16 +354,20 @@ function DocumentRow({
               onStart(key, { kind: "url", url: document.url as string })
             }
           >
-            {starting === key ? "Starting" : "Analyse live"}
+            {mine && (
+              <LoaderCircle data-icon="inline-start" className="animate-spin" />
+            )}
+            {mine ? "Starting" : "Analyse live"}
           </Button>
         ) : (
-          <p className="text-sm text-muted-foreground">No recording yet</p>
+          <p className="rinse-sheet-note">No recording yet</p>
         )}
       </div>
     </li>
   )
 }
 
+/** The sheet the reader writes on: ruled paper for the text, a plain field for a link. */
 function OwnTextForm({
   starting,
   onStart,
@@ -365,6 +378,7 @@ function OwnTextForm({
   const [text, setText] = useState("")
   const [url, setUrl] = useState("")
   const busy = starting !== null
+  const mine = starting?.startsWith("own:") === true
 
   const submit = (event: FormEvent) => {
     event.preventDefault()
@@ -373,33 +387,42 @@ function OwnTextForm({
   }
 
   return (
-    <form onSubmit={submit} className="mt-3 flex flex-col gap-3">
-      <div className="flex flex-col gap-1.5">
+    <form
+      onSubmit={submit}
+      className="rinse-sheet rinse-form"
+      data-rinsing={mine ? "" : undefined}
+    >
+      <span className="rinse-pigment" aria-hidden="true" />
+      <div className="rinse-field">
         <Label htmlFor="own-text">Paste a text</Label>
         <Textarea
           id="own-text"
           value={text}
           onChange={(e) => setText(e.target.value)}
-          rows={6}
+          rows={5}
+          className="rinse-ruled py-[7px] leading-[26px]"
           placeholder="A label, a policy page, a claim"
         />
       </div>
-      <div className="flex flex-col gap-1.5">
-        <Label htmlFor="own-url">Or a link</Label>
-        <Input
-          id="own-url"
-          type="url"
-          value={url}
-          onChange={(e) => setUrl(e.target.value)}
-          placeholder="https://"
-        />
-      </div>
-      <div>
+      <div className="rinse-form-foot">
+        <div className="rinse-field flex-1">
+          <Label htmlFor="own-url">Or a link</Label>
+          <Input
+            id="own-url"
+            type="url"
+            value={url}
+            onChange={(e) => setUrl(e.target.value)}
+            placeholder="https://"
+          />
+        </div>
         <Button
           type="submit"
           disabled={busy || (text.trim() === "" && url.trim() === "")}
         >
-          {starting?.startsWith("own:") ? "Starting" : "Analyse"}
+          {mine && (
+            <LoaderCircle data-icon="inline-start" className="animate-spin" />
+          )}
+          {mine ? "Starting" : "Analyse"}
         </Button>
       </div>
     </form>

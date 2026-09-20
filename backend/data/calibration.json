@@ -1,0 +1,821 @@
+{
+  "generated": "2026-09-20T14:41:31Z",
+  "method": "leave-one-out over the precedent store; Clarity and Support only (see auditor/calibration.py)",
+  "dimensions": [
+    "clarity",
+    "support"
+  ],
+  "metrics": {
+    "scored": 24,
+    "labelled": 20,
+    "positives": 17,
+    "negatives": 3,
+    "unlabelled": 4,
+    "failed": 0,
+    "threshold": 0.5,
+    "true_positive": 16,
+    "false_positive": 3,
+    "true_negative": 0,
+    "false_negative": 1,
+    "brier": 0.1404,
+    "precision": 0.8421052631578947,
+    "recall": 0.9411764705882353,
+    "f1": 0.8888888888888888,
+    "accuracy": 0.8,
+    "caveat": "Only 3 of the 20 adjudicated cases were decided in the advertiser's favour, so recall is easy to score well on and precision rests on too few negatives to mean much. The calibration curve is the number to read.",
+    "bins": [
+      {
+        "low": 0.4,
+        "high": 0.6,
+        "count": 1,
+        "predicted": 0.5,
+        "observed": 1.0
+      },
+      {
+        "low": 0.6,
+        "high": 0.8,
+        "count": 7,
+        "predicted": 0.707,
+        "observed": 0.857
+      },
+      {
+        "low": 0.8,
+        "high": 1.0,
+        "count": 12,
+        "predicted": 0.833,
+        "observed": 0.833
+      }
+    ]
+  },
+  "cases": [
+    {
+      "store_id": "asa-2023-shell-uk-omission",
+      "claim_text": "Poster, TV and online ads presenting Shell's renewable electricity tariff, electric-vehicle charging and biofuels as Shell helping the UK move to cleaner energy",
+      "outcome": "upheld",
+      "company": "Shell",
+      "industry": "oil and gas",
+      "body": "Advertising Standards Authority",
+      "claim_type": "vague_attribute",
+      "label": 1,
+      "likelihood": 0.8,
+      "category": "unsubstantiated",
+      "scores": {
+        "clarity": {
+          "score": 0.8,
+          "confidence": 0.85
+        },
+        "support": {
+          "score": 0.65,
+          "confidence": 0.65
+        }
+      },
+      "cited": [
+        "K1",
+        "K11",
+        "K3",
+        "P10",
+        "P12"
+      ],
+      "held_out": [
+        "asa-2023-shell-uk-omission"
+      ],
+      "error": ""
+    },
+    {
+      "store_id": "asa-2025-shell-uk-investment-split",
+      "claim_text": "In 2023, 68% of Shell’s global investments included oil & gas, 23% included low-carbon energy solutions and 9% non-energy products. Shell’s target is to become a net zero emissions (NZE) energy business by 2050",
+      "outcome": "not_upheld",
+      "company": "Shell",
+      "industry": "oil and gas",
+      "body": "Advertising Standards Authority",
+      "claim_type": "commitment",
+      "label": 0,
+      "likelihood": 0.7,
+      "category": "misleading_by_framing",
+      "scores": {
+        "clarity": {
+          "score": 0.6,
+          "confidence": 0.75
+        },
+        "support": {
+          "score": 0.7,
+          "confidence": 0.75
+        }
+      },
+      "cited": [
+        "K19",
+        "K3",
+        "K6",
+        "P1",
+        "P4"
+      ],
+      "held_out": [
+        "asa-2025-shell-uk-investment-split"
+      ],
+      "error": ""
+    },
+    {
+      "store_id": "rcc-2022-shell-co2-neutral-driving",
+      "claim_text": "Maak het verschil. Rij CO2-neutraal. (Make the difference. Drive CO2-neutral.)",
+      "outcome": "upheld",
+      "company": "Shell",
+      "industry": "oil and gas",
+      "body": "Reclame Code Commissie (advertising self-regulation), appeal board",
+      "claim_type": "certification",
+      "label": 1,
+      "likelihood": 0.85,
+      "category": "unsubstantiated",
+      "scores": {
+        "clarity": {
+          "score": 0.85,
+          "confidence": 0.85
+        },
+        "support": {
+          "score": 0.7,
+          "confidence": 0.75
+        }
+      },
+      "cited": [
+        "K15",
+        "K23",
+        "K4",
+        "P3"
+      ],
+      "held_out": [
+        "rcc-2022-shell-co2-neutral-driving"
+      ],
+      "error": ""
+    },
+    {
+      "store_id": "rcc-2023-shell-energy-co2-compensated-gas",
+      "claim_text": "Bij ons kun je kiezen voor gewoon-, maar ook voor CO2-gecompenseerd gas. (With us you can choose ordinary gas, or CO2-compensated gas.)",
+      "outcome": "upheld",
+      "company": "Shell",
+      "industry": "energy retail",
+      "body": "Reclame Code Commissie (advertising self-regulation)",
+      "claim_type": "factual",
+      "label": 1,
+      "likelihood": 0.75,
+      "category": "misleading_by_framing",
+      "scores": {
+        "clarity": {
+          "score": 0.6,
+          "confidence": 0.7
+        },
+        "support": {
+          "score": 0.75,
+          "confidence": 0.65
+        }
+      },
+      "cited": [
+        "K10",
+        "K15",
+        "K17",
+        "P3"
+      ],
+      "held_out": [
+        "rcc-2023-shell-energy-co2-compensated-gas"
+      ],
+      "error": ""
+    },
+    {
+      "store_id": "paris-2025-totalenergies-carbon-neutrality",
+      "claim_text": "leur ambition d’atteindre la neutralité carbone d’ici 2050 et d’être un acteur majeur dans la transition énergétique (their ambition to reach carbon neutrality by 2050 and to be a major player in the energy transition)",
+      "outcome": "upheld",
+      "company": "TotalEnergies",
+      "industry": "oil and gas",
+      "body": "Tribunal judiciaire de Paris (civil court)",
+      "claim_type": "commitment",
+      "label": 1,
+      "likelihood": 0.8,
+      "category": "unsubstantiated",
+      "scores": {
+        "clarity": {
+          "score": 0.8,
+          "confidence": 0.85
+        },
+        "support": {
+          "score": 0.65,
+          "confidence": 0.6
+        }
+      },
+      "cited": [
+        "K16",
+        "K19",
+        "K6",
+        "P12",
+        "P2"
+      ],
+      "held_out": [
+        "paris-2025-totalenergies-carbon-neutrality"
+      ],
+      "error": ""
+    },
+    {
+      "store_id": "lg-frankfurt-2025-apple-watch-co2-neutral",
+      "claim_text": "Die Apple Watch ist unser erstes CO2 neutrales Produkt. (The Apple Watch is our first carbon neutral product.)",
+      "outcome": "upheld",
+      "company": "Apple",
+      "industry": "technology hardware",
+      "body": "Landgericht Frankfurt am Main (regional court)",
+      "claim_type": "certification",
+      "label": 1,
+      "likelihood": 0.7,
+      "category": "misleading_by_framing",
+      "scores": {
+        "clarity": {
+          "score": 0.65,
+          "confidence": 0.75
+        },
+        "support": {
+          "score": 0.7,
+          "confidence": 0.7
+        }
+      },
+      "cited": [
+        "K15",
+        "K23",
+        "K4",
+        "P6",
+        "P7"
+      ],
+      "held_out": [
+        "lg-frankfurt-2025-apple-watch-co2-neutral"
+      ],
+      "error": ""
+    },
+    {
+      "store_id": "ndcal-2026-dib-v-apple-carbon-neutral",
+      "claim_text": "carbon neutral Apple Watch (Series 9, SE and Ultra 2) and carbon neutral corporate operations since 2020",
+      "outcome": "dismissed",
+      "company": "Apple",
+      "industry": "technology hardware",
+      "body": "US District Court for the Northern District of California",
+      "claim_type": "certification",
+      "label": 0,
+      "likelihood": 0.8,
+      "category": "misleading_by_framing",
+      "scores": {
+        "clarity": {
+          "score": 0.4,
+          "confidence": 0.75
+        },
+        "support": {
+          "score": 0.8,
+          "confidence": 0.85
+        }
+      },
+      "cited": [
+        "K10",
+        "K15",
+        "K23",
+        "P6",
+        "P7"
+      ],
+      "held_out": [
+        "ndcal-2026-dib-v-apple-carbon-neutral"
+      ],
+      "error": ""
+    },
+    {
+      "store_id": "bgh-2024-katjes-klimaneutral",
+      "claim_text": "Seit 2021 produziert Katjes alle Produkte klimaneutral (Since 2021 Katjes produces all products climate-neutrally)",
+      "outcome": "upheld",
+      "company": "Katjes",
+      "industry": "food",
+      "body": "Bundesgerichtshof (Federal Court of Justice)",
+      "claim_type": "certification",
+      "label": 1,
+      "likelihood": 0.65,
+      "category": "misleading_by_framing",
+      "scores": {
+        "clarity": {
+          "score": 0.45,
+          "confidence": 0.75
+        },
+        "support": {
+          "score": 0.65,
+          "confidence": 0.7
+        }
+      },
+      "cited": [
+        "K15",
+        "K23",
+        "K4",
+        "P3",
+        "P6"
+      ],
+      "held_out": [
+        "bgh-2024-katjes-klimaneutral"
+      ],
+      "error": ""
+    },
+    {
+      "store_id": "rb-amsterdam-2024-klm-fly-responsibly",
+      "claim_text": "Fly Responsibly; CO2ZERO compensation; statements that KLM was committed to the Paris Agreement goals and that flying could be made sustainable",
+      "outcome": "upheld",
+      "company": "KLM",
+      "industry": "aviation",
+      "body": "Rechtbank Amsterdam (district court)",
+      "claim_type": "vague_attribute",
+      "label": 1,
+      "likelihood": 0.85,
+      "category": "unsubstantiated",
+      "scores": {
+        "clarity": {
+          "score": 0.85,
+          "confidence": 0.85
+        },
+        "support": {
+          "score": 0.65,
+          "confidence": 0.65
+        }
+      },
+      "cited": [
+        "K1",
+        "K17",
+        "K4",
+        "P11",
+        "P3"
+      ],
+      "held_out": [
+        "rb-amsterdam-2024-klm-fly-responsibly"
+      ],
+      "error": ""
+    },
+    {
+      "store_id": "asa-2022-oatly-73-percent",
+      "claim_text": "Oatly generates 73% less CO2e vs. milk",
+      "outcome": "upheld_in_part",
+      "company": "Oatly",
+      "industry": "food",
+      "body": "Advertising Standards Authority",
+      "claim_type": "comparative",
+      "label": 1,
+      "likelihood": 0.75,
+      "category": "unsubstantiated",
+      "scores": {
+        "clarity": {
+          "score": 0.75,
+          "confidence": 0.75
+        },
+        "support": {
+          "score": 0.65,
+          "confidence": 0.6
+        }
+      },
+      "cited": [
+        "K2",
+        "K22",
+        "P13"
+      ],
+      "held_out": [
+        "asa-2022-oatly-73-percent"
+      ],
+      "error": ""
+    },
+    {
+      "store_id": "asa-2022-hsbc-net-zero-financing",
+      "claim_text": "HSBC is aiming to provide up to $1 trillion in financing and investment globally to help our clients transition to net zero",
+      "outcome": "upheld",
+      "company": "HSBC",
+      "industry": "banking",
+      "body": "Advertising Standards Authority",
+      "claim_type": "commitment",
+      "label": 1,
+      "likelihood": 0.75,
+      "category": "unsubstantiated",
+      "scores": {
+        "clarity": {
+          "score": 0.75,
+          "confidence": 0.85
+        },
+        "support": {
+          "score": 0.65,
+          "confidence": 0.65
+        }
+      },
+      "cited": [
+        "K16",
+        "K19",
+        "K6",
+        "P12",
+        "P2"
+      ],
+      "held_out": [
+        "asa-2022-hsbc-net-zero-financing"
+      ],
+      "error": ""
+    },
+    {
+      "store_id": "asa-2023-etihad-sustainable-aviation",
+      "claim_text": "we’re taking a louder, bolder approach to sustainable aviation",
+      "outcome": "upheld",
+      "company": "Etihad Airways",
+      "industry": "aviation",
+      "body": "Advertising Standards Authority",
+      "claim_type": "vague_attribute",
+      "label": 1,
+      "likelihood": 0.85,
+      "category": "unsubstantiated",
+      "scores": {
+        "clarity": {
+          "score": 0.85,
+          "confidence": 0.85
+        },
+        "support": {
+          "score": 0.65,
+          "confidence": 0.65
+        }
+      },
+      "cited": [
+        "K1",
+        "K9",
+        "P9"
+      ],
+      "held_out": [
+        "asa-2023-etihad-sustainable-aviation"
+      ],
+      "error": ""
+    },
+    {
+      "store_id": "asa-2023-repsol-net-zero-biofuels",
+      "claim_text": "At Repsol, we are developing biofuels and synthetic fuels to achieve net zero emissions. Renewable fuels for more sustainable mobility.",
+      "outcome": "upheld",
+      "company": "Repsol",
+      "industry": "oil and gas",
+      "body": "Advertising Standards Authority",
+      "claim_type": "commitment",
+      "label": 1,
+      "likelihood": 0.8,
+      "category": "unsubstantiated",
+      "scores": {
+        "clarity": {
+          "score": 0.8,
+          "confidence": 0.85
+        },
+        "support": {
+          "score": 0.65,
+          "confidence": 0.65
+        }
+      },
+      "cited": [
+        "K16",
+        "K19",
+        "K6",
+        "P18",
+        "P5"
+      ],
+      "held_out": [
+        "asa-2023-repsol-net-zero-biofuels"
+      ],
+      "error": ""
+    },
+    {
+      "store_id": "asa-2022-persil-kinder-to-our-planet",
+      "claim_text": "kinder to our planet",
+      "outcome": "upheld",
+      "company": "Unilever",
+      "industry": "consumer goods",
+      "body": "Advertising Standards Authority",
+      "claim_type": "comparative",
+      "label": 1,
+      "likelihood": 0.85,
+      "category": "unsubstantiated",
+      "scores": {
+        "clarity": {
+          "score": 0.85,
+          "confidence": 0.9
+        },
+        "support": {
+          "score": 0.65,
+          "confidence": 0.6
+        }
+      },
+      "cited": [
+        "K1",
+        "K2",
+        "K9",
+        "P14"
+      ],
+      "held_out": [
+        "asa-2022-persil-kinder-to-our-planet"
+      ],
+      "error": ""
+    },
+    {
+      "store_id": "asa-2022-innocent-healthier-planet",
+      "claim_text": "Little drinks with big dreams for a healthier planet",
+      "outcome": "upheld",
+      "company": "Innocent",
+      "industry": "food and drink",
+      "body": "Advertising Standards Authority",
+      "claim_type": "vague_attribute",
+      "label": 1,
+      "likelihood": 0.9,
+      "category": "unsubstantiated",
+      "scores": {
+        "clarity": {
+          "score": 0.9,
+          "confidence": 0.9
+        },
+        "support": {
+          "score": 0.65,
+          "confidence": 0.65
+        }
+      },
+      "cited": [
+        "K1",
+        "K5",
+        "K9",
+        "P12",
+        "P14"
+      ],
+      "held_out": [
+        "asa-2022-innocent-healthier-planet"
+      ],
+      "error": ""
+    },
+    {
+      "store_id": "asa-2024-virgin-atlantic-100-saf",
+      "claim_text": "the world’s first commercial airline to fly transatlantic on 100% sustainable aviation fuel",
+      "outcome": "upheld",
+      "company": "Virgin Atlantic",
+      "industry": "aviation",
+      "body": "Advertising Standards Authority",
+      "claim_type": "factual",
+      "label": 1,
+      "likelihood": 0.5,
+      "category": "unsubstantiated",
+      "scores": {
+        "clarity": {
+          "score": 0.4,
+          "confidence": 0.7
+        },
+        "support": {
+          "score": 0.5,
+          "confidence": 0.4
+        }
+      },
+      "cited": [
+        "K11",
+        "K14",
+        "K8"
+      ],
+      "held_out": [
+        "asa-2024-virgin-atlantic-100-saf"
+      ],
+      "error": ""
+    },
+    {
+      "store_id": "ftc-2022-kohls-walmart-bamboo",
+      "claim_text": "textiles marketed as 'bamboo' made with ecofriendly processes, free of harmful chemicals",
+      "outcome": "settled",
+      "company": "Kohl's and Walmart",
+      "industry": "retail",
+      "body": "Federal Trade Commission (with the Department of Justice)",
+      "claim_type": "vague_attribute",
+      "label": null,
+      "likelihood": 0.8,
+      "category": "unsubstantiated",
+      "scores": {
+        "clarity": {
+          "score": 0.8,
+          "confidence": 0.85
+        },
+        "support": {
+          "score": 0.65,
+          "confidence": 0.6
+        }
+      },
+      "cited": [
+        "K1",
+        "K13",
+        "K9",
+        "P21"
+      ],
+      "held_out": [
+        "ftc-2022-kohls-walmart-bamboo"
+      ],
+      "error": ""
+    },
+    {
+      "store_id": "ftc-2016-volkswagen-clean-diesel",
+      "claim_text": "Clean Diesel: low-emission, environmentally friendly cars that met emissions standards",
+      "outcome": "settled",
+      "company": "Volkswagen",
+      "industry": "automotive",
+      "body": "Federal Trade Commission",
+      "claim_type": "factual",
+      "label": null,
+      "likelihood": 0.8,
+      "category": "unsubstantiated",
+      "scores": {
+        "clarity": {
+          "score": 0.8,
+          "confidence": 0.85
+        },
+        "support": {
+          "score": 0.65,
+          "confidence": 0.65
+        }
+      },
+      "cited": [
+        "K1",
+        "K9",
+        "P21"
+      ],
+      "held_out": [
+        "ftc-2016-volkswagen-clean-diesel"
+      ],
+      "error": ""
+    },
+    {
+      "store_id": "nyag-2025-jbs-net-zero-2040",
+      "claim_text": "JBS will achieve net zero greenhouse gas emissions by 2040, reducing its direct and indirect emissions and offsetting all residual emissions",
+      "outcome": "settled",
+      "company": "JBS",
+      "industry": "meat processing",
+      "body": "New York State Attorney General (consumer protection)",
+      "claim_type": "commitment",
+      "label": null,
+      "likelihood": 0.65,
+      "category": "misleading_by_framing",
+      "scores": {
+        "clarity": {
+          "score": 0.6,
+          "confidence": 0.8
+        },
+        "support": {
+          "score": 0.65,
+          "confidence": 0.65
+        }
+      },
+      "cited": [
+        "K16",
+        "K19",
+        "K6",
+        "P2",
+        "P5"
+      ],
+      "held_out": [
+        "nyag-2025-jbs-net-zero-2040"
+      ],
+      "error": ""
+    },
+    {
+      "store_id": "competition-bureau-2022-keurig-recyclable",
+      "claim_text": "K-Cup pods are recyclable",
+      "outcome": "settled",
+      "company": "Keurig",
+      "industry": "consumer goods",
+      "body": "Competition Bureau Canada",
+      "claim_type": "factual",
+      "label": null,
+      "likelihood": 0.6,
+      "category": "unsubstantiated",
+      "scores": {
+        "clarity": {
+          "score": 0.6,
+          "confidence": 0.8
+        },
+        "support": {
+          "score": 0.5,
+          "confidence": 0.4
+        }
+      },
+      "cited": [
+        "K13"
+      ],
+      "held_out": [
+        "competition-bureau-2022-keurig-recyclable"
+      ],
+      "error": ""
+    },
+    {
+      "store_id": "accc-2025-clorox-glad-ocean-plastic",
+      "claim_text": "50% Ocean Plastic Recycled",
+      "outcome": "upheld",
+      "company": "Clorox",
+      "industry": "consumer goods",
+      "body": "Federal Court of Australia, on ACCC proceedings",
+      "claim_type": "factual",
+      "label": 1,
+      "likelihood": 0.65,
+      "category": "unsubstantiated",
+      "scores": {
+        "clarity": {
+          "score": 0.65,
+          "confidence": 0.7
+        },
+        "support": {
+          "score": 0.5,
+          "confidence": 0.4
+        }
+      },
+      "cited": [
+        "K13"
+      ],
+      "held_out": [
+        "accc-2025-clorox-glad-ocean-plastic"
+      ],
+      "error": ""
+    },
+    {
+      "store_id": "agcm-2020-eni-diesel-plus",
+      "claim_text": "Eni Diesel+: 'green diesel', 'renewable', with a positive environmental impact and lower consumption and emissions",
+      "outcome": "upheld",
+      "company": "Eni",
+      "industry": "oil and gas",
+      "body": "Autorità Garante della Concorrenza e del Mercato (competition and consumer authority)",
+      "claim_type": "vague_attribute",
+      "label": 1,
+      "likelihood": 0.85,
+      "category": "unsubstantiated",
+      "scores": {
+        "clarity": {
+          "score": 0.85,
+          "confidence": 0.85
+        },
+        "support": {
+          "score": 0.65,
+          "confidence": 0.6
+        }
+      },
+      "cited": [
+        "K1",
+        "K5",
+        "K9",
+        "P13",
+        "P18"
+      ],
+      "held_out": [
+        "agcm-2020-eni-diesel-plus"
+      ],
+      "error": ""
+    },
+    {
+      "store_id": "asa-2025-shell-energy-baker-hughes",
+      "claim_text": "Our work with Baker Hughes to help meet their energy needs and decarbonise operations. Progress together",
+      "outcome": "not_upheld",
+      "company": "Shell",
+      "industry": "energy retail",
+      "body": "Advertising Standards Authority",
+      "claim_type": "factual",
+      "label": 0,
+      "likelihood": 0.8,
+      "category": "unsubstantiated",
+      "scores": {
+        "clarity": {
+          "score": 0.8,
+          "confidence": 0.85
+        },
+        "support": {
+          "score": 0.65,
+          "confidence": 0.65
+        }
+      },
+      "cited": [
+        "K3",
+        "P1"
+      ],
+      "held_out": [
+        "asa-2025-shell-energy-baker-hughes"
+      ],
+      "error": ""
+    },
+    {
+      "store_id": "asa-2020-ryanair-lowest-emissions",
+      "claim_text": "Europe's lowest emissions airline; low CO2 emissions",
+      "outcome": "upheld",
+      "company": "Ryanair",
+      "industry": "aviation",
+      "body": "Advertising Standards Authority",
+      "claim_type": "comparative",
+      "label": 1,
+      "likelihood": 0.85,
+      "category": "unsubstantiated",
+      "scores": {
+        "clarity": {
+          "score": 0.85,
+          "confidence": 0.85
+        },
+        "support": {
+          "score": 0.7,
+          "confidence": 0.7
+        }
+      },
+      "cited": [
+        "K1",
+        "K14",
+        "K2",
+        "P12",
+        "P14"
+      ],
+      "held_out": [
+        "asa-2020-ryanair-lowest-emissions"
+      ],
+      "error": ""
+    }
+  ]
+}

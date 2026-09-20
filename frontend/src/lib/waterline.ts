@@ -16,11 +16,11 @@ import { clamp01 } from "@/lib/menu-scroll"
 
 /**
  * Where the water already is when the card arrives. The card does not open under a full sheet
- * of pigment: the top quarter has drained already, so the wordmark is in ink from the first
- * frame and the tagline under it is still white on the wash. `.rinse-title` in index.css is
- * capped to keep the word clear of `startCrest()`.
+ * of pigment: the top half has drained already, so the wordmark is in ink from the first frame
+ * and the tagline under it is still white on the wash. `.rinse-title` and `.rinse-tagline` in
+ * index.css are both placed against `startCrest()`, one above it and one below.
  */
-export const START = 0.28
+export const START = 0.5
 /** Slack past the bottom of the card, so the line ends wholly below it. */
 export const OVERSHOOT = 0.28
 /** Points sampled across the card. Enough that the quadratic smoothing keeps the narrowest
@@ -90,11 +90,13 @@ export const rivuletDepth = (edge: number): number =>
 /**
  * Every height above is a fraction of the card's height and every width a fraction of its width,
  * so a card taller than it is wide would stretch the same line into icicles. This flattens the
- * waves and the rivulets until their slopes are roughly what they are on a laptop.
+ * waves and the rivulets until their slopes are roughly what they are on a laptop. The floor is
+ * not the aspect maths: below it a phone's line goes flat, which is the thing the curve exists
+ * to avoid.
  */
 export const verticalScale = (width: number, height: number): number => {
   if (height <= 0) return 1
-  return Math.min(1, Math.max(0.34, width / height / REFERENCE_ASPECT))
+  return Math.min(1, Math.max(0.5, width / height / REFERENCE_ASPECT))
 }
 
 /** The signed distance from `u` to `x` the short way round the card. */

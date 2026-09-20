@@ -196,3 +196,33 @@ def test_built_frontend_gets_spa_fallback(tmp_path, fixtures_dir, demo_dir):
         assert client.get("/api/nope").status_code == 404
         assert client.get("/api/nope").headers["content-type"].startswith("application/json")
         assert client.get("/api/health").status_code == 200
+
+
+def test_the_calibration_report_is_served_once_it_has_been_run(client, tmp_path, monkeypatch):
+    """The metrics page (step 19) reads a file a run wrote, so the app never waits on a model."""
+    from auditor.calibration import Case, measure, report
+
+    path = tmp_path / "calibration.json"
+    client.app.state.settings.calibration_file = path
+
+    missing = client.get("/api/calibration")
+    assert missing.status_code == 404 and "auditor.calibration run" in missing.json()["detail"]
+
+    cases = [
+        Case(store_id="a", claim_text="t", outcome="upheld", label=1, likelihood=0.9, category="unsubstantiated"),
+        Case(store_id="b", claim_text="t", outcome="not_upheld", label=0, likelihood=0.2, category="supported"),
+    ]
+    path.write_text(json.dumps(report(cases, measure(cases))), encoding="utf-8")
+    try:
+        got = client.get("/api/calibration")
+        assert got.status_code == 200
+        body = got.json()
+        assert body["metrics"]["precision"] == 1.0 and body["metrics"]["recall"] == 1.0
+        assert body["metrics"]["caveat"] and body["metrics"]["bins"] and body["metrics"]["sweep"]
+        assert [c["store_id"] for c in body["cases"]] == ["a", "b"]
+        assert "leave-one-out" in body["method"]
+        path.write_text("not json", encoding="utf-8")
+        assert client.get("/api/calibration").status_code == 500
+    finally:
+        path.unlink(missing_ok=True)
+

@@ -2,8 +2,8 @@
  * The menu screen's scroll choreography as pure maths (../../menu-design.md §6.4 and §7.3).
  *
  * `p` is the title card wrapper's progress, 0 with its top at the viewport top and 1 with its
- * bottom at the viewport bottom. `f` is the content section's progress, 0 as it enters at the
- * bottom of the viewport and 1 at the end of the page. Everything the card and the forest do is
+ * bottom at the viewport bottom. `f` is the content section's approach, 0 as its top enters at
+ * the bottom of the viewport and 1 as that top reaches the top of it. Everything the card and the forest do is
  * a function of one of those two numbers, so it scrubs in both directions and a presenter can
  * hold any state on stage.
  */
@@ -34,13 +34,17 @@ export const titleExitOpacity = (p: number): number => 1 - ramp(p, 0.82, 0.96)
 export const titleExitY = (p: number): number => -4 * ramp(p, 0.82, 0.96)
 export const shaderRunning = (p: number): boolean => p < SHADER_PAUSE
 
-/** Per-tree growth windows on `f` (§7.3), T1 to T5. */
+/**
+ * Per-tree growth windows on `f` (§7.3), T1 to T5. `f` is the list's approach to the top of the
+ * viewport, and every tree is done by 0.72 of it: the stand is full while the reader is still
+ * arriving at the list, not at the bottom of the page after they have read it.
+ */
 export const TREE_WINDOWS = [
-  { from: 0.0, to: 0.82 },
-  { from: 0.06, to: 0.9 },
-  { from: 0.12, to: 0.96 },
-  { from: 0.04, to: 0.86 },
-  { from: 0.1, to: 0.92 },
+  { from: 0.0, to: 0.6 },
+  { from: 0.05, to: 0.66 },
+  { from: 0.1, to: 0.72 },
+  { from: 0.03, to: 0.63 },
+  { from: 0.08, to: 0.69 },
 ] as const
 
 /** A tree's own progress `g`, 0 before it starts and 1 once its last leaf is out. */

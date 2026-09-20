@@ -1,7 +1,11 @@
 .venv/
-data/
+data/*
 __pycache__/
 *.pyc
 .pytest_cache/
 *.egg-info/
 .env
+
+# The calibration report is a demo artifact: a run costs money, so it is committed.
+# (the run logs under data/runs/ stay out)
+!data/calibration.json

@@ -53,9 +53,9 @@ describe("the card's cues", () => {
   })
 
   it("crosses the tagline early, while the reader is still at the top of the card", () => {
-    // The tagline sits at 40 svh and runs two lines, so the water is through it by p 0.25.
-    expect(frontAt(rinseEdge(0.1))).toBeLessThan(0.4)
-    expect(frontAt(rinseEdge(0.25))).toBeGreaterThan(0.47)
+    // The tagline sits at 60 svh and runs two lines, so the water is through it by p 0.30.
+    expect(frontAt(rinseEdge(0.15))).toBeLessThan(0.6)
+    expect(frontAt(rinseEdge(0.3))).toBeGreaterThan(0.67)
   })
 
   it("takes the title away once the card is clean, and not before", () => {

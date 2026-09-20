@@ -498,12 +498,13 @@
     color: var(--foreground);
   }
 
-  /* Two viewports of wrapper hold one viewport of sticky card: long enough that the rinse is a
-     gesture, short enough that the clean card is not a blank scroll before the list. */
+  /* The wrapper holds one viewport of sticky card plus the scroll the rinse runs over. 65svh of
+     that: long enough that the rinse is a gesture, short enough that the reader is not a whole
+     screen of scrolling away from the first thing they can actually press. */
   .rinse-card-wrapper {
     position: relative;
     z-index: 3;
-    height: 200svh;
+    height: 165svh;
   }
   .rinse-card {
     position: sticky;
@@ -564,7 +565,7 @@
   .rinse-card-inner {
     position: absolute;
     inset: 0;
-    padding: 2.5svh 24px 0;
+    padding: 0 24px;
     color: #ffffff;
     text-align: center;
     pointer-events: none;
@@ -573,12 +574,14 @@
     color: var(--foreground);
   }
   .rinse-title {
-    /* The card opens with the water a quarter of the way down (lib/waterline.ts `START`), and
-       the wordmark has to clear the highest crest of it. At 2.5svh from the top and a line box
-       of 0.9em, a cap of 22svh puts the baseline at 18.5svh against a crest at 21.8svh. Raise
-       either number and the water cuts the letters on a short window. The floor is a phone,
-       where the crest is far higher up and 14vw would leave the word too small to be a title. */
-    font-size: clamp(72px, min(14vw, 22svh), 210px);
+    /* The card opens with the water halfway down (lib/waterline.ts `START`), so the wordmark is
+       centred in the clean half above it: the line box is 0.9em, `margin-top` puts its middle a
+       little above the middle of that half, and `em` here resolves against the title's own size.
+       The 36svh cap is what keeps the box off the highest crest (43.8svh) on a short window; the
+       14vw cap is what stops the word running edge to edge; the 72px floor is a phone, where
+       14vw would leave it too small to be a title. */
+    margin-top: calc(24svh - 0.45em);
+    font-size: clamp(72px, min(14vw, 36svh), 210px);
     line-height: 0.9;
     letter-spacing: -0.015em;
     color: inherit;
@@ -586,11 +589,11 @@
   .rinse-letter {
     display: inline-block;
   }
-  /* Below the opening waterline, so the tagline starts white on the wash and the water uncovers
-     it in ink, the same way it uncovers the wordmark. */
+  /* Below the opening waterline's lowest trough (56.2svh), so the tagline starts white on the
+     wash everywhere and the water uncovers it in ink, the same way it uncovers the wordmark. */
   .rinse-tagline {
     position: absolute;
-    top: 40svh;
+    top: 60svh;
     right: 24px;
     left: 24px;
     margin-inline: auto;
@@ -608,13 +611,231 @@
     color: inherit;
   }
 
+  /* The list sizes to what it carries. The floor is not for the look of it: the forest grows
+     over the list's own approach to the top of the viewport, which the page has to be long
+     enough to allow even with one document on it. */
   .rinse-content {
     position: relative;
     z-index: 2;
-    padding-top: 4rem;
-    /* Long enough that the forest has a scroll range even with three documents. */
-    min-height: 170svh;
-    padding-bottom: 8rem;
+    min-height: 76svh;
+    padding: 4.5rem 0 5rem;
+  }
+  .rinse-column {
+    position: relative;
+    margin: 0 auto;
+    display: flex;
+    max-width: 46rem;
+    flex-direction: column;
+    gap: 3.5rem;
+    padding: 0 24px;
+  }
+  /* The column is lit and the stand is behind it: a scrim of the ground itself, feathered to
+     nothing, so a heading never lands on a canopy. The trees keep the margins. */
+  .rinse-column::before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    inset: -3rem -3.5rem;
+    background-image: radial-gradient(
+      closest-side at 50% 50%,
+      color-mix(in oklab, var(--rinsed-paper) 90%, transparent) 0%,
+      color-mix(in oklab, var(--rinsed-paper) 88%, transparent) 58%,
+      transparent 100%
+    );
+    pointer-events: none;
+  }
+
+  /* Section headings are the document's own voice, the serif, so the list reads as paper and
+     the controls beside it read as interface. */
+  .rinse-heading {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 14px;
+  }
+  .rinse-heading-text {
+    font-family: var(--font-serif);
+    font-size: 27px;
+    font-variation-settings:
+      "opsz" 27,
+      "wght" 480;
+    letter-spacing: -0.012em;
+    line-height: 1.1;
+  }
+  .rinse-pace {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    color: var(--muted-foreground);
+  }
+  .rinse-aside {
+    margin-top: 10px;
+    font-size: 12px;
+    color: var(--muted-foreground);
+  }
+
+  /* A sheet of paper lying on the rinsed ground: square, a hairline, and a shadow low enough
+     that it reads as a sheet on a surface rather than a card floating over one. */
+  .rinse-sheets {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .rinse-sheet {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    background-color: var(--paper);
+    padding: 20px 22px 20px 26px;
+    box-shadow:
+      0 1px 0 color-mix(in oklab, var(--ink) 4%, transparent),
+      0 14px 26px -22px color-mix(in oklab, var(--ink) 55%, transparent);
+    transition:
+      transform 220ms cubic-bezier(0.2, 0.7, 0.2, 1),
+      box-shadow 220ms cubic-bezier(0.2, 0.7, 0.2, 1),
+      border-color 220ms ease;
+  }
+  .rinse-sheet:hover,
+  .rinse-sheet:focus-within {
+    transform: translateY(-2px);
+    border-color: color-mix(in oklab, var(--viridian) 30%, var(--border));
+    box-shadow:
+      0 1px 0 color-mix(in oklab, var(--ink) 5%, transparent),
+      0 22px 34px -24px color-mix(in oklab, var(--ink) 60%, transparent);
+  }
+  /* The pigment this document still has on it. It drains down and away under the pointer, and
+     once its analysis has started it does not come back: the same gesture as the title card,
+     at the size of a row. */
+  .rinse-pigment {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 4px;
+    background-image: linear-gradient(
+      to bottom,
+      var(--viridian),
+      var(--sap) 65%,
+      var(--viridian)
+    );
+    transform-origin: bottom;
+    transition: transform 620ms cubic-bezier(0.3, 0.85, 0.2, 1);
+  }
+  .rinse-sheet:hover .rinse-pigment,
+  .rinse-sheet:focus-within .rinse-pigment,
+  .rinse-sheet[data-rinsing] .rinse-pigment {
+    transform: scaleY(0);
+  }
+
+  .rinse-sheet-text {
+    min-width: 0;
+    flex: 1;
+  }
+  .rinse-sheet-company {
+    font-size: 13px;
+    color: var(--muted-foreground);
+  }
+  .rinse-sheet-title {
+    font-family: var(--font-serif);
+    font-size: 20px;
+    font-variation-settings:
+      "opsz" 20,
+      "wght" 450;
+    line-height: 1.25;
+    margin-top: 1px;
+  }
+  .rinse-sheet-meta {
+    margin-top: 5px;
+    font-size: 13px;
+    color: var(--muted-foreground);
+  }
+  .rinse-sheet-meta a {
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+  .rinse-sheet-meta a:hover {
+    color: var(--foreground);
+  }
+  .rinse-sheet-action {
+    flex-shrink: 0;
+    text-align: right;
+  }
+  .rinse-sheet-note {
+    margin-top: 6px;
+    font-size: 12px;
+    color: var(--muted-foreground);
+  }
+  /* Loading, empty and error all land on a sheet too, so the column never collapses to a line
+     of grey text on the ground. */
+  .rinse-sheet-note:only-child {
+    margin-top: 0;
+    font-size: 14px;
+  }
+
+  .rinse-form {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 14px;
+  }
+  .rinse-field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .rinse-form-foot {
+    display: flex;
+    align-items: flex-end;
+    gap: 12px;
+  }
+  /* Ruled paper: the rules are the text's own line grid, and they scroll with it. */
+  .rinse-ruled {
+    background-image: repeating-linear-gradient(
+      to bottom,
+      transparent 0 25px,
+      color-mix(in oklab, var(--border) 65%, transparent) 25px 26px
+    );
+    background-position: 0 7px;
+    background-attachment: local;
+  }
+
+  /* Recent is a margin note, not a third list of sheets: whole rows are the link. */
+  .rinse-recent {
+    border-top: 1px solid color-mix(in oklab, var(--border) 70%, transparent);
+  }
+  .rinse-recent-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 6px 16px;
+    border-bottom: 1px solid color-mix(in oklab, var(--border) 70%, transparent);
+    padding: 11px 4px;
+    text-decoration: none;
+    transition:
+      padding-left 220ms cubic-bezier(0.2, 0.7, 0.2, 1),
+      background-color 220ms ease;
+  }
+  .rinse-recent-row:hover,
+  .rinse-recent-row:focus-visible {
+    padding-left: 12px;
+    background-color: color-mix(in oklab, var(--paper) 55%, transparent);
+  }
+  .rinse-recent-title {
+    font-family: var(--font-serif);
+    font-size: 16px;
+    font-variation-settings:
+      "opsz" 16,
+      "wght" 450;
+  }
+  .rinse-recent-meta {
+    font-size: 13px;
+    color: var(--muted-foreground);
   }
 
   /* The forest sits under everything and shows only where the content has no Paper surface. */
@@ -662,7 +883,10 @@
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .rinse-leaf {
+    .rinse-leaf,
+    .rinse-sheet,
+    .rinse-pigment,
+    .rinse-recent-row {
       transition: none;
     }
   }

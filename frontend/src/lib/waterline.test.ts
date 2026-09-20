@@ -25,7 +25,7 @@ const DEEPEST = Math.max(...RIVULETS.map((rivulet) => rivulet.depth))
 const spread = (ys: number[]) => Math.max(...ys) - Math.min(...ys)
 
 describe("the front", () => {
-  it("starts a quarter of the way down the card and ends an overshoot below it", () => {
+  it("starts halfway down the card and ends an overshoot below it", () => {
     expect(frontAt(0)).toBeCloseTo(START, 10)
     expect(frontAt(1)).toBeCloseTo(1 + OVERSHOOT, 10)
   })
@@ -39,23 +39,24 @@ describe("the front", () => {
     }
   })
 
-  it("opens with the top quarter clean and three quarters still wet", () => {
+  it("opens with the top half clean and the bottom half still wet", () => {
     for (const time of TIMES) {
       const ys = waterlineSamples(frontAt(0), time, rivuletDepth(0))
-      expect(Math.min(...ys)).toBeGreaterThan(0.1)
-      expect(Math.max(...ys)).toBeLessThan(0.45)
+      expect(Math.min(...ys)).toBeGreaterThan(0.35)
+      expect(Math.max(...ys)).toBeLessThan(0.65)
     }
   })
 
-  it("never lets the opening line reach the wordmark", () => {
-    // `.rinse-title` in index.css puts the baseline at 19.3svh at its cap, and the word has no
-    // descenders. Nothing the waves do at the start may come above that.
-    expect(startCrest()).toBeGreaterThan(0.21)
-    for (const scale of [1, 0.6, 0.34]) {
+  it("leaves the opening line between the wordmark and the tagline", () => {
+    // index.css puts the wordmark's box at 40.2svh at its cap and the tagline's top at 60svh,
+    // and the word has no descenders. Nothing the waves do at the start may cross either.
+    expect(startCrest()).toBeGreaterThan(0.41)
+    for (const scale of [1, 0.75, 0.5]) {
       for (const time of TIMES) {
         const ys = waterlineSamples(frontAt(0), time, rivuletDepth(0), scale)
         expect(Math.min(...ys)).toBeGreaterThanOrEqual(startCrest(scale) - 1e-9)
-        expect(Math.min(...ys)).toBeGreaterThan(0.21)
+        expect(Math.min(...ys)).toBeGreaterThan(0.41)
+        expect(Math.max(...ys)).toBeLessThan(0.6)
       }
     }
   })
@@ -82,8 +83,8 @@ describe("the vertical scale", () => {
   it("leaves a laptop alone and flattens a phone", () => {
     expect(verticalScale(1440, 900)).toBe(1)
     expect(verticalScale(2560, 1080)).toBe(1)
-    expect(verticalScale(390, 844)).toBe(0.34)
-    expect(verticalScale(768, 1024)).toBeCloseTo(0.469, 3)
+    expect(verticalScale(390, 844)).toBe(0.5)
+    expect(verticalScale(768, 1024)).toBe(0.5)
   })
 
   it("keeps the deepest rivulet's slope within a factor of two of the laptop's", () => {

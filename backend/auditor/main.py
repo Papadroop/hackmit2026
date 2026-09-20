@@ -6,6 +6,7 @@ the frontend (frontend/dist) is served from / by this same process when it exist
 
 from __future__ import annotations
 
+import json
 import os
 from contextlib import asynccontextmanager
 from datetime import datetime
@@ -32,6 +33,7 @@ class Settings(BaseModel):
     fixtures_dir: Path = REPO_ROOT / "fixtures"
     demo_documents_dir: Path = REPO_ROOT / "demo-documents"
     runs_dir: Path | None = REPO_ROOT / "backend" / "data" / "runs"
+    calibration_file: Path = REPO_ROOT / "backend" / "data" / "calibration.json"
     frontend_dist: Path | None = REPO_ROOT / "frontend" / "dist"
 
     @classmethod
@@ -43,6 +45,8 @@ class Settings(BaseModel):
             values["demo_documents_dir"] = Path(demo)
         if runs := os.environ.get("AUDITOR_RUNS_DIR"):
             values["runs_dir"] = Path(runs)
+        if calibration := os.environ.get("AUDITOR_CALIBRATION_FILE"):
+            values["calibration_file"] = Path(calibration)
         return cls(**values)
 
 
@@ -195,6 +199,23 @@ def create_app(settings: Settings | None = None) -> FastAPI:
                 FixtureInfo(name=name, file=path.name, title=document_title(events), **log_summary(events))
             )
         return infos
+
+    @app.get("/api/calibration")
+    async def calibration_report() -> dict[str, Any]:
+        """The metrics page's data (roadmap step 19): the precedent set run leave-one-out, with
+        precision, recall, the calibration curve and what the set cannot support. Written by
+        `python -m auditor.calibration run --out data/calibration.json`, so the app never waits
+        on a model; 404 until that has been run."""
+        path = settings.calibration_file
+        if not path.is_file():
+            raise HTTPException(
+                status_code=404,
+                detail=f"No calibration report yet. Run `python -m auditor.calibration run --out {path}`.",
+            )
+        try:
+            return json.loads(path.read_text(encoding="utf-8"))
+        except ValueError as exc:
+            raise HTTPException(status_code=500, detail=f"{path} is not readable JSON: {exc}") from exc
 
     @app.get("/api/documents")
     async def list_demo_documents() -> DocumentsResponse:

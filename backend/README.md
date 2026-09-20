@@ -145,6 +145,22 @@ Every analysis is also appended, event by event, to `backend/data/runs/<timestam
   cross-industry entry. `check [--fetch]` validates the store and looks for every quote on its
   page; `coverage <file or url>` prints which of the reference's words are in a document and
   which are not, with no model in the loop.
+- `calibration.py`: roadmap step 19, D5 "Rigour guarantees" — the audit scored on the only
+  ground truth this project has. Each of the 24 precedents is a labelled case: its wording is
+  analysed with **its own ruling taken out of the store** (`Knowledge.without`, the leave-one-out
+  rule in demo-documents.md §6), and what a regulator decided is the label. A precedent gives a
+  wording and nothing else, so only Clarity and Support run — the two this set is ground truth
+  for; Materiality and Consistency need a document and a company's record, and external
+  verification would find the very ruling held out. The debate is not run either: likelihood is
+  derived, not judged, so it cannot move the number being measured.
+  `.venv/bin/python -m auditor.calibration run --out data/calibration.json` scores the set
+  (about two calls a case) and `report data/calibration.json` recomputes the metrics, moves the
+  threshold and redraws the curve without paying again. `GET /api/calibration` serves the saved
+  report to the metrics page. The committed run: precision 84%, recall 94%, Brier 0.14, and a
+  curve that is honest at the top (predicted 0.83, observed 0.83) — but **0 of 3 negatives were
+  cleared**, and the report says in as many words that 3 negatives cannot support a precision
+  figure. The threshold sweep is in the report: at 0.8 all three are cleared at 100% precision
+  and recall falls to 41%.
 - `summary.py`: roadmap step 18, D6 "Aggregation" — the header, from the results beneath it.
   Nothing here is a model's opinion: the profile, the headline and the ranking are arithmetic,
   and each number records in `ext.drivers` the claims it came from, which is the step's visual
