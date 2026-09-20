@@ -38,6 +38,14 @@ export type Group =
   | { type: "list"; lines: Line[] }
   | { type: "paragraph"; lines: Line[] }
 
+/** Where a group sits in the text: the start of its first line to the end of its last. Also
+ * its key, since no two groups start at the same offset. */
+export function blockRange(group: Group): [number, number] {
+  if (group.type === "heading") return [group.line.start, group.line.end]
+  const lines = group.lines
+  return [lines[0].start, lines[lines.length - 1].end]
+}
+
 export type Section = {
   /** The innermost container region around these groups, or null for plain body text. */
   container: { kind: ContainerKind; label: string | null; start: number } | null

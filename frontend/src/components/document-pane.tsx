@@ -5,7 +5,6 @@ import {
   useRef,
   type KeyboardEvent,
   type MouseEvent,
-  type ReactNode,
   type Ref,
 } from "react"
 
@@ -16,18 +15,9 @@ import type {
   Verdict,
 } from "@contract"
 
-import { planRewrite, type DiffOp } from "@/lib/diff"
+import { DocumentBlock } from "@/components/document-blocks"
 import { placeGutterLabels } from "@/lib/document-dom"
-import { markVars } from "@/lib/encoding"
-import { describeSignal, strongestPolarity } from "@/lib/language"
-import {
-  markKey,
-  segmentRange,
-  type Group,
-  type Line,
-  type Mark,
-  type Section,
-} from "@/lib/document-layout"
+import { blockRange, type Mark, type Section } from "@/lib/document-layout"
 import { cn } from "@/lib/utils"
 import type { AnchoredClaim } from "@/state/annotations"
 
@@ -36,10 +26,13 @@ import type { AnchoredClaim } from "@/state/annotations"
  * every claim span highlighted where it sits and its id in the margin, and the Language
  * layer's word-level marks under the words they concern. The text is rendered from the
  * layout in document-layout.ts, so a highlight is a run of segments inside a line; clicks and
- * keys are handled once at the sheet by delegation. Whatever is passed as `before` (the
- * omission cards) sits on the desk above the sheet and scrolls with it. In the honest
- * version (step 9) each claim's primary span becomes a redline of its rewrite, and what the
- * document omits is inserted at the end.
+ * keys are handled once at the sheet by delegation.
+ *
+ * The same pane draws the corrected version (step 9, design-doc D6's honest version): each
+ * claim's primary span becomes a redline of its rewrite and what the document omits is
+ * inserted at the end. `redline` off drops the struck words, which leaves the corrected text
+ * as it would read — the same sheet, with the tool's wording in italic where the document's
+ * own could not stand.
  */
 type Props = {
   ref?: Ref<HTMLDivElement>
@@ -54,9 +47,10 @@ type Props = {
   verdicts: Record<string, Verdict>
   /** Signals by id: sets each language mark's polarity and tooltip. */
   signals: Record<string, LanguageSignal>
-  before?: ReactNode
-  /** The honest version: rewrites by claim id, drawn as redlines when `honest` is on. */
+  /** The corrected version: rewrites by claim id, drawn where `honest` is on. */
   honest: boolean
+  /** With the struck words (a redline), or without them (the corrected text as it reads). */
+  redline?: boolean
   rewrites: Record<string, string>
   omissions: Omission[]
   onShowOmission: (id: string) => void
@@ -76,8 +70,8 @@ export const DocumentPane = memo(function DocumentPane({
   languageMarks,
   verdicts,
   signals,
-  before,
   honest,
+  redline = true,
   rewrites,
   omissions,
   onShowOmission,
@@ -100,7 +94,7 @@ export const DocumentPane = memo(function DocumentPane({
     observer.observe(sheet)
     void globalThis.document.fonts?.ready.then(place)
     return () => observer.disconnect()
-  }, [sections, marks, honest, rewrites, omissions])
+  }, [sections, marks, honest, redline, rewrites, omissions])
 
   const handleClick = (event: MouseEvent<HTMLElement>) => {
     const selection = window.getSelection()
@@ -133,12 +127,11 @@ export const DocumentPane = memo(function DocumentPane({
 
   return (
     <div ref={ref} className={cn("@container h-full overflow-auto", className)}>
-      {before}
       <article
         ref={sheetRef}
         className="relative mx-auto my-4 w-full max-w-[47rem] border bg-paper py-8 pr-5 pl-11 sm:my-8 sm:py-10 sm:pr-10 sm:pl-[4.5rem]"
         aria-label={doc?.title ?? "Document"}
-        data-honest={honest || undefined}
+        data-honest={honest ? (redline ? "redline" : "clean") : undefined}
         onClick={handleClick}
         onKeyDown={handleKeyDown}
       >
@@ -150,18 +143,20 @@ export const DocumentPane = memo(function DocumentPane({
               {sections.map((section, i) =>
                 section.container === null ? (
                   <Fragment key={i}>
-                    {section.groups.map((g) =>
-                      renderGroup(
-                        g,
-                        doc.text,
-                        marks,
-                        languageMarks,
-                        verdicts,
-                        signals,
-                        honest ? rewrites : NO_REWRITES,
-                        selectedId
-                      )
-                    )}
+                    {section.groups.map((g) => (
+                      <DocumentBlock
+                        key={blockRange(g)[0]}
+                        group={g}
+                        text={doc.text}
+                        marks={marks}
+                        languageMarks={languageMarks}
+                        verdicts={verdicts}
+                        signals={signals}
+                        rewrites={honest ? rewrites : NO_REWRITES}
+                        redline={redline}
+                        selectedId={selectedId}
+                      />
+                    ))}
                   </Fragment>
                 ) : (
                   <section
@@ -170,18 +165,20 @@ export const DocumentPane = memo(function DocumentPane({
                     data-kind={section.container.kind}
                     aria-label={section.container.label ?? undefined}
                   >
-                    {section.groups.map((g) =>
-                      renderGroup(
-                        g,
-                        doc.text,
-                        marks,
-                        languageMarks,
-                        verdicts,
-                        signals,
-                        honest ? rewrites : NO_REWRITES,
-                        selectedId
-                      )
-                    )}
+                    {section.groups.map((g) => (
+                      <DocumentBlock
+                        key={blockRange(g)[0]}
+                        group={g}
+                        text={doc.text}
+                        marks={marks}
+                        languageMarks={languageMarks}
+                        verdicts={verdicts}
+                        signals={signals}
+                        rewrites={honest ? rewrites : NO_REWRITES}
+                        redline={redline}
+                        selectedId={selectedId}
+                      />
+                    ))}
                   </section>
                 )
               )}
@@ -248,261 +245,3 @@ export const DocumentPane = memo(function DocumentPane({
 })
 
 const NO_REWRITES: Record<string, string> = {}
-
-function renderGroup(
-  group: Group,
-  text: string,
-  marks: Mark[],
-  languageMarks: Mark[],
-  verdicts: Record<string, Verdict>,
-  signals: Record<string, LanguageSignal>,
-  rewrites: Record<string, string>,
-  selectedId: string | null
-) {
-  switch (group.type) {
-    case "heading": {
-      const key = group.line.start
-      if (group.level <= 1) {
-        return (
-          <h1 key={key} className="document-title">
-            <LineText
-              text={text}
-              line={group.line}
-              marks={marks}
-              languageMarks={languageMarks}
-              verdicts={verdicts}
-              signals={signals}
-              rewrites={rewrites}
-              selectedId={selectedId}
-            />
-          </h1>
-        )
-      }
-      const Tag = group.level === 2 ? "h2" : group.level === 3 ? "h3" : "h4"
-      return (
-        <Tag
-          key={key}
-          className="document-heading"
-          data-level={Math.min(group.level, 4)}
-        >
-          <LineText
-            text={text}
-            line={group.line}
-            marks={marks}
-            languageMarks={languageMarks}
-            verdicts={verdicts}
-            signals={signals}
-            rewrites={rewrites}
-            selectedId={selectedId}
-          />
-        </Tag>
-      )
-    }
-    case "list":
-      return (
-        <ul key={group.lines[0].start} className="document-list">
-          {group.lines.map((line) => (
-            <li key={line.start}>
-              <LineText
-                text={text}
-                line={line}
-                marks={marks}
-                languageMarks={languageMarks}
-                verdicts={verdicts}
-                signals={signals}
-                rewrites={rewrites}
-                selectedId={selectedId}
-              />
-            </li>
-          ))}
-        </ul>
-      )
-    case "paragraph": {
-      const prominence = group.lines[0].prominence
-      return (
-        <p
-          key={group.lines[0].start}
-          className="document-paragraph"
-          data-prominence={
-            prominence !== null && prominence >= 1 ? "headline" : undefined
-          }
-        >
-          {group.lines.map((line, i) => (
-            <Fragment key={line.start}>
-              {i > 0 && <br />}
-              <LineText
-                text={text}
-                line={line}
-                marks={marks}
-                languageMarks={languageMarks}
-                verdicts={verdicts}
-                signals={signals}
-                rewrites={rewrites}
-                selectedId={selectedId}
-              />
-            </Fragment>
-          ))}
-        </p>
-      )
-    }
-  }
-}
-
-function LineText({
-  text,
-  line,
-  marks,
-  languageMarks,
-  verdicts,
-  signals,
-  rewrites,
-  selectedId,
-}: {
-  text: string
-  line: Line
-  marks: Mark[]
-  languageMarks: Mark[]
-  verdicts: Record<string, Verdict>
-  signals: Record<string, LanguageSignal>
-  rewrites: Record<string, string>
-  selectedId: string | null
-}) {
-  // Two levels: the line is cut by claim marks, and each piece by language marks, so a claim
-  // highlight stays one element (one ring, one hover) and a word-level mark that straddles a
-  // claim boundary is simply drawn in two pieces.
-  const segments = segmentRange(line.start, line.end, marks)
-  return segments.map((segment) => {
-    const inner =
-      languageMarks.length === 0 ? (
-        text.slice(segment.start, segment.end)
-      ) : (
-        <LanguageText
-          text={text}
-          start={segment.start}
-          end={segment.end}
-          marks={languageMarks}
-          signals={signals}
-        />
-      )
-    if (segment.marks.length === 0)
-      return <Fragment key={segment.start}>{inner}</Fragment>
-    // The most specific claim (shortest span) is the click target when claims nest.
-    const claim = segment.marks[segment.marks.length - 1]
-    const first = segment.start === claim.start
-    const verdict = verdicts[claim.id]
-    // The honest version: the outermost rewritten claim whose primary span covers this
-    // piece has it struck through, and its rewrite follows the last piece. A piece that is
-    // the whole span may instead be shown as a word-level correction.
-    const rewritten = segment.marks.find(
-      (m) => m.span === 0 && rewrites[m.id] !== undefined
-    )
-    let content = inner
-    if (rewritten !== undefined) {
-      const rewrite = withoutDoubledStop(
-        rewrites[rewritten.id],
-        text.charAt(rewritten.end)
-      )
-      const whole =
-        segment.start === rewritten.start && segment.end === rewritten.end
-      const plan = whole
-        ? planRewrite(text.slice(segment.start, segment.end), rewrite)
-        : ({ mode: "block" } as const)
-      content =
-        plan.mode === "words" ? (
-          <DiffText ops={plan.ops} />
-        ) : (
-          <>
-            <del className="honest-del">{inner}</del>
-            {segment.end === rewritten.end && (
-              <>
-                {" "}
-                <ins className="honest-ins">{rewrite}</ins>
-              </>
-            )}
-          </>
-        )
-    }
-    return (
-      <mark
-        key={segment.start}
-        className="claim-mark"
-        data-claim={claim.id}
-        data-verdict={verdict?.category}
-        style={markVars(verdict)}
-        data-anchor={first ? markKey(claim) : undefined}
-        data-primary={first && claim.span === 0 ? claim.id : undefined}
-        data-selected={
-          segment.marks.some((m) => m.id === selectedId) || undefined
-        }
-        tabIndex={first ? 0 : undefined}
-        role={first ? "button" : undefined}
-        aria-pressed={first ? claim.id === selectedId : undefined}
-      >
-        {content}
-      </mark>
-    )
-  })
-}
-
-/** A rewrite is a sentence, a span often is not: when the document's own full stop follows
- * the span, the rewrite's is dropped so the redline does not read "solutions.. As". */
-function withoutDoubledStop(rewrite: string, next: string): string {
-  const last = rewrite.trimEnd().slice(-1)
-  return last !== "" && last === next && ".!?".includes(last)
-    ? rewrite.trimEnd().slice(0, -1)
-    : rewrite
-}
-
-function DiffText({ ops }: { ops: DiffOp[] }) {
-  return ops.map((op, i) => (
-    <Fragment key={i}>
-      {i > 0 && " "}
-      {op.type === "equal" ? (
-        op.text
-      ) : op.type === "delete" ? (
-        <del className="honest-del">{op.text}</del>
-      ) : (
-        <ins className="honest-ins">{op.text}</ins>
-      )}
-    </Fragment>
-  ))
-}
-
-function LanguageText({
-  text,
-  start,
-  end,
-  marks,
-  signals,
-}: {
-  text: string
-  start: number
-  end: number
-  marks: Mark[]
-  signals: Record<string, LanguageSignal>
-}) {
-  return segmentRange(start, end, marks).map((segment) => {
-    const slice = text.slice(segment.start, segment.end)
-    if (segment.marks.length === 0)
-      return <Fragment key={segment.start}>{slice}</Fragment>
-    // A word can carry several signals: styled as the most notable, described by all.
-    const found = segment.marks
-      .map((m) => signals[m.id])
-      .filter((s): s is LanguageSignal => s !== undefined)
-    const first = segment.marks.find((m) => m.start === segment.start)
-    return (
-      <span
-        key={segment.start}
-        className="language-mark"
-        data-polarity={
-          strongestPolarity(found.map((s) => s.polarity)) ?? "flag"
-        }
-        data-signal={segment.marks.map((m) => m.id).join(" ")}
-        data-anchor={first ? markKey(first) : undefined}
-        title={found.map(describeSignal).join("\n")}
-      >
-        {slice}
-      </span>
-    )
-  })
-}

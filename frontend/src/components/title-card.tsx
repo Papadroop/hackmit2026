@@ -8,7 +8,6 @@ import {
   type MotionValue,
 } from "motion/react"
 
-import { useTheme } from "@/components/theme-provider"
 import {
   cueOpacity,
   rinseEdge,
@@ -21,7 +20,7 @@ import {
   readPigmentPalette,
   type PigmentPalette,
 } from "@/lib/pigment"
-import { useMediaQuery } from "@/lib/use-media-query"
+import { useResolvedTheme } from "@/lib/theme"
 import {
   frontAt,
   rivuletDepth,
@@ -31,8 +30,10 @@ import {
 } from "@/lib/waterline"
 
 /**
- * The first viewport of the menu: wet green pigment on white paper, moving as if under running
- * water, with the word "rinse" the only other thing on it. The card opens with the top quarter
+ * The first viewport of the menu: the canopy the page stands on, seen through green water, with
+ * the word "rinse" the only other thing on it. The water refracts the photograph itself
+ * (§6.3), so the forest goes on under the surface; the green is a depth over it rather than a
+ * fill, and the pigment is the dye in it. The card opens with the top quarter
  * already drained, so the wordmark reads in ink from the first frame and the tagline under it is
  * still white on the wash; scrolling takes the rest of the pigment down with it
  * (../../menu-design.md §6).
@@ -67,44 +68,40 @@ function titleSize(): number {
   return Math.min(Math.max(76, 0.17 * window.innerWidth), RIPPLE_AT)
 }
 
+/** What the water refracts: the same canopy the page stands on (public/canopy.jpg). */
+const CANOPY = "/canopy.jpg"
+
 /**
- * §6.3, tuned by screenshot at 1440x900 from the starting values there. Caustic, highlights and
- * layering came a long way down: at the starting values the shader read as the floor of a
- * swimming pool, which §6.3 names as the thing to avoid. What is left is a slow wet mottling
- * over the pigment rather than a net of bright cells.
+ * §6.3, retuned once the shader was given the canopy to refract rather than a flat wash.
+ * Refracting the forest is what makes the bottom of the card read as water: the ground goes on
+ * under the surface, wobbling, instead of stopping at a green field. Caustic and waves carry
+ * that displacement, highlights are the light off the surface, and `edges` keeps the
+ * displacement alive where the water meets the meniscus.
  *
- * `scale` and the offsets are not in §6.3; they are how its fourth target and §12's contrast
- * floor are met. The shader offsets the image's own UV by up to 0.1 x `waves`, and anything past
- * the edge of the image is filled with `colorBack`, which showed as two vertical seams down the
- * card: cropping in gives the distortion room at every viewport aspect. The offsets then move the
- * brightest thin spot of the wash out from under the title, which at the centred crop held the
- * worst pixel under it to 2.9:1.
+ * `scale` and the offsets are not in §6.3. The shader offsets the image's own UV by up to
+ * 0.1 x `waves`, and anything past the edge of the image is filled with `colorBack`, which
+ * showed as two vertical seams down the card: cropping in gives the distortion room at every
+ * viewport aspect. The offset then holds the crop on the canopy itself rather than on the river
+ * and the sky at the top of the photograph.
  */
 const WATER = {
-  highlights: 0.04,
-  caustic: 0.1,
-  waves: 0.4,
-  layering: 0.05,
-  edges: 0.1,
-  size: 0.35,
-  scale: 1.6,
+  highlights: 0.26,
+  caustic: 0.3,
+  waves: 0.5,
+  layering: 0.12,
+  edges: 0.3,
+  size: 1.1,
+  scale: 1.45,
   offsetX: 0.08,
-  offsetY: -0.2,
-  speed: 0.6,
+  offsetY: 0.3,
+  speed: 0.5,
   minPixelRatio: 1,
   maxPixelCount: 1_200_000,
-  /** The phase the still wash holds under reduced motion. */
+  /** The phase the still water holds under reduced motion. */
   frozenFrame: 2400,
 } as const
 
 const washes = new Map<string, { image: string; palette: PigmentPalette }>()
-
-function useResolvedTheme(): "light" | "dark" {
-  const { theme } = useTheme()
-  const systemDark = useMediaQuery("(prefers-color-scheme: dark)")
-  if (theme === "system") return systemDark ? "dark" : "light"
-  return theme
-}
 
 /** The pigment image and the greens it was made from, generated once per theme and kept. */
 function usePigment(theme: "light" | "dark") {
@@ -240,10 +237,10 @@ export function TitleCard({ progress }: { progress: MotionValue<number> }) {
         {pigment === null ? null : webgl2 ? (
           <Water
             className="rinse-shader"
-            image={pigment.image}
+            image={CANOPY}
             fit="cover"
             colorBack={pigment.palette.pine}
-            colorHighlight={pigment.palette.wetPaper}
+            colorHighlight="#ffffff"
             highlights={WATER.highlights}
             caustic={WATER.caustic}
             waves={WATER.waves}
@@ -260,11 +257,20 @@ export function TitleCard({ progress }: { progress: MotionValue<number> }) {
             style={{ visibility: running ? "visible" : "hidden" }}
           />
         ) : (
+          /* Without WebGL2 there is no refraction, so the generated wash stands in for it:
+             the same pigment, still, under the same depth. */
           <div
             className="rinse-wash-still"
             style={{ backgroundImage: `url(${pigment.image})` }}
           />
         )}
+        {pigment !== null && webgl2 && (
+          <div
+            className="rinse-dye"
+            style={{ backgroundImage: `url(${pigment.image})` }}
+          />
+        )}
+        <div className="rinse-depth" />
       </div>
 
       {measured && (

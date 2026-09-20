@@ -161,6 +161,8 @@ The shader refracts an image. Generate it in code so it is reproducible and matc
 
 Dark mode uses the dark pigment set from §4.1 with the same procedure.
 
+**As built (2026-09-20, second pass):** the wash is no longer what the shader refracts — see §6.3. It survives as two thinner jobs: the dye suspended in the water (`.rinse-dye`, the same image at 0.18, so the green is uneven the way a pigment in water is) and the whole of the card where there is no WebGL2. Its own measurements below are unchanged, since nothing about the image changed.
+
 ### 6.3 The shader
 
 `import { Water } from "@paper-design/shaders-react"`. Before using it, read `node_modules/@paper-design/shaders-react/dist/index.d.ts` for the exact prop names, types and ranges; do not guess ranges. Verified prop names: `image, colorBack, colorHighlight, highlights, layering, edges, caustic, waves, size`, plus the mount props `speed, frame, minPixelRatio, maxPixelCount`.
@@ -176,7 +178,14 @@ At the starting values the card read as the floor of a swimming pool, which is t
 - **The seam (target 4)** is not tiling. The fragment shader offsets the image's own UV by up to `0.1 × waves` and fills anything past the image edge with `colorBack`, which showed as two vertical bands down the card. `scale` crops in so the distortion never reaches the edge; 1.6 is seam-free at 1440×900, 1920×1080, 1024×768, 1440×700 and 390×844.
 - **The title's contrast (§12)** was 2.9:1 at its worst pixel with the image centred, because the brightest Wet-paper thin spot sat under the word at every crop. The offsets move that spot out from under the title. Measured on the built screen with the type hidden: title 6.1:1 mean and 3.8:1 worst, tagline 5.8:1 / 4.6:1, cue 5.9:1 / 4.7:1.
 
-The shader needs WebGL2. If `canvas.getContext("webgl2")` is null, render the pigment image as a static CSS background of the card instead and skip the shader; everything else (title, rinse mask, forest) works unchanged.
+**As built (2026-09-20, second pass): the water refracts the canopy.** Reviewed on the built screen, the bottom of the card was a flat, opaque green field with a few smears in it — "murky" was the reader's word, and it is the right one: nothing was behind the water, so there was nothing for it to be water *over*. The shader is an image filter, so it was given the ground's own photograph (`public/canopy.jpg`) instead of the wash. The forest now goes on under the surface, wobbling, and the card reads as clear water over the canopy the page already stands on. The dye and the depth do the colouring instead of the image:
+
+- `image` = `/canopy.jpg` (already loaded and cached for `.rinse-canopy`), `colorHighlight` = `#ffffff` for the light off the surface, `colorBack` = Pine for anything the distortion reaches past the crop.
+- Retuned: `highlights` 0.26, `caustic` 0.3, `waves` 0.5, `layering` 0.12, `edges` 0.3, `size` 1.1, `scale` 1.45, `offsetX` 0.08, `offsetY` 0.3, `speed` 0.5. The first pass at 0.52 caustic and 0.5 size marbled the forest into closed loops that read as swirled paint; dropping caustic and layering and taking `size` up to a finer ripple is what turned it into water. `offsetY` holds the crop on the canopy rather than on the sky at the top of the photograph.
+- `.rinse-depth`, over the shader and under the meniscus, is the water's thickness: 12 % of the shallow colour at 44 % of the card, 54 % at 55 %, then the deep colour to 88 % at the foot. That is what a depth of water does, and it is also what carries §12 — the water is nearly clear where it meets the meniscus, which is where clarity is worth the most, and dense where the tagline sits.
+- `--water-shallow` and `--water-deep` are new tokens (§4.1). Dark mode needs a darker water than its own Viridian and Pine, which are lightened for type, and the photograph itself is pulled back there by the same `brightness(0.4)` the ground uses, or the water is a lit lagoon in front of a black forest.
+
+The shader needs WebGL2. If `canvas.getContext("webgl2")` is null, render the pigment image as a static CSS background of the card instead and skip the shader; everything else (title, rinse mask, forest) works unchanged. The depth gradient still applies, so the fallback is the old flat wash under the new depth.
 
 Tuning targets, judged from screenshots at 1440×900:
 
@@ -287,6 +296,8 @@ Growth windows, in tree-progress units `g ∈ [0, 1]`:
 
 Per-tree windows on `f`: start `[0.00, 0.06, 0.12, 0.04, 0.10]`, end `[0.82, 0.90, 0.96, 0.86, 0.92]` for T1–T5; `g_i = clamp((f − start_i) / (end_i − start_i), 0, 1)`.
 
+**As built (2026-09-20, third pass):** `offset: ["start end", "start start"]`, so `f` is the list's *approach* — 0 as its top enters at the bottom of the viewport, 1 as that top reaches the top — one viewport of scroll whatever the list is carrying. Ends are `[0.60, 0.66, 0.72, 0.63, 0.69]`; starts are unchanged but for rounding. Tied to the end of the page, as specified, the last tree finished within the last few per cent of the scroll, which is after the reader has read everything the trees were meant to be growing behind. `.rinse-content` carries an 80svh floor so the approach can still reach 0.72 with one document on the page.
+
 Do not create a motion value per path. Set one CSS custom property per tree, `--g`, on the tree's group each frame (`useMotionValueEvent(f, "change", …)`), and let CSS derive every element:
 
 ```css
@@ -324,6 +335,27 @@ When a tree's `g` reaches 1, start a Motion `animate` on its inner group: `rotat
 - "Your own text": unchanged, fields on Paper. "Recent": unchanged.
 - No entrance animations on any of these. They do not fade or slide in. The forest is the motion here.
 - Headings keep 22 px / 500 Public Sans. No eyebrows, no numbering, no dividers beyond the existing hairlines.
+
+**As built (2026-09-20, third pass): rebuilt as sheets on the ground.** Kept from above: no entrance animations, no eyebrows, no numbering, no dividers beyond hairlines, and every function the old list had — the pace control, replay and live starts, the invalid-recordings note, the own-text form, recent analyses, and the loading, empty and error states. What changed, and why:
+
+- **One sheet per document**, not one sheet holding rows. Square corners, a hairline and a shadow low enough to read as paper lying on the ground rather than a card floating over it. The column is 46rem, with a radial scrim of the ground itself behind it, feathered to nothing, so a heading never lands on a canopy and the trees keep the margins.
+- **Each sheet carries a 4 px stripe of pigment down its left edge**, the green this document still has on it. It drains — `scaleY` to 0 from the bottom, 620 ms — under the pointer or keyboard focus, and again, for good, once that document's analysis starts. It is the title card's own gesture at the size of a row, and it is the only decoration on the sheet.
+- **Headings are the serif at 27 px**, not 22 px Public Sans: the list is paper, so it speaks in the document's voice, and the controls beside it stay sans and read as interface.
+- **The starting state is visible**: a spinner in the button, the label "Starting", and the stripe gone.
+- **Recent is a margin note**, not a third stack of sheets: hairline rows where the whole row is the link, indenting 8 px on hover.
+- **Responsive**: under 40rem a sheet stacks, because a title beside a button squeezes to five lines on a phone.
+
+**And the ground is a photograph.** Rinsed paper alone read as flat grey behind the trees, and a generated damp-paper texture (fibre, dried blooms, high-water marks) did not fix it — it was still a tint. The ground is now an aerial of dense canopy, `public/canopy.jpg`: "Aerial view of the Amazon Rainforest" by lubasi, **CC BY-SA 2.0**, credited at the foot of the list, which is what that licence asks for. Three fixed layers under the forest, on from the first frame, so the rinse takes the pigment off the card and what is under the sheet is the forest itself:
+
+- `.rinse-canopy` — the photograph at `background-size: 150%`, positioned past the sky and the far bank onto the canopy proper, under `--canopy-filter` (light: `saturate(0.92) contrast(0.98) brightness(1.12)`; dark: `brightness(0.4)`).
+- `.rinse-veil` — the page's own paper at `--canopy-veil` (44 % light, 46 % dark). It is veiled, not decorated: the screen is ink and paper, and a photograph at full strength takes the type with it. Measured on the built screen, the wordmark over the canopy is 3.76:1 at its worst pixel and 6.13:1 on the mean, against §12's 3:1 floor for type this size.
+- `.rinse-grain` — the paper's fibre (`lib/paper.ts`), tiled, the same tile the sheets carry, so the photograph reads as printed on the same sheet everything else is on.
+
+The column gets a frosted panel to sit on: `backdrop-filter: blur(20px) saturate(0.55)` over a 76 % paper wash, masked by two crossed linear gradients so the panel has feathered edges and no shape of its own. A radial mask was tried first and is wrong — the column's height is whatever the list carries, so anything past the ellipse's short axis ends up on bare canopy.
+
+**One thing the canopy cost, recorded in full.** §7.3 blends leaves `mix-blend-mode: multiply` so overlapping ones darken like wet pigment. Over a flat ground that is free; over the photograph it forces a full-viewport readback on every frame the sway moves the stand, and the scroll probe fell from 60 fps to **10 fps** (measured: leaves at `normal` 60.2, forest hidden 60.1, canopy hidden 14.2, `isolation: isolate` on the layer 10.3 — the blend is the cost, and isolating it does not help). The leaves stack source-over now at `fill-opacity: 0.5`, pooling toward Sap instead of toward black. 60.3 fps restored, in the rinse and in the list.
+
+**And the page got its length back.** The wrapper was two viewports and the content had a 170svh floor, which put the first thing a reader could press most of a page away and left a screen of nothing under the last one. The wrapper is 150svh (50svh of rinse), the content sizes to what it carries with an 80svh floor, and the forest now grows over the list's *approach* — `offset: ["start end", "start start"]`, one viewport of scroll — with every window closed by `f` 0.72. The stand is full while the reader is arriving at the list instead of at the bottom of the page after they have read it. Whole page 2233 px at 1440×900, against 3330 px before.
 
 ## 9. Motion inventory and reduced motion
 
@@ -466,6 +498,14 @@ Built to this document with the changes recorded in §6.1, §6.3, §6.4, §7.1, 
 | §6.4 | a linear-gradient mask with a 24svh feather, from a fully wet card | a sampled waterline with waves and rivulets, starting halfway up the card | The straight edge read as a band sliding down a green rectangle, not as water leaving a sheet; opening with the wordmark already clear of the water was the client's call |
 | §6.4 | title colour crossfades Paper to foreground over p 0.46–0.54; toggle over 0.11–0.16 | the block drawn twice and the waterline clipping the ink copy; the toggle is foreground throughout | The crossfade took the whole word through mid-grey; the water now uncovers it, and the top of the card is clean from the first frame |
 | §6.4 | tagline fades out over p 0.40–0.52 | the water takes it, around p 0.19–0.30 | It sits under the opening waterline now, so it is white on the wash and then ink on paper, like the wordmark |
+| §8 | the documents `ul` as one Paper sheet with rows; headings 22 px Public Sans | one sheet per document, each with a pigment stripe that drains on hover and on starting; headings 27 px serif | Reviewed on the built screen: the list read as a plain table dropped on the page, with nothing of the card's material in it |
+| §6.1, §8 | wrapper 200svh, content floor 170svh | wrapper 150svh, content floor 80svh and otherwise sized to its content | The first thing a reader could press was most of a page away, and the last one had a screen of nothing under it |
+| §7.3 | `f` is the content's progress to the end of the page; windows end 0.82–0.96 | `f` is the list's approach to the top of the viewport; windows end 0.60–0.72 | The stand finished after the reader had read the list it was meant to be growing behind |
+| §4.3, §8 | the ground under the content is Rinsed paper | an aerial canopy photograph, veiled back to 44 % over it | Flat grey behind the trees; a generated paper texture did not fix it either. CC BY-SA 2.0, credited on the page |
+| §7.3 | leaves `mix-blend-mode: multiply`, `fill-opacity` 0.72 | source-over at 0.5 | Over the photograph the blend costs a full-viewport readback per frame: 10 fps against 60 |
+| §6.2, §6.3 | the shader refracts the generated wash | it refracts `canopy.jpg`; the wash is the dye at 0.18 and the no-WebGL2 fallback | An opaque green field with nothing behind it reads as murk, not as water. Refracting the ground the page already stands on is what makes it a surface |
+| §6.3 | the wash is the card's colour | `.rinse-depth`, a depth of water over the refraction, with `--water-shallow` and `--water-deep` | Water is clear where it is thin and dense where it is deep; it is also what holds white type above §12's floor without making the whole card dark |
+| §4.3 | `.rinse-canopy` at `background-size: 150%` | `no-repeat`, `max(150%, 170vh)` | At 150 % of the width alone the photograph is shorter than a phone and tiled, which put a seam across the hero |
 
 **Added, not specified:** `src/lib/waterline.ts`, the curve above, pure and tested; and `src/lib/random.ts`, seven lines holding the mulberry32 the pigment and the forest share, so the two do not each carry a copy of an algorithm that has to match. And a white outline outside the toggle's focus ring on this screen only: Marker against the wash is 1.29:1 by luminance — visible by hue, not by contrast — and the white reads at 10.3:1. The ring keeps its Marker colour, per §4.1.
 
@@ -476,9 +516,10 @@ Built to this document with the changes recorded in §6.1, §6.3, §6.4, §7.1, 
 | Pigment mean luminance (§6.2) | 0.08–0.14 | 0.0822 |
 | Pigment pixels lighter than Sap (§6.2) | < 15 % | 0.18 % |
 | White title on the wash (§12) | ≥ 3:1 everywhere, ≥ 4.5:1 mean | 3.8:1 worst pixel, 6.1:1 mean |
-| Tagline, cue on the wash | ≥ 3:1 | 4.6:1, 4.7:1 worst |
+| Tagline, cue on the wash | ≥ 3:1 | 5.96:1, 8.56:1 worst (dark 11.7:1) |
 | Wash movement over 2 s (§6.3) | visible, not dramatic | 22 % of pixels changed, mean ΔL 0.015 |
-| Scroll probe, 20 steps over 2 s (§13) | ≥ 50 fps | 59.3 fps; 60.3 fps with the waterline |
+| Scroll probe, 20 steps over 2 s (§13) | ≥ 50 fps | 59.3 fps; 60.3 fps with the waterline and the canopy; 60.1 fps with the water refracting it |
+| Wordmark over the canopy (§12) | ≥ 3:1 for type this size | 3.79:1 worst pixel, 6.18:1 mean (5.60:1 worst on a phone) |
 | Added JavaScript (§13) | ≤ 100 kB gzipped | 63.0 kB gzipped (CSS +1.2 kB) |
 | Forest elements (§13) | ~900 branches, ~600 leaves | 623 branches, 678 leaves |
 | Phone at 390 px (§11) | no horizontal scroll | 0 px |

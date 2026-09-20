@@ -1,9 +1,13 @@
 /**
  * From the folded document, claims and signals to what the document pane draws: the text's
- * layout, every span anchored to UTF-16 offsets, and the marks of each layer that is switched
- * on (claim marks and language marks stay separate lists, because the pane cuts the text by
- * claims first and by language marks inside each piece, so a claim stays one element).
- * Memoised so that events which change none of the inputs do not touch the pane.
+ * layout, every span anchored to UTF-16 offsets, and both lists of marks (claim marks and
+ * language marks stay separate, because the pane cuts the text by claims first and by language
+ * marks inside each piece, so a claim stays one element). Memoised so that events which change
+ * none of the inputs do not touch the pane.
+ *
+ * Both lists are always built: which of them a view draws is the view's own business (Claims
+ * can turn its marks off; the corrected version needs claim marks whatever else is showing,
+ * because the rewrites hang off them).
  */
 import { useMemo } from "react"
 
@@ -27,22 +31,11 @@ import {
   type Section,
 } from "@/lib/document-layout"
 
-/** Which layers the document pane draws (roadmap step 8). */
-export type Layers = { claims: boolean; language: boolean; omissions: boolean }
+/** Which annotations the sheet is carrying in the Claims section. Both are on to begin with:
+ * they are the live progression, and the reader turns them off to read the page as published. */
+export type Marks = { claims: boolean; wording: boolean }
 
-export const LAYER_KEYS: readonly (keyof Layers)[] = [
-  "claims",
-  "language",
-  "omissions",
-]
-
-/** Claims and language marks are part of the live progression; omissions are opt-in so the
- * cards do not push the sheet down while the reader is in the text. */
-export const DEFAULT_LAYERS: Layers = {
-  claims: true,
-  language: true,
-  omissions: false,
-}
+export const DEFAULT_MARKS: Marks = { claims: true, wording: true }
 
 export type AnchoredSpan = Anchored & { paragraph: string | null }
 
@@ -66,14 +59,13 @@ export type Annotations = {
   claims: AnchoredClaim[]
   /** Signals by id, for the pane to style and describe a language mark. */
   signals: Record<string, LanguageSignal>
-  /** Claim marks, when the Claims layer is on. */
+  /** Claim marks: one per placed span, sorted by start then longest first. */
   marks: Mark[]
-  /** Word-level marks, when the Language layer is on. */
+  /** Word-level marks from the language signals, sorted the same way. */
   languageMarks: Mark[]
 }
 
 const EMPTY_INDEX = makeOffsetIndex("")
-const NO_MARKS: Mark[] = []
 
 export function anchorClaims(
   doc: ContractDocument,
@@ -153,8 +145,7 @@ export function useAnnotations(
   doc: ContractDocument | null,
   claims: Claim[],
   verdicts: Record<string, Verdict>,
-  signals: LanguageSignal[],
-  layers: Layers
+  signals: LanguageSignal[]
 ): Annotations {
   const index = useMemo(
     () => (doc === null ? EMPTY_INDEX : makeOffsetIndex(doc.text)),
@@ -186,7 +177,7 @@ export function useAnnotations(
     sections,
     claims: anchored,
     signals: byId,
-    marks: layers.claims ? ofClaims : NO_MARKS,
-    languageMarks: layers.language ? ofLanguage : NO_MARKS,
+    marks: ofClaims,
+    languageMarks: ofLanguage,
   }
 }

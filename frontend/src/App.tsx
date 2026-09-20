@@ -13,7 +13,7 @@ export function App() {
     case "menu":
       return <MenuScreen />
     case "analysis":
-      return <AnalysisScreen id={route.id} />
+      return <AnalysisScreen id={route.id} section={route.section} />
     case "metrics":
       return <MetricsScreen />
     case "company":

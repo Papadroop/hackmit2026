@@ -1,4 +1,11 @@
-import { useEffect, useRef, useState, type FormEvent } from "react"
+import {
+  useEffect,
+  useRef,
+  useState,
+  type CSSProperties,
+  type FormEvent,
+  type PointerEvent,
+} from "react"
 import { LoaderCircle, Play } from "lucide-react"
 import { ReactLenis } from "lenis/react"
 import { useReducedMotion, useScroll, useTransform } from "motion/react"
@@ -8,6 +15,7 @@ import "lenis/dist/lenis.css"
 
 import { ThemeToggle } from "@/components/chrome"
 import { Forest } from "@/components/forest"
+import { Ground } from "@/components/ground"
 import { Link } from "@/components/link"
 import { TitleCard } from "@/components/title-card"
 import { Button } from "@/components/ui/button"
@@ -30,6 +38,7 @@ import {
   formatRelative,
 } from "@/lib/format"
 import { forestOpacity } from "@/lib/menu-scroll"
+import { sheetTilt } from "@/lib/paper"
 import { readPref, writePref } from "@/lib/prefs"
 import { navigate, paths } from "@/lib/router"
 
@@ -61,9 +70,10 @@ const STATUS_TEXT = {
  * drives the rinse and the forest's arrival; `f`, the list's own approach to the top of the
  * viewport, grows the trees, so the stand is full by the time the reader is reading.
  *
- * Below the card everything is a sheet of paper on the rinsed ground, each one still carrying a
- * stripe of pigment down its edge. The only motion here answers the reader: the stripe drains
- * when a sheet is under the pointer, and again, for good, when its analysis starts.
+ * Below the card everything is a sheet of paper laid on damp ground, each one at its own small
+ * angle and still carrying a stripe of pigment down its edge. The only motion here answers the
+ * reader: the sheet squares up and the water follows the pointer across it, the stripe drains,
+ * and it drains again, for good, when that document's analysis starts.
  */
 export function MenuScreen() {
   const [data, setData] = useState<DocumentsResponse | null>(null)
@@ -135,6 +145,7 @@ export function MenuScreen() {
 
   const screen = (
     <div className="rinse-screen">
+      <Ground />
       <Forest progress={listProgress} opacity={forestFade} />
       <header className="rinse-header">
         <ThemeToggle />
@@ -250,6 +261,45 @@ export function MenuScreen() {
               </ul>
             </section>
           )}
+
+          <section aria-labelledby="calibration-heading">
+            <div className="rinse-heading">
+              <h2 id="calibration-heading" className="rinse-heading-text">
+                Calibration
+              </h2>
+            </div>
+            <p className="max-w-[60ch] text-[15px] leading-relaxed text-muted-foreground">
+              Every curated precedent is also a test of the audit, scored with
+              its own ruling held out of the knowledge store.{" "}
+              <Link
+                href={paths.metrics()}
+                className="rounded-sm underline decoration-border decoration-dotted underline-offset-2 outline-none hover:decoration-marker focus-visible:ring-3 focus-visible:ring-ring/50"
+              >
+                See the calibration
+              </Link>
+              .
+            </p>
+          </section>
+
+          <p className="rinse-credit">
+            Canopy:{" "}
+            <a
+              href="https://commons.wikimedia.org/wiki/File:Aerial_view_of_the_Amazon_Rainforest.jpg"
+              target="_blank"
+              rel="noreferrer"
+            >
+              Aerial view of the Amazon Rainforest
+            </a>{" "}
+            by lubasi,{" "}
+            <a
+              href="https://creativecommons.org/licenses/by-sa/2.0"
+              target="_blank"
+              rel="noreferrer"
+            >
+              CC BY-SA 2.0
+            </a>
+            .
+          </p>
         </div>
       </main>
     </div>
@@ -297,8 +347,26 @@ function DocumentSheet({
     : `live:${document.id}`
   const mine = starting === key
 
+  // Where the pointer is on the sheet, so the water soaks in under it. Written straight to the
+  // element: this runs on every pointer move and nothing about it belongs in React state.
+  const wet = (event: PointerEvent<HTMLLIElement>) => {
+    const sheet = event.currentTarget
+    const box = sheet.getBoundingClientRect()
+    const x = ((event.clientX - box.left) / box.width) * 100
+    const y = ((event.clientY - box.top) / box.height) * 100
+    sheet.style.setProperty("--mx", `${x.toFixed(1)}%`)
+    sheet.style.setProperty("--my", `${y.toFixed(1)}%`)
+  }
+
   return (
-    <li className="rinse-sheet" data-rinsing={mine ? "" : undefined}>
+    <li
+      className="rinse-sheet"
+      data-rinsing={mine ? "" : undefined}
+      onPointerMove={wet}
+      style={
+        { "--tilt": `${sheetTilt(document.id).toFixed(3)}deg` } as CSSProperties
+      }
+    >
       <span className="rinse-pigment" aria-hidden="true" />
       <div className="rinse-sheet-text">
         {document.company !== null && (

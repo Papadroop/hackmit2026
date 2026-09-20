@@ -4,6 +4,7 @@ import type { Region } from "@contract"
 
 import { makeOffsetIndex } from "./anchor"
 import {
+  blockRange,
   layoutDocument,
   markKey,
   paragraphAt,
@@ -185,6 +186,26 @@ describe("layoutDocument", () => {
   it("finds the paragraph label at an offset", () => {
     expect(paragraphAt(regions, index, 70)).toBe("P2")
     expect(paragraphAt(regions, index, 3)).toBeNull()
+  })
+})
+
+describe("blockRange", () => {
+  const index = makeOffsetIndex(text)
+  const body = layoutDocument(text, regions, index)[0].groups
+
+  it("runs from the first line's start to the last line's end", () => {
+    // A heading is one line; a list group is every item in it, which is the row the corrected
+    // version's split puts a block on.
+    expect(blockRange(body[0])).toEqual([0, 7])
+    expect(blockRange(body[1])).toEqual([9, 32])
+    const list = body.find((g) => g.type === "list")
+    expect(list).toBeDefined()
+    expect(blockRange(list!)[0]).toBeLessThan(blockRange(list!)[1])
+  })
+
+  it("gives every block a start of its own, so a start is a usable key", () => {
+    const starts = body.map((g) => blockRange(g)[0])
+    expect(new Set(starts).size).toBe(starts.length)
   })
 })
 

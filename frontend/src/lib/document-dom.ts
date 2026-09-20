@@ -4,6 +4,10 @@
  */
 import { markKey } from "./document-layout"
 
+/** Something one section has asked another to point at: a claim to scroll to, an omission
+ * card to flash. The key makes a second request for the same id a new one. */
+export type Focus = { id: string; span: number; key: number }
+
 const LABEL_HEIGHT = 18
 const LABEL_GAP = 2
 

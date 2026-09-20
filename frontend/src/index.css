@@ -93,8 +93,19 @@
   --pine: #0f3b2e;
   --sap: #6f9b3a;
   --wet-paper: #d5e3da;
+  /* A sheet lying on the rinsed ground. Not `--paper`: in dark mode that is a cool grey card,
+     and these sheets are the same damp paper the ground is. */
+  --sheet: #ffffff;
+  /* How far the canopy photograph behind the page is pulled back toward the paper. */
+  --canopy-filter: saturate(0.92) contrast(0.98) brightness(1.12);
+  --canopy-veil: 44%;
   /* The meniscus the water leaves along the rinse's edge: bright against the pigment. */
   --waterline: #ffffff;
+  /* The water's own two colours: what a little of it looks like over the canopy, and what a
+     lot of it does. They are tokens rather than the greens themselves because dark mode needs
+     a darker water than its own Viridian and Pine, which are lightened for type. */
+  --water-shallow: var(--viridian);
+  --water-deep: var(--pine);
 
   /* shadcn variables mapped onto the palette. */
   --background: var(--desk);
@@ -149,7 +160,12 @@
   --pine: #175c50;
   --sap: #7fa845;
   --wet-paper: #35524a;
+  --sheet: #1b2420;
+  --canopy-filter: saturate(0.6) contrast(0.95) brightness(0.4);
+  --canopy-veil: 46%;
   --waterline: #cfe8de;
+  --water-shallow: #16564a;
+  --water-deep: #08241d;
 
   --background: var(--desk);
   --foreground: var(--ink);
@@ -411,6 +427,13 @@
     background-color: var(--paper);
     padding-block: 0.12em;
   }
+  /* The clean copy strikes nothing out, so there is no struck text for the fill to stay on.
+     The corrected words take the claim's own highlight instead, which is how the reader can
+     still see which sentences are not the page's. */
+  [data-honest="clean"] .claim-mark .honest-ins {
+    background-color: transparent;
+    padding-block: 0;
+  }
   .document-insert {
     cursor: pointer;
   }
@@ -487,6 +510,53 @@
     min-height: 100svh;
     background-color: var(--rinsed-paper);
   }
+  /* The ground: a dense canopy from the air, then a veil of the page's own paper over it, then
+     the paper's fibre. Three fixed layers under the forest, so the surface stays put while the
+     page moves across it. The photograph is public/canopy.jpg — "Aerial view of the Amazon
+     Rainforest" by lubasi, CC BY-SA 2.0 — credited at the foot of the list.
+
+     It is veiled, not decorated: the screen is ink and paper, and a photograph at full strength
+     would take the type with it. The filter and the veil are tokens so both themes can pull it
+     back by as much as they need. */
+  .rinse-ground {
+    position: fixed;
+    z-index: 0;
+    inset: 0;
+    pointer-events: none;
+  }
+  .rinse-canopy {
+    position: absolute;
+    inset: 0;
+    background-image: url("/canopy.jpg");
+    /* In past the sky and the far bank, onto the canopy itself. The floor is what covers a tall
+       viewport: at 150% of the width alone the photograph is shorter than a phone and tiles,
+       which put a seam across the hero. 170vh clears its 1.63 aspect with room to spare, and on
+       anything wider than it is tall the 150% still wins, so the crop is unchanged there. */
+    background-repeat: no-repeat;
+    background-position: 40% 92%;
+    background-size: max(150%, 170vh);
+    filter: var(--canopy-filter);
+    /* The blur has to have somewhere to sample from, so the layer runs past the viewport. */
+    transform: scale(1.06);
+    pointer-events: none;
+  }
+  .rinse-veil {
+    position: absolute;
+    inset: 0;
+    background-color: color-mix(
+      in oklab,
+      var(--rinsed-paper) var(--canopy-veil),
+      transparent
+    );
+  }
+  .rinse-grain {
+    position: fixed;
+    z-index: 0;
+    inset: 0;
+    background-image: var(--paper-grain, none);
+    background-repeat: repeat;
+    pointer-events: none;
+  }
   /* The theme toggle is the whole header here: a link to the menu from the menu is pointless,
      and the title is the wordmark. The card opens with its top quarter already rinsed, so the
      toggle is on clean paper from the first frame and never sits on the pigment. */
@@ -498,13 +568,13 @@
     color: var(--foreground);
   }
 
-  /* The wrapper holds one viewport of sticky card plus the scroll the rinse runs over. 65svh of
-     that: long enough that the rinse is a gesture, short enough that the reader is not a whole
-     screen of scrolling away from the first thing they can actually press. */
+  /* The wrapper holds one viewport of sticky card plus the scroll the rinse runs over. 50svh of
+     that: long enough that the rinse is a gesture, short enough that the reader is not most of a
+     page away from the first thing they can actually press. */
   .rinse-card-wrapper {
     position: relative;
     z-index: 3;
-    height: 165svh;
+    height: 150svh;
   }
   .rinse-card {
     position: sticky;
@@ -519,6 +589,38 @@
   .rinse-shader {
     position: absolute;
     inset: 0;
+  }
+  /* The dye suspended in the water: the generated wash (lib/pigment.ts) laid faintly over the
+     refraction, so the green is uneven the way a pigment in water is and not a flat filter. It
+     is thin on purpose — at any weight it starts to read as silt rather than as dye. */
+  .rinse-dye {
+    position: absolute;
+    inset: 0;
+    background-position: center;
+    background-size: cover;
+    opacity: 0.18;
+  }
+  /* Depth. The water is nearly clear where it meets the meniscus, so the canopy is visible
+     through it and the edge reads as a surface; it thickens toward Pine further down, which is
+     both what deep water does and what keeps white type on it above §12's floor. The stops are
+     fractions of the card, and the card opens with the line halfway down it. */
+  .rinse-depth {
+    position: absolute;
+    inset: 0;
+    background-image: linear-gradient(
+      to bottom,
+      color-mix(in oklab, var(--water-shallow) 12%, transparent) 44%,
+      color-mix(in oklab, var(--water-shallow) 54%, transparent) 55%,
+      color-mix(in oklab, var(--water-deep) 62%, transparent) 62%,
+      color-mix(in oklab, var(--water-deep) 88%, transparent) 100%
+    );
+  }
+  /* The canopy the water refracts is the photograph at full strength; on a dark page it has to
+     be pulled back the way `--canopy-filter` pulls the ground back, or the water is a lit
+     lagoon in front of a black forest. */
+  .dark .rinse-shader,
+  .dark .rinse-wash-still {
+    filter: brightness(0.4) saturate(0.85);
   }
   /* Without WebGL2 the same pigment sits still behind the same rinse. */
   .rinse-wash-still {
@@ -611,14 +713,15 @@
     color: inherit;
   }
 
-  /* The list sizes to what it carries. The floor is not for the look of it: the forest grows
-     over the list's own approach to the top of the viewport, which the page has to be long
-     enough to allow even with one document on it. */
+  /* The list sizes to what it carries, so the page ends where the reading does. The floor is
+     not for the look of it: the forest grows over the list's own approach to the top of the
+     viewport, and the page has to be long enough for that approach to reach 0.72, where the
+     last tree finishes, even with a single document on it. */
   .rinse-content {
     position: relative;
     z-index: 2;
-    min-height: 76svh;
-    padding: 4.5rem 0 5rem;
+    min-height: 80svh;
+    padding: 3.5rem 0 5rem;
   }
   .rinse-column {
     position: relative;
@@ -636,12 +739,28 @@
     position: absolute;
     z-index: -1;
     inset: -3rem -3.5rem;
-    background-image: radial-gradient(
-      closest-side at 50% 50%,
-      color-mix(in oklab, var(--rinsed-paper) 90%, transparent) 0%,
-      color-mix(in oklab, var(--rinsed-paper) 88%, transparent) 58%,
-      transparent 100%
-    );
+    background-color: color-mix(in oklab, var(--rinsed-paper) 76%, transparent);
+    /* The canopy goes out of focus behind the column, the way it would behind a sheet held up
+       in front of it. The mask feathers the blur as well as the wash, so the panel has no edge. */
+    backdrop-filter: blur(20px) saturate(0.55);
+    /* A feathered rectangle, not an ellipse: the column's height is whatever the list carries,
+       and a radial mask leaves whatever is past its short axis sitting on bare canopy. */
+    mask-image:
+      linear-gradient(
+        to right,
+        transparent,
+        #000 5rem,
+        #000 calc(100% - 5rem),
+        transparent
+      ),
+      linear-gradient(
+        to bottom,
+        transparent,
+        #000 3rem,
+        #000 calc(100% - 3rem),
+        transparent
+      );
+    mask-composite: intersect;
     pointer-events: none;
   }
 
@@ -682,7 +801,7 @@
   .rinse-sheets {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 14px;
   }
   .rinse-sheet {
     position: relative;
@@ -691,23 +810,57 @@
     gap: 24px;
     overflow: hidden;
     border: 1px solid var(--border);
-    background-color: var(--paper);
-    padding: 20px 22px 20px 26px;
+    background-color: var(--sheet);
+    padding: 20px 22px 20px 28px;
+    /* Each sheet keeps the angle it was laid down at, from its own id (lib/paper.ts). Half a
+       degree either way: enough that three of them stop reading as a table. */
+    transform: rotate(var(--tilt, 0deg)) translateY(0);
     box-shadow:
       0 1px 0 color-mix(in oklab, var(--ink) 4%, transparent),
       0 14px 26px -22px color-mix(in oklab, var(--ink) 55%, transparent);
     transition:
-      transform 220ms cubic-bezier(0.2, 0.7, 0.2, 1),
-      box-shadow 220ms cubic-bezier(0.2, 0.7, 0.2, 1),
+      transform 300ms cubic-bezier(0.2, 0.7, 0.2, 1),
+      box-shadow 300ms cubic-bezier(0.2, 0.7, 0.2, 1),
       border-color 220ms ease;
   }
+  /* Under the pointer the sheet is squared up and picked up off the ground. */
   .rinse-sheet:hover,
   .rinse-sheet:focus-within {
-    transform: translateY(-2px);
+    transform: rotate(0deg) translateY(-3px);
     border-color: color-mix(in oklab, var(--viridian) 30%, var(--border));
     box-shadow:
       0 1px 0 color-mix(in oklab, var(--ink) 5%, transparent),
-      0 22px 34px -24px color-mix(in oklab, var(--ink) 60%, transparent);
+      0 24px 36px -24px color-mix(in oklab, var(--ink) 62%, transparent);
+  }
+  /* The sheet is the same paper as the ground, so it carries the same fibre. Both pseudo
+     elements sit above the sheet's own background and below everything written on it. */
+  .rinse-sheet::before,
+  .rinse-sheet::after {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    inset: 0;
+    pointer-events: none;
+  }
+  .rinse-sheet::before {
+    background-image: var(--paper-grain, none);
+    background-repeat: repeat;
+    opacity: 0.6;
+  }
+  /* Water follows the pointer into the paper: a damp patch, wet paper's own colour, which is
+     what takes the pigment off the edge at the same moment. */
+  .rinse-sheet::after {
+    background-image: radial-gradient(
+      230px 180px at var(--mx, 50%) var(--my, 50%),
+      color-mix(in oklab, var(--wet-paper) 90%, transparent),
+      transparent 72%
+    );
+    opacity: 0;
+    transition: opacity 380ms ease;
+  }
+  .rinse-sheet:hover::after,
+  .rinse-sheet:focus-within::after {
+    opacity: 1;
   }
   /* The pigment this document still has on it. It drains down and away under the pointer, and
      once its analysis has started it does not come back: the same gesture as the title card,
@@ -717,12 +870,20 @@
     top: 0;
     bottom: 0;
     left: 0;
-    width: 4px;
+    width: 8px;
     background-image: linear-gradient(
       to bottom,
       var(--viridian),
-      var(--sap) 65%,
-      var(--viridian)
+      var(--sap) 62%,
+      var(--pine)
+    );
+    /* Pigment soaks into paper rather than printing on it: solid for three pixels, then gone
+       over the next five. */
+    mask-image: linear-gradient(
+      to right,
+      black 0 3px,
+      rgba(0, 0, 0, 0.5) 5px,
+      transparent 8px
     );
     transform-origin: bottom;
     transition: transform 620ms cubic-bezier(0.3, 0.85, 0.2, 1);
@@ -838,6 +999,42 @@
     color: var(--muted-foreground);
   }
 
+  /* The screen borrows a photograph, so it says whose and under what. */
+  .rinse-credit {
+    font-size: 12px;
+    color: var(--muted-foreground);
+  }
+  .rinse-credit a {
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+  .rinse-credit a:hover {
+    color: var(--foreground);
+  }
+
+  /* A sheet narrower than a paperback stacks: a title beside a button squeezes to five lines. */
+  @media (max-width: 40rem) {
+    .rinse-sheet {
+      flex-direction: column;
+      align-items: stretch;
+      gap: 14px;
+      padding: 18px 18px 18px 22px;
+    }
+    .rinse-sheet-action {
+      text-align: left;
+    }
+    .rinse-form-foot {
+      flex-direction: column;
+      align-items: stretch;
+    }
+    .rinse-heading-text {
+      font-size: 24px;
+      font-variation-settings:
+        "opsz" 24,
+        "wght" 480;
+    }
+  }
+
   /* The forest sits under everything and shows only where the content has no Paper surface. */
   .rinse-forest {
     position: fixed;
@@ -856,18 +1053,19 @@
        what non-scaling-stroke was there for. */
     stroke-dashoffset: clamp(0, 1 - (var(--g, 0) - var(--b)) / var(--s), 1);
     stroke-linecap: round;
-    stroke-opacity: 0.55;
+    /* Ink over a photographed forest: the drawn trees have to stay clearly drawn. */
+    stroke-opacity: 0.82;
   }
   .dark .rinse-branch {
-    stroke-opacity: 0.45;
+    stroke-opacity: 0.6;
   }
   .rinse-leaf {
     fill: var(--sap);
-    /* Overlapping leaves darken like wet pigment. §7.3's 0.72 multiplies to black wherever the
-       canopy is dense, which stops reading as green at all; 0.42 pools instead of blackening.
-       Dark mode blends normally, so it keeps its 0.8. */
-    fill-opacity: 0.42;
-    mix-blend-mode: multiply;
+    /* §7.3 blends these `multiply` so overlapping leaves darken like wet pigment. Over the
+       canopy photograph that costs a full-viewport readback on every frame the sway moves the
+       stand — 10 fps against 60 — so they stack source-over instead and pool toward Sap rather
+       than toward black. §7.3's 0.72 was also far too dense; 0.5 is what reads as a canopy. */
+    fill-opacity: 0.5;
     transform: scale(clamp(0, (var(--g, 0) - var(--b)) / var(--s), 1));
     transform-box: fill-box;
     transform-origin: center;
@@ -885,6 +1083,7 @@
   @media (prefers-reduced-motion: reduce) {
     .rinse-leaf,
     .rinse-sheet,
+    .rinse-sheet::after,
     .rinse-pigment,
     .rinse-recent-row {
       transition: none;

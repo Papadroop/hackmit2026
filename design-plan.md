@@ -138,6 +138,8 @@ verified never reaches the screen.
 
 ### The summary header (built 2026-09-19, roadmap step 7)
 
+*Superseded 2026-09-20: the band is now the Verdict section. See "The analysis screen, as a case file".*
+
 One band under the app header, on the chrome's grey, spanning the document and the panel.
 Line one: "Likelihood" and the headline score at 22px with its confidence beside it, then the
 five-dimension profile (the four claim dimensions plus Completeness) as the same short Ink
@@ -154,6 +156,8 @@ panel's overview under "Summary", not in the band; a summary that is not yet fin
 "provisional" in both places. No hue is used except the verdict words.
 
 ### The layers (built 2026-09-19, roadmap step 8)
+
+*Superseded 2026-09-20: Omissions is a section, and the remaining two marks are a control at the head of the claim column. See "The analysis screen, as a case file".*
 
 Three toggles in the app header, each with its count: Claims, Language, Omissions. Claims
 and Language are on from the start because they are the live progression; Omissions is off,
@@ -175,6 +179,8 @@ omission switches the layer on and scrolls to the card. The toggles are hidden b
 small breakpoint; a phone gets the default layers.
 
 ### The honest version (built 2026-09-19, roadmap step 9)
+
+*Superseded 2026-09-20: the toggle is the Corrected version section, which also offers a clean copy. See "The analysis screen, as a case file".*
 
 A toggle beside the layers, with the count of rewrites. On, the sheet becomes a redline in
 the regulator's own idiom: each claim's primary span shows what the evidence does not allow
@@ -221,8 +227,79 @@ The first screen was rebuilt to the specification in `menu-design.md`, which own
 
 - **The name.** The product is **rinse**, lowercase everywhere. The wordmark is italic Literata, the voice of the honest rewrite in the application, so the name reads as the honest version. It is the one place the interface borrows the document's typeface. "Greenwashing Auditor" is retired from the interface.
 - **The green, and where it stops.** Menu-only tokens live beside the base palette in `index.css`: Rinsed paper `#E6EEE9`, Viridian (the Supported hue), Pine `#0F3B2E`, Sap `#6F9B3A`, Wet paper `#D5E3DA`. Nothing on the analysis screen changed, and Marker is still the interactive accent — no button turned green.
-- **One orchestrated moment, spread across the scroll.** The first viewport opens with the word "rinse" in ink on clean paper and the bottom half of the card still under green pigment, moving as if under running water. Scrolling takes the rest of the pigment down behind a waterline that runs in waves and cuts channels through it; the tagline under the line comes up in ink as the water passes it. Below the card, ink trees draw themselves in growth order and leaf last. Nothing below the card fades or slides in — the forest is the motion there.
+- **One orchestrated moment, spread across the scroll.** The first viewport opens with the word "rinse" in ink on clean paper and the bottom half of the card under green water — the same aerial canopy the page stands on, refracted and moving, seen through a depth of pigment that is nearly clear at the surface and dense below it. Scrolling takes the rest of the pigment down behind a waterline that runs in waves and cuts channels through it; the tagline under the line comes up in ink as the water passes it. Below the card, ink trees draw themselves in growth order and leaf last. Nothing below the card fades or slides in — the forest is the motion there.
 - **Why white type that becomes ink.** Ink on dense pigment is 2.8:1. Type on the wash is white and becomes ink as the water clears, which turns the constraint into the moment. Each piece is drawn twice, white and ink, and the waterline clips the ink copy to the part of the sheet that has come clean, so the water uncovers the letters rather than a colour ramp taking them through grey. Measured on the built screen: type on the wash is 6.1:1 on average and 3.8:1 at its worst pixel; the tagline 4.6:1 at worst; the cue 4.7:1.
+- **The water is the ground, seen through water.** The shader refracts the canopy photograph rather than a flat wash, so the forest continues under the surface. It was an opaque green field before, which read as murk: water needs something to be water *over*. The green is now a depth rather than a fill.
+- **The ground is a real canopy.** Under everything, fixed, is an aerial photograph of dense Amazon forest, veiled back with the page's own paper until it is a ground rather than a picture, with the paper's fibre tiled over it. The drawn trees are ink over it, and the column of documents sits on a frosted panel of paper. It is on from the first frame, so the rinse takes the pigment off the card and what is under the sheet is the forest itself. Credit and licence (CC BY-SA 2.0) are on the page.
+- **Below the card, sheets on the ground.** Each document is its own sheet of paper, square, hairlined, with a 4 px stripe of pigment down its left edge — the green that document still has on it. The stripe drains when the sheet is under the pointer or the keyboard, and again for good when its analysis starts: the title card's gesture at the size of a row, and the only decoration on the sheet. Section headings are the serif, so the list speaks in the document's voice and the controls beside it read as interface.
 - **Reach.** Green is a material, never a light: no neon, no glow, no gradient text, no leaf icon. Paper stays white, never cream.
 
-Changes against `menu-design.md`, each recorded there with the reason. From building it: the Water shader needed a crop and an offset to stop it seaming and to keep the title's contrast; the forest's limbs cannot use `vector-effect: non-scaling-stroke` because it breaks the draw-on; and leaves are smoothed blots at a lower opacity, because hard hexagons at 0.72 multiply to black wherever the canopy is dense. From reviewing it on screen (§6.1, §6.4): the card opens with the water already halfway up it and the wordmark centred in the clean half above the line, the wordmark is at the top and a third smaller, the sheet edge across the bottom of the card is gone, and the straight mask edge that drained the pigment is now the waterline — it read as a band sliding down a green rectangle rather than as water leaving a sheet.
+Changes against `menu-design.md`, each recorded there with the reason. From building it: the Water shader needed a crop and an offset to stop it seaming and to keep the title's contrast; the forest's limbs cannot use `vector-effect: non-scaling-stroke` because it breaks the draw-on; and leaves are smoothed blots at a lower opacity, because hard hexagons at 0.72 multiply to black wherever the canopy is dense. From reviewing it on screen (§6.1, §6.4): the card opens with the water already halfway up it and the wordmark centred in the clean half above the line, the wordmark is at the top and a third smaller, the sheet edge across the bottom of the card is gone, and the straight mask edge that drained the pigment is now the waterline — it read as a band sliding down a green rectangle rather than as water leaving a sheet. The list below it was rebuilt as sheets (§8), and the page lost a third of its length: the card's wrapper is 150svh instead of 200, the list sizes to what it carries instead of a 170svh floor, and the forest grows over the list's approach to the top of the viewport rather than over the whole page, so the stand is full while the reader is arriving at the list.
+
+## The analysis screen, as a case file (rebuilt 2026-09-20)
+
+The screen showed everything at once, in strips: an app header, a summary band, the document,
+the claim panel, and the raw event log across the bottom. The document — the thing the plan
+calls the hero — had about half the height and a third of the width, and the three things that
+were not the document each had too little room to be read. Asked for "a bar up top with
+different selections", and for the events log to go, it was rebuilt as a case file with four
+dividers, each carrying one whole argument.
+
+**The dividers.** Claims, Omissions, Corrected version, Verdict, in that order: the document
+and what is wrong with it, what is not in it at all, what it should have said, and the finding.
+Each is an address (`/a/<id>/verdict`), so a section can be linked to, the back button walks
+them and a reload during the demo keeps the one that was open; keys 1 to 4 open them. The open
+divider is the one pulled forward — it takes the colour of the desk below it and its bottom
+edge is the desk's own, so it covers the strip's rule and reads as one piece of paper with the
+section under it. A 2 px Marker cap sits on its top edge, because Marker is what "selected"
+means everywhere else on this screen, and it slides from divider to divider on a spring: the
+only motion added, and it answers the reader's own click. Each divider carries its count, and
+the Verdict carries the headline score, so the number is visible before the section is opened.
+
+**No events section.** The raw log was a developer's tool, not one of the file's dividers, and
+`GET /api/analyses/<id>/log` still serves it. What it was doing on screen — showing that the
+pipeline is working — is now nine ticks in the header, one per contract stage, filling as they
+complete with the running one named beside them. It is the only thing that moves on its own,
+and it stops when the analysis does (roadmap's "every stage is inspectable" is now the log
+endpoint plus the ticks).
+
+**Claims** keeps the arrangement that worked: the sheet on the desk, every claim highlighted
+where it sits with its id in the margin, and the claims in a column beside it, a selected one
+read like a ruling. What was three layer toggles in the app header is now two at the head of
+that column, where the lists they affect are — Claims and Wording, both on, so the reader can
+take the marks off and read the page as published.
+
+**Omissions** was a layer that pushed slips of paper above the sheet, which is why it was off
+by default. It has the desk to itself now: one card per topic, worst first, each saying why the
+absence is material, what the page would say if it were complete, how near the page came to
+saying it, its materiality with confidence, the standard that makes it material, and its
+evidence behind a fold.
+
+**Corrected version** was the "honest version" toggle. As a section it is a split: the page as
+published on the left, the same page as the evidence allows it on the right, block beside block.
+A redline reads well when a rewrite is a few words, but the worst claims here are rewritten
+wholesale, and a struck paragraph followed by its replacement is two paragraphs of prose
+interleaved — neither can be read. The two columns are one grid with a row per block rather
+than two scrolling panes, so a paragraph and its rewrite always start on the same line however
+much longer the rewrite is; a list is split further, a row per item, because items are what the
+corrections land on. Between the columns are the ids of the claims that changed in that row —
+the sheet's margin ids, in the one place a split leaves for them — and each opens its claim.
+What the page omits comes last, with "Not on the page" where the original would be.
+
+The redline is kept as the second view, because it is the only one that shows a change of two
+words as two words, and it is what a screen under 68 rem gets, since two columns of prose need
+the width for two measures. The tool's wording is italic in both and keeps the claim's own
+highlight, so it is never mistaken for the page's.
+
+**Verdict** was the band. The summary's narrative had nowhere to go in a band, so it was in the
+panel in 13 px; here it is the finding, in Literata at 19 px, under the headline score and its
+confidence. Then the verdicts as a distribution bar in the document's own hues with the counts
+beneath it, the five dimensions with the question each answers, and the top issues and the
+credit, each a button that opens the section which can show its target.
+
+Reading between sections is kept: what one names, another opens and puts in view, and where a
+section was scrolled to is remembered while the file is open.
+
+**Copy.** "Honest version" is the design-doc's name (D6) and stays there; the interface calls
+the section Corrected version, which is what it is for the reader, and the claim detail's
+heading follows it.

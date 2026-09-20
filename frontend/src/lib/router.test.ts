@@ -1,5 +1,7 @@
 import { describe, expect, it } from "vitest"
 
+import { ANALYSIS_SECTIONS } from "@/lib/sections"
+
 import { parseRoute, paths } from "./router"
 
 describe("parseRoute", () => {
@@ -13,15 +15,32 @@ describe("parseRoute", () => {
     expect(parseRoute("/a/8ccb1a368d")).toEqual({
       name: "analysis",
       id: "8ccb1a368d",
+      section: "claims",
     })
     expect(parseRoute("/a/8ccb1a368d/")).toEqual({
       name: "analysis",
       id: "8ccb1a368d",
+      section: "claims",
     })
     expect(parseRoute(paths.analysis("x y/z"))).toEqual({
       name: "analysis",
       id: "x y/z",
+      section: "claims",
     })
+  })
+
+  it("reads the section from the next segment, and leaves the default one off", () => {
+    for (const section of ANALYSIS_SECTIONS) {
+      expect(parseRoute(paths.analysis("abc", section))).toEqual({
+        name: "analysis",
+        id: "abc",
+        section,
+      })
+    }
+    // The default section is not in the address, so /a/<id> stays the address of an analysis.
+    expect(paths.analysis("abc")).toBe("/a/abc")
+    expect(paths.analysis("abc", "claims")).toBe("/a/abc")
+    expect(paths.analysis("abc", "verdict")).toBe("/a/abc/verdict")
   })
 
   it("maps /calibration to the metrics page", () => {
@@ -48,6 +67,11 @@ describe("parseRoute", () => {
     expect(parseRoute("/a/one/two")).toEqual({
       name: "not-found",
       path: "/a/one/two",
+    })
+    // A section the screen does not have is not an analysis with a stray segment.
+    expect(parseRoute("/a/one/events")).toEqual({
+      name: "not-found",
+      path: "/a/one/events",
     })
     expect(parseRoute("/company/shell")).toEqual({
       name: "not-found",

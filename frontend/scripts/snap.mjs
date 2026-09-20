@@ -1,6 +1,7 @@
 // Headless Chrome screenshot over the DevTools protocol (Node 24 has a WebSocket client).
 // usage: [VISION=achromatopsia] [MOTION=reduce] [CLIP=x,y,w,h] node snap.mjs <url> <out.png> [width] [height] [js expression to run before the shot]...
 // CLIP shoots one CSS-pixel rectangle of the page instead of the viewport, for looking closely at a detail.
+// DPR sets the device pixel ratio (default 2). DPR=1 is much faster to encode on a page with a grain texture on it.
 // MOTION=reduce emulates prefers-reduced-motion for the reduced-motion pass of ../../menu-design.md §14.
 import { spawn } from "node:child_process"
 import { writeFileSync, mkdtempSync } from "node:fs"
@@ -34,7 +35,7 @@ try {
     if (m.id && pending.has(m.id)) { const p = pending.get(m.id); pending.delete(m.id); m.error ? p.rej(new Error(m.error.message)) : p.res(m.result) }
   }
   const send = (method, params = {}) => new Promise((res, rej) => { const mid = ++id; pending.set(mid, { res, rej }); ws.send(JSON.stringify({ id: mid, method, params })) })
-  await send("Emulation.setDeviceMetricsOverride", { width: +w, height: +h, deviceScaleFactor: 2, mobile: false })
+  await send("Emulation.setDeviceMetricsOverride", { width: +w, height: +h, deviceScaleFactor: +(process.env.DPR ?? 2), mobile: false })
   await send("Page.enable")
   // VISION=achromatopsia|deuteranopia|protanopia|tritanopia|blurredVision renders the page as that viewer sees it.
   if (process.env.VISION) await send("Emulation.setEmulatedVisionDeficiency", { type: process.env.VISION })

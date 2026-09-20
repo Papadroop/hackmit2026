@@ -261,8 +261,8 @@ export function ClaimDetail({
       )}
 
       {verdict?.rewrite !== undefined && (
-        <section aria-label="Honest rewrite">
-          <h3 className="font-medium">Honest rewrite</h3>
+        <section aria-label="Corrected wording">
+          <h3 className="font-medium">Corrected wording</h3>
           <blockquote className="mt-1.5 border-l-2 border-graphite/40 pl-3 font-serif text-[15px] leading-snug">
             {verdict.rewrite}
           </blockquote>

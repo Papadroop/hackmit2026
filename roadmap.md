@@ -7,7 +7,10 @@ Companion to `design-doc.md`; D-numbers refer to its decisions.
 - **Frontend first, against a fixture.** One real document is analysed by hand and written down in the agreed data format. The whole interface is built on that file before any pipeline exists.
 - **One mechanism for fixture, live and replay.** An analysis is an ordered stream of events. Replay reads them from a file; live receives them from the pipeline. The frontend cannot tell the difference, so replay (D7) comes free, and each backend stage can be switched from fixture to real one at a time.
 - **Every step ends in a visual check in the app.** Do not start the next step until it passes.
-- **A debug drawer** listing raw events stays in the app throughout, so every stage is inspectable.
+- **Every stage stays inspectable.** A debug drawer listing raw events did this until
+  2026-09-20, when the analysis screen was rebuilt around four sections and the drawer was
+  dropped as one of them; the raw log is served at `GET /api/analyses/<id>/log`, and the
+  header shows a tick per stage as it completes.
 
 ## Phase 0 — Foundations
 
